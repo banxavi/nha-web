@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* Design tokens — Nhà Web Landing (mục 0) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f5f2;
+  --cta-orange: #f97316;
+  --footer-navy: #0b1f3a;
+  --logo-nha: #f97316;
+  --logo-web: #0b1f3a;
+  --foreground: #0b1f3a;
+  --muted: #6b7280;
+  --card-border: #e8e4de;
+  --card-bg: #ffffff;
+}
+
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-cta: var(--cta-orange);
+  --color-footer: var(--footer-navy);
+  --color-logo-nha: var(--logo-nha);
+  --color-logo-web: var(--logo-web);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card-border: var(--card-border);
+  --color-card: var(--card-bg);
+
+  /* Encode Sans Expanded ≈ Surt Expanded (chưa có license Surt) */
+  --font-sans: var(--font-display);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--foreground);
+  font-family: var(--font-display), system-ui, sans-serif;
+}
