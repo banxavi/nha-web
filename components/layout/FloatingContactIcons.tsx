@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { siteContact } from "@/lib/site-config";
 
 /**
- * Phone + Zalo — fixed góc dưới phải, luôn hiện (ref interdata.vn).
+ * Phone → Messenger → Zalo — fixed góc dưới phải, luôn hiện.
  */
 export function FloatingContactIcons() {
   return (
@@ -18,10 +19,27 @@ export function FloatingContactIcons() {
       </a>
 
       <a
+        href={siteContact.messengerUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pointer-events-auto flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A033FF] focus-visible:ring-offset-2"
+        aria-label="Chat Messenger"
+      >
+        <Image
+          src="/social/messenger.png"
+          alt=""
+          width={48}
+          height={48}
+          className="h-full w-full object-cover"
+          aria-hidden
+        />
+      </a>
+
+      <a
         href={siteContact.zaloUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-lg shadow-[#0068FF]/30 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0068FF] focus-visible:ring-offset-2"
+        className="pointer-events-auto flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-[#0068FF] shadow-lg shadow-[#0068FF]/30 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0068FF] focus-visible:ring-offset-2"
         aria-label="Chat Zalo"
       >
         <ZaloIcon />
@@ -38,11 +56,29 @@ function PhoneIcon() {
   );
 }
 
-/** Official-style Zalo glyph (simplified mark) */
+/**
+ * Logo Zalo dạng bubble + chữ "Zalo" (như nút chat Zalo OA).
+ * Bubble trắng trên nền xanh #0068FF của nút.
+ */
 function ZaloIcon() {
   return (
-    <svg viewBox="0 0 48 48" fill="currentColor" aria-hidden className="h-6 w-6">
-      <path d="M24.4 8C14.9 8 7.2 14.8 7.2 23.1c0 4.3 1.9 8.1 5 10.8l-1.2 5.7 6.1-1.9c2.2.7 4.6 1.1 7.1 1.1 9.5 0 17.2-6.8 17.2-15.1S33.9 8 24.4 8zm8.4 10.7-2.1 9.9c-.1.5-.5.7-.9.5l-2.7-2-1.9 1.8c-.2.2-.5.3-.8.2l.3-3.4 7.2-6.5c.3-.3 0-.7-.4-.5l-8.9 5.6-3.5-1.1c-.7-.2-.7-.7.1-1.1l14.1-5.4c.6-.3 1.1.2.9 1z" />
+    <svg viewBox="0 0 48 48" aria-hidden className="h-10 w-10">
+      <path
+        fill="#fff"
+        d="M24.2 9.2c-8.6 0-15.6 5.9-15.6 13.2 0 4.6 2.6 8.6 6.7 11l-1.5 5.5 5.9-2.3c1.4.4 2.9.6 4.5.6 8.6 0 15.6-5.9 15.6-13.2S32.8 9.2 24.2 9.2z"
+      />
+      <text
+        x="24.2"
+        y="26.2"
+        textAnchor="middle"
+        fill="#0068FF"
+        fontFamily="Arial Black, Arial, Helvetica, sans-serif"
+        fontSize="9.5"
+        fontWeight="800"
+        letterSpacing="-0.4"
+      >
+        Zalo
+      </text>
     </svg>
   );
 }

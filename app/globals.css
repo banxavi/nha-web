@@ -5,7 +5,8 @@
   --bg-primary: #ffffff;
   --bg-secondary: #f7f5f2;
   --cta-orange: #f97316;
-  --footer-navy: #0b1f3a;
+  /* #1E293B thay #0B1F3A — logo "Web" navy đọc rõ hơn trên footer */
+  --footer-navy: #1e293b;
   --logo-nha: #f97316;
   --logo-web: #0b1f3a;
   --foreground: #0b1f3a;

@@ -11,7 +11,7 @@ function cx(...parts: Array<string | undefined | false>) {
 }
 
 /**
- * Header — nền trắng, hover mở sub-menu (desktop), click trên mobile (ref luvini.vn).
+ * Header — nền trắng, logo lớn (ref tma.vn), menu Title Case, hover sub-menu.
  */
 export function Header() {
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -43,19 +43,22 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[4.5rem] sm:px-6 lg:px-8">
-        <Link href="/" className="relative flex h-10 w-[140px] shrink-0 items-center sm:h-12 sm:w-[168px]">
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:h-28 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="relative flex w-fit shrink-0 items-center aspect-square h-full"
+        >
           <Image
             src={logoPath}
             alt="Nhà Web"
             fill
             priority
-            className="object-contain object-left"
-            sizes="168px"
+            className="object-contain object-left w-fit"
+            sizes="320px"
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Menu chính">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Menu chính">
           {navItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen = openKey === item.label;
@@ -65,7 +68,7 @@ export function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="inline-flex rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:text-cta"
+                  className="inline-flex rounded-md px-3 py-2 text-sm font-medium tracking-normal text-foreground transition-colors hover:text-cta"
                 >
                   {item.label}
                 </Link>
@@ -91,7 +94,7 @@ export function Header() {
                   aria-haspopup="menu"
                   aria-controls={`${menuId}-${item.label}`}
                   className={cx(
-                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors",
+                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium tracking-normal text-foreground transition-colors",
                     "hover:text-cta",
                     isOpen && "text-cta",
                   )}
@@ -170,7 +173,7 @@ export function Header() {
                         aria-expanded={isOpen}
                         onClick={() => toggleMobileItem(item)}
                         className={cx(
-                          "flex w-full items-center justify-between py-3 text-left text-sm font-semibold uppercase tracking-wide text-foreground",
+                          "flex w-full items-center justify-between py-3 text-left text-sm font-medium tracking-normal text-foreground",
                           "hover:text-cta",
                           isOpen && "text-cta",
                         )}
@@ -200,7 +203,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:text-cta"
+                      className="block py-3 text-sm font-medium tracking-normal text-foreground transition-colors hover:text-cta"
                     >
                       {item.label}
                     </Link>

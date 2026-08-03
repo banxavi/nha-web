@@ -23,28 +23,26 @@
   - Sử dụng công nghệ hiện đại, bền vững
   - Đội ngũ hỗ trợ chuyên nghiệp
 
-- [ ] **Section 2** — Quy trình 5 bước dạng hình tròn, text mô tả bên dưới mỗi hình, tiêu đề giữa "QUY TRÌNH 5 BƯỚC" (đen, in đậm). Ref interdata.vn. *(cần screenshot đính kèm từ email — image.png chưa có trong nội dung text)*
+- [x] **Section 2** — Quy trình 5 bước dạng hình tròn, text mô tả bên dưới mỗi hình, tiêu đề giữa "QUY TRÌNH 5 BƯỚC" (đen, in đậm). Ref interdata.vn. *(copy bước đang placeholder TODO trong `processStepsContent` — swap khi có content/ảnh thật từ email)*
 
-- [x] **Section 3+4 (gộp)** — Heading giữa "MẪU WEBSITE NỔI BẬT" (style ref 99designs). Bên dưới: grid flexible MSN (5 cột: mỗi hàng **4 item** = 1 wide + 3 small), carousel `<` `>` + auto next 4s. Tagline: "GIAO DIỆN HIỆN ĐẠI, CHUẨN SEO, ĐA DẠNG LĨNH VỰC"
+- [x] **Section 3** — Heading giữa "MẪU WEBSITE NỔI BẬT". **Chỉ 5 website nổi bật**, layout bento: 1 card cao trái + 4 card nhỏ 2×2 phải; ảnh full + nhãn trắng đáy. Tagline: "GIAO DIỆN HIỆN ĐẠI, CHUẨN SEO, ĐA DẠNG LĨNH VỰC"
 
-- [x] ~~**Section 3**~~ — đã gộp vào Section 3+4
+- [x] ~~**Section 4**~~ — gộp vào Section 3 (5 mẫu cố định, không carousel)
 
-- [x] ~~**Section 4**~~ — đã gộp vào Section 3+4
+- [x] **Section 5** — FAQ: "CÂU HỎI THƯỜNG GẶP VỀ DỊCH VỤ THIẾT KẾ WEBSITE CHUYÊN NGHIỆP TẠI NHÀ WEB". Layout ref web4s.vn. *(tạm dùng Q&A + ảnh crop từ mẫu web4s — swap trong `faqContent` khi có bản final)*
 
-- [ ] **Section 5** — FAQ: "CÂU HỎI THƯỜNG GẶP VỀ DỊCH VỤ THIẾT KẾ WEBSITE CHUYÊN NGHIỆP TẠI NHÀ WEB". Layout ref web4s.vn. ⚠️ Content/hình ảnh final CHƯA CÓ — build với placeholder, đánh dấu TODO rõ ràng.
+- [x] **Section 6** — Text giữa "Quy trình 5 bước" + text trái / hình phải (placeholder). ⚠️ Content/hình final CHƯA CÓ — swap `section6Content` khi có.
 
-- [ ] **Section 6** — Text trái / hình phải, format tạm theo ảnh mẫu trong email (image.png). ⚠️ Content/hình final CHƯA CÓ — placeholder.
+- [x] **Section 7** — "TẠI SAO BẠN NÊN CHỌN… / NỀN TẢNG CÔNG NGHỆ…". Glass cards 2×4 + CTA "Đăng ký tư vấn". ⚠️ Ảnh nền collage final CHƯA CÓ — đang dùng placeholder; swap trong `whyChooseContent`.
 
-- [ ] **Section 7** — "TẠI SAO BẠN NÊN CHỌN DỊCH VỤ THIẾT KẾ WEBSITE CHUYÊN NGHIỆP TẠI NHÀ WEB? NỀN TẢNG CÔNG NGHỆ TẠO NÊN SỰ KHÁC BIỆT CỦA NHÀ WEB". Nút CTA đổi từ "Tư vấn ngay" → "Đăng ký tư vấn". ⚠️ Content/hình final CHƯA CÓ — placeholder.
-
-- [ ] **Section 8** — Tin tức (ref web4s.vn) + form nhập số điện thoại liên hệ. Cần định nghĩa rõ: form submit thì hiện state gì (ref ảnh "sau khi nhập số điện thoại" trong email — cần đính kèm ảnh thật).
+- [x] **Section 8** — Form "Đăng ký ngay" (4 field qua `ContactFormModal` variant=register; Section 8 là CTA mở modal)
 
 - [ ] **Section 9** — Footer info đầy đủ theo sheet "Trang chủ" #9–#14
 
 ## 4. Chi tiết bổ sung (áp dụng xuyên suốt, không phải section riêng)
 
 - [ ] Khi click vào bất kỳ dịch vụ nào → trang đó luôn hiện info block cố định (cần ảnh mẫu từ email để build đúng UI)
-- [ ] Modal/form nhập số điện thoại dùng chung cho nhiều chỗ (Section 7 nút CTA, Section 8) — nên làm 1 component `PhoneContactModal` tái sử dụng thay vì build riêng lẻ
+- [x] Modal/form đăng ký dùng chung (`ContactFormModal` variant consult|register) — Section 7 CTA, Hero, mẫu website, Section 8
 
 ---
 
