@@ -38,7 +38,7 @@ export function AllWebsiteSamplesSection() {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   /** Pages sau khi random vị trí wide — tránh lệch SSR/CSR */
-  const [mosaicPages, setMosaicPages] = useState(pages);
+  const [mosaicPages, setMosaicPages] = useState<AllSampleRow[][]>(pages);
   const { openContactForm } = useContactForm();
 
   const trackRef = useRef<HTMLDivElement>(null);
