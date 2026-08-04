@@ -23,8 +23,6 @@ export type SocialLink = {
 export const siteContact = {
   phoneDisplay: "0907 566 279",
   phoneTel: "0907566279",
-  /** TODO: link Messenger / Facebook Page thật (m.me/...) */
-  messengerUrl: "https://m.me/",
   zaloUrl: "https://zalo.me/0907566279",
   email: "nhaweb.vn@gmail.com",
   address: "208 Trường Chinh, Phường Tân Bình, TP.Hồ Chí Minh",
@@ -75,7 +73,7 @@ export const footerContent = {
   info: {
     title: "Thông tin",
     links: [
-      { label: "Giới thiệu", href: "/#gioi-thieu" },
+      { label: "Giới thiệu", href: "/gioi-thieu" },
       { label: "Quy trình làm việc", href: "/#quy-trinh" },
       { label: "Dự án", href: "/#mau-website" },
       { label: "Tin tức", href: "/#tin-tuc" },
@@ -97,10 +95,96 @@ export const footerContent = {
 };
 
 export const logoPath = "/logo/Nhà_Web_logo.webp";
+export const footerLogoPath = "/logo/nha-web-trang.png";
 
 /**
- * Section 1 — Hero (layout web4s.vn).
- * TODO: thay `image.src` bằng ảnh hero thật khi khách cung cấp.
+ * Trang Giới thiệu — Section 1: Giới thiệu chung.
+ * Layout 2 cột text trái / hình phải (ref interdata.vn/about-us).
+ * Ảnh: `public/about-us/gioi-thieu-chung.webp` (395×600).
+ * `imagePosition` dùng lại cho Section 2 (hình trái / text phải).
+ */
+export type AboutIntroImagePosition = "left" | "right";
+
+export const aboutIntroContent = {
+  id: "gioi-thieu-chung",
+  /** Brand line — hiển thị "Nhà" cam + "Web" navy */
+  brandNha: "NHÀ",
+  brandWeb: "WEB",
+  tagline: "Đồng hành chuyển đổi số cùng bạn",
+  body: [
+    "Nhà Web mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số.",
+  ],
+  image: {
+    src: "/about-us/gioi-thieu-chung.webp",
+    alt: "Nhà Web — giới thiệu chung, đồng hành chuyển đổi số cùng bạn",
+    width: 395,
+    height: 600,
+  },
+  imagePosition: "right" as AboutIntroImagePosition,
+};
+
+/**
+ * Trang Giới thiệu — Section 2: Tầm nhìn – Sứ mệnh – Giá trị cốt lõi.
+ * Layout 2 cột hình trái / text phải (ref interdata.vn/about-us “Tham vọng & mục tiêu”).
+ * Ảnh: `public/about-us/gioi-thieu-chung-tam-nhin.webp` (680×516).
+ */
+export type AboutVisionBlockIcon =
+  | "team"
+  | "vision"
+  | "values"
+  | "growth";
+
+export type AboutVisionBlock = {
+  id: string;
+  icon: AboutVisionBlockIcon;
+  title: string;
+  body: string;
+};
+
+export const aboutVisionContent = {
+  id: "tam-nhin-su-menh",
+  title: "Tầm nhìn - Sứ mệnh - Giá trị cốt lõi",
+  /** Badge dưới title — "Nhà" cam + "Web" trắng trên nền navy (ref InterData brand chip). */
+  brandNha: "Nhà",
+  brandWeb: "Web",
+  image: {
+    src: "/about-us/gioi-thieu-chung-tam-nhin.webp",
+    alt: "Nhà Web — tầm nhìn, sứ mệnh và giá trị cốt lõi",
+    width: 680,
+    height: 516,
+  },
+  imagePosition: "left" as AboutIntroImagePosition,
+  blocks: [
+    {
+      id: "doi-ngu",
+      icon: "team" as AboutVisionBlockIcon,
+      title: "Đội ngũ",
+      body: "Nhà Web được xây dựng bởi đội ngũ có hơn 7 năm kinh nghiệm phát triển website và 17 năm kinh nghiệm kiểm thử chất lượng phần mềm tại TMA Solutions. Nền tảng chuyên môn vững chắc giúp chúng tôi tạo ra những website hiện đại, ổn định, dễ sử dụng và đáp ứng tốt nhu cầu kinh doanh thực tế.",
+    },
+    {
+      id: "tam-nhin",
+      icon: "vision" as AboutVisionBlockIcon,
+      title: "Tầm nhìn",
+      body: "Ứng dụng công nghệ hiện đại và bền vững để giúp cá nhân, hộ kinh doanh và doanh nghiệp vừa và nhỏ xây dựng hiện diện trực tuyến chuyên nghiệp, từng bước phát triển thương hiệu và nâng cao hiệu quả kinh doanh trên môi trường số.",
+    },
+    {
+      id: "gia-tri",
+      icon: "values" as AboutVisionBlockIcon,
+      title: "Giá trị cốt lõi",
+      body: "Nhà Web lấy trải nghiệm người dùng làm trung tâm, không ngừng sáng tạo và đổi mới trong từng giải pháp. Chúng tôi đề cao sự trung thực, minh bạch và luôn nỗ lực hoàn thiện sản phẩm đúng với những gì đã cam kết cùng khách hàng.",
+    },
+    {
+      id: "dinh-huong",
+      icon: "growth" as AboutVisionBlockIcon,
+      title: "Định hướng phát triển",
+      body: "Nhà Web hướng đến trở thành đơn vị cung cấp dịch vụ thiết kế và vận hành website tiên phong trong việc ứng dụng công nghệ hiện đại. Mục tiêu của chúng tôi là mang đến những giải pháp website hiệu quả, dễ mở rộng và có khả năng hỗ trợ doanh nghiệp vừa và nhỏ tiếp cận khách hàng, phát triển thương hiệu và thúc đẩy doanh số.",
+    },
+  ] satisfies AboutVisionBlock[],
+};
+
+/**
+ * Section 1 — Hero (text trái + banner phải).
+ * Ảnh thật trong `public/hero` — tỉ lệ 930×429.
  */
 export const heroContent = {
   headline: "Dịch vụ thiết kế website chuyên nghiệp, uy tín, chuẩn SEO",
@@ -114,69 +198,29 @@ export const heroContent = {
   ],
   ctaLabel: "Đăng ký ngay!",
   ctaHref: "/#lien-he",
-  image: {
-    src: "/hero/section1-media.svg",
-    alt: "Minh họa dịch vụ thiết kế website Nhà Web",
-  },
+  autoplayMs: 5000,
+  banners: [
+    {
+      src: "/hero/hero-banner-1.webp.png",
+      alt: "Thiết kế website theo yêu cầu — Nhà Web",
+    },
+    {
+      src: "/hero/hero-banner-2.webp.png",
+      alt: "Dịch vụ thiết kế website — Nhà Web",
+    },
+  ],
 };
 
 /**
- * Section 2 — Quy trình 5 bước (ref interdata.vn / layout hình tròn sóng).
- * TODO: thay title/description/icon bằng content + ảnh thật từ email khi có.
+ * Section 2 — Quy trình 5 bước (ảnh infographic).
+ * Ảnh: `public/process/quy-trinh-5-buoc.webp.png` (1920×902).
  */
-export type ProcessStep = {
-  id: string;
-  step: number;
-  title: string;
-  description: string;
-  /** Pastel fill cho vòng tròn — khớp vibe ref OS icons */
-  circleClassName: string;
-};
-
 export const processStepsContent = {
   heading: "Quy trình 5 bước",
-  steps: [
-    {
-      id: "step-1",
-      step: 1,
-      title: "Tư vấn & tiếp nhận",
-      description:
-        "TODO: Lắng nghe nhu cầu, mục tiêu kinh doanh và định hướng website phù hợp.",
-      circleClassName: "bg-[#E8F1FB] text-[#2B6CB0]",
-    },
-    {
-      id: "step-2",
-      step: 2,
-      title: "Báo giá & hợp đồng",
-      description:
-        "TODO: Gửi đề xuất rõ hạng mục, tiến độ và ký kết trước khi triển khai.",
-      circleClassName: "bg-[#EAF6F0] text-[#2F855A]",
-    },
-    {
-      id: "step-3",
-      step: 3,
-      title: "Thiết kế giao diện",
-      description:
-        "TODO: Phác thảo UI/UX, duyệt mẫu và chỉnh sửa đến khi bạn hài lòng.",
-      circleClassName: "bg-[#FFF4D6] text-[#B7791F]",
-    },
-    {
-      id: "step-4",
-      step: 4,
-      title: "Lập trình & tối ưu",
-      description:
-        "TODO: Xây dựng tính năng, chuẩn SEO, tối ưu tốc độ trên mọi thiết bị.",
-      circleClassName: "bg-[#E8F1FB] text-[#2B6CB0]",
-    },
-    {
-      id: "step-5",
-      step: 5,
-      title: "Bàn giao & bảo hành",
-      description:
-        "TODO: Bàn giao tài khoản, hướng dẫn sử dụng và hỗ trợ sau bàn giao.",
-      circleClassName: "bg-[#FDE8E4] text-[#C05621]",
-    },
-  ] satisfies ProcessStep[],
+  image: {
+    src: "/process/quy-trinh-5-buoc.webp.png",
+    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
+  },
 };
 
 /**
@@ -583,7 +627,7 @@ export const faqContent = {
   heading:
     "Câu hỏi thường gặp về dịch vụ thiết kế website chuyên nghiệp tại Nhà Web",
   image: {
-    src: "/faq/section5-media.png",
+    src: "/faq/faq-nha-web.webp.png",
     alt: "Minh họa FAQ — giải pháp, chi phí, quy trình thiết kế website",
   },
   items: [
@@ -771,8 +815,8 @@ export type ContactFormVariant = "consult" | "register";
 
 export const contactFormContent = {
   image: {
-    src: "/contact/section8-illustration.png",
-    alt: "Nhà Web — hỗ trợ đăng ký và tư vấn",
+    src: "/contact/dang-ky-tu-van.webp.png",
+    alt: "Nhà Web — dịch vụ thiết kế website chuyên nghiệp",
   },
   consult: {
     heading: "NHÀ WEB XIN CHÀO!",
@@ -817,7 +861,7 @@ export const contactFormContent = {
     ctaLabel: "Đăng ký ngay",
     bannerColor: "#1B78E0",
     illustration: {
-      src: "/contact/section8-illustration.png",
+      src: "/contact/lien-he-phone.webp.png",
       alt: "Minh họa đăng ký website Nhà Web",
     },
   },

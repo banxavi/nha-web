@@ -181,10 +181,10 @@ export function ContactFormModal({
       ref={dialogRef}
       aria-labelledby={titleId}
       className={cx(
+        "contact-form-dialog",
         "fixed inset-0 z-[100] m-0 h-full max-h-none w-full max-w-none bg-transparent p-0",
         "backdrop:bg-footer/60 backdrop:backdrop-blur-[3px]",
-        "open:flex open:items-end open:justify-center open:p-0",
-        "sm:open:items-center sm:open:p-5",
+        "open:flex open:items-center open:justify-center open:px-6 open:py-5",
       )}
       onClose={handleDialogClose}
       onClick={(e) => {
@@ -192,11 +192,11 @@ export function ContactFormModal({
       }}
     >
       <div
+        data-contact-panel
         className={cx(
           "relative flex w-full max-h-[min(100dvh,920px)] max-w-4xl flex-col overflow-hidden",
-          "rounded-t-3xl bg-bg-primary shadow-[0_-8px_40px_rgba(11,31,58,0.18)]",
-          "sm:rounded-3xl sm:shadow-2xl",
-          "lg:grid lg:max-h-[min(90dvh,640px)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:flex-none",
+          "rounded-3xl bg-bg-primary shadow-2xl",
+          "lg:grid lg:max-h-[min(90dvh,720px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:flex-none",
         )}
         role="document"
       >
@@ -209,22 +209,16 @@ export function ContactFormModal({
           <CloseIcon />
         </button>
 
-        {/* Media — compact strip on mobile, full column on lg */}
-        <div className="relative h-28 shrink-0 overflow-hidden bg-gradient-to-br from-[#EEF4FB] via-bg-secondary to-[#F7F5F2] sm:h-36 lg:h-auto lg:min-h-full">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-40"
-            aria-hidden
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 20% 30%, rgba(249,115,22,0.18), transparent 45%), radial-gradient(circle at 80% 70%, rgba(11,31,58,0.1), transparent 50%)",
-            }}
-          />
+        {/* Media — chỉ hiện từ lg trở lên (ẩn trên mobile) */}
+        <div className="hidden shrink-0 items-center justify-center overflow-hidden bg-footer lg:flex lg:h-full lg:min-h-0">
           <Image
             src={contactFormContent.image.src}
             alt={contactFormContent.image.alt}
-            fill
-            className="object-contain object-center p-4 sm:p-6 lg:p-10"
-            sizes="(max-width: 1024px) 100vw, 420px"
+            width={1024}
+            height={1024}
+            className="h-full max-h-full w-auto max-w-full object-contain"
+            sizes="420px"
+            priority
           />
         </div>
 

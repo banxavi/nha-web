@@ -26,16 +26,16 @@ export function WebsiteSamplesSection() {
       aria-labelledby="samples-heading"
       className="bg-bg-primary px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-site">
         <header className="mb-10 text-center sm:mb-14">
           <h2
             id="samples-heading"
-            className="text-2xl font-bold uppercase tracking-[0.08em] text-foreground sm:text-3xl md:text-4xl"
+            className="text-2xl font-bold uppercase text-foreground sm:text-3xl md:text-4xl"
           >
             {heading}
           </h2>
           {tagline ? (
-            <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-muted sm:text-base">
+            <p className="mt-4 text-sm font-semibold uppercase text-muted sm:text-base">
               {tagline}
             </p>
           ) : null}

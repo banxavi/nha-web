@@ -15,7 +15,7 @@ export function ProcessImagesSection() {
       aria-labelledby="section6-heading"
       className="scroll-mt-24 bg-bg-secondary"
     >
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <h2
           id="section6-heading"
           className="text-center text-2xl font-bold tracking-normal text-foreground sm:text-3xl"

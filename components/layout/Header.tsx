@@ -43,7 +43,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:h-28 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-24 max-w-site items-center justify-between gap-4 px-4 sm:h-28 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="relative flex w-fit shrink-0 items-center aspect-square h-full"
@@ -159,7 +159,7 @@ export function Header() {
           id={`${menuId}-mobile`}
           className="border-t border-card-border bg-bg-primary lg:hidden"
         >
-          <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6" aria-label="Menu mobile">
+          <nav className="mx-auto flex max-w-site flex-col px-4 py-3 sm:px-6" aria-label="Menu mobile">
             {navItems.map((item) => {
               const hasChildren = Boolean(item.children?.length);
               const isOpen = openKey === item.label;

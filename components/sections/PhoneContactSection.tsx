@@ -20,7 +20,7 @@ export function PhoneContactSection() {
       aria-labelledby="phone-contact-heading"
       className="scroll-mt-24 bg-bg-secondary"
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-site px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
         <div
           className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
           style={{ backgroundColor: bannerColor }}
@@ -53,8 +53,8 @@ export function PhoneContactSection() {
             </svg>
           </div>
 
-          <div className="relative grid items-center gap-6 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1fr_minmax(10rem,14rem)] lg:gap-4 lg:px-12 lg:py-11">
-            <div className="relative z-10 mx-auto w-full max-w-2xl text-center lg:mx-0 lg:max-w-none lg:pr-4">
+          <div className="relative grid items-center gap-6 px-5 py-8 sm:px-8 sm:py-10  lg:gap-4 lg:px-12 lg:py-11">
+            <div className="relative z-10 mx-auto w-full text-center lg:mx-0 lg:max-w-none lg:pr-4">
               <h2
                 id="phone-contact-heading"
                 className="text-base font-bold leading-snug text-white sm:text-lg lg:text-xl"
@@ -76,7 +76,7 @@ export function PhoneContactSection() {
               </div>
             </div>
 
-            <div className="relative mx-auto hidden h-36 w-40 sm:h-40 sm:w-44 lg:mx-0 lg:block lg:h-44 lg:w-full">
+            {/* <div className="relative mx-auto hidden h-36 w-40 sm:h-40 sm:w-44 lg:mx-0 lg:block lg:h-44 lg:w-full">
               <Image
                 src={illustration.src}
                 alt={illustration.alt}
@@ -85,7 +85,7 @@ export function PhoneContactSection() {
                 sizes="180px"
                 priority={false}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

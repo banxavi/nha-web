@@ -122,23 +122,23 @@ export function NewsSection() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-site">
         <header className="mb-10 text-center sm:mb-14">
           <h2
             id="news-heading"
-            className="text-2xl font-bold uppercase tracking-[0.08em] text-foreground sm:text-3xl md:text-4xl"
+            className="text-2xl font-bold text-foreground sm:text-3xl md:text-4xl"
           >
             {heading}
           </h2>
           {tagline ? (
-            <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-muted sm:text-base">
+            <p className="mt-4 text-sm font-semibold tracking-wide text-muted sm:text-base">
               {tagline}
             </p>
           ) : null}
         </header>
       </div>
 
-      <div className="relative mx-auto max-w-[min(100%,calc(80rem+5.5rem))]">
+      <div className="relative mx-auto max-w-[min(100%,calc(var(--site-max)+5.5rem))]">
         <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
           {pageCount > 1 ? (
             <CarouselButton

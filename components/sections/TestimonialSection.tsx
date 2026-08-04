@@ -62,14 +62,14 @@ export function TestimonialSection() {
       aria-labelledby="testimonials-heading"
       className="scroll-mt-24 bg-gradient-to-b from-bg-secondary via-[#F3F6FA] to-bg-primary"
     >
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <header className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted sm:text-sm">
+          <p className="text-xs font-semibold tracking-[0.12em] text-muted sm:text-sm">
             {eyebrow}
           </p>
           <h2
             id="testimonials-heading"
-            className="mt-3 text-xl font-bold uppercase leading-snug tracking-wide text-foreground sm:text-2xl lg:text-[1.75rem]"
+            className="mt-3 text-xl font-bold leading-snug tracking-wide text-foreground sm:text-2xl lg:text-[1.75rem]"
           >
             {heading}
           </h2>

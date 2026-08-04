@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { siteContact } from "@/lib/site-config";
 
 /**
- * Phone → Messenger → Zalo — fixed góc dưới phải, luôn hiện.
+ * Phone → Zalo — fixed góc dưới phải, luôn hiện.
  */
 export function FloatingContactIcons() {
   return (
@@ -16,23 +15,6 @@ export function FloatingContactIcons() {
         aria-label={`Gọi ${siteContact.phoneDisplay}`}
       >
         <PhoneIcon />
-      </a>
-
-      <a
-        href={siteContact.messengerUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="pointer-events-auto flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A033FF] focus-visible:ring-offset-2"
-        aria-label="Chat Messenger"
-      >
-        <Image
-          src="/social/messenger.png"
-          alt=""
-          width={48}
-          height={48}
-          className="h-full w-full object-cover"
-          aria-hidden
-        />
       </a>
 
       <a

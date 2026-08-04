@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   footerContent,
-  logoPath,
+  footerLogoPath,
   serviceNavLinks,
   siteContact,
   socialLinks,
@@ -16,19 +16,19 @@ import {
 export function Footer() {
   return (
     <footer className="mt-auto bg-footer text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16">
-        {/* #9 Logo + social */}
+      <div className="mx-auto grid max-w-site gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16">
+        {/* #9 Logo + social — logo trắng, ~2× size gốc (h-14/h-16, max-w 220) */}
         <div className="lg:col-span-3">
           <Link
             href="/"
-            className="relative mb-5 block h-14 w-[min(100%,220px)] rounded-md px-3 py-2 sm:h-16"
+            className="relative mb-5 block h-28 w-[min(100%,440px)] rounded-md sm:h-32"
           >
             <Image
-              src={logoPath}
+              src={footerLogoPath}
               alt="Nhà Web"
               fill
               className="object-contain object-left"
-              sizes="220px"
+              sizes="440px"
             />
           </Link>
           <ul className="flex items-center gap-3" aria-label="Mạng xã hội">
@@ -71,7 +71,7 @@ export function Footer() {
 
         {/* #13 Liên hệ */}
         <div className="lg:col-span-3">
-          <h3 className="text-sm font-semibold tracking-wide text-white">
+          <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
             {footerContent.contactTitle}
           </h3>
           <ul className="mt-4 space-y-3 text-sm text-white/70">
@@ -107,7 +107,7 @@ export function Footer() {
 
       {/* #14 Copyright */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-white/50 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-site px-4 py-5 text-center text-xs text-white/50 sm:px-6 lg:px-8">
           <p>{footerContent.copyright}</p>
         </div>
       </div>
@@ -126,7 +126,7 @@ function FooterLinkColumn({
 }) {
   return (
     <div className={className}>
-      <h3 className="text-sm font-semibold tracking-wide text-white">{title}</h3>
+      <h3 className="text-sm font-semibold tracking-wide text-white uppercase">{title}</h3>
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
           <li key={link.label}>

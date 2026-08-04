@@ -1,18 +1,42 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { heroContent } from "@/lib/site-config";
 
 /**
  * Section 1 — Hero dịch vụ.
- * Layout copy web4s.vn: text trái + bullet ✓, media phải (hình vuông).
- * Text section 1–3: viết hoa hết, in đậm.
+ * Layout: text trái + bullet ✓, media phải (banner auto slide phải → trái).
  */
 export function HeroSection() {
-  const { headline, bullets, ctaLabel, image } = heroContent;
+  const { headline, bullets, ctaLabel, banners, autoplayMs } = heroContent;
   const { openContactForm } = useContactForm();
+  const count = banners.length;
+
+  // Clone slide đầu ở cuối để loop vô hạn luôn trượt phải → trái.
+  const slides = count > 1 ? [...banners, banners[0]] : banners;
+
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState(true);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (count <= 1 || paused) return;
+    const timer = window.setInterval(() => {
+      setAnimate(true);
+      setIndex((current) => current + 1);
+    }, autoplayMs);
+    return () => window.clearInterval(timer);
+  }, [autoplayMs, count, paused]);
+
+  function onTransitionEnd() {
+    if (count <= 1 || index !== count) return;
+    // Đã tới clone — nhảy về slide đầu thật, không animate.
+    setAnimate(false);
+    setIndex(0);
+  }
 
   return (
     <section
@@ -20,7 +44,7 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-gradient-to-b from-[#EEF4FB] via-bg-primary to-bg-secondary"
     >
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
         <div className="flex flex-col">
           <h1
             id="hero-heading"
@@ -33,7 +57,7 @@ export function HeroSection() {
             {bullets.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 text-sm font-bold uppercase tracking-wide text-foreground sm:text-base"
+                className="flex items-start gap-3 text-sm tracking-wide text-foreground sm:text-base"
               >
                 <span
                   className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta text-white"
@@ -57,25 +81,47 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-2xl border-4 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)]">
-            <ZoomableImage
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority
-              unoptimized={image.src.endsWith(".svg")}
-              className="object-cover"
-              frameClassName="aspect-square w-full bg-bg-secondary"
-              sizes="(max-width: 1024px) 100vw, 560px"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 right-0 w-[38%] bg-footer"
-              style={{
-                clipPath: "polygon(28% 0, 100% 0, 100% 100%, 0 100%)",
-              }}
-            />
+        <div
+          className="relative"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            className="relative overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)]"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Banner dịch vụ Nhà Web"
+          >
+            <div className="relative aspect-[930/429] w-full overflow-hidden bg-bg-secondary">
+              <div
+                className="flex h-full w-full"
+                style={{
+                  transform: `translateX(${-index * 100}%)`,
+                  transition: animate
+                    ? "transform 500ms cubic-bezier(0.22, 1, 0.36, 1)"
+                    : "none",
+                }}
+                onTransitionEnd={onTransitionEnd}
+              >
+                {slides.map((banner, i) => (
+                  <div
+                    key={`${banner.src}-${i}`}
+                    className="relative h-full w-full shrink-0"
+                    aria-hidden={i !== index}
+                  >
+                    <Image
+                      src={banner.src}
+                      alt={banner.alt}
+                      fill
+                      priority={i === 0}
+                      draggable={false}
+                      className="object-cover object-center select-none"
+                      sizes="(max-width: 1024px) 100vw, 560px"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
