@@ -37,11 +37,9 @@ export function ProcessSection() {
       <div className="relative z-10 mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <h2
           id="process-heading"
-          className="text-center text-2xl font-bold tracking-normal text-foreground sm:text-3xl uppercase"
+          className="text-center text-2xl font-bold uppercase tracking-normal text-foreground sm:text-3xl md:text-4xl"
         >
-          Quy trình
-         
-            5 bước
+          Quy trình 5 bước
         <span className="sr-only"> — {heading}</span>
         
         </h2>
