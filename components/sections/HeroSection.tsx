@@ -44,8 +44,8 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-gradient-to-b from-[#EEF4FB] via-bg-primary to-bg-secondary"
     >
-      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
-        <div className="flex flex-col">
+      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:items-stretch lg:gap-12 lg:px-8 lg:py-20">
+        <div className="flex flex-col justify-center">
           <h1
             id="hero-heading"
             className="text-2xl font-bold uppercase leading-tight tracking-wide text-foreground sm:text-3xl lg:text-[2rem] lg:leading-snug"
@@ -82,17 +82,18 @@ export function HeroSection() {
         </div>
 
         <div
-          className="relative"
+          className="relative w-full lg:h-full"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
+          {/* Mobile 3:2; desktop kéo full height cột text (object-top giữ phần trên) */}
           <div
-            className="relative overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)]"
+            className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)] lg:aspect-auto lg:h-full"
             role="region"
             aria-roledescription="carousel"
             aria-label="Banner dịch vụ Nhà Web"
           >
-            <div className="relative aspect-[930/429] w-full overflow-hidden bg-bg-secondary">
+            <div className="absolute inset-0 overflow-hidden bg-bg-secondary">
               <div
                 className="flex h-full w-full"
                 style={{
@@ -115,8 +116,9 @@ export function HeroSection() {
                       fill
                       priority={i === 0}
                       draggable={false}
-                      className="object-cover object-center select-none"
-                      sizes="(max-width: 1024px) 100vw, 560px"
+                      quality={100}
+                      className="object-cover object-top select-none"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
                 ))}

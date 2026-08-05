@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   footerContent,
-  footerLogoPath,
   serviceNavLinks,
   siteContact,
   socialLinks,
@@ -10,27 +8,25 @@ import {
 } from "@/lib/site-config";
 
 /**
- * Footer #9–#14 — nền #1E293B (sáng hơn navy gốc để logo "Web" đọc được),
- * logo + MXH, 4 cột, copyright căn giữa.
+ * Footer #9–#14 — nền #1E293B (sáng hơn navy gốc để "Web" đọc được),
+ * brand text + tagline + MXH, 4 cột, copyright căn giữa.
  */
 export function Footer() {
   return (
     <footer className="mt-auto bg-footer text-white">
       <div className="mx-auto grid max-w-site gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16">
-        {/* #9 Logo + social — logo trắng, ~2× size gốc (h-14/h-16, max-w 220) */}
+        {/* #9 Brand text + social — "Nhà" cam + "Web" navy như logo */}
         <div className="lg:col-span-3">
-          <Link
-            href="/"
-            className="relative mb-5 block h-28 w-[min(100%,440px)] rounded-md sm:h-32"
-          >
-            <Image
-              src={footerLogoPath}
-              alt="Nhà Web"
-              fill
-              className="object-contain object-left"
-              sizes="440px"
-            />
+          <Link href="/" className="mb-4 block rounded-md">
+            <span className="text-2xl font-bold tracking-wide sm:text-[1.75rem]">
+              <span className="text-logo-nha">Nhà</span>{" "}
+              <span className="text-white">Web</span>
+            </span>
           </Link>
+          <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
+            chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh
+            doanh và doanh nghiệp.
+          </p>
           <ul className="flex items-center gap-3" aria-label="Mạng xã hội">
             {socialLinks.map((social) => (
               <li key={social.id}>
@@ -78,17 +74,19 @@ export function Footer() {
             <li>
               <a
                 href={`tel:${siteContact.phoneTel}`}
-                className="transition-colors hover:text-cta"
+                className="flex items-start gap-2.5 transition-colors hover:text-cta"
               >
-                {siteContact.phoneDisplay}
+                <ContactPhoneIcon />
+                <span>{siteContact.phoneDisplay}</span>
               </a>
             </li>
             <li>
               <a
                 href={`mailto:${siteContact.email}`}
-                className="transition-colors hover:text-cta"
+                className="flex items-start gap-2.5 transition-colors hover:text-cta"
               >
-                {siteContact.email}
+                <ContactMailIcon />
+                <span>{siteContact.email}</span>
               </a>
             </li>
             <li>
@@ -96,9 +94,10 @@ export function Footer() {
                 href={siteContact.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="leading-relaxed transition-colors hover:text-cta"
+                className="flex items-start gap-2.5 leading-relaxed transition-colors hover:text-cta"
               >
-                {siteContact.address}
+                <ContactMapIcon />
+                <span>{siteContact.address}</span>
               </a>
             </li>
           </ul>
@@ -165,4 +164,62 @@ function SocialIcon({ social }: { social: SocialLink }) {
         </svg>
       );
   }
+}
+
+const contactIconClass =
+  "mt-0.5 h-4 w-4 shrink-0 text-cta";
+
+function ContactPhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden
+      className={contactIconClass}
+    >
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.73-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ContactMailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden
+      className={contactIconClass}
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ContactMapIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden
+      className={contactIconClass}
+    >
+      <path
+        d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
 }

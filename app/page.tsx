@@ -2,7 +2,6 @@ import { AllWebsiteSamplesSection } from "@/components/sections/AllWebsiteSample
 import { FaqSection } from "@/components/sections/FaqSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { NewsSection } from "@/components/sections/NewsSection";
-import { PhoneContactSection } from "@/components/sections/PhoneContactSection";
 import { ProcessImagesSection } from "@/components/sections/ProcessImagesSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { TestimonialSection } from "@/components/sections/TestimonialSection";
@@ -21,7 +20,6 @@ export default function Home() {
       <ProcessImagesSection />
       <TestimonialSection />
       <NewsSection />
-      <PhoneContactSection />
     </>
   );
 }

@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
+import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { logoPath, navItems, siteContact, type NavItem } from "@/lib/site-config";
+import { logoPath, navItems, type NavItem } from "@/lib/site-config";
 
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
@@ -17,6 +18,7 @@ export function Header() {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuId = useId();
+  const { openContactForm } = useContactForm();
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -43,18 +45,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
-      <div className="mx-auto flex h-24 max-w-site items-center justify-between gap-4 px-4 sm:h-28 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="relative flex w-fit shrink-0 items-center aspect-square h-full"
-        >
+      <div className="mx-auto flex h-20 max-w-site items-center justify-between gap-4 px-4 sm:h-24 sm:px-6 lg:px-8">
+        <Link href="/" className="flex shrink-0 items-center">
           <Image
             src={logoPath}
             alt="Nhà Web"
-            fill
+            width={1012}
+            height={338}
             priority
-            className="object-contain object-left w-fit"
-            sizes="320px"
+            className="h-12 w-auto object-contain sm:h-14"
+            sizes="200px"
           />
         </Link>
 
@@ -68,7 +68,7 @@ export function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="inline-flex rounded-md px-3 py-2 text-sm font-medium tracking-normal text-foreground transition-colors hover:text-cta"
+                  className="inline-flex rounded-md px-3 py-2 text-base font-medium uppercase tracking-normal text-foreground transition-colors hover:text-cta"
                 >
                   {item.label}
                 </Link>
@@ -94,7 +94,7 @@ export function Header() {
                   aria-haspopup="menu"
                   aria-controls={`${menuId}-${item.label}`}
                   className={cx(
-                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium tracking-normal text-foreground transition-colors",
+                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium uppercase tracking-normal text-foreground transition-colors",
                     "hover:text-cta",
                     isOpen && "text-cta",
                   )}
@@ -120,7 +120,7 @@ export function Header() {
                         href={child.href}
                         role="menuitem"
                         onClick={() => setOpenKey(null)}
-                        className="block px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-bg-secondary hover:text-cta"
+                        className="block px-4 py-2.5 text-base font-medium uppercase text-foreground transition-colors hover:bg-bg-secondary hover:text-cta"
                       >
                         {child.label}
                       </Link>
@@ -134,11 +134,11 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <CTAButton
-            href={`tel:${siteContact.phoneTel}`}
+            type="button"
             className="hidden px-4 py-2.5 text-xs sm:inline-flex"
+            onClick={() => openContactForm({ variant: "consult" })}
           >
-            <PhoneIcon />
-            {siteContact.phoneDisplay}
+            Đăng ký tư vấn ngay
           </CTAButton>
 
           <button
@@ -173,7 +173,7 @@ export function Header() {
                         aria-expanded={isOpen}
                         onClick={() => toggleMobileItem(item)}
                         className={cx(
-                          "flex w-full items-center justify-between py-3 text-left text-sm font-medium tracking-normal text-foreground",
+                          "flex w-full items-center justify-between py-3 text-left text-base font-medium uppercase tracking-normal text-foreground",
                           "hover:text-cta",
                           isOpen && "text-cta",
                         )}
@@ -191,7 +191,7 @@ export function Header() {
                                 setMobileOpen(false);
                                 setOpenKey(null);
                               }}
-                              className="block rounded-md px-2 py-2 text-sm text-muted transition-colors hover:bg-bg-secondary hover:text-cta"
+                              className="block rounded-md px-2 py-2 text-base font-medium uppercase text-muted transition-colors hover:bg-bg-secondary hover:text-cta"
                             >
                               {child.label}
                             </Link>
@@ -203,7 +203,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-3 text-sm font-medium tracking-normal text-foreground transition-colors hover:text-cta"
+                      className="block py-3 text-base font-medium uppercase tracking-normal text-foreground transition-colors hover:text-cta"
                     >
                       {item.label}
                     </Link>
@@ -213,12 +213,14 @@ export function Header() {
             })}
 
             <CTAButton
-              href={`tel:${siteContact.phoneTel}`}
+              type="button"
               className="mt-4 w-full"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false);
+                openContactForm({ variant: "consult" });
+              }}
             >
-              <PhoneIcon />
-              {siteContact.phoneDisplay}
+              Đăng ký tư vấn ngay
             </CTAButton>
           </nav>
         </div>
@@ -240,14 +242,6 @@ function ChevronDown({ className }: { className?: string }) {
         d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z"
         clipRule="evenodd"
       />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-4 w-4">
-      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 3.5A1 1 0 0 1 4 2.5h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.02l-2.2 2.2Z" />
     </svg>
   );
 }

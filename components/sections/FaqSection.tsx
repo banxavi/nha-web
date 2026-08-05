@@ -91,7 +91,7 @@ export function FaqSection() {
                   <div
                     className={`overflow-hidden rounded-md border transition-[border-color] duration-700 ${
                       isHovered
-                        ? "border-[#4981D7]"
+                        ? "border-cta"
                         : isOpen
                           ? "border-[#B8D4F0]"
                           : "border-card-border"
@@ -109,7 +109,7 @@ export function FaqSection() {
                           : "bg-right text-foreground"
                       }`}
                       style={{
-                        backgroundImage: `linear-gradient(to right, #4981D7 50%, ${idleBg} 50%)`,
+                        backgroundImage: `linear-gradient(to right, #F97316 50%, ${idleBg} 50%)`,
                       }}
                       onPointerEnter={() => {
                         // While layout is animating, only keep the locked item —

@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { ServicesContactSection } from "@/components/sections/ServicesContactSection";
+
+export const metadata: Metadata = {
+  title: "Liên hệ | Nhà Web",
+  description:
+    "Liên hệ Nhà Web để đăng ký tư vấn thiết kế website chuyên nghiệp, chuẩn SEO. Hotline, địa chỉ và form gửi yêu cầu.",
+};
+
+export default function LienHePage() {
+  return <ServicesContactSection />;
+}

@@ -30,34 +30,20 @@ export const siteContact = {
     "https://www.google.com/maps/search/?api=1&query=208+Tr%C6%B0%E1%BB%9Dng+Chinh,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+B%C3%ACnh,+TP.+H%E1%BB%93+Ch%C3%AD+Minh",
 };
 
-/** Menu Title Case — thứ tự theo luồng trang (điều chỉnh khi có sheet "Dịch vụ") */
+/** Menu Title Case — thứ tự theo luồng trang */
 export const navItems: NavItem[] = [
-  { label: "Trang chủ", href: "/" },
-  {
-    label: "Dịch vụ",
-    href: "/#dich-vu",
-    children: [
-      { label: "Thiết kế website", href: "/#dich-vu" },
-      { label: "Website chuẩn SEO", href: "/#dich-vu" },
-      { label: "Giao diện quản trị", href: "/#dich-vu" },
-    ],
-  },
-  { label: "Quy trình", href: "/#quy-trinh" },
-  {
-    label: "Mẫu website",
-    href: "/#mau-website",
-    children: [
-      { label: "Mẫu nổi bật", href: "/#mau-website" },
-      { label: "Tất cả mẫu", href: "/#mau-carousel" },
-    ],
-  },
+  { label: "Giới thiệu", href: "/gioi-thieu" },
+  { label: "Cửa hàng", href: "/#mau-website" },
   { label: "Tin tức", href: "/#tin-tuc" },
-  { label: "Liên hệ", href: "/#lien-he" },
+  { label: "Liên hệ", href: "/lien-he" },
 ];
 
-/** Footer / Header dùng chung — lấy từ menu "Dịch vụ", không hard-code trùng. */
-export const serviceNavLinks: NavChild[] =
-  navItems.find((item) => item.label === "Dịch vụ")?.children ?? [];
+/** Footer cột Dịch vụ — anchor về section CTA trên trang chủ. */
+export const serviceNavLinks: NavChild[] = [
+  { label: "Thiết kế website", href: "/#dich-vu" },
+  { label: "Website chuẩn SEO", href: "/#dich-vu" },
+  { label: "Giao diện quản trị", href: "/#dich-vu" },
+];
 
 /** TODO: thay href bằng fanpage / channel thật khi có. */
 export const socialLinks: SocialLink[] = [
@@ -94,7 +80,7 @@ export const footerContent = {
     "Bản quyền © 2026 | Nhà Web – Thiết kế & Vận hành website",
 };
 
-export const logoPath = "/logo/Nhà_Web_logo.webp";
+export const logoPath = "/logo/Nha_Web_logo.png";
 export const footerLogoPath = "/logo/nha-web-trang.png";
 
 /**
@@ -184,7 +170,8 @@ export const aboutVisionContent = {
 
 /**
  * Section 1 — Hero (text trái + banner phải).
- * Ảnh thật trong `public/hero` — tỉ lệ 930×429.
+ * Ảnh thật trong `public/hero` — tỉ lệ 3:2 (export 1800×1200).
+ * Desktop: khung stretch theo chiều cao cột text; object-top giữ phần trên.
  */
 export const heroContent = {
   headline: "Dịch vụ thiết kế website chuyên nghiệp, uy tín, chuẩn SEO",
@@ -212,15 +199,61 @@ export const heroContent = {
 };
 
 /**
- * Section 2 — Quy trình 5 bước (ảnh infographic).
- * Ảnh: `public/process/quy-trinh-5-buoc.webp.png` (1920×902).
+ * Section 2 — Quy trình 5 bước (icon + title blocks).
+ * Icon crop từ `public/process/image.png` → `public/process/icons/`.
+ * Ảnh infographic chuyển sang `processImagesContent` / ProcessImagesSection.
  */
+export type ProcessStepItem = {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  /** Path relative to /public */
+  iconSrc: string;
+};
+
 export const processStepsContent = {
   heading: "Quy trình 5 bước",
-  image: {
-    src: "/process/quy-trinh-5-buoc.webp.png",
-    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
-  },
+  steps: [
+    {
+      id: "step-1",
+      step: "Bước 1",
+      title: "Tiếp nhận yêu cầu và tư vấn\ngiải pháp",
+      description: "Lắng nghe nhu cầu, ngành nghề, chức năng cần thiết",
+      iconSrc: "/process/icons/step-1-consult.png",
+    },
+    {
+      id: "step-2",
+      step: "Bước 2",
+      title: "Lập kế hoạch và chốt phạm vi",
+      description:
+        "Xây dựng cấu trúc, tính năng, nội dung cần chuẩn bị, tiến độ",
+      iconSrc: "/process/icons/step-2-plan.png",
+    },
+    {
+      id: "step-3",
+      step: "Bước 3",
+      title: "Thiết kế và xây dựng website",
+      description:
+        "Thiết kế giao diện, màu sắc, hình ảnh, nội dung theo phạm vi đã chốt",
+      iconSrc: "/process/icons/step-3-build.png",
+    },
+    {
+      id: "step-4",
+      step: "Bước 4",
+      title: "Kiểm thử và tối ưu",
+      description: "Kiểm tra website trước khi bàn giao",
+      iconSrc: "/process/icons/step-4-test.png",
+    },
+    {
+      id: "step-5",
+      step: "Bước 5",
+      title: "Nghiệm thu, bàn giao, vận hành",
+      description:
+        "Gửi website hoàn chỉnh cho khách, bàn giao tài khoản, hướng dẫn và hỗ trợ vận hành",
+      iconSrc: "/process/icons/step-5-handover.png",
+    },
+  ] satisfies ProcessStepItem[],
 };
 
 /**
@@ -684,19 +717,20 @@ export const faqContent = {
  * TODO: Content/hình final CHƯA CÓ — `image.src` rỗng = placeholder;
  * gán đường dẫn ảnh (vd. `/process/section6-media.png`) khi khách cung cấp.
  */
-export const section6Content = {
+/**
+ * Section 6 — ảnh infographic quy trình full-width (không chia text / image).
+ * Ảnh: `public/process/quy-trinh-5-buoc.webp.png` (1920×902).
+ */
+export const processImagesContent = {
   heading: "Quy trình 5 bước",
-  /** TODO: tiêu đề phụ bên trái — để trống nếu không cần */
-  bodyTitle: "TODO: Tiêu đề phụ mô tả quy trình",
-  bodyText: [
-    "TODO: Đoạn mô tả quy trình làm việc Nhà Web — thay bằng nội dung final từ email / sheet.",
-    "TODO: Đoạn bổ sung (lợi ích, cam kết tiến độ…) — xóa nếu không cần.",
-  ],
   image: {
-    src: "",
-    alt: "Minh họa quy trình 5 bước Nhà Web (ảnh sẽ cập nhật sau)",
+    src: "/process/quy-trinh-5-buoc.webp.png",
+    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
   },
 };
+
+/** @deprecated Dùng `processImagesContent` — giữ alias tạm nếu có import cũ. */
+export const section6Content = processImagesContent;
 
 /**
  * Section 7 — Why choose Nhà Web (format tạm ref Mắt Bão WS glass cards).
@@ -807,6 +841,57 @@ export const testimonialsContent = {
 };
 
 /**
+ * Section — CTA dịch vụ cao cấp (trên PhoneContactSection).
+ * Ref layout interdata.vn: heading + domain underline + pill buttons gradient.
+ */
+export type PremiumServiceIcon =
+  | "website"
+  | "landing"
+  | "branding"
+  | "fullpackage"
+  | "care";
+
+export type PremiumServiceItem = {
+  id: string;
+  label: string;
+  icon: PremiumServiceIcon;
+};
+
+export const premiumServicesContent = {
+  id: "dich-vu",
+  eyebrow: "Trải nghiệm dịch vụ cao cấp ngay tại",
+  /** Domain-style brand line (ref INTERDATA.VN) */
+  brandDomain: "NHAWEB.VN",
+  services: [
+    {
+      id: "thiet-ke-website",
+      label: "Thiết kế website",
+      icon: "website",
+    },
+    {
+      id: "thiet-ke-landing-page",
+      label: "Thiết kế Landing page",
+      icon: "landing",
+    },
+    {
+      id: "thiet-ke-nhan-dien",
+      label: "Thiết kế nhận diện thương hiệu",
+      icon: "branding",
+    },
+    {
+      id: "thiet-ke-tron-goi",
+      label: "Thiết kế website trọn gói",
+      icon: "fullpackage",
+    },
+    {
+      id: "cham-soc-website",
+      label: "Chăm sóc website",
+      icon: "care",
+    },
+  ] satisfies PremiumServiceItem[],
+};
+
+/**
  * Shared contact form (Form 7 "Đăng ký tư vấn" + Form 8 "Đăng ký ngay").
  * Dùng qua `ContactFormModal` với `variant`: "consult" | "register".
  * TODO: swap `image` khi có ảnh Nhà Web thật; nối `/api/contact` gửi mail.
@@ -869,3 +954,46 @@ export const contactFormContent = {
 
 /** @deprecated Dùng `contactFormContent` — giữ alias tạm nếu còn import cũ */
 export const phoneContactContent = contactFormContent.section;
+
+/**
+ * Trang Liên hệ — hero form (ref interdata.vn/contact).
+ * Layout: info trái + form phải trên nền gradient xanh.
+ * Form thêm field Số điện thoại so với mẫu InterData gốc.
+ */
+export const lienHePageContent = {
+  id: "lien-he",
+  eyebrow: "Liên hệ",
+  heading: "LIÊN HỆ NHÀ WEB",
+  intro:
+    "Để lại thông tin — đội ngũ Nhà Web sẽ tư vấn giải pháp website phù hợp với nhu cầu của bạn.",
+  hotlineLabel: "Hotline",
+  workingHours: "Giờ làm việc: Thứ 2 - Thứ 7: 8:00 - 18:00",
+  termsLabel: "Tôi đồng ý với Thỏa thuận & Điều khoản sử dụng",
+  termsHref: "/#chinh-sach",
+  submitLabel: "Gửi liên hệ",
+  fields: {
+    name: {
+      label: "Họ tên",
+      placeholder: "Nguyễn Văn A",
+      required: true,
+    },
+    phone: {
+      label: "Số điện thoại",
+      placeholder: "0907 566 279",
+      required: true,
+    },
+    email: {
+      label: "Email",
+      placeholder: "email@domain.com",
+      required: true,
+    },
+    message: {
+      label: "Nội dung liên hệ",
+      placeholder: "Mô tả ngắn nhu cầu dịch vụ của bạn…",
+      required: false,
+    },
+  },
+  successTitle: "Gửi liên hệ thành công!",
+  successMessage:
+    "Cảm ơn bạn đã liên hệ Nhà Web. Chúng tôi sẽ phản hồi sớm nhất.",
+};
