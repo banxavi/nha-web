@@ -211,7 +211,7 @@ export function ServicesContactSection() {
           </div>
 
           {/* Right — form */}
-          <div className="rounded-2xl bg-white/10 p-5 shadow-[0_20px_50px_rgba(0,40,120,0.25)] backdrop-blur-[2px] sm:p-7 lg:p-8">
+          <div>
             {submitted ? (
               <div
                 className="flex flex-col items-center justify-center py-10 text-center"
@@ -242,18 +242,17 @@ export function ServicesContactSection() {
                 noValidate
               >
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    id={nameId}
-                    label={fields.name.label}
-                    required={fields.name.required}
-                    error={errors.name}
-                  >
+                  <Field error={errors.name}>
                     <input
                       id={nameId}
                       name="name"
                       type="text"
                       autoComplete="name"
-                      placeholder={fields.name.placeholder}
+                      aria-label={fields.name.label}
+                      placeholder={fieldPlaceholder(
+                        fields.name.label,
+                        fields.name.required,
+                      )}
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
@@ -264,19 +263,18 @@ export function ServicesContactSection() {
                     />
                   </Field>
 
-                  <Field
-                    id={phoneId}
-                    label={fields.phone.label}
-                    required={fields.phone.required}
-                    error={errors.phone}
-                  >
+                  <Field error={errors.phone}>
                     <input
                       id={phoneId}
                       name="phone"
                       type="tel"
                       inputMode="numeric"
                       autoComplete="tel"
-                      placeholder={fields.phone.placeholder}
+                      aria-label={fields.phone.label}
+                      placeholder={fieldPlaceholder(
+                        fields.phone.label,
+                        fields.phone.required,
+                      )}
                       value={phone}
                       onChange={(e) => {
                         setPhone(e.target.value);
@@ -288,18 +286,17 @@ export function ServicesContactSection() {
                   </Field>
                 </div>
 
-                <Field
-                  id={emailId}
-                  label={fields.email.label}
-                  required={fields.email.required}
-                  error={errors.email}
-                >
+                <Field error={errors.email}>
                   <input
                     id={emailId}
                     name="email"
                     type="email"
                     autoComplete="email"
-                    placeholder={fields.email.placeholder}
+                    aria-label={fields.email.label}
+                    placeholder={fieldPlaceholder(
+                      fields.email.label,
+                      fields.email.required,
+                    )}
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -310,16 +307,16 @@ export function ServicesContactSection() {
                   />
                 </Field>
 
-                <Field
-                  id={messageId}
-                  label={fields.message.label}
-                  required={fields.message.required}
-                >
+                <Field>
                   <textarea
                     id={messageId}
                     name="message"
                     rows={4}
-                    placeholder={fields.message.placeholder}
+                    aria-label={fields.message.label}
+                    placeholder={fieldPlaceholder(
+                      fields.message.label,
+                      fields.message.required,
+                    )}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className={cx(
@@ -372,7 +369,7 @@ export function ServicesContactSection() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-1 inline-flex w-full items-center justify-center rounded-lg bg-[#0B1F3A] px-8 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50 sm:w-auto sm:min-w-[11rem]"
+                  className="mt-1 inline-flex w-fit items-center justify-center rounded-lg bg-[#0B1F3A] px-8 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
                 >
                   {submitting ? "Đang gửi…" : submitLabel}
                 </button>
@@ -385,28 +382,19 @@ export function ServicesContactSection() {
   );
 }
 
+function fieldPlaceholder(label: string, required?: boolean) {
+  return required ? `${label} *` : label;
+}
+
 function Field({
-  id,
-  label,
-  required,
   error,
   children,
 }: {
-  id: string;
-  label: string;
-  required?: boolean;
   error?: string;
   children: ReactNode;
 }) {
   return (
     <div className="min-w-0">
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-sm font-semibold text-white"
-      >
-        {label}
-        {required ? <span className="text-white"> *</span> : null}
-      </label>
       {children}
       {error ? (
         <p className="mt-1 text-sm text-red-200" role="alert">
