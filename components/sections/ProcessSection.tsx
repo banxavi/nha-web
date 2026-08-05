@@ -37,13 +37,13 @@ export function ProcessSection() {
       <div className="relative z-10 mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <h2
           id="process-heading"
-          className="text-center text-2xl font-bold tracking-normal text-foreground sm:text-3xl"
+          className="text-center text-2xl font-bold tracking-normal text-foreground sm:text-3xl uppercase"
         >
-          Quy trình{" "}
-          <span className="bg-gradient-to-r from-logo-web to-[#38BDF8] bg-clip-text text-transparent">
+          Quy trình
+         
             5 bước
-          </span>
-          <span className="sr-only"> — {heading}</span>
+        <span className="sr-only"> — {heading}</span>
+        
         </h2>
 
         <ol className="mt-12 flex flex-col items-center gap-10 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:flex lg:flex-row lg:items-start lg:justify-between lg:gap-4">
