@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ServicesContactSection } from "@/components/sections/ServicesContactSection";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Liên hệ | Nhà Web",
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function LienHePage() {
-  return <ServicesContactSection />;
+  return (
+    <Reveal>
+      <ServicesContactSection />
+    </Reveal>
+  );
 }

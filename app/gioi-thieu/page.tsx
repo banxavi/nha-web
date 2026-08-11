@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutIntroSection } from "@/components/sections/AboutIntroSection";
 import { AboutVisionSection } from "@/components/sections/AboutVisionSection";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Giới thiệu | Nhà Web",
@@ -12,7 +13,9 @@ export default function GioiThieuPage() {
   return (
     <>
       <AboutIntroSection />
-      <AboutVisionSection />
+      <Reveal>
+        <AboutVisionSection />
+      </Reveal>
     </>
   );
 }

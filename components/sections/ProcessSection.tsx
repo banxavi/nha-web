@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { processStepsContent } from "@/lib/site-config";
+import {
+  processStepsContent,
+  type ProcessStepItem,
+} from "@/lib/site-config";
 
 /** Stagger vertical resting positions — matches airy OS-logo layout */
 const STEP_OFFSET = [
@@ -10,16 +13,30 @@ const STEP_OFFSET = [
   "lg:pt-1",
 ] as const;
 
+export type ProcessSectionContent = {
+  heading: string;
+  steps: ProcessStepItem[];
+};
+
+type ProcessSectionProps = {
+  /** Override content — mặc định `processStepsContent` trang chủ. */
+  content?: ProcessSectionContent;
+  sectionId?: string;
+};
+
 /**
  * Section 2 — Quy trình 5 bước: tối giản logo tròn + title, float nhẹ lên xuống.
  * Icon lấy từ `public/process/image.png` (crop → `public/process/icons/`).
  */
-export function ProcessSection() {
-  const { heading, steps } = processStepsContent;
+export function ProcessSection({
+  content = processStepsContent,
+  sectionId = "quy-trinh",
+}: ProcessSectionProps) {
+  const { heading, steps } = content;
 
   return (
     <section
-      id="quy-trinh"
+      id={sectionId}
       aria-labelledby="process-heading"
       className="relative scroll-mt-24 overflow-hidden bg-bg-primary"
     >

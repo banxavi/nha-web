@@ -1,117 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useEffect,
-  useRef,
-  useState,
-  type MouseEvent as ReactMouseEvent,
-  type PointerEvent as ReactPointerEvent,
-} from "react";
 import { Card } from "@/components/ui/Card";
+import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { newsContent, type NewsItem } from "@/lib/site-config";
 
-function cx(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
-}
-
-const SWIPE_THRESHOLD_RATIO = 0.18;
-const SWIPE_THRESHOLD_MIN_PX = 56;
-const DRAG_INTENT_PX = 8;
-
 /**
  * Task 4 — Tin tức / Sự kiện mới nhất.
- * Cùng cấu trúc slider mẫu website cũ:
- * heading giữa + grid 5 item/hàng + carousel `<` `>` / auto next / kéo-vuốt.
+ * Heading giữa + grid 5 item/hàng + Embla carousel (prev/next, autoplay, swipe).
  */
 export function NewsSection() {
   const { heading, tagline, items, itemsPerRow, autoplayMs } = newsContent;
   const pages = chunkItems(items, itemsPerRow);
   const pageCount = Math.max(1, pages.length);
-  const [pageIndex, setPageIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const trackRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef({
-    pointerId: -1,
-    startX: 0,
-    lastX: 0,
-    moved: false,
-  });
-  const suppressClickRef = useRef(false);
-
-  useEffect(() => {
-    if (pageCount <= 1 || paused || isDragging) return;
-    const timer = window.setInterval(() => {
-      setPageIndex((current) => (current + 1) % pageCount);
-    }, autoplayMs);
-    return () => window.clearInterval(timer);
-  }, [autoplayMs, pageCount, paused, isDragging]);
-
-  function goTo(next: number) {
-    setPageIndex(((next % pageCount) + pageCount) % pageCount);
-  }
-
-  function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    if (pageCount <= 1 || event.button !== 0) return;
-    dragRef.current = {
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      lastX: event.clientX,
-      moved: false,
-    };
-    setIsDragging(true);
-    setDragOffset(0);
-    event.currentTarget.setPointerCapture(event.pointerId);
-  }
-
-  function onPointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    if (!isDragging || dragRef.current.pointerId !== event.pointerId) return;
-    const delta = event.clientX - dragRef.current.startX;
-    if (Math.abs(delta) > DRAG_INTENT_PX) {
-      dragRef.current.moved = true;
-    }
-    dragRef.current.lastX = event.clientX;
-    setDragOffset(delta);
-  }
-
-  function finishDrag(event: ReactPointerEvent<HTMLDivElement>) {
-    if (!isDragging || dragRef.current.pointerId !== event.pointerId) return;
-
-    const width = trackRef.current?.offsetWidth ?? 1;
-    const threshold = Math.max(
-      SWIPE_THRESHOLD_MIN_PX,
-      width * SWIPE_THRESHOLD_RATIO,
-    );
-    const delta = dragRef.current.lastX - dragRef.current.startX;
-
-    if (dragRef.current.moved && Math.abs(delta) >= threshold) {
-      goTo(pageIndex + (delta < 0 ? 1 : -1));
-      suppressClickRef.current = true;
-      window.setTimeout(() => {
-        suppressClickRef.current = false;
-      }, 0);
-    }
-
-    dragRef.current.pointerId = -1;
-    setIsDragging(false);
-    setDragOffset(0);
-  }
-
-  function onClickCapture(event: ReactMouseEvent<HTMLDivElement>) {
-    if (suppressClickRef.current || dragRef.current.moved) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
-
-  const trackStyle = {
-    transform: `translateX(calc(-${pageIndex * 100}% + ${dragOffset}px))`,
-    transition: isDragging ? "none" : "transform 420ms ease",
-  };
 
   return (
     <section
@@ -119,8 +21,6 @@ export function NewsSection() {
       aria-labelledby="news-heading"
       aria-roledescription="carousel"
       className="scroll-mt-24 bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <div className="mx-auto max-w-site">
         <header className="mb-10 text-center sm:mb-14">
@@ -138,83 +38,29 @@ export function NewsSection() {
         </header>
       </div>
 
-      <div className="relative mx-auto max-w-[min(100%,calc(var(--site-max)+5.5rem))]">
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-          {pageCount > 1 ? (
-            <CarouselButton
-              direction="prev"
-              label="Tin trước"
-              onClick={() => goTo(pageIndex - 1)}
-            />
-          ) : (
-            <span className="hidden w-10 shrink-0 lg:block" aria-hidden />
-          )}
-
-          <div
-            ref={trackRef}
-            className={cx(
-              "min-w-0 flex-1 overflow-hidden touch-pan-y",
-              isDragging ? "cursor-grabbing" : pageCount > 1 ? "cursor-grab" : "",
-            )}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={finishDrag}
-            onPointerCancel={finishDrag}
-            onClickCapture={onClickCapture}
-          >
-            <div className="flex w-full" style={trackStyle}>
-              {pages.map((page, index) => (
-                <ul
-                  key={`news-page-${index}`}
-                  className="grid w-full shrink-0 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
-                  aria-hidden={index !== pageIndex}
-                >
-                  {page.map((item) => (
-                    <li key={item.id} className="min-h-0">
-                      <NewsCard item={item} />
-                    </li>
-                  ))}
-                </ul>
+      <Carousel
+        className="mx-auto max-w-[min(100%,calc(var(--site-max)+5.5rem))]"
+        options={{ loop: pageCount > 1, watchDrag: pageCount > 1 }}
+        autoplayMs={pageCount > 1 ? autoplayMs : undefined}
+        slideGap="4-5"
+        sideControls={{
+          prevLabel: "Tin trước",
+          nextLabel: "Tin sau",
+        }}
+        dotsLabel="Trang tin tức"
+      >
+        {pages.map((page, index) => (
+          <CarouselSlide key={`news-page-${index}`}>
+            <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
+              {page.map((item) => (
+                <li key={item.id} className="min-h-0">
+                  <NewsCard item={item} />
+                </li>
               ))}
-            </div>
-          </div>
-
-          {pageCount > 1 ? (
-            <CarouselButton
-              direction="next"
-              label="Tin sau"
-              onClick={() => goTo(pageIndex + 1)}
-            />
-          ) : (
-            <span className="hidden w-10 shrink-0 lg:block" aria-hidden />
-          )}
-        </div>
-
-        {pageCount > 1 ? (
-          <div
-            className="mt-8 flex items-center justify-center gap-2"
-            role="tablist"
-            aria-label="Trang tin tức"
-          >
-            {pages.map((_, index) => (
-              <button
-                key={`news-dot-${index}`}
-                type="button"
-                role="tab"
-                aria-selected={index === pageIndex}
-                aria-label={`Trang ${index + 1}`}
-                className={cx(
-                  "h-2.5 rounded-full transition-all duration-200",
-                  index === pageIndex
-                    ? "w-7 bg-cta"
-                    : "w-2.5 bg-card-border hover:bg-muted/50",
-                )}
-                onClick={() => goTo(index)}
-              />
-            ))}
-          </div>
-        ) : null}
-      </div>
+            </ul>
+          </CarouselSlide>
+        ))}
+      </Carousel>
     </section>
   );
 }
@@ -252,56 +98,6 @@ function NewsCard({ item }: { item: NewsItem }) {
         </div>
       </Card>
     </Link>
-  );
-}
-
-function CarouselButton({
-  direction,
-  label,
-  onClick,
-}: {
-  direction: "prev" | "next";
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      className={cx(
-        "hidden h-10 w-10 shrink-0 items-center justify-center rounded-full",
-        "border border-card-border bg-bg-primary text-foreground shadow-sm",
-        "transition-colors hover:border-cta hover:text-cta",
-        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta",
-        "sm:inline-flex",
-      )}
-    >
-      <ChevronIcon direction={direction} />
-    </button>
-  );
-}
-
-function ChevronIcon({ direction }: { direction: "prev" | "next" }) {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      aria-hidden
-      className="h-5 w-5"
-    >
-      <path
-        d={
-          direction === "prev"
-            ? "M12.5 4.5 7 10l5.5 5.5"
-            : "M7.5 4.5 13 10l-5.5 5.5"
-        }
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 

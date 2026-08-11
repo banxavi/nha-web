@@ -2,29 +2,63 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { logoPath, navItems, type NavItem } from "@/lib/site-config";
+import {
+  logoPath,
+  navItems,
+  searchPopularSuggestions,
+  searchPromoSuggestions,
+  type NavItem,
+  type SearchSuggestion,
+} from "@/lib/site-config";
 
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
+/** Bỏ dấu tiếng Việt — search "thiet ke" khớp "Thiết kế" (ref luvini.vn). */
+function normalizeSearch(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .trim();
+}
+
+function filterSuggestions(items: SearchSuggestion[], query: string) {
+  const q = normalizeSearch(query);
+  if (!q) return items;
+  return items.filter((item) => normalizeSearch(item.label).includes(q));
+}
+
 /**
- * Header — nền trắng, logo lớn (ref tma.vn), menu Title Case, hover sub-menu.
+ * Header — nền trắng, logo lớn (ref tma.vn), menu + mega dropdown, icon tìm kiếm cam.
+ * Logo + CTA "Đăng ký tư vấn" giữ nguyên theo mockup.
  */
 export function Header() {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const menuId = useId();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchRootRef = useRef<HTMLDivElement>(null);
   const { openContactForm } = useContactForm();
+
+  const popularResults = filterSuggestions(searchPopularSuggestions, searchQuery);
+  const promoResults = filterSuggestions(searchPromoSuggestions, searchQuery);
+  const hasResults = popularResults.length > 0 || promoResults.length > 0;
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setOpenKey(null);
         setMobileOpen(false);
+        setSearchOpen(false);
       }
     }
     document.addEventListener("keydown", onKeyDown);
@@ -33,14 +67,53 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) setOpenKey(null);
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (searchOpen) searchInputRef.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    function onPointerDown(event: MouseEvent) {
+      if (!searchRootRef.current?.contains(event.target as Node)) {
+        setSearchOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [searchOpen]);
+
   function toggleMobileItem(item: NavItem) {
     if (!item.children?.length) return;
     setOpenKey((prev) => (prev === item.label ? null : item.label));
+  }
+
+  function closeSearch() {
+    setSearchOpen(false);
+    setSearchQuery("");
+  }
+
+  function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const first = popularResults[0] ?? promoResults[0];
+    if (first) {
+      closeSearch();
+      window.location.href = first.href;
+      return;
+    }
+    const q = searchQuery.trim();
+    closeSearch();
+    if (!q) return;
+    window.location.href = `/san-pham`;
+  }
+
+  function handleSuggestionClick() {
+    closeSearch();
   }
 
   return (
@@ -62,13 +135,14 @@ export function Header() {
           {navItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen = openKey === item.label;
+            const isMega = item.columns === 2;
 
             if (!hasChildren) {
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="inline-flex rounded-md px-3 py-2 text-base font-medium uppercase tracking-normal text-foreground transition-colors hover:text-cta"
+                  className="inline-flex rounded-md px-3 py-2 text-base font-medium tracking-normal text-foreground transition-colors hover:text-cta"
                 >
                   {item.label}
                 </Link>
@@ -94,7 +168,7 @@ export function Header() {
                   aria-haspopup="menu"
                   aria-controls={`${menuId}-${item.label}`}
                   className={cx(
-                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium uppercase tracking-normal text-foreground transition-colors",
+                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium tracking-normal text-foreground transition-colors",
                     "hover:text-cta",
                     isOpen && "text-cta",
                   )}
@@ -107,20 +181,29 @@ export function Header() {
                   id={`${menuId}-${item.label}`}
                   role="menu"
                   className={cx(
-                    "absolute left-0 top-full z-50 min-w-[220px] pt-2 transition-opacity duration-150",
+                    "absolute top-full z-50 pt-2 transition-opacity duration-150",
+                    isMega ? "left-1/2 w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2" : "left-0 min-w-[240px]",
                     isOpen
                       ? "pointer-events-auto opacity-100"
                       : "pointer-events-none opacity-0",
                   )}
                 >
-                  <div className="overflow-hidden rounded-xl border border-card-border bg-card py-2 shadow-lg">
+                  <div
+                    className={cx(
+                      "overflow-hidden rounded-xl border border-card-border bg-card shadow-lg",
+                      isMega ? "grid grid-flow-col grid-rows-5 gap-x-2 p-2" : "py-2",
+                    )}
+                  >
                     {item.children!.map((child) => (
                       <Link
                         key={child.label}
                         href={child.href}
                         role="menuitem"
                         onClick={() => setOpenKey(null)}
-                        className="block px-4 py-2.5 text-base font-medium uppercase text-foreground transition-colors hover:bg-bg-secondary hover:text-cta"
+                        className={cx(
+                          "block px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-bg-secondary hover:text-cta sm:text-base",
+                          isMega && "rounded-lg",
+                        )}
                       >
                         {child.label}
                       </Link>
@@ -132,14 +215,84 @@ export function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <CTAButton
-            type="button"
-            className="hidden px-4 py-2.5 text-xs sm:inline-flex"
-            onClick={() => openContactForm({ variant: "consult" })}
-          >
-            Đăng ký tư vấn ngay
-          </CTAButton>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="relative" ref={searchRootRef}>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md transition-colors hover:bg-bg-secondary"
+              aria-expanded={searchOpen}
+              aria-controls={`${menuId}-search`}
+              aria-label={searchOpen ? "Đóng tìm kiếm" : "Tìm kiếm"}
+              onClick={() => {
+                setSearchOpen((v) => !v);
+                if (searchOpen) setSearchQuery("");
+              }}
+            >
+              <SearchIcon />
+            </button>
+
+            {searchOpen ? (
+              <div
+                id={`${menuId}-search`}
+                className="absolute right-0 top-full z-50 mt-2 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-card-border bg-card shadow-lg"
+              >
+                <form role="search" onSubmit={handleSearchSubmit} className="p-3 pb-2">
+                  <label className="sr-only" htmlFor={`${menuId}-search-input`}>
+                    Từ khóa tìm kiếm
+                  </label>
+                  <div className="flex items-center gap-2 rounded-full border border-card-border bg-bg-primary px-3.5 py-2.5 transition-shadow focus-within:border-cta focus-within:ring-2 focus-within:ring-cta/30">
+                    <SearchIconSmall />
+                    <input
+                      ref={searchInputRef}
+                      id={`${menuId}-search-input`}
+                      type="search"
+                      value={searchQuery}
+                      onChange={(event) => setSearchQuery(event.target.value)}
+                      placeholder="Từ khóa tìm kiếm"
+                      autoComplete="off"
+                      className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
+                    />
+                  </div>
+                </form>
+
+                <div className="max-h-[min(22rem,70vh)] overflow-y-auto px-2 pb-3">
+                  {hasResults ? (
+                    <>
+                      {popularResults.length > 0 ? (
+                        <SearchGroup
+                          title="Tìm kiếm nhiều nhất"
+                          items={popularResults}
+                          onSelect={handleSuggestionClick}
+                        />
+                      ) : null}
+                      {promoResults.length > 0 ? (
+                        <SearchGroup
+                          title="Chương trình khuyến mãi"
+                          items={promoResults}
+                          onSelect={handleSuggestionClick}
+                        />
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="px-3 py-4 text-sm text-muted">
+                      Không tìm thấy kết quả cho &ldquo;{searchQuery.trim()}&rdquo;
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          {/* Wrapper: CTAButton base is `inline-flex`, which beats Tailwind `hidden` */}
+          <div className="hidden lg:block">
+            <CTAButton
+              type="button"
+              className="px-4 py-2.5 text-xs"
+              onClick={() => openContactForm({ variant: "consult" })}
+            >
+              Đăng ký tư vấn ngay
+            </CTAButton>
+          </div>
 
           <button
             type="button"
@@ -149,23 +302,43 @@ export function Header() {
             aria-label={mobileOpen ? "Đóng menu" : "Mở menu"}
             onClick={() => setMobileOpen((v) => !v)}
           >
-            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+            <span
+              className={cx(
+                "inline-flex transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                mobileOpen && "rotate-90",
+              )}
+            >
+              {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+            </span>
           </button>
         </div>
       </div>
 
-      {mobileOpen ? (
-        <div
-          id={`${menuId}-mobile`}
-          className="border-t border-card-border bg-bg-primary lg:hidden"
-        >
-          <nav className="mx-auto flex max-w-site flex-col px-4 py-3 sm:px-6" aria-label="Menu mobile">
-            {navItems.map((item) => {
+      <div
+        id={`${menuId}-mobile`}
+        className="mobile-nav-panel border-card-border bg-bg-primary lg:hidden"
+        data-open={mobileOpen ? "true" : "false"}
+        aria-hidden={!mobileOpen}
+        inert={!mobileOpen ? true : undefined}
+      >
+        <div className="mobile-nav-panel__inner">
+          <nav
+            className={cx(
+              "mx-auto flex max-w-site flex-col border-t border-card-border px-4 py-3 sm:px-6",
+              !mobileOpen && "pointer-events-none",
+            )}
+            aria-label="Menu mobile"
+          >
+            {navItems.map((item, index) => {
               const hasChildren = Boolean(item.children?.length);
               const isOpen = openKey === item.label;
 
               return (
-                <div key={item.label} className="border-b border-card-border/70 last:border-b-0">
+                <div
+                  key={item.label}
+                  className="mobile-nav-item border-b border-card-border/70 last:border-b-0"
+                  style={{ animationDelay: `${80 + index * 45}ms` }}
+                >
                   {hasChildren ? (
                     <>
                       <button
@@ -173,37 +346,56 @@ export function Header() {
                         aria-expanded={isOpen}
                         onClick={() => toggleMobileItem(item)}
                         className={cx(
-                          "flex w-full items-center justify-between py-3 text-left text-base font-medium uppercase tracking-normal text-foreground",
+                          "flex w-full items-center justify-between py-3 text-left text-base font-medium tracking-normal text-foreground",
                           "hover:text-cta",
                           isOpen && "text-cta",
                         )}
                       >
                         {item.label}
-                        <ChevronDown className={cx("transition-transform", isOpen && "rotate-180")} />
+                        <ChevronDown
+                          className={cx(
+                            "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                            isOpen && "rotate-180",
+                          )}
+                        />
                       </button>
-                      {isOpen ? (
-                        <div className="mb-2 space-y-1 pb-2 pl-3">
-                          {item.children!.map((child) => (
-                            <Link
-                              key={child.label}
-                              href={child.href}
-                              onClick={() => {
-                                setMobileOpen(false);
-                                setOpenKey(null);
-                              }}
-                              className="block rounded-md px-2 py-2 text-base font-medium uppercase text-muted transition-colors hover:bg-bg-secondary hover:text-cta"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                      <div
+                        className="mobile-nav-submenu"
+                        data-open={isOpen ? "true" : "false"}
+                      >
+                        <div className="mobile-nav-submenu__inner">
+                          <div
+                            className={cx(
+                              "mb-2 space-y-1 pb-2 pl-3",
+                              item.columns === 2 &&
+                                "grid grid-cols-1 gap-1 space-y-0 sm:grid-cols-2 sm:pl-2",
+                            )}
+                          >
+                            {item.children!.map((child, childIndex) => (
+                              <Link
+                                key={child.label}
+                                href={child.href}
+                                onClick={() => {
+                                  setMobileOpen(false);
+                                  setOpenKey(null);
+                                }}
+                                className="mobile-nav-child block rounded-md px-2 py-2 text-sm font-medium text-muted transition-colors hover:bg-bg-secondary hover:text-cta sm:text-base"
+                                style={{
+                                  animationDelay: `${40 + childIndex * 35}ms`,
+                                }}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
-                      ) : null}
+                      </div>
                     </>
                   ) : (
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-3 text-base font-medium uppercase tracking-normal text-foreground transition-colors hover:text-cta"
+                      className="block py-3 text-base font-medium tracking-normal text-foreground transition-colors hover:text-cta"
                     >
                       {item.label}
                     </Link>
@@ -212,20 +404,55 @@ export function Header() {
               );
             })}
 
-            <CTAButton
-              type="button"
-              className="mt-4 w-full"
-              onClick={() => {
-                setMobileOpen(false);
-                openContactForm({ variant: "consult" });
-              }}
+            <div
+              className="mobile-nav-item"
+              style={{ animationDelay: `${80 + navItems.length * 45}ms` }}
             >
-              Đăng ký tư vấn ngay
-            </CTAButton>
+              <CTAButton
+                type="button"
+                className="mt-4 w-full"
+                onClick={() => {
+                  setMobileOpen(false);
+                  openContactForm({ variant: "consult" });
+                }}
+              >
+                Đăng ký tư vấn ngay
+              </CTAButton>
+            </div>
           </nav>
         </div>
-      ) : null}
+      </div>
     </header>
+  );
+}
+
+function SearchGroup({
+  title,
+  items,
+  onSelect,
+}: {
+  title: string;
+  items: SearchSuggestion[];
+  onSelect: () => void;
+}) {
+  return (
+    <div className="mt-1">
+      <p className="px-3 py-2 text-sm font-semibold text-foreground">{title}</p>
+      <ul role="listbox" aria-label={title}>
+        {items.map((item) => (
+          <li key={item.id} role="option">
+            <Link
+              href={item.href}
+              onClick={onSelect}
+              className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-bg-secondary hover:text-cta"
+            >
+              <ClockIcon />
+              <span>{item.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -242,6 +469,59 @@ function ChevronDown({ className }: { className?: string }) {
         d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z"
         clipRule="evenodd"
       />
+    </svg>
+  );
+}
+
+/** Icon tìm kiếm — outline magnifying glass, màu CTA cam (ref vinahost.vn / mockup). */
+function SearchIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.25"
+      strokeLinecap="round"
+      aria-hidden
+      className="h-6 w-6 text-cta"
+    >
+      <circle cx="10.5" cy="10.5" r="6.25" />
+      <path d="M15.2 15.2L20 20" />
+    </svg>
+  );
+}
+
+function SearchIconSmall() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+      className="h-4 w-4 shrink-0 text-muted"
+    >
+      <circle cx="10.5" cy="10.5" r="6.25" />
+      <path d="M15.2 15.2L20 20" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="h-4 w-4 shrink-0 text-muted"
+    >
+      <circle cx="12" cy="12" r="8.25" />
+      <path d="M12 8.5V12l2.5 1.5" />
     </svg>
   );
 }

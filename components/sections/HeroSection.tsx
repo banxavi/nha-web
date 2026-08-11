@@ -1,46 +1,41 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
+import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { heroContent } from "@/lib/site-config";
 
+export type HeroContent = {
+  headline: string;
+  bullets: string[];
+  ctaLabel: string;
+  autoplayMs: number;
+  banners: Array<{ src: string; alt: string }>;
+};
+
+type HeroSectionProps = {
+  /** Override content — mặc định `heroContent` trang chủ. */
+  content?: HeroContent;
+  /** Section id — trang dịch vụ có thể đổi để tránh trùng `#dich-vu`. */
+  sectionId?: string;
+};
+
 /**
  * Section 1 — Hero dịch vụ.
- * Layout: text trái + bullet ✓, media phải (banner auto slide phải → trái).
+ * Layout: text trái + bullet ✓, media phải (Embla autoplay loop).
  */
-export function HeroSection() {
-  const { headline, bullets, ctaLabel, banners, autoplayMs } = heroContent;
+export function HeroSection({
+  content = heroContent,
+  sectionId = "dich-vu",
+}: HeroSectionProps) {
+  const { headline, bullets, ctaLabel, banners, autoplayMs } = content;
   const { openContactForm } = useContactForm();
   const count = banners.length;
 
-  // Clone slide đầu ở cuối để loop vô hạn luôn trượt phải → trái.
-  const slides = count > 1 ? [...banners, banners[0]] : banners;
-
-  const [index, setIndex] = useState(0);
-  const [animate, setAnimate] = useState(true);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (count <= 1 || paused) return;
-    const timer = window.setInterval(() => {
-      setAnimate(true);
-      setIndex((current) => current + 1);
-    }, autoplayMs);
-    return () => window.clearInterval(timer);
-  }, [autoplayMs, count, paused]);
-
-  function onTransitionEnd() {
-    if (count <= 1 || index !== count) return;
-    // Đã tới clone — nhảy về slide đầu thật, không animate.
-    setAnimate(false);
-    setIndex(0);
-  }
-
   return (
     <section
-      id="dich-vu"
+      id={sectionId}
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-gradient-to-b from-[#EEF4FB] via-bg-primary to-bg-secondary"
     >
@@ -81,11 +76,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div
-          className="relative w-full lg:h-full"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
+        <div className="relative w-full lg:h-full">
           {/* Mobile 3:2; desktop kéo full height cột text (object-top giữ phần trên) */}
           <div
             className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)] lg:aspect-auto lg:h-full"
@@ -93,37 +84,36 @@ export function HeroSection() {
             aria-roledescription="carousel"
             aria-label="Banner dịch vụ Nhà Web"
           >
-            <div className="absolute inset-0 overflow-hidden bg-bg-secondary">
-              <div
-                className="flex h-full w-full"
-                style={{
-                  transform: `translateX(${-index * 100}%)`,
-                  transition: animate
-                    ? "transform 500ms cubic-bezier(0.22, 1, 0.36, 1)"
-                    : "none",
-                }}
-                onTransitionEnd={onTransitionEnd}
-              >
-                {slides.map((banner, i) => (
-                  <div
-                    key={`${banner.src}-${i}`}
-                    className="relative h-full w-full shrink-0"
-                    aria-hidden={i !== index}
-                  >
-                    <Image
-                      src={banner.src}
-                      alt={banner.alt}
-                      fill
-                      priority={i === 0}
-                      draggable={false}
-                      quality={100}
-                      className="object-cover object-top select-none"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Carousel
+              className="absolute inset-0 h-full bg-bg-secondary"
+              viewportClassName="h-full"
+              containerClassName="h-full"
+              options={{
+                loop: count > 1,
+                watchDrag: count > 1,
+                duration: 25,
+              }}
+              autoplayMs={count > 1 ? autoplayMs : undefined}
+              showDots={false}
+            >
+              {banners.map((banner, i) => (
+                <CarouselSlide
+                  key={`${banner.src}-${i}`}
+                  className="relative h-full"
+                >
+                  <Image
+                    src={banner.src}
+                    alt={banner.alt}
+                    fill
+                    priority={i === 0}
+                    draggable={false}
+                    quality={100}
+                    className="object-cover object-top select-none"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </CarouselSlide>
+              ))}
+            </Carousel>
           </div>
         </div>
       </div>

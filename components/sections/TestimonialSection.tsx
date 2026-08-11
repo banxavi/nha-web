@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import {
   testimonialsContent,
   type TestimonialItem,
@@ -13,44 +13,10 @@ function cx(...parts: Array<string | undefined | false>) {
 
 /**
  * Mục 5 — Nhận xét khách hàng.
- * Card layout ref web4s.vn (ảnh trái + tên/role/quote phải); carousel để mở rộng khi có nhiều review.
+ * Card layout ref web4s.vn; Embla carousel khi có nhiều review.
  */
 export function TestimonialSection() {
   const { eyebrow, heading, items } = testimonialsContent;
-  const trackRef = useRef<HTMLUListElement>(null);
-  const [index, setIndex] = useState(0);
-  const [perView, setPerView] = useState(1);
-
-  useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth;
-      if (w >= 1024) setPerView(3);
-      else if (w >= 640) setPerView(2);
-      else setPerView(1);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const maxIndex = Math.max(0, items.length - perView);
-  const canPrev = index > 0;
-  const canNext = index < maxIndex;
-  const showControls = items.length > perView;
-
-  useEffect(() => {
-    setIndex((current) => Math.min(current, maxIndex));
-  }, [maxIndex]);
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const first = el.children[0] as HTMLElement | undefined;
-    if (!first) return;
-    const gap = parseFloat(getComputedStyle(el).columnGap || "0") || 20;
-    const offset = index * (first.offsetWidth + gap);
-    el.style.transform = `translateX(-${offset}px)`;
-  }, [index, perView, items.length]);
 
   if (items.length === 0) return null;
 
@@ -76,68 +42,38 @@ export function TestimonialSection() {
         </header>
 
         <div className="relative mt-10 sm:mt-12">
-          <div
-            className={cx("overflow-hidden", single && "flex justify-center")}
-          >
-            <ul
-              ref={trackRef}
-              className={cx(
-                "flex gap-4 transition-transform duration-500 ease-out sm:gap-5",
-                single ? "w-auto" : "w-full",
-              )}
+          {single ? (
+            <div className="flex justify-center">
+              <div className="w-[min(100%,36rem)]">
+                <TestimonialCard item={items[0]} />
+              </div>
+            </div>
+          ) : (
+            <Carousel
+              options={{
+                align: "start",
+                containScroll: "trimSnaps",
+                dragFree: false,
+              }}
+              slideGap="4-5"
+              bottomControls={{
+                prevLabel: "Nhận xét trước",
+                nextLabel: "Nhận xét sau",
+              }}
+              disableWhenEdge
+              dotsLabel="Trang nhận xét"
+              showDots
             >
               {items.map((item) => (
-                <li
+                <CarouselSlide
                   key={item.id}
-                  className={cx(
-                    "shrink-0",
-                    single
-                      ? "w-[min(100%,36rem)]"
-                      : "w-full sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]",
-                  )}
+                  className={cx("basis-full sm:basis-1/2 lg:basis-1/3")}
                 >
                   <TestimonialCard item={item} />
-                </li>
+                </CarouselSlide>
               ))}
-            </ul>
-          </div>
-
-          {showControls ? (
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <CarouselButton
-                direction="prev"
-                disabled={!canPrev}
-                onClick={() => setIndex((i) => Math.max(0, i - 1))}
-              />
-              <div
-                className="flex items-center gap-2"
-                role="tablist"
-                aria-label="Trang nhận xét"
-              >
-                {Array.from({ length: maxIndex + 1 }, (_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    role="tab"
-                    aria-selected={i === index}
-                    aria-label={`Trang ${i + 1}`}
-                    className={cx(
-                      "h-2.5 rounded-full transition-all duration-200",
-                      i === index
-                        ? "w-6 bg-cta"
-                        : "w-2.5 bg-card-border hover:bg-muted/40",
-                    )}
-                    onClick={() => setIndex(i)}
-                  />
-                ))}
-              </div>
-              <CarouselButton
-                direction="next"
-                disabled={!canNext}
-                onClick={() => setIndex((i) => Math.min(maxIndex, i + 1))}
-              />
-            </div>
-          ) : null}
+            </Carousel>
+          )}
         </div>
       </div>
     </section>
@@ -167,47 +103,5 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
         </p>
       </div>
     </article>
-  );
-}
-
-function CarouselButton({
-  direction,
-  disabled,
-  onClick,
-}: {
-  direction: "prev" | "next";
-  disabled: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      disabled={disabled}
-      aria-label={direction === "prev" ? "Nhận xét trước" : "Nhận xét sau"}
-      onClick={onClick}
-      className={cx(
-        "flex h-10 w-10 items-center justify-center rounded-full border border-card-border bg-card text-foreground shadow-sm transition-colors",
-        "hover:border-cta/40 hover:text-cta",
-        "disabled:pointer-events-none disabled:opacity-35",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta/40",
-      )}
-    >
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden
-        className={direction === "prev" ? "rotate-180" : undefined}
-      >
-        <path
-          d="M9 5l7 7-7 7"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </button>
   );
 }

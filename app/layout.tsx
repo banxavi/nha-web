@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PhoneContactSection } from "@/components/sections/PhoneContactSection";
 import { PremiumServicesSection } from "@/components/sections/PremiumServicesSection";
+import { Reveal } from "@/components/ui/Reveal";
 import "./globals.css";
 
 /* Closest free alternative to Surt Expanded (perpetualny.com) — có subset Vietnamese */
@@ -46,8 +47,12 @@ export default function RootLayout({
           <Header />
           <main className="flex flex-1 flex-col">
             {children}
-            <PremiumServicesSection />
-            <PhoneContactSection />
+            <Reveal>
+              <PremiumServicesSection />
+            </Reveal>
+            <Reveal>
+              <PhoneContactSection />
+            </Reveal>
           </main>
           <Footer />
           <FloatingContactIcons />

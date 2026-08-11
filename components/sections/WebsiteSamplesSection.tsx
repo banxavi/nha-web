@@ -1,6 +1,6 @@
 "use client";
 
-import { useContactForm } from "@/components/contact/ContactFormProvider";
+import Link from "next/link";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import {
   websiteSamplesContent,
@@ -12,13 +12,12 @@ function cx(...parts: Array<string | undefined | false>) {
 }
 
 /**
- * Section 3 — 5 mẫu website nổi bật.
- * Bento: 1 card cao trái + lưới 2×2 bên phải (ref layout services).
- * Click mẫu → mở Form "Đăng ký ngay" với title = tên mẫu.
+ * Section 3 — 5 nhóm ngành nổi bật (bento).
+ * Bento: 1 card cao trái + lưới 2×2 bên phải.
+ * Click nhóm ngành → trang `/san-pham` (lọc theo nhóm).
  */
 export function WebsiteSamplesSection() {
   const { heading, tagline, items } = websiteSamplesContent;
-  const { openContactForm } = useContactForm();
 
   return (
     <section
@@ -50,15 +49,7 @@ export function WebsiteSamplesSection() {
                 !item.featured && "min-h-[220px] sm:min-h-[240px]",
               )}
             >
-              <SampleCard
-                item={item}
-                onSelect={() =>
-                  openContactForm({
-                    variant: "register",
-                    selectedSample: item.title,
-                  })
-                }
-              />
+              <SampleCard item={item} />
             </li>
           ))}
         </ul>
@@ -67,13 +58,7 @@ export function WebsiteSamplesSection() {
   );
 }
 
-function SampleCard({
-  item,
-  onSelect,
-}: {
-  item: SampleItem;
-  onSelect: () => void;
-}) {
+function SampleCard({ item }: { item: SampleItem }) {
   return (
     <article
       className={cx(
@@ -81,11 +66,10 @@ function SampleCard({
         item.featured ? "min-h-[320px] sm:min-h-[360px] lg:min-h-full" : "",
       )}
     >
-      <button
-        type="button"
-        onClick={onSelect}
-        className="absolute inset-0 block w-full cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cta"
-        aria-label={`Đăng ký mẫu ${item.title}`}
+      <Link
+        href={item.href}
+        className="absolute inset-0 block w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cta"
+        aria-label={`Xem mẫu website ${item.title}`}
       >
         <ZoomableImage
           src={item.image.src}
@@ -102,11 +86,11 @@ function SampleCard({
         />
 
         <div className="absolute inset-x-0 bottom-0 flex justify-center p-4 sm:p-5">
-          <span className="rounded-lg bg-bg-primary px-5 py-2.5 text-center text-sm font-bold tracking-wide text-foreground shadow-sm transition-colors group-hover:text-cta sm:px-6 sm:text-base">
+          <span className="rounded-lg bg-bg-primary px-4 py-2.5 text-center text-sm font-bold tracking-wide text-foreground shadow-sm transition-colors group-hover:text-cta sm:px-5 sm:text-base">
             {item.title}
           </span>
         </div>
-      </button>
+      </Link>
     </article>
   );
 }

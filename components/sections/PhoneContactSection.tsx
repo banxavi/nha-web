@@ -8,6 +8,8 @@ import { contactFormContent } from "@/lib/site-config";
 /**
  * Section 8 — CTA mở Form "Đăng ký ngay" (ContactFormModal variant=register).
  * Form đầy đủ 4 field nằm trong modal dùng chung với Form 7.
+ * Mobile–lg: bot đứng riêng phía trên, không đè chữ/CTA.
+ * lg+: bot neo cạnh phải như banner desktop.
  */
 export function PhoneContactSection() {
   const { openContactForm } = useContactForm();
@@ -53,8 +55,22 @@ export function PhoneContactSection() {
             </svg>
           </div>
 
-          <div className="relative grid items-center gap-6 px-5 py-8 sm:px-8 sm:py-10  lg:gap-4 lg:px-12 lg:py-11">
-            <div className="relative z-10 mx-auto w-full text-center lg:mx-0 lg:max-w-none lg:pr-4">
+          <div className="relative px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-11">
+            {/* Bot — mobile/tablet: dedicated slot above copy (no overlap) */}
+            <div className="relative z-10 mx-auto mb-5 flex justify-center lg:hidden">
+              <div className="relative h-28 w-28 sm:h-32 sm:w-32">
+                <Image
+                  src={illustration.src}
+                  alt=""
+                  fill
+                  className="object-contain drop-shadow-md"
+                  sizes="128px"
+                  priority={false}
+                />
+              </div>
+            </div>
+
+            <div className="relative z-10 mx-auto w-full max-w-3xl text-center lg:pr-40 xl:pr-48">
               <h2
                 id="phone-contact-heading"
                 className="text-base font-bold leading-snug text-white sm:text-lg lg:text-xl"
@@ -76,16 +92,20 @@ export function PhoneContactSection() {
               </div>
             </div>
 
-            {/* <div className="relative mx-auto hidden h-36 w-40 sm:h-40 sm:w-44 lg:mx-0 lg:block lg:h-44 lg:w-full">
+            {/* Bot — desktop: side illustration */}
+            <div
+              className="pointer-events-none absolute top-1/2 right-3 z-0 hidden aspect-square h-[88%] max-h-full -translate-y-1/2 lg:block xl:right-8"
+              aria-hidden
+            >
               <Image
                 src={illustration.src}
-                alt={illustration.alt}
+                alt=""
                 fill
-                className="object-contain object-bottom"
-                sizes="180px"
+                className="object-contain drop-shadow-md"
+                sizes="(min-width: 1280px) 220px, 200px"
                 priority={false}
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

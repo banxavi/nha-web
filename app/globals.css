@@ -195,3 +195,76 @@ dialog.contact-form-dialog[open] > [data-contact-panel] {
     animation: none;
   }
 }
+
+/* Header mobile — panel + item enter */
+@keyframes mobile-nav-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobile-nav-child-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.mobile-nav-panel__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mobile-nav-panel[data-open="true"] .mobile-nav-item {
+  animation: mobile-nav-item-in 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-nav-submenu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav-submenu[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.mobile-nav-submenu__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mobile-nav-submenu[data-open="true"] .mobile-nav-child {
+  animation: mobile-nav-child-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav-panel,
+  .mobile-nav-submenu {
+    transition: none;
+  }
+
+  .mobile-nav-panel[data-open="true"] .mobile-nav-item,
+  .mobile-nav-submenu[data-open="true"] .mobile-nav-child {
+    animation: none;
+  }
+}

@@ -2,17 +2,32 @@
 
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { faqContent } from "@/lib/site-config";
+import { faqContent, type FaqItem } from "@/lib/site-config";
 
 const FAQ_ANIM_MS = 700;
+
+export type FaqSectionContent = {
+  heading: string;
+  image: { src: string; alt: string };
+  items: FaqItem[];
+};
+
+type FaqSectionProps = {
+  /** Override content — mặc định `faqContent` trang chủ. */
+  content?: FaqSectionContent;
+  sectionId?: string;
+};
 
 /**
  * Section 5 — FAQ (layout ref web4s.vn).
  * Accordion trái + minh họa phải.
  * TODO: swap content/ảnh trong `faqContent` khi có bản final từ khách.
  */
-export function FaqSection() {
-  const { heading, items, image } = faqContent;
+export function FaqSection({
+  content = faqContent,
+  sectionId = "faq",
+}: FaqSectionProps) {
+  const { heading, items, image } = content;
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [hoverLocked, setHoverLocked] = useState(false);
@@ -20,11 +35,20 @@ export function FaqSection() {
   const mediaRef = useRef<HTMLDivElement>(null);
   const hoverLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [mediaOffset, setMediaOffset] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     return () => {
       if (hoverLockTimerRef.current) clearTimeout(hoverLockTimerRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setIsDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   useLayoutEffect(() => {
@@ -33,6 +57,11 @@ export function FaqSection() {
     if (!list || !media) return;
 
     const syncOffset = () => {
+      // Mobile/tablet: keep image static — vertical recenter covers content below.
+      if (!window.matchMedia("(min-width: 1024px)").matches) {
+        setMediaOffset(0);
+        return;
+      }
       const next = Math.max(0, (list.offsetHeight - media.offsetHeight) / 2);
       setMediaOffset(next);
     };
@@ -43,7 +72,7 @@ export function FaqSection() {
     observer.observe(list);
     observer.observe(media);
     return () => observer.disconnect();
-  }, [openId]);
+  }, [openId, isDesktop]);
 
   const lockHoverToItem = (id: string) => {
     // Keep wipe on the clicked item; block other items from stealing hover
@@ -64,7 +93,7 @@ export function FaqSection() {
 
   return (
     <section
-      id="faq"
+      id={sectionId}
       aria-labelledby="faq-heading"
       className="scroll-mt-24 bg-bg-primary"
     >
@@ -161,14 +190,20 @@ export function FaqSection() {
             })}
           </ul>
 
-          {/* Right — media; smoothly recenters as accordion height changes */}
+          {/* Right — media; recenter only on desktop so mobile stays static */}
           <div
             ref={mediaRef}
-            className="relative mx-auto w-full max-w-lg will-change-transform lg:max-w-none"
-            style={{
-              transform: `translateY(${mediaOffset}px)`,
-              transition: `transform ${FAQ_ANIM_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
-            }}
+            className={`relative mx-auto w-full max-w-lg lg:max-w-none ${
+              isDesktop ? "will-change-transform" : ""
+            }`}
+            style={
+              isDesktop
+                ? {
+                    transform: `translateY(${mediaOffset}px)`,
+                    transition: `transform ${FAQ_ANIM_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+                  }
+                : undefined
+            }
           >
             <div className="relative aspect-[482/328] w-full overflow-hidden">
               <Image

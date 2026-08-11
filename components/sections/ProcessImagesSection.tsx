@@ -2,10 +2,11 @@ import Image from "next/image";
 import { processImagesContent } from "@/lib/site-config";
 
 /**
- * Section 6 — chỉ hiển thị ảnh infographic quy trình full-width.
+ * Section 6 — ảnh infographic quy trình full-width.
+ * Mobile: `5-step-mobile.png` (dọc). md+: ảnh ngang desktop.
  */
 export function ProcessImagesSection() {
-  const { heading, image } = processImagesContent;
+  const { heading, image, imageMobile } = processImagesContent;
 
   return (
     <section
@@ -23,11 +24,20 @@ export function ProcessImagesSection() {
 
         <div className="relative mx-auto mt-10 w-full overflow-hidden sm:mt-12 lg:mt-14">
           <Image
+            src={imageMobile.src}
+            alt={imageMobile.alt}
+            width={imageMobile.width}
+            height={imageMobile.height}
+            className="h-auto w-full md:hidden"
+            sizes="100vw"
+            priority={false}
+          />
+          <Image
             src={image.src}
             alt={image.alt}
-            width={1920}
-            height={902}
-            className="h-auto w-full"
+            width={image.width}
+            height={image.height}
+            className="hidden h-auto w-full md:block"
             sizes="(max-width: 1280px) 100vw, (max-width: 1535px) 1280px, 1536px"
             priority={false}
           />

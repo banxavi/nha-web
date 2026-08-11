@@ -8,19 +8,35 @@ import {
   type WhyChooseItem,
 } from "@/lib/site-config";
 
+export type WhyChooseSectionContent = {
+  heading: string;
+  subheading: string;
+  ctaLabel: string;
+  backgroundImage: { src: string; alt: string };
+  items: WhyChooseItem[];
+};
+
+type WhyChooseSectionProps = {
+  /** Override content — mặc định `whyChooseContent` trang chủ. */
+  content?: WhyChooseSectionContent;
+  sectionId?: string;
+};
+
 /**
  * Section 7 — Why choose Nhà Web.
  * Format tạm: dark overlay + glass cards 2×4 (ref ảnh mẫu).
  * TODO: swap ảnh nền collage khi khách cung cấp bản final.
  */
-export function WhyChooseSection() {
-  const { heading, subheading, ctaLabel, backgroundImage, items } =
-    whyChooseContent;
+export function WhyChooseSection({
+  content = whyChooseContent,
+  sectionId = "tai-sao-chon",
+}: WhyChooseSectionProps) {
+  const { heading, subheading, ctaLabel, backgroundImage, items } = content;
   const { openContactForm } = useContactForm();
 
   return (
     <section
-      id="tai-sao-chon"
+      id={sectionId}
       aria-labelledby="why-choose-heading"
       className="relative scroll-mt-24 overflow-hidden"
     >

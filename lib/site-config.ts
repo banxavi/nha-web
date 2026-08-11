@@ -12,6 +12,8 @@ export type NavItem = {
   label: string;
   href: string;
   children?: NavChild[];
+  /** Mega dropdown — chia đều 2 cột (vd. Mẫu giao diện 5 | 5) */
+  columns?: 2;
 };
 
 export type SocialLink = {
@@ -30,19 +32,162 @@ export const siteContact = {
     "https://www.google.com/maps/search/?api=1&query=208+Tr%C6%B0%E1%BB%9Dng+Chinh,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+B%C3%ACnh,+TP.+H%E1%BB%93+Ch%C3%AD+Minh",
 };
 
-/** Menu Title Case — thứ tự theo luồng trang */
-export const navItems: NavItem[] = [
-  { label: "Giới thiệu", href: "/gioi-thieu" },
-  { label: "Cửa hàng", href: "/#mau-website" },
-  { label: "Tin tức", href: "/#tin-tuc" },
-  { label: "Liên hệ", href: "/lien-he" },
+/**
+ * 10 nhóm ngành — nguồn: docs/10-nhom-nganh.md
+ * Dùng chung mega menu "Mẫu giao diện" + AllWebsiteSamplesSection.
+ */
+export type IndustryGroup = {
+  id: string;
+  label: string;
+  /** Ngành nghề thuộc nhóm — tham chiếu content, chưa dùng UI */
+  occupations: string[];
+};
+
+export const industryGroups: IndustryGroup[] = [
+  {
+    id: "dich-vu-thuong-mai",
+    label: "Dịch vụ & Thương mại",
+    occupations: [
+      "Nhà hàng, quán ăn",
+      "Quán cà phê, trà sữa",
+      "Spa, thẩm mỹ viện",
+      "Salon tóc, nail",
+      "Dịch vụ giặt ủi",
+      "Trung tâm gym, yoga",
+    ],
+  },
+  {
+    id: "ban-le-tmdt",
+    label: "Bán lẻ & Thương mại điện tử",
+    occupations: [
+      "Cửa hàng thời trang",
+      "Cửa hàng mỹ phẩm",
+      "Cửa hàng thú cưng",
+      "Siêu thị mini, tạp hóa",
+      "Cửa hàng hoa, cây cảnh",
+      "Cửa hàng đồ gia dụng",
+      "Cửa hàng thiết bị điện tử",
+      "Cửa hàng điện máy",
+    ],
+  },
+  {
+    id: "san-xuat-cong-nghiep",
+    label: "Sản xuất & Công nghiệp",
+    occupations: [
+      "Xưởng may mặc",
+      "Nhà máy thực phẩm chế biến",
+      "Xưởng gỗ & nội thất",
+      "Sản xuất bao bì, in ấn",
+      "Cơ khí, kim loại",
+    ],
+  },
+  {
+    id: "xay-dung-bds",
+    label: "Xây dựng & Bất động sản",
+    occupations: [
+      "Công ty xây dựng, thiết kế nội thất",
+      "Đại lý bất động sản",
+      "Dự án khu đô thị, căn hộ",
+      "Cho thuê văn phòng, nhà ở",
+    ],
+  },
+  {
+    id: "giao-duc-dao-tao",
+    label: "Giáo dục & Đào tạo",
+    occupations: [
+      "Trường mầm non, tiểu học, trung học",
+      "Trung tâm ngoại ngữ",
+      "Trung tâm đào tạo kỹ năng",
+      "Gia sư, dạy kèm",
+    ],
+  },
+  {
+    id: "y-te-suc-khoe",
+    label: "Y tế & Sức khỏe",
+    occupations: [
+      "Phòng khám đa khoa",
+      "Nhà thuốc, dược phẩm",
+      "Thiết bị y tế",
+      "Trung tâm vật lý trị liệu",
+    ],
+  },
+  {
+    id: "du-lich-khach-san",
+    label: "Du lịch & Khách sạn",
+    occupations: [
+      "Công ty du lịch, lữ hành",
+      "Khách sạn, resort",
+      "Homestay, căn hộ dịch vụ",
+      "Địa điểm vui chơi, giải trí",
+    ],
+  },
+  {
+    id: "luat-tai-chinh",
+    label: "Luật, Tài chính",
+    occupations: [
+      "Công ty luật, văn phòng luật sư",
+      "Tư vấn tài chính, đầu tư",
+      "Bảo hiểm",
+      "Kế toán, thuế",
+    ],
+  },
+  {
+    id: "cong-nghe-dich-vu-so",
+    label: "Công nghệ & Dịch vụ số",
+    occupations: [
+      "Công ty phần mềm",
+      "Dịch vụ IT",
+      "Marketing số",
+      "AI và tự động hóa",
+    ],
+  },
+  {
+    id: "dich-vu-chuyen-nghiep",
+    label: "Dịch vụ chuyên nghiệp",
+    occupations: ["Thương hiệu cá nhân"],
+  },
 ];
 
-/** Footer cột Dịch vụ — anchor về section CTA trên trang chủ. */
+/** Mega menu "Mẫu giao diện" (trái 5 | phải 5) — trang sản phẩm theo nhóm ngành. */
+export const templateCategoryLinks: NavChild[] = industryGroups.map((group) => ({
+  label: group.label,
+  href: `/san-pham#${group.id}`,
+}));
+
+/** Footer cột Dịch vụ — cùng danh sách submenu Header. */
 export const serviceNavLinks: NavChild[] = [
   { label: "Thiết kế website", href: "/#dich-vu" },
-  { label: "Website chuẩn SEO", href: "/#dich-vu" },
-  { label: "Giao diện quản trị", href: "/#dich-vu" },
+  { label: "Thiết kế Landing page", href: "/#dich-vu" },
+  { label: "Thiết kế nhận diện thương hiệu", href: "/#dich-vu" },
+  {
+    label: "Thiết kế website trọn gói",
+    href: "/thiet-ke-website-tron-goi",
+  },
+  { label: "Chăm sóc website", href: "/#dich-vu" },
+];
+
+/** Menu chính — logo + CTA giữ nguyên ở Header; cấu trúc theo mockup. */
+export const navItems: NavItem[] = [
+  {
+    label: "Trang chủ",
+    href: "/",
+    children: [
+      { label: "Giới thiệu", href: "/gioi-thieu" },
+      { label: "Liên hệ", href: "/lien-he" },
+    ],
+  },
+  {
+    label: "Dịch vụ",
+    href: "/#dich-vu",
+    children: serviceNavLinks,
+  },
+  {
+    label: "Mẫu giao diện",
+    href: "/san-pham",
+    columns: 2,
+    children: templateCategoryLinks,
+  },
+  { label: "Tin tức", href: "/#tin-tuc" },
 ];
 
 /** TODO: thay href bằng fanpage / channel thật khi có. */
@@ -61,8 +206,16 @@ export const footerContent = {
     links: [
       { label: "Giới thiệu", href: "/gioi-thieu" },
       { label: "Quy trình làm việc", href: "/#quy-trinh" },
-      { label: "Dự án", href: "/#mau-website" },
+      { label: "Dự án", href: "/san-pham" },
       { label: "Tin tức", href: "/#tin-tuc" },
+      {
+        label: "Thiết kế website theo yêu cầu",
+        href: "/thiet-ke-website-theo-yeu-cau",
+      },
+      {
+        label: "Thiết kế website trọn gói",
+        href: "/thiet-ke-website-tron-goi",
+      },
     ],
   },
   /** #12 — link/nội dung cập nhật sau */
@@ -82,6 +235,51 @@ export const footerContent = {
 
 export const logoPath = "/logo/Nha_Web_logo.png";
 export const footerLogoPath = "/logo/nha-web-trang.png";
+
+/**
+ * Header search — gợi ý hardcode (ref luvini.vn dropdown).
+ * Lọc có dấu / không dấu ở `Header` (normalize NFD).
+ */
+export type SearchSuggestion = {
+  id: string;
+  label: string;
+  href: string;
+};
+
+export const searchPopularSuggestions: SearchSuggestion[] = [
+  { id: "thiet-ke-website", label: "Thiết kế website", href: "/#dich-vu" },
+  {
+    id: "thiet-ke-landing-page",
+    label: "Thiết kế Landing page",
+    href: "/#dich-vu",
+  },
+  {
+    id: "mau-web-ban-hang",
+    label: "Mẫu web bán hàng",
+    href: "/san-pham#ban-le-tmdt",
+  },
+  { id: "cham-soc-website", label: "Chăm sóc website", href: "/#dich-vu" },
+  {
+    id: "thiet-ke-tron-goi",
+    label: "Thiết kế website trọn gói",
+    href: "/thiet-ke-website-tron-goi",
+  },
+  {
+    id: "nhan-dien-thuong-hieu",
+    label: "Thiết kế nhận diện thương hiệu",
+    href: "/#dich-vu",
+  },
+  { id: "mau-giao-dien", label: "Mẫu giao diện website", href: "/san-pham" },
+  { id: "quy-trinh", label: "Quy trình làm việc", href: "/#quy-trinh" },
+];
+
+export const searchPromoSuggestions: SearchSuggestion[] = [
+  {
+    id: "uu-dai-thiet-ke",
+    label: "Ưu đãi thiết kế website",
+    href: "/#lien-he",
+  },
+];
 
 /**
  * Trang Giới thiệu — Section 1: Giới thiệu chung.
@@ -170,7 +368,7 @@ export const aboutVisionContent = {
 
 /**
  * Section 1 — Hero (text trái + banner phải).
- * Ảnh thật trong `public/hero` — tỉ lệ 3:2 (export 1800×1200).
+ * Banner 1: `public/update/thiet-ke-website-theo-yeu-cau.webp` (1200×800, 3:2).
  * Desktop: khung stretch theo chiều cao cột text; object-top giữ phần trên.
  */
 export const heroContent = {
@@ -188,7 +386,7 @@ export const heroContent = {
   autoplayMs: 5000,
   banners: [
     {
-      src: "/hero/hero-banner-1.webp.png",
+      src: "/update/thiet-ke-website-theo-yeu-cau.webp",
       alt: "Thiết kế website theo yêu cầu — Nhà Web",
     },
     {
@@ -257,14 +455,18 @@ export const processStepsContent = {
 };
 
 /**
- * Section 3 — 5 mẫu website nổi bật.
+ * Section 3 — 5 nhóm ngành nổi bật (không phải 5 mẫu web đơn lẻ).
  * Layout bento: 1 card cao trái (featured) + 4 card nhỏ 2×2 bên phải.
- * TODO: thay ảnh / title / href bằng mẫu website thật.
+ * Nguồn nhãn: docs/10-nhom-nganh.md (+ “Thương hiệu cá nhân” thuộc nhóm 10).
+ * Click → trang `/san-pham` (lọc theo nhóm ngành).
+ * TODO: thay ảnh placeholder SVG bằng mockup/ảnh thật theo nhóm ngành.
  */
 export type SampleItem = {
   id: string;
+  /** Tên nhóm ngành hiển thị trên card */
   title: string;
   category: string;
+  /** Link tới catalog sản phẩm (có thể kèm hash nhóm ngành) */
   href: string;
   image: { src: string; alt: string };
   /** Card cao full-height bên trái (chỉ 1 item) */
@@ -274,52 +476,68 @@ export type SampleItem = {
 export const websiteSamplesContent = {
   heading: "Mẫu website nổi bật",
   tagline: "Giao diện hiện đại, chuẩn SEO, đa dạng lĩnh vực",
-  /** Đúng 5 item: featured đứng đầu, 4 còn lại xếp 2×2 */
+  /** Đúng 5 nhóm ngành: featured đứng đầu, 4 còn lại xếp 2×2 */
   items: [
     {
       id: "s1",
-      title: "Website doanh nghiệp",
-      category: "Doanh nghiệp",
-      href: "/#mau-website",
-      image: { src: "/samples/sample-1.svg", alt: "Mẫu website doanh nghiệp" },
+      title: "Dịch vụ & Thương mại",
+      category: "Dịch vụ & Thương mại",
+      href: "/san-pham#dich-vu-thuong-mai",
+      image: {
+        src: "/samples/sample-1.svg",
+        alt: "Mẫu website nhóm Dịch vụ & Thương mại",
+      },
       featured: true,
     },
     {
       id: "s2",
-      title: "Landing page bán hàng",
-      category: "Landing page",
-      href: "/#mau-website",
-      image: { src: "/samples/sample-2.svg", alt: "Mẫu landing page" },
+      title: "Bán lẻ & Thương mại điện tử",
+      category: "Bán lẻ & Thương mại điện tử",
+      href: "/san-pham#ban-le-tmdt",
+      image: {
+        src: "/samples/sample-2.svg",
+        alt: "Mẫu website nhóm Bán lẻ & Thương mại điện tử",
+      },
     },
     {
       id: "s3",
-      title: "Website nhà hàng & F&B",
-      category: "Nhà hàng",
-      href: "/#mau-website",
-      image: { src: "/samples/sample-3.svg", alt: "Mẫu website nhà hàng" },
+      title: "Xây dựng & Bất động sản",
+      category: "Xây dựng & Bất động sản",
+      href: "/san-pham#xay-dung-bds",
+      image: {
+        src: "/samples/sample-3.svg",
+        alt: "Mẫu website nhóm Xây dựng & Bất động sản",
+      },
     },
     {
       id: "s4",
-      title: "Website bất động sản",
-      category: "Bất động sản",
-      href: "/#mau-website",
-      image: { src: "/samples/sample-5.svg", alt: "Mẫu website bất động sản" },
+      title: "Du lịch & Khách sạn",
+      category: "Du lịch & Khách sạn",
+      href: "/san-pham#du-lich-khach-san",
+      image: {
+        src: "/samples/sample-5.svg",
+        alt: "Mẫu website nhóm Du lịch & Khách sạn",
+      },
     },
     {
       id: "s5",
-      title: "Shop thời trang online",
-      category: "Thương mại",
-      href: "/#mau-website",
-      image: { src: "/samples/sample-6.svg", alt: "Mẫu shop thời trang" },
+      title: "Thương hiệu cá nhân",
+      category: "Dịch vụ chuyên nghiệp",
+      href: "/san-pham#dich-vu-chuyen-nghiep",
+      image: {
+        src: "/samples/sample-4.svg",
+        alt: "Mẫu website Thương hiệu cá nhân",
+      },
     },
   ] satisfies SampleItem[],
 };
 
 /**
- * Section 4 — Tất cả mẫu websites (ref msn.com/vi-vn).
- * Desktop: lưới 5 cột; mỗi hàng đúng 4 item = 1 wide (span 2) + 3 small (span 1).
- * Carousel `<` `>` + auto next 4s (cùng pattern slider mẫu website cũ).
- * TODO: thay ảnh / title bằng mẫu website thật.
+ * Section 4 — Tất cả mẫu websites theo 10 nhóm ngành (docs/10-nhom-nganh.md).
+ * Desktop: lưới 5 cột; hàng đủ 4 item = 1 wide (span 2) + 3 small (span 1).
+ * Hàng cuối có thể 2 item (nhóm 9–10).
+ * Carousel `<` `>` + auto next 4s khi >1 page.
+ * TODO: thay ảnh placeholder bằng mẫu website thật theo từng nhóm.
  */
 export type AllSampleSize = "wide" | "small";
 
@@ -332,161 +550,135 @@ export type AllSampleItem = {
   size: AllSampleSize;
 };
 
-/** Mỗi hàng: đúng 4 item, đúng 1 item `wide`, tổng span = 5 */
-export type AllSampleRow = [
-  AllSampleItem,
-  AllSampleItem,
-  AllSampleItem,
-  AllSampleItem,
-];
+/** Mỗi hàng: 2–4 item; hàng đủ 4 thì đúng 1 item `wide` (tổng span = 5) */
+export type AllSampleRow = AllSampleItem[];
+
+const SAMPLE_IMAGE_SRC = [
+  "/samples/sample-1.svg",
+  "/samples/sample-2.svg",
+  "/samples/sample-3.svg",
+  "/samples/sample-4.svg",
+  "/samples/sample-5.svg",
+  "/samples/sample-6.svg",
+  "/samples/sample-7.svg",
+  "/samples/sample-8.svg",
+] as const;
+
+function industryGroupToSample(
+  group: IndustryGroup,
+  index: number,
+  size: AllSampleSize,
+): AllSampleItem {
+  const src = SAMPLE_IMAGE_SRC[index % SAMPLE_IMAGE_SRC.length];
+  return {
+    id: group.id,
+    title: group.label,
+    category: group.label,
+    size,
+    image: {
+      src,
+      alt: `Mẫu website ${group.label}`,
+    },
+  };
+}
+
+/** Chia 10 nhóm thành các hàng mosaic: 4 + 4 + 2 */
+function buildIndustrySampleRows(groups: IndustryGroup[]): AllSampleRow[] {
+  const chunkSizes = [4, 4, 2] as const;
+  const rows: AllSampleRow[] = [];
+  let offset = 0;
+
+  for (const chunkSize of chunkSizes) {
+    const slice = groups.slice(offset, offset + chunkSize);
+    if (slice.length === 0) break;
+    const wideIndex = 0;
+    rows.push(
+      slice.map((group, i) =>
+        industryGroupToSample(
+          group,
+          offset + i,
+          slice.length <= 2 || i === wideIndex ? "wide" : "small",
+        ),
+      ),
+    );
+    offset += chunkSize;
+  }
+
+  return rows;
+}
 
 export const allWebsiteSamplesContent = {
   heading: "Dịch vụ thiết kế website Chuyên Nghiệp - Chuẩn SEO",
   tagline: "Giao diện hiện đại, chuẩn SEO, đa dạng lĩnh vực",
   autoplayMs: 4000,
   /**
-   * Mỗi page = 1–2 hàng × 4 item.
+   * 1 page = 10 nhóm ngành (3 hàng: 4 + 4 + 2).
    * `size` trong data chỉ là fallback SSR — client sẽ random lại
-   * vị trí item wide mỗi hàng (index 0–3) khi mount.
+   * vị trí item wide mỗi hàng khi mount.
    */
-  pages: [
-    [
-      [
-        {
-          id: "all-1",
-          title: "Website doanh nghiệp",
-          category: "Doanh nghiệp",
-          size: "wide",
-          image: {
-            src: "/samples/sample-1.svg",
-            alt: "Mẫu website doanh nghiệp",
-          },
+  pages: [buildIndustrySampleRows(industryGroups)] satisfies AllSampleRow[][],
+};
+
+/**
+ * Trang `/san-pham` — catalog tất cả mẫu giao diện theo ngành nghề
+ * (docs/10-nhom-nganh.md). Mỗi nghề = 1 mẫu; lọc theo nhóm ngành.
+ * TODO: thay ảnh placeholder bằng mockup thật theo từng nghề.
+ */
+export type ProductSampleItem = {
+  id: string;
+  title: string;
+  /** Id nhóm ngành — dùng filter + hash `/san-pham#…` */
+  groupId: string;
+  groupLabel: string;
+  image: { src: string; alt: string };
+};
+
+function slugifyOccupation(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
+  const items: ProductSampleItem[] = [];
+  let imageIndex = 0;
+
+  for (const group of groups) {
+    for (const occupation of group.occupations) {
+      const src = SAMPLE_IMAGE_SRC[imageIndex % SAMPLE_IMAGE_SRC.length];
+      imageIndex += 1;
+      items.push({
+        id: `${group.id}-${slugifyOccupation(occupation)}`,
+        title: occupation,
+        groupId: group.id,
+        groupLabel: group.label,
+        image: {
+          src,
+          alt: `Mẫu website ${occupation}`,
         },
-        {
-          id: "all-2",
-          title: "Landing page bán hàng",
-          category: "Landing page",
-          size: "small",
-          image: { src: "/samples/sample-2.svg", alt: "Mẫu landing page" },
-        },
-        {
-          id: "all-3",
-          title: "Website nhà hàng & F&B",
-          category: "Nhà hàng",
-          size: "small",
-          image: {
-            src: "/samples/sample-3.svg",
-            alt: "Mẫu website nhà hàng",
-          },
-        },
-        {
-          id: "all-4",
-          title: "Website giáo dục",
-          category: "Giáo dục",
-          size: "small",
-          image: { src: "/samples/sample-4.svg", alt: "Mẫu website giáo dục" },
-        },
-      ],
-      [
-        {
-          id: "all-5",
-          title: "Shop thời trang online",
-          category: "Thương mại",
-          size: "small",
-          image: { src: "/samples/sample-6.svg", alt: "Mẫu shop thời trang" },
-        },
-        {
-          id: "all-6",
-          title: "Website spa & beauty",
-          category: "Làm đẹp",
-          size: "wide",
-          image: { src: "/samples/sample-7.svg", alt: "Mẫu website spa" },
-        },
-        {
-          id: "all-7",
-          title: "Website công nghệ",
-          category: "Công nghệ",
-          size: "small",
-          image: { src: "/samples/sample-8.svg", alt: "Mẫu website công nghệ" },
-        },
-        {
-          id: "all-8",
-          title: "Website bất động sản",
-          category: "Bất động sản",
-          size: "small",
-          image: {
-            src: "/samples/sample-5.svg",
-            alt: "Mẫu website bất động sản",
-          },
-        },
-      ],
-    ],
-    [
-      [
-        {
-          id: "all-9",
-          title: "Website phòng khám",
-          category: "Y tế",
-          size: "small",
-          image: { src: "/samples/sample-3.svg", alt: "Mẫu website y tế" },
-        },
-        {
-          id: "all-10",
-          title: "Website du lịch",
-          category: "Du lịch",
-          size: "small",
-          image: { src: "/samples/sample-1.svg", alt: "Mẫu website du lịch" },
-        },
-        {
-          id: "all-11",
-          title: "Website sự kiện",
-          category: "Sự kiện",
-          size: "wide",
-          image: { src: "/samples/sample-2.svg", alt: "Mẫu website sự kiện" },
-        },
-        {
-          id: "all-12",
-          title: "Website nội thất",
-          category: "Nội thất",
-          size: "small",
-          image: { src: "/samples/sample-4.svg", alt: "Mẫu website nội thất" },
-        },
-      ],
-      [
-        {
-          id: "all-13",
-          title: "Website luật & tư vấn",
-          category: "Dịch vụ",
-          size: "small",
-          image: { src: "/samples/sample-8.svg", alt: "Mẫu website luật" },
-        },
-        {
-          id: "all-14",
-          title: "Website xây dựng",
-          category: "Xây dựng",
-          size: "small",
-          image: { src: "/samples/sample-7.svg", alt: "Mẫu website xây dựng" },
-        },
-        {
-          id: "all-15",
-          title: "Website nông sản",
-          category: "Nông nghiệp",
-          size: "small",
-          image: { src: "/samples/sample-6.svg", alt: "Mẫu website nông sản" },
-        },
-        {
-          id: "all-16",
-          title: "Website logistics",
-          category: "Logistics",
-          size: "wide",
-          image: {
-            src: "/samples/sample-5.svg",
-            alt: "Mẫu website logistics",
-          },
-        },
-      ],
-    ],
-  ] satisfies AllSampleRow[][],
+      });
+    }
+  }
+
+  return items;
+}
+
+export const productsPageContent = {
+  heading: "Mẫu giao diện website",
+  tagline: "Đa dạng ngành nghề — chọn mẫu phù hợp và đăng ký triển khai",
+  allFilterLabel: "Tất cả",
+  emptyFilterMessage: "Chưa có mẫu trong nhóm ngành này.",
+  registerHint: "Chọn mẫu để đăng ký triển khai",
+  filters: industryGroups.map((group) => ({
+    id: group.id,
+    label: group.label,
+  })),
+  items: buildProductSamples(industryGroups),
 };
 
 /**
@@ -647,8 +839,7 @@ export const newsContent = {
 
 /**
  * Section 5 — FAQ (layout ref web4s.vn).
- * TODO: content/ảnh final CHƯA CÓ — đang dùng text + crop ảnh mẫu tạm.
- * Swap `heading` / `items` / `image` khi khách cung cấp bản Nhà Web.
+ * Ảnh: `public/update/faq-nha-web.webp` (964×656).
  */
 export type FaqItem = {
   id: string;
@@ -660,7 +851,7 @@ export const faqContent = {
   heading:
     "Câu hỏi thường gặp về dịch vụ thiết kế website chuyên nghiệp tại Nhà Web",
   image: {
-    src: "/faq/faq-nha-web.webp.png",
+    src: "/update/faq-nha-web.webp",
     alt: "Minh họa FAQ — giải pháp, chi phí, quy trình thiết kế website",
   },
   items: [
@@ -713,19 +904,23 @@ export const faqContent = {
 };
 
 /**
- * Section 6 — tiêu đề giữa "Quy trình 5 bước" + text trái / hình phải.
- * TODO: Content/hình final CHƯA CÓ — `image.src` rỗng = placeholder;
- * gán đường dẫn ảnh (vd. `/process/section6-media.png`) khi khách cung cấp.
- */
-/**
  * Section 6 — ảnh infographic quy trình full-width (không chia text / image).
- * Ảnh: `public/process/quy-trinh-5-buoc.webp.png` (1920×902).
+ * Desktop: `public/update/quy-trinh-5-buoc.webp` (1920×902).
+ * Mobile: `public/process/5-step-mobile.png` (864×1821).
  */
 export const processImagesContent = {
   heading: "Quy trình 5 bước",
   image: {
     src: "/process/quy-trinh-5-buoc.webp.png",
     alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
+    width: 1920,
+    height: 902,
+  },
+  imageMobile: {
+    src: "/process/5-step-mobile.png",
+    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
+    width: 864,
+    height: 1821,
   },
 };
 
@@ -946,8 +1141,8 @@ export const contactFormContent = {
     ctaLabel: "Đăng ký ngay",
     bannerColor: "#1B78E0",
     illustration: {
-      src: "/contact/lien-he-phone.webp.png",
-      alt: "Minh họa đăng ký website Nhà Web",
+      src: "/support/bot-remove-bg.png",
+      alt: "Bot hỗ trợ đăng ký website Nhà Web",
     },
   },
 };
@@ -996,4 +1191,130 @@ export const lienHePageContent = {
   successTitle: "Gửi liên hệ thành công!",
   successMessage:
     "Cảm ơn bạn đã liên hệ Nhà Web. Chúng tôi sẽ phản hồi sớm nhất.",
+};
+
+/**
+ * Trang Thiết kế website theo yêu cầu (`/thiet-ke-website-theo-yeu-cau`).
+ * Bố cục ref web4s.vn/thiet-ke-website-theo-yeu-cau; hero/FAQ/why/process tái dùng pattern trang chủ.
+ * Ảnh minh họa: `public/services/thiet-ke-website-theo-yeu-cau.webp.png` (swap khi có bản final).
+ */
+export const customWebsiteHeroContent = {
+  headline: "Thiết Kế Website Theo Yêu Cầu, Độc Quyền Giao Diện",
+  bullets: [
+    "Thiết kế độc quyền theo thương hiệu",
+    "Tùy chỉnh tính năng linh hoạt",
+    "Tối ưu trải nghiệm người dùng",
+    "Dễ dàng mở rộng trong tương lai",
+    "Chủ động về công nghệ & hiệu suất",
+  ],
+  ctaLabel: "Đăng ký ngay",
+  ctaHref: "/#lien-he",
+  autoplayMs: 5000,
+  banners: [
+    {
+      src: "/hero/hero-banner-1.webp.png",
+      alt: "Thiết kế website theo yêu cầu — Nhà Web",
+    },
+    {
+      src: "/hero/hero-banner-2.webp.png",
+      alt: "Dịch vụ thiết kế website độc quyền — Nhà Web",
+    },
+  ],
+};
+
+export const customWebsiteIntroContent = {
+  id: "ban-biet-gi",
+  heading: "Bạn biết gì về thiết kế website theo yêu cầu?",
+  intro:
+    "Thiết kế website theo yêu cầu là dựa vào nhu cầu, sở thích riêng biệt của mỗi khách hàng về website mà từ đó chúng tôi sẽ xây dựng một trang web đúng như họ mong muốn. Đây được xem là một loại hình dịch vụ được sử dụng khá phổ biến hiện nay, giúp doanh nghiệp sở hữu một giao diện hoàn chỉnh và độc nhất cho thương hiệu của mình.",
+  highlightTitle:
+    "Thiết kế web theo yêu cầu sẽ dễ dàng thu hút được sự chú ý của người dùng hơn bởi ý tưởng website đẹp – độc – lạ",
+  points: [
+    "Bạn là người luôn ưu thích sự khác biệt, có nhiều ý tưởng mới lạ và không muốn tuân theo bất kỳ một khuôn mẫu hay nguyên tắc nào về thiết kế website.",
+    "Bạn cần tích hợp nhiều yếu tố vào trong hệ thống trang web của mình và có những yêu cầu riêng biệt mà một mẫu web sẵn không thể đáp ứng.",
+    "Bạn mong muốn được thoải mái sáng tạo và thể hiện phong cách của riêng mình giúp sản phẩm trở nên hoàn hảo và độc đáo nhất.",
+  ],
+  note: "Tuy nhiên, do tính chất trang website được thiết kế riêng dựa trên yêu cầu của khách hàng, vậy nên cần có thời gian bàn bạc và thống nhất, lên kế hoạch cụ thể cho từng thành phần của website.",
+  image: {
+    src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
+    alt: "Thiết kế website theo yêu cầu — giao diện độc quyền Nhà Web",
+  },
+};
+
+export const customWebsiteCostContent = {
+  id: "chi-phi",
+  heading: "Chi phí làm website theo yêu cầu có cao không?",
+  body: "Chi phí thiết kế web theo yêu cầu chắc chắn sẽ cao hơn so với thiết kế theo mẫu giao diện web đã có sẵn (tùy theo mức độ thiết kế đơn giản hay phức tạp). Tuy nhiên, việc xây dựng một website theo yêu cầu sẽ giúp bạn sở hữu ngay một trang web độc đáo, “có 1 không 2” và mang phong cách riêng của mình giúp khách hàng dễ dàng ghi nhớ thương hiệu của bạn hơn.",
+};
+
+export const customWebsiteDetailsContent = {
+  id: "thong-tin-chi-tiet",
+  heading:
+    "Thông tin chi tiết dịch vụ thiết kế website theo yêu cầu tại Nhà Web",
+  items: [
+    "Tất cả các gói thiết kế website của Nhà Web bao gồm tính năng và nội dung website, tùy vào gói dịch vụ khách hàng lựa chọn mà bạn sẽ được tặng thêm tên miền quốc tế, banner, Google Maps, công cụ hỗ trợ SEO để chạy quảng cáo.",
+    "Chi phí: Khi Nhà Web nắm bắt được ý tưởng và yêu cầu của khách hàng, chúng tôi sẽ gửi bảng giá thiết kế website theo yêu cầu phù hợp nhằm tiết kiệm chi phí tối đa nhất cho khách hàng.",
+    "Các module cơ bản được tích hợp trên website: Trang chủ, Giới thiệu, Sản phẩm, Dịch vụ, Tin tức, Đối tác, Tuyển dụng, Liên hệ,… Tuy nhiên, phụ thuộc vào lĩnh vực kinh doanh và nhu cầu mà khách hàng có thể tạo web theo yêu cầu với những tính năng riêng để phục vụ mục đích của mình.",
+    "Thời gian hoàn thiện web đúng tiến độ trong hợp đồng, đảm bảo chất lượng.",
+    "Chế độ bảo trì, chăm sóc khách hàng sau khi hoàn thiện Website vẫn tận tình, chu đáo.",
+  ],
+};
+
+export const customWebsiteWhyChooseContent = {
+  ...whyChooseContent,
+  heading:
+    "Tại sao bạn nên chọn dịch vụ thiết kế website theo yêu cầu tại Nhà Web?",
+  subheading:
+    "Nếu bạn đang khó khăn trong việc chưa biết lựa chọn một đơn vị thiết kế web theo yêu cầu giá cả phải chăng, chuyên nghiệp, vậy đến ngay với Nhà Web bạn sẽ hài lòng tuyệt đối bởi:",
+};
+
+export const customWebsiteProcessContent = {
+  ...processStepsContent,
+  heading: "Quy trình thiết kế website theo yêu cầu tại Nhà Web",
+};
+
+export const customWebsiteFaqContent = {
+  heading:
+    "Câu hỏi thường gặp về thiết kế website theo yêu cầu tại Nhà Web",
+  image: faqContent.image,
+  items: [
+    {
+      id: "cyw-faq-1",
+      question: "Thiết kế website theo yêu cầu là gì?",
+      answer:
+        "Thiết kế website theo yêu cầu là thiết kế một website theo mong muốn để phù hợp với cá tính cũng như sở thích của người sở hữu chúng. Cá nhân hay một chủ doanh nghiệp đầy ắp các ý tưởng độc đáo, bạn mong muốn sở hữu được một website mang đậm chất riêng của mình, vậy tạo website theo yêu cầu sẽ là lựa chọn thích hợp dành cho bạn.",
+    },
+    {
+      id: "cyw-faq-2",
+      question: "Tôi được yêu cầu những gì khi làm website theo yêu cầu?",
+      answer:
+        "Bạn có thể yêu cầu chọn tên miền/ hạ tầng máy chủ lưu trữ phù hợp; yêu cầu thiết kế giao diện web theo ý tưởng của mình; yêu cầu sắp xếp bố cục, vị trí các module; yêu cầu tích hợp thêm hoặc bỏ bớt tính năng không cần thiết để đảm bảo đúng mục đích sử dụng web.",
+    },
+    {
+      id: "cyw-faq-3",
+      question:
+        "Chi phí đầu tư cho một website thiết kế riêng theo yêu cầu có cao không?",
+      answer:
+        "Chi phí thiết kế web theo yêu cầu chắc chắn sẽ cao hơn so với thiết kế theo mẫu giao diện web đã có sẵn (tùy theo mức độ thiết kế đơn giản hay phức tạp). Nhưng bạn hoàn toàn yên tâm bởi chi phí đầu tư tương xứng với chất lượng, bạn sẽ sở hữu một website độc nhất vô nhị, theo đúng mong muốn của bản thân.",
+    },
+    {
+      id: "cyw-faq-4",
+      question: "Tôi sẽ nhận được web sau bao nhiêu ngày?",
+      answer:
+        "Phụ thuộc vào yêu cầu của khách hàng, độ phức tạp của website mà thời gian tạo web sẽ dao động từ 20 đến 30 ngày.",
+    },
+    {
+      id: "cyw-faq-5",
+      question:
+        "Tôi chưa có ý tưởng gì cho giao diện web, vậy có tạo website được không?",
+      answer:
+        "Hoàn toàn được, nếu bạn chưa có ý tưởng thiết kế giao diện hay chưa lựa chọn được màu sắc web, đội ngũ Nhà Web sẽ tư vấn giao diện/ màu sắc phù hợp với nhu cầu, lĩnh vực kinh doanh của bạn.",
+    },
+    {
+      id: "cyw-faq-6",
+      question: "Tôi có thể tự chỉnh sửa/ cập nhật thông tin lên web không?",
+      answer:
+        "Chắc chắn là được. Khi thiết kế website tại Nhà Web, khách hàng sẽ được cung cấp một tài khoản quản trị admin để chủ động cập nhật nội dung/ chỉnh sửa theo mong muốn của mình.",
+    },
+  ] satisfies FaqItem[],
 };
