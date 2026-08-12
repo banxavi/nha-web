@@ -118,8 +118,30 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
-      <div className="mx-auto flex h-20 max-w-site items-center justify-between gap-4 px-4 sm:h-24 sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center">
+      {/* Mobile: menu trái · logo giữa · search phải (ref msn.com). Desktop giữ layout cũ. */}
+      <div className="relative mx-auto flex h-20 max-w-site items-center justify-between gap-4 px-4 sm:h-24 sm:px-6 lg:px-8">
+        <button
+          type="button"
+          className="relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-foreground transition-colors hover:bg-bg-secondary hover:text-cta lg:hidden"
+          aria-expanded={mobileOpen}
+          aria-controls={`${menuId}-mobile`}
+          aria-label={mobileOpen ? "Đóng menu" : "Mở menu"}
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          <span
+            className={cx(
+              "inline-flex transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              mobileOpen && "rotate-90",
+            )}
+          >
+            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          </span>
+        </button>
+
+        <Link
+          href="/"
+          className="absolute left-1/2 top-1/2 z-10 flex shrink-0 -translate-x-1/2 -translate-y-1/2 items-center lg:static lg:translate-x-0 lg:translate-y-0"
+        >
           <Image
             src={logoPath}
             alt="Nhà Web"
@@ -215,7 +237,7 @@ export function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="relative z-10 flex items-center gap-1 sm:gap-2">
           <div className="relative" ref={searchRootRef}>
             <button
               type="button"
@@ -293,24 +315,6 @@ export function Header() {
               Đăng ký tư vấn ngay
             </CTAButton>
           </div>
-
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-bg-secondary hover:text-cta lg:hidden"
-            aria-expanded={mobileOpen}
-            aria-controls={`${menuId}-mobile`}
-            aria-label={mobileOpen ? "Đóng menu" : "Mở menu"}
-            onClick={() => setMobileOpen((v) => !v)}
-          >
-            <span
-              className={cx(
-                "inline-flex transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                mobileOpen && "rotate-90",
-              )}
-            >
-              {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-            </span>
-          </button>
         </div>
       </div>
 

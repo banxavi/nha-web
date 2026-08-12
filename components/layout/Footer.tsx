@@ -24,7 +24,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
-            chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh
+            Chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh
             doanh và doanh nghiệp.
           </p>
           <ul className="flex items-center gap-3" aria-label="Mạng xã hội">

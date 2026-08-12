@@ -127,8 +127,20 @@ dialog.contact-form-dialog[open] > [data-contact-panel] {
   }
 }
 
-/* PremiumServicesSection — soft lift on hover */
+/* PremiumServicesSection — cam ngã bóng (ref vinahost.vn title card) + soft lift */
 .premium-service-pill {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.12) 38%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    linear-gradient(135deg, #ffb347 0%, #f97316 48%, #ea580c 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(194, 65, 12, 0.22),
+    0 6px 18px rgba(249, 115, 22, 0.32);
   transition:
     transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -138,7 +150,10 @@ dialog.contact-form-dialog[open] > [data-contact-panel] {
 .premium-service-pill:hover,
 .premium-service-pill:focus-visible {
   transform: translateY(-3px) scale(1.045);
-  box-shadow: 0 12px 28px rgba(0, 71, 255, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(194, 65, 12, 0.2),
+    0 12px 28px rgba(249, 115, 22, 0.42);
   filter: brightness(1.06);
 }
 

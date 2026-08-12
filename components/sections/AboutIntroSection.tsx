@@ -11,8 +11,8 @@ type AboutIntroSectionProps = {
 
 /**
  * Trang Giới thiệu — Section 1: Giới thiệu chung.
- * 2 cột: text + hình (ref interdata.vn/about-us).
- * Truyền `imagePosition="left"` để tái dùng cho Section 2.
+ * 2 cột text + hình trong `max-w-site`.
+ * Nền `#F7F6F2`; ảnh bo `100% 100% 0 0` (vòm trên).
  */
 export function AboutIntroSection({
   imagePosition = aboutIntroContent.imagePosition,
@@ -24,15 +24,9 @@ export function AboutIntroSection({
     <section
       id={id}
       aria-labelledby="about-intro-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-bg-primary"
+      className="relative scroll-mt-24 overflow-hidden bg-[#FDFDFD]"
     >
-      {/* Soft atmosphere — nhẹ, không cạnh tranh nội dung (ref interdata circuit wash) */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_85%_45%,rgba(249,115,22,0.06),transparent_55%),radial-gradient(ellipse_at_15%_60%,rgba(11,31,58,0.04),transparent_50%)]"
-        aria-hidden
-      />
-
-      <div className="relative mx-auto grid max-w-site items-center gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
+      <div className="relative mx-auto grid max-w-site items-center gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-20">
         {/* Text column */}
         <div
           className={`flex flex-col justify-center ${
@@ -50,28 +44,29 @@ export function AboutIntroSection({
             </span>
           </h1>
 
-          <div className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/80 sm:mt-8 sm:text-base">
+          <div className="mt-6 space-y-4 text-sm leading-relaxed text-foreground/80 sm:mt-8 sm:text-base">
             {body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
         </div>
 
-        {/* Image column */}
+        {/* Image column — nằm trong max-w-site, bo vòm trên */}
         <div
-          className={`relative mx-auto w-full max-w-sm lg:mx-0 lg:max-w-none ${
+          className={`relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none ${
             imageFirst ? "order-1 lg:order-1" : "order-2 lg:order-2"
-          } ${imageFirst ? "lg:justify-self-start" : "lg:justify-self-end"}`}
+          }`}
         >
-          <div className="relative mx-auto aspect-[395/600] w-full max-w-[395px] overflow-hidden">
+          <div className="relative aspect-[680/516] w-full overflow-hidden rounded-t-[100%]">
             <Image
               src={image.src}
               alt={image.alt}
               width={image.width}
               height={image.height}
               priority
+              quality={100}
               className="h-full w-full object-contain object-center"
-              sizes="(max-width: 1024px) 90vw, 395px"
+              sizes="(max-width: 1024px) 90vw, 560px"
             />
           </div>
         </div>

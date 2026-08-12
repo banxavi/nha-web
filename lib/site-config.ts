@@ -156,14 +156,17 @@ export const templateCategoryLinks: NavChild[] = industryGroups.map((group) => (
 
 /** Footer cột Dịch vụ — cùng danh sách submenu Header. */
 export const serviceNavLinks: NavChild[] = [
-  { label: "Thiết kế website", href: "/#dich-vu" },
-  { label: "Thiết kế Landing page", href: "/#dich-vu" },
-  { label: "Thiết kế nhận diện thương hiệu", href: "/#dich-vu" },
+  { label: "Thiết kế website", href: "/thiet-ke-website" },
+  { label: "Thiết kế Landing page", href: "/thiet-ke-landing-page" },
+  {
+    label: "Thiết kế nhận diện thương hiệu",
+    href: "/thiet-ke-nhan-dien-thuong-hieu",
+  },
   {
     label: "Thiết kế website trọn gói",
     href: "/thiet-ke-website-tron-goi",
   },
-  { label: "Chăm sóc website", href: "/#dich-vu" },
+  { label: "Chăm sóc website", href: "/cham-soc-website" },
 ];
 
 /** Menu chính — logo + CTA giữ nguyên ở Header; cấu trúc theo mockup. */
@@ -190,11 +193,22 @@ export const navItems: NavItem[] = [
   { label: "Tin tức", href: "/#tin-tuc" },
 ];
 
-/** TODO: thay href bằng fanpage / channel thật khi có. */
 export const socialLinks: SocialLink[] = [
-  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/" },
-  { id: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
-  { id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/" },
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/nhaweb.vn/",
+  },
+  {
+    id: "youtube",
+    label: "YouTube",
+    href: "https://www.youtube.com/@nhàweb",
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    href: "https://www.tiktok.com/@nhaweb.vn",
+  },
 ];
 
 export const footerContent = {
@@ -205,17 +219,10 @@ export const footerContent = {
     title: "Thông tin",
     links: [
       { label: "Giới thiệu", href: "/gioi-thieu" },
+      { label: "Liên hệ", href: "/lien-he" },
       { label: "Quy trình làm việc", href: "/#quy-trinh" },
       { label: "Dự án", href: "/san-pham" },
       { label: "Tin tức", href: "/#tin-tuc" },
-      {
-        label: "Thiết kế website theo yêu cầu",
-        href: "/thiet-ke-website-theo-yeu-cau",
-      },
-      {
-        label: "Thiết kế website trọn gói",
-        href: "/thiet-ke-website-tron-goi",
-      },
     ],
   },
   /** #12 — link/nội dung cập nhật sau */
@@ -247,18 +254,26 @@ export type SearchSuggestion = {
 };
 
 export const searchPopularSuggestions: SearchSuggestion[] = [
-  { id: "thiet-ke-website", label: "Thiết kế website", href: "/#dich-vu" },
+  {
+    id: "thiet-ke-website",
+    label: "Thiết kế website",
+    href: "/thiet-ke-website",
+  },
   {
     id: "thiet-ke-landing-page",
     label: "Thiết kế Landing page",
-    href: "/#dich-vu",
+    href: "/thiet-ke-landing-page",
   },
   {
     id: "mau-web-ban-hang",
     label: "Mẫu web bán hàng",
     href: "/san-pham#ban-le-tmdt",
   },
-  { id: "cham-soc-website", label: "Chăm sóc website", href: "/#dich-vu" },
+  {
+    id: "cham-soc-website",
+    label: "Chăm sóc website",
+    href: "/cham-soc-website",
+  },
   {
     id: "thiet-ke-tron-goi",
     label: "Thiết kế website trọn gói",
@@ -267,7 +282,7 @@ export const searchPopularSuggestions: SearchSuggestion[] = [
   {
     id: "nhan-dien-thuong-hieu",
     label: "Thiết kế nhận diện thương hiệu",
-    href: "/#dich-vu",
+    href: "/thiet-ke-nhan-dien-thuong-hieu",
   },
   { id: "mau-giao-dien", label: "Mẫu giao diện website", href: "/san-pham" },
   { id: "quy-trinh", label: "Quy trình làm việc", href: "/#quy-trinh" },
@@ -284,7 +299,7 @@ export const searchPromoSuggestions: SearchSuggestion[] = [
 /**
  * Trang Giới thiệu — Section 1: Giới thiệu chung.
  * Layout 2 cột text trái / hình phải (ref interdata.vn/about-us).
- * Ảnh: `public/about-us/gioi-thieu-chung.webp` (395×600).
+ * Ảnh: `public/about-us/gioi-thieu-chung1.webp` (1360×1032) — nền asset trắng.
  * `imagePosition` dùng lại cho Section 2 (hình trái / text phải).
  */
 export type AboutIntroImagePosition = "left" | "right";
@@ -299,10 +314,10 @@ export const aboutIntroContent = {
     "Nhà Web mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số.",
   ],
   image: {
-    src: "/about-us/gioi-thieu-chung.webp",
+    src: "/about-us/gioi-thieu-chung1.webp",
     alt: "Nhà Web — giới thiệu chung, đồng hành chuyển đổi số cùng bạn",
-    width: 395,
-    height: 600,
+    width: 1360,
+    height: 1032,
   },
   imagePosition: "right" as AboutIntroImagePosition,
 };
@@ -368,8 +383,7 @@ export const aboutVisionContent = {
 
 /**
  * Section 1 — Hero (text trái + banner phải).
- * Banner 1: `public/update/thiet-ke-website-theo-yeu-cau.webp` (1200×800, 3:2).
- * Desktop: khung stretch theo chiều cao cột text; object-top giữ phần trên.
+ * Banner 930×429 — cùng size/ảnh với trang thiet-ke-website-tron-goi.
  */
 export const heroContent = {
   headline: "Dịch vụ thiết kế website chuyên nghiệp, uy tín, chuẩn SEO",
@@ -386,7 +400,7 @@ export const heroContent = {
   autoplayMs: 5000,
   banners: [
     {
-      src: "/update/thiet-ke-website-theo-yeu-cau.webp",
+      src: "/hero/hero-banner-1.webp.png",
       alt: "Thiết kế website theo yêu cầu — Nhà Web",
     },
     {
@@ -857,48 +871,37 @@ export const faqContent = {
   items: [
     {
       id: "faq-1",
-      question: "Lợi ích của việc thiết kế website là gì ?",
+      question:
+        "Bảng giá thiết kế website chuyên nghiệp tại Nhà Web giá khoảng bao nhiêu?",
       answer:
-        "Việc sở hữu một website đã trở thành một nhu cầu thiết yếu đối với các doanh nghiệp, tổ chức và cá nhân muốn bán hàng trực tuyến, mở rộng thị trường, tương tác với khách hàng qua môi trường online từ đó đưa ra các chiến lược kinh doanh hiệu quả.",
+        "Tại Nhà Web mức giá thiết kế website trọn gói thông thường sẽ là 4.000.000 ngoài ra bạn còn được thêm rất nhiều các quà tặng hấp dẫn như: tặng tên miền, tặng SSL... Trong trường hợp những website có nhiều yêu cầu phức tạp chúng tôi sẽ luôn đưa ra mức giá mà bạn cảm thấy hài lòng nhất.",
     },
     {
       id: "faq-2",
-      question:
-        "Bảng giá thiết kế website chuyên nghiệp Nhân Hòa trọn gói giá khoảng bao nhiêu?",
-      /** TODO: thay bằng câu trả lời Nhà Web */
+      question: "Thiết kế website có chuẩn SEO không?",
       answer:
-        "TODO: Nội dung trả lời tạm — sẽ cập nhật bảng giá / gói dịch vụ Nhà Web khi có content final.",
+        "Tất cả website đều chuẩn SEO là quá trình tạo dựng một trang web không chỉ đẹp mắt, thân thiện với người dùng mà còn được tối ưu hóa để các công cụ tìm kiếm như Google, Bing... dễ dàng hiểu và xếp hạng cao trong kết quả tìm kiếm. Điều này giúp website của bạn có khả năng tiếp cận được nhiều khách hàng tiềm năng hơn.",
     },
     {
       id: "faq-3",
-      question: "Vì sao cần thiết kế web trọn gói chuẩn SEO?",
-      /** TODO: thay bằng câu trả lời Nhà Web */
+      question:
+        "Chi phí cho dịch vụ chăm sóc website thường dao động như thế nào?",
       answer:
-        "TODO: Nội dung trả lời tạm — giải thích lợi ích website trọn gói chuẩn SEO.",
+        "Chi phí cho dịch vụ chăm sóc website tại Nhà Web được xác định dựa trên nhiều yếu tố. Chúng tôi cung cấp nhiều gói dịch vụ với mức giá linh hoạt, giúp khách hàng dễ dàng lựa chọn gói phù hợp với ngân sách và nhu cầu của mình.",
     },
     {
       id: "faq-4",
       question:
-        "Chi phí cho dịch vụ chăm sóc website thường dao động như thế nào?",
-      /** TODO: thay bằng câu trả lời Nhà Web */
+        "Khi thiết kế website trọn gói có đội ngũ hỗ trợ tôi trong quá trình sử dụng không?",
       answer:
-        "TODO: Nội dung trả lời tạm — khoảng chi phí chăm sóc / bảo trì website.",
+        "Chắc chắn là Có. Chúng tôi luôn có những đội ngũ chuyên gia giàu kinh nghiệm luôn túc trực qua các kênh như Zalo, Messenger, Hotline nếu bạn cần hỗ trợ gì hãy liên hệ với chúng tôi qua những kênh trên nhé.",
     },
     {
       id: "faq-5",
       question:
-        "Khi thiết kế website trọn gói có đội ngũ hỗ trợ tôi trong quá trình sử dụng không?",
-      /** TODO: thay bằng câu trả lời Nhà Web */
+        "Nhà Web có hỗ trợ hướng dẫn hoặc nhập liệu bài viết chuẩn SEO lên cho khách được không?",
       answer:
-        "TODO: Nội dung trả lời tạm — mô tả đội ngũ hỗ trợ sau bàn giao.",
-    },
-    {
-      id: "faq-6",
-      question:
-        "Web4s có hỗ trợ hướng dẫn hoặc nhập liệu bài viết chuẩn SEO lên cho khách được không?",
-      /** TODO: thay bằng câu trả lời Nhà Web (đổi brand Web4s → Nhà Web) */
-      answer:
-        "TODO: Nội dung trả lời tạm — chính sách hướng dẫn / nhập liệu bài viết SEO.",
+        "Sau khi hoàn thành website, Nhà Web sẽ hướng dẫn khách hàng nhập liệu bài viết chuẩn SEO thông qua giao diện quản trị mà chúng tôi thiết kế người không rành về công nghệ cũng có thể làm được.",
     },
   ] satisfies FaqItem[],
 };
@@ -911,7 +914,7 @@ export const faqContent = {
 export const processImagesContent = {
   heading: "Quy trình 5 bước",
   image: {
-    src: "/process/quy-trinh-5-buoc.webp.png",
+    src: "/update/quy-trinh-5-buoc.webp",
     alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
     width: 1920,
     height: 902,
@@ -1050,6 +1053,8 @@ export type PremiumServiceItem = {
   id: string;
   label: string;
   icon: PremiumServiceIcon;
+  /** Khi có — pill điều hướng tới trang dịch vụ thay vì mở form đăng ký. */
+  href?: string;
 };
 
 export const premiumServicesContent = {
@@ -1062,26 +1067,31 @@ export const premiumServicesContent = {
       id: "thiet-ke-website",
       label: "Thiết kế website",
       icon: "website",
+      href: "/thiet-ke-website",
     },
     {
       id: "thiet-ke-landing-page",
       label: "Thiết kế Landing page",
       icon: "landing",
+      href: "/thiet-ke-landing-page",
     },
     {
       id: "thiet-ke-nhan-dien",
       label: "Thiết kế nhận diện thương hiệu",
       icon: "branding",
+      href: "/thiet-ke-nhan-dien-thuong-hieu",
     },
     {
       id: "thiet-ke-tron-goi",
       label: "Thiết kế website trọn gói",
       icon: "fullpackage",
+      href: "/thiet-ke-website-tron-goi",
     },
     {
       id: "cham-soc-website",
       label: "Chăm sóc website",
       icon: "care",
+      href: "/cham-soc-website",
     },
   ] satisfies PremiumServiceItem[],
 };

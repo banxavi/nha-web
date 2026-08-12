@@ -70,14 +70,14 @@ export function PhoneContactSection() {
               </div>
             </div>
 
-            <div className="relative z-10 mx-auto w-full max-w-3xl text-center lg:pr-40 xl:pr-48">
+            <div className="relative z-10 mx-auto flex w-full flex-col items-center text-center">
               <h2
                 id="phone-contact-heading"
-                className="text-base font-bold leading-snug text-white sm:text-lg lg:text-xl"
+                className="whitespace-nowrap text-[clamp(0.7rem,2.4vw,1.25rem)] font-bold leading-snug text-white"
               >
                 {headline}
               </h2>
-              <p className="mt-1.5 text-sm font-bold text-white sm:text-base lg:text-lg">
+              <p className="mt-1.5 whitespace-nowrap text-[clamp(0.65rem,2vw,1.125rem)] font-bold text-white">
                 {subheadline}
               </p>
 

@@ -1,14 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import {
   premiumServicesContent,
   type PremiumServiceIcon,
 } from "@/lib/site-config";
 
+const pillClassName =
+  "premium-service-pill group inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 sm:px-6 sm:py-3 sm:text-sm";
+
 /**
  * CTA dịch vụ cao cấp — heading + brand underline + pill buttons.
- * Nằm trên PhoneContactSection; mở form đăng ký theo từng dịch vụ.
+ * Nằm trên PhoneContactSection; pill có `href` điều hướng trang dịch vụ,
+ * còn lại mở form đăng ký. Nền cam ngã bóng (ref vinahost.vn title card).
  */
 export function PremiumServicesSection() {
   const { eyebrow, brandDomain, services, id } = premiumServicesContent;
@@ -49,21 +54,30 @@ export function PremiumServicesSection() {
             >
               {row.map((service) => (
                 <li key={service.id}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openContactForm({
-                        variant: "register",
-                        selectedSample: service.label,
-                      })
-                    }
-                    className="premium-service-pill group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#0047FF] to-[#00C2FF] px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white shadow-[0_6px_18px_rgba(0,71,255,0.28)] will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0047FF] focus-visible:ring-offset-2 sm:px-6 sm:py-3 sm:text-sm"
-                  >
-                    <span>{service.label}</span>
-                    <span className="premium-service-pill__icon inline-flex shrink-0">
-                      <ServiceIcon name={service.icon} />
-                    </span>
-                  </button>
+                  {service.href ? (
+                    <Link href={service.href} className={pillClassName}>
+                      <span>{service.label}</span>
+                      <span className="premium-service-pill__icon inline-flex shrink-0">
+                        <ServiceIcon name={service.icon} />
+                      </span>
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openContactForm({
+                          variant: "register",
+                          selectedSample: service.label,
+                        })
+                      }
+                      className={pillClassName}
+                    >
+                      <span>{service.label}</span>
+                      <span className="premium-service-pill__icon inline-flex shrink-0">
+                        <ServiceIcon name={service.icon} />
+                      </span>
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
