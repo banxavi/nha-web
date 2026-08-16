@@ -230,7 +230,7 @@ export function ServicesContactSection() {
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="mt-8 inline-flex items-center justify-center rounded-lg bg-[#0B1F3A] px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="mt-8 inline-flex items-center justify-center rounded-full bg-[#0B1F3A] px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                 >
                   Gửi liên hệ khác
                 </button>
@@ -369,7 +369,7 @@ export function ServicesContactSection() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-1 inline-flex w-fit items-center justify-center rounded-lg bg-cta px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-cta/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  className="mt-1 inline-flex w-fit items-center justify-center rounded-full bg-cta px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-cta/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                 >
                   {submitting ? "Đang gửi…" : submitLabel}
                 </button>

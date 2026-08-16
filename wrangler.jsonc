@@ -16,5 +16,8 @@
   ],
   "images": {
     "binding": "IMAGES"
+  },
+  "vars": {
+    "CONTACT_TO_EMAIL": "nhaweb.vn@gmail.com"
   }
 }

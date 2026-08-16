@@ -10,6 +10,7 @@
 |    |                             | Cửa hàng mỹ phẩm                    | Bán sản phẩm làm đẹp, skincare, nước hoa                                                                                          |
 |    |                             | Cửa hàng thú cưng                   | Bán thức ăn, phụ kiện, dịch vụ spa cho thú cưng                                                                                   |
 |    |                             | Siêu thị mini, tạp hóa              | Bán nhu yếu phẩm, thực phẩm hàng ngày                                                                                             |
+|    |                             | Thực phẩm & Đồ uống                 | Kinh doanh thực phẩm, đồ uống, rượu vang, bia — mẫu tham chiếu: luvini.vn                                                         |
 |    |                             | Cửa hàng hoa, cây cảnh              | Kinh doanh hoa tươi, cây cảnh, dịch vụ trang trí sự kiện                                                                          |
 |    |                             | Cửa hàng đồ gia dụng                | Bán đồ bếp, thiết bị vệ sinh, đồ gia dụng thông minh                                                                              |
 |    |                             | Cửa hàng thiết bị điện tử           | Bán điện thoại, laptop, tivi, linh kiện điện tử                                                                                   |

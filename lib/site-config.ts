@@ -64,6 +64,7 @@ export const industryGroups: IndustryGroup[] = [
       "Cửa hàng mỹ phẩm",
       "Cửa hàng thú cưng",
       "Siêu thị mini, tạp hóa",
+      "Thực phẩm & Đồ uống",
       "Cửa hàng hoa, cây cảnh",
       "Cửa hàng đồ gia dụng",
       "Cửa hàng thiết bị điện tử",
@@ -645,6 +646,13 @@ export type ProductSampleItem = {
   groupId: string;
   groupLabel: string;
   image: { src: string; alt: string };
+  /** URL xem thực tế — hiện nút "Xem thực tế" khi có */
+  liveUrl?: string;
+  /**
+   * `true` (mặc định) = mẫu có sẵn, bàn giao 3–5 ngày.
+   * `false` = thiết kế mới, 15–20 ngày tùy độ phức tạp.
+   */
+  isReadyTemplate?: boolean;
 };
 
 function slugifyOccupation(value: string) {
@@ -657,6 +665,11 @@ function slugifyOccupation(value: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
+
+/** Demo live theo nghề — bổ sung khi có site thật. */
+const TEMPLATE_LIVE_DEMOS: Record<string, string> = {
+  "Thực phẩm & Đồ uống": "https://luvini.vn",
+};
 
 function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
   const items: ProductSampleItem[] = [];
@@ -671,6 +684,8 @@ function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
         title: occupation,
         groupId: group.id,
         groupLabel: group.label,
+        liveUrl: TEMPLATE_LIVE_DEMOS[occupation],
+        isReadyTemplate: true,
         image: {
           src,
           alt: `Mẫu website ${occupation}`,
@@ -687,13 +702,95 @@ export const productsPageContent = {
   tagline: "Đa dạng ngành nghề — chọn mẫu phù hợp và đăng ký triển khai",
   allFilterLabel: "Tất cả",
   emptyFilterMessage: "Chưa có mẫu trong nhóm ngành này.",
-  registerHint: "Chọn mẫu để đăng ký triển khai",
+  registerHint: "Chọn mẫu để xem chi tiết và đăng ký triển khai",
   filters: industryGroups.map((group) => ({
     id: group.id,
     label: group.label,
   })),
   items: buildProductSamples(industryGroups),
 };
+
+export type TemplateFeatureIcon =
+  | "devices"
+  | "seo"
+  | "admin"
+  | "speed";
+
+/**
+ * Trang chi tiết mẫu `/san-pham/[slug]` (ref web4s.vn/thoitrang09).
+ * Trái: preview + "Xem thực tế". Phải: 2 form viền cam (ref card luvini.vn).
+ *
+ * Tốc độ tải: ghi "dưới 2 giây" — ngưỡng LCP tốt của Google là < 2.5s;
+ * "dưới 1 giây" trên mobile 4G không ổn định nên không dùng cho copy marketing.
+ */
+export const templateDetailContent = {
+  liveViewLabel: "Xem thực tế",
+  /** Fallback demo khi mẫu chưa có liveUrl riêng — swap khi có site thật */
+  liveViewFallbackUrl: "https://luvini.vn/",
+  consultLabel: "Đăng ký tư vấn",
+  similarHeading: "Mẫu website tương tự",
+  breadcrumbHome: "Trang chủ",
+  breadcrumbCatalog: "Mẫu giao diện",
+  form1TitlePrefix: "Mẫu Website",
+  features: [
+    {
+      icon: "devices" as const,
+      label: "Hiển thị tốt trên mọi thiết bị",
+    },
+    {
+      icon: "seo" as const,
+      label: "Giao diện hiện đại, chuẩn SEO",
+    },
+    {
+      icon: "admin" as const,
+      label: "Giao diện quản trị dễ sử dụng",
+    },
+    {
+      icon: "speed" as const,
+      label: "Tốc độ tải trang dưới 3 giây",
+    },
+  ] satisfies Array<{ icon: TemplateFeatureIcon; label: string }>,
+  benefitsTitle: "Quyền lợi khi sở hữu website tại Nhà Web",
+  readyHandover: "Thời gian bàn giao: 3–5 ngày",
+  customHandover: "Thời gian bàn giao: 15–20 ngày (tùy độ phức tạp)",
+  benefits: [
+    "Bảo hành trọn đời website",
+    "Bàn giao đầy đủ mã nguồn website",
+    "Tặng thêm ngôn ngữ tiếng Anh",
+    "Tặng SSL/HTTPS bảo mật",
+    "Tặng gói gửi email: tối đa 20 mail/ngày đến địa chỉ email cá nhân",
+    "Tặng thiết kế Hero Banner (số lượng tùy theo gói)",
+    "Hỗ trợ nhập bài viết/sản phẩm (số lượng tùy theo gói)",
+    "Mã nguồn sử dụng: Next.js, Tailwind CSS, Headless CMS",
+  ],
+};
+
+export function productSampleHref(item: Pick<ProductSampleItem, "id">) {
+  return `/san-pham/${item.id}`;
+}
+
+export function getProductSampleById(
+  id: string,
+): ProductSampleItem | undefined {
+  return productsPageContent.items.find((item) => item.id === id);
+}
+
+export function getRelatedProductSamples(
+  item: ProductSampleItem,
+  limit = 8,
+): ProductSampleItem[] {
+  const sameGroup = productsPageContent.items.filter(
+    (candidate) =>
+      candidate.groupId === item.groupId && candidate.id !== item.id,
+  );
+  if (sameGroup.length >= limit) return sameGroup.slice(0, limit);
+
+  const others = productsPageContent.items.filter(
+    (candidate) =>
+      candidate.id !== item.id && candidate.groupId !== item.groupId,
+  );
+  return [...sameGroup, ...others].slice(0, limit);
+}
 
 /**
  * Task 4 — Tin tức / Sự kiện mới nhất.
@@ -1099,7 +1196,7 @@ export const premiumServicesContent = {
 /**
  * Shared contact form (Form 7 "Đăng ký tư vấn" + Form 8 "Đăng ký ngay").
  * Dùng qua `ContactFormModal` với `variant`: "consult" | "register".
- * TODO: swap `image` khi có ảnh Nhà Web thật; nối `/api/contact` gửi mail.
+ * TODO: swap `image` khi có ảnh Nhà Web thật.
  */
 export type ContactFormVariant = "consult" | "register";
 

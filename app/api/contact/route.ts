@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+import {
+  EmailConfigError,
+  sendContactLeadEmail,
+} from "@/lib/email/send-contact-lead";
 
 type ContactPayload = {
   variant?: "consult" | "register";
@@ -13,11 +17,6 @@ function normalizePhone(value: string) {
   return value.replace(/[\s.\-]/g, "");
 }
 
-/**
- * Stub nhận lead form (consult / register).
- * TODO: gửi email tới nhaweb.vn@gmail.com (Resend / Nodemailer / form service).
- * Khi có selectedSample (Form 8), kèm tên mẫu vào nội dung mail.
- */
 export async function POST(request: Request) {
   let body: ContactPayload;
 
@@ -47,16 +46,30 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Email không hợp lệ." }, { status: 400 });
   }
 
-  // Placeholder — log payload until mail provider is chosen
-  console.info("[contact]", {
-    variant,
-    name,
-    phone,
-    email: email || null,
-    message: message || null,
-    selectedSample: selectedSample ?? null,
-    to: "nhaweb.vn@gmail.com",
-  });
+  try {
+    await sendContactLeadEmail({
+      variant,
+      name,
+      phone,
+      email: email || undefined,
+      message: message || undefined,
+      selectedSample,
+    });
+  } catch (error) {
+    if (error instanceof EmailConfigError) {
+      console.error("[contact] missing email config", error.message);
+      return NextResponse.json(
+        { error: "Hệ thống email chưa được cấu hình." },
+        { status: 503 },
+      );
+    }
+
+    console.error("[contact] send failed", error);
+    return NextResponse.json(
+      { error: "Không gửi được. Vui lòng thử lại sau." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }
