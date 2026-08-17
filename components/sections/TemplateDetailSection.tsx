@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { ProductSampleCard } from "@/components/products/ProductSampleCard";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { ZoomableImage } from "@/components/ui/ZoomableImage";
+import { HoverScrollPreview } from "@/components/ui/HoverScrollPreview";
 import {
   templateDetailContent,
   type ProductSampleItem,
@@ -82,13 +82,13 @@ export function TemplateDetailSection({
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-8">
           <div className="lg:sticky lg:top-28">
             <div className="overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
-              <ZoomableImage
+              <HoverScrollPreview
                 src={item.image.src}
                 alt={item.image.alt}
-                fill
+                width={item.image.width ?? 1600}
+                height={item.image.height ?? 1200}
                 unoptimized={item.image.src.endsWith(".svg")}
-                className="object-cover object-top"
-                frameClassName="relative aspect-[4/3] w-full bg-bg-secondary"
+                frameClassName="h-[37.5rem] w-full bg-bg-secondary"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 priority
               />
@@ -154,7 +154,7 @@ export function TemplateDetailSection({
               </article>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-5 flex justify-center">
               <CTAButton
                 type="button"
                 className="w-1/2 min-w-[10.5rem] px-5 py-3.5 text-sm font-bold sm:text-base"

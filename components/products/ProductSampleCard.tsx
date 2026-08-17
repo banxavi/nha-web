@@ -21,7 +21,7 @@ export function ProductSampleCard({ item }: { item: ProductSampleItem }) {
           alt={item.image.alt}
           fill
           unoptimized={item.image.src.endsWith(".svg")}
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
           frameClassName="absolute inset-0 h-full w-full"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />

@@ -384,7 +384,7 @@ export const aboutVisionContent = {
 
 /**
  * Section 1 — Hero (text trái + banner phải).
- * Banner 930×429 — cùng size/ảnh với trang thiet-ke-website-tron-goi.
+ * Ảnh 930×429; khung desktop cao bằng cột text, mobile giữ tỉ lệ gốc.
  */
 export const heroContent = {
   headline: "Dịch vụ thiết kế website chuyên nghiệp, uy tín, chuẩn SEO",
@@ -645,7 +645,7 @@ export type ProductSampleItem = {
   /** Id nhóm ngành — dùng filter + hash `/san-pham#…` */
   groupId: string;
   groupLabel: string;
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; width?: number; height?: number };
   /** URL xem thực tế — hiện nút "Xem thực tế" khi có */
   liveUrl?: string;
   /**
@@ -671,13 +671,27 @@ const TEMPLATE_LIVE_DEMOS: Record<string, string> = {
   "Thực phẩm & Đồ uống": "https://luvini.vn",
 };
 
+/** Screenshot full-page theo nghề — hover-scroll trên trang chi tiết. */
+const TEMPLATE_PREVIEW_IMAGES: Record<
+  string,
+  { src: string; width: number; height: number }
+> = {
+  "Thực phẩm & Đồ uống": {
+    src: "/san-pham/thuc-pham-do-uong/luvini.png",
+    width: 1651,
+    height: 4240,
+  },
+};
+
 function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
   const items: ProductSampleItem[] = [];
   let imageIndex = 0;
 
   for (const group of groups) {
     for (const occupation of group.occupations) {
-      const src = SAMPLE_IMAGE_SRC[imageIndex % SAMPLE_IMAGE_SRC.length];
+      const preview = TEMPLATE_PREVIEW_IMAGES[occupation];
+      const src =
+        preview?.src ?? SAMPLE_IMAGE_SRC[imageIndex % SAMPLE_IMAGE_SRC.length];
       imageIndex += 1;
       items.push({
         id: `${group.id}-${slugifyOccupation(occupation)}`,
@@ -689,6 +703,8 @@ function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
         image: {
           src,
           alt: `Mẫu website ${occupation}`,
+          width: preview?.width,
+          height: preview?.height,
         },
       });
     }
@@ -700,6 +716,17 @@ function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
 export const productsPageContent = {
   heading: "Mẫu giao diện website",
   tagline: "Đa dạng ngành nghề — chọn mẫu phù hợp và đăng ký triển khai",
+  /** Dòng phụ trên banner — bổ sung ngữ cảnh catalog mẫu. */
+  description:
+    "Giao diện hiện đại, chuẩn SEO, dễ vận hành trên mọi thiết bị. Chọn mẫu sẵn — bàn giao chỉ 3–5 ngày.",
+  highlights: ["10 nhóm ngành", "Chuẩn SEO", "Bàn giao 3–5 ngày"],
+  banner: {
+    src: "/san-pham/banner/banner.webp",
+    alt: "Mẫu giao diện website Nhà Web — không gian làm việc hiện đại",
+    /** Ảnh gốc 1920×500 — hiển thị gọn (object-cover) để catalog còn trong viewport. */
+    width: 1920,
+    height: 500,
+  },
   allFilterLabel: "Tất cả",
   emptyFilterMessage: "Chưa có mẫu trong nhóm ngành này.",
   registerHint: "Chọn mẫu để xem chi tiết và đăng ký triển khai",

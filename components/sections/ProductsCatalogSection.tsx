@@ -14,15 +14,8 @@ function cx(...parts: Array<string | undefined | false>) {
  * Click mẫu → trang chi tiết `/san-pham/[slug]`.
  */
 export function ProductsCatalogSection() {
-  const {
-    heading,
-    tagline,
-    allFilterLabel,
-    emptyFilterMessage,
-    registerHint,
-    filters,
-    items,
-  } = productsPageContent;
+  const { allFilterLabel, emptyFilterMessage, registerHint, filters, items } =
+    productsPageContent;
   const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -58,29 +51,17 @@ export function ProductsCatalogSection() {
   return (
     <section
       id="san-pham"
-      aria-labelledby="products-heading"
-      className="scroll-mt-24 bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+      aria-label="Danh sách mẫu giao diện"
+      className="scroll-mt-24 bg-bg-secondary px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
     >
       <div className="mx-auto max-w-site">
-        <header className="mb-10 text-center sm:mb-12">
-          <h1
-            id="products-heading"
-            className="text-2xl font-bold uppercase text-foreground sm:text-3xl md:text-4xl"
-          >
-            {heading}
-          </h1>
-          {tagline ? (
-            <p className="mt-4 text-sm font-semibold uppercase text-muted sm:text-base">
-              {tagline}
-            </p>
-          ) : null}
-          <p className="mt-3 text-sm text-muted">{registerHint}</p>
-        </header>
-
+        <p className="mb-4 text-center text-sm text-muted sm:mb-5">
+          {registerHint}
+        </p>
         <div
           role="tablist"
           aria-label="Lọc theo nhóm ngành"
-          className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-10 sm:gap-2.5"
+          className="mb-6 flex flex-wrap justify-center gap-2 sm:mb-8 sm:gap-2.5"
         >
           <FilterChip
             active={activeGroupId === null}

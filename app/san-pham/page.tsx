@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProductsCatalogSection } from "@/components/sections/ProductsCatalogSection";
+import { ProductsPageBanner } from "@/components/sections/ProductsPageBanner";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -10,8 +11,11 @@ export const metadata: Metadata = {
 
 export default function SanPhamPage() {
   return (
-    <Reveal>
-      <ProductsCatalogSection />
-    </Reveal>
+    <>
+      <ProductsPageBanner />
+      <Reveal>
+        <ProductsCatalogSection />
+      </Reveal>
+    </>
   );
 }

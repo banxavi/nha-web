@@ -39,7 +39,7 @@ export function HeroSection({
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-gradient-to-b from-[#EEF4FB] via-bg-primary to-bg-secondary"
     >
-      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-stretch lg:gap-12 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-center">
           <h1
             id="hero-heading"
@@ -76,10 +76,10 @@ export function HeroSection({
           </div>
         </div>
 
-        <div className="relative w-full">
-          {/* Khung 930×429 — cùng tỉ lệ banner trang thiet-ke-website-tron-goi */}
+        <div className="relative w-full lg:h-full">
+          {/* Mobile giữ tỉ lệ banner 930×429; desktop cao bằng cột text (headline → CTA) */}
           <div
-            className="relative aspect-[930/429] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)]"
+            className="relative aspect-[930/429] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)] lg:aspect-auto lg:h-full"
             role="region"
             aria-roledescription="carousel"
             aria-label="Banner dịch vụ Nhà Web"
