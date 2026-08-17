@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ProductSampleCard } from "@/components/products/ProductSampleCard";
+import { Reveal } from "@/components/ui/Reveal";
 import { productsPageContent } from "@/lib/site-config";
 
 function cx(...parts: Array<string | undefined | false>) {
@@ -83,9 +84,11 @@ export function ProductsCatalogSection() {
           <p className="py-16 text-center text-muted">{emptyFilterMessage}</p>
         ) : (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-            {visibleItems.map((item) => (
-              <li key={item.id}>
-                <ProductSampleCard item={item} />
+            {visibleItems.map((item, index) => (
+              <li key={`${activeGroupId ?? "all"}-${item.id}`}>
+                <Reveal amount={0.15} delay={(index % 4) * 0.06}>
+                  <ProductSampleCard item={item} />
+                </Reveal>
               </li>
             ))}
           </ul>

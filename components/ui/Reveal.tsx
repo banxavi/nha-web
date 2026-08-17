@@ -6,9 +6,18 @@ import type { ReactNode } from "react";
 type RevealProps = {
   children: ReactNode;
   className?: string;
+  /** Stagger delay (seconds). Default 0. */
+  delay?: number;
+  /** Viewport amount before revealing. Default 0.2. */
+  amount?: number | "some" | "all";
 };
 
-export function Reveal({ children, className }: RevealProps) {
+export function Reveal({
+  children,
+  className,
+  delay = 0,
+  amount = 0.2,
+}: RevealProps) {
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
@@ -20,8 +29,8 @@ export function Reveal({ children, className }: RevealProps) {
       className={className}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55, ease: "easeOut" }}
+      viewport={{ once: true, amount }}
+      transition={{ duration: 0.55, ease: "easeOut", delay }}
     >
       {children}
     </motion.div>
