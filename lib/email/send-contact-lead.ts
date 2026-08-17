@@ -26,13 +26,9 @@ export class EmailSendError extends Error {
 }
 
 function processEnvValue(name: EmailEnvName) {
-  const value =
-    name === "RESEND_API_KEY"
-      ? process.env.RESEND_API_KEY
-      : name === "CONTACT_TO_EMAIL"
-        ? process.env.CONTACT_TO_EMAIL
-        : process.env.RESEND_FROM_EMAIL;
-  return value?.trim() || undefined;
+  // Dynamic lookup — Next.js inlines `process.env.RESEND_API_KEY` at build time as undefined.
+  const value = process.env[name];
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
 function cloudflareBinding(name: EmailEnvName) {
