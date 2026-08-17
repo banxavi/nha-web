@@ -1,4 +1,3 @@
-import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { Resend } from "resend";
 
 export type ContactLead = {
@@ -36,22 +35,20 @@ function processEnvValue(name: EmailEnvName) {
   return value?.trim() || undefined;
 }
 
-async function readEnv(name: EmailEnvName) {
-  try {
-    const { env } = await getCloudflareContext({ async: true });
-    const value = Reflect.get(env, name);
-    if (typeof value === "string" && value.trim()) {
-      return value.trim();
-    }
-  } catch {
-    // `next dev` / builds without a Cloudflare request context.
-  }
-
-  return processEnvValue(name);
+function cloudflareBinding(name: EmailEnvName) {
+  const ctx = Reflect.get(globalThis, Symbol.for("__cloudflare-context__")) as
+    | { env?: Record<string, unknown> }
+    | undefined;
+  const value = ctx?.env?.[name];
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
-async function requiredEnv(name: "RESEND_API_KEY" | "CONTACT_TO_EMAIL") {
-  const value = await readEnv(name);
+function readEnv(name: EmailEnvName) {
+  return cloudflareBinding(name) ?? processEnvValue(name);
+}
+
+function requiredEnv(name: "RESEND_API_KEY" | "CONTACT_TO_EMAIL") {
+  const value = readEnv(name);
   if (!value) {
     throw new EmailConfigError(`${name} is not set`);
   }
@@ -59,8 +56,8 @@ async function requiredEnv(name: "RESEND_API_KEY" | "CONTACT_TO_EMAIL") {
 }
 
 /** Resend test sender until nhaweb.vn is verified. Built in code so dotenv `<...>` quoting cannot break it. */
-async function fromAddress() {
-  const configured = await readEnv("RESEND_FROM_EMAIL");
+function fromAddress() {
+  const configured = readEnv("RESEND_FROM_EMAIL");
   if (configured && !/@example\.com>?$/i.test(configured)) {
     return configured;
   }
@@ -148,11 +145,11 @@ function htmlBody(lead: ContactLead) {
 }
 
 export async function sendContactLeadEmail(lead: ContactLead) {
-  const resend = new Resend(await requiredEnv("RESEND_API_KEY"));
-  const to = await requiredEnv("CONTACT_TO_EMAIL");
+  const resend = new Resend(requiredEnv("RESEND_API_KEY"));
+  const to = requiredEnv("CONTACT_TO_EMAIL");
 
   const { data, error } = await resend.emails.send({
-    from: await fromAddress(),
+    from: fromAddress(),
     to,
     ...(lead.email ? { replyTo: lead.email } : {}),
     subject: subjectFor(lead),
