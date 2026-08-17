@@ -65,6 +65,16 @@ export async function POST(request: Request) {
     }
 
     console.error("[contact] send failed", error);
+    const detail = error instanceof Error ? error.message : "";
+    if (/only send testing emails to your own email address/i.test(detail)) {
+      return NextResponse.json(
+        {
+          error:
+            "Resend chưa verify domain nhaweb.vn — hiện chỉ gửi được tới email tài khoản Resend.",
+        },
+        { status: 502 },
+      );
+    }
     return NextResponse.json(
       { error: "Không gửi được. Vui lòng thử lại sau." },
       { status: 502 },
