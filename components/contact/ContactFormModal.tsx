@@ -370,26 +370,28 @@ export function ContactFormModal({
                     {submitting ? "Đang gửi…" : copy.submitLabel}
                   </CTAButton>
 
-                  <div className="flex flex-wrap items-center justify-center gap-2">
+                  <div className="flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
                     <span className="text-xs font-medium text-muted sm:text-sm">
                       Hoặc liên hệ nhanh
                     </span>
-                    <a
-                      href={`tel:${siteContact.phoneTel}`}
-                      className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-card-border bg-bg-secondary px-3 text-sm font-semibold text-foreground transition-colors hover:border-cta/40 hover:text-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
-                    >
-                      <PhoneIcon />
-                      {siteContact.phoneDisplay}
-                    </a>
-                    <a
-                      href={siteContact.zaloUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-card-border bg-bg-secondary px-3 text-sm font-semibold text-foreground transition-colors hover:border-cta/40 hover:text-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
-                    >
-                      <ZaloIcon />
-                      Zalo
-                    </a>
+                    <div className="flex items-center justify-center gap-2">
+                      <a
+                        href={`tel:${siteContact.phoneTel}`}
+                        className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-card-border bg-bg-secondary px-3 text-sm font-semibold text-foreground transition-colors hover:border-cta/40 hover:text-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
+                      >
+                        <PhoneIcon />
+                        {siteContact.phoneDisplay}
+                      </a>
+                      <a
+                        href={siteContact.zaloUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-card-border bg-bg-secondary px-3 text-sm font-semibold text-foreground transition-colors hover:border-cta/40 hover:text-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
+                      >
+                        <ZaloIcon />
+                        Zalo
+                      </a>
+                    </div>
                   </div>
                 </div>
               </form>

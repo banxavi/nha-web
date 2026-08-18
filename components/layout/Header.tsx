@@ -117,6 +117,7 @@ export function Header() {
   }
 
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
       {/* Mobile: menu trái · logo giữa · search phải (ref msn.com). Desktop giữ layout cũ. */}
       <div className="relative mx-auto flex h-20 max-w-site items-center justify-between gap-4 px-4 sm:h-24 sm:px-6 lg:px-8">
@@ -320,7 +321,7 @@ export function Header() {
 
       <div
         id={`${menuId}-mobile`}
-        className="mobile-nav-panel border-card-border bg-bg-primary lg:hidden"
+        className="mobile-nav-panel absolute inset-x-0 top-full z-50 border-card-border bg-bg-primary lg:hidden"
         data-open={mobileOpen ? "true" : "false"}
         aria-hidden={!mobileOpen}
         inert={!mobileOpen ? true : undefined}
@@ -345,25 +346,48 @@ export function Header() {
                 >
                   {hasChildren ? (
                     <>
-                      <button
-                        type="button"
-                        aria-expanded={isOpen}
-                        onClick={() => toggleMobileItem(item)}
-                        className={cx(
-                          "flex w-full items-center justify-between py-3 text-left text-base font-medium tracking-normal text-foreground",
-                          "hover:text-cta",
-                          isOpen && "text-cta",
-                        )}
-                      >
-                        {item.label}
-                        <ChevronDown
+                      <div className="flex items-stretch">
+                        <Link
+                          href={item.href}
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setOpenKey(null);
+                          }}
                           className={cx(
-                            "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                            isOpen && "rotate-180",
+                            "flex min-w-0 flex-1 items-center py-3 pr-2 text-left text-base font-medium tracking-normal text-foreground",
+                            "hover:text-cta",
+                            isOpen && "text-cta",
                           )}
-                        />
-                      </button>
+                        >
+                          {item.label}
+                        </Link>
+                        <button
+                          type="button"
+                          aria-expanded={isOpen}
+                          aria-controls={`${menuId}-${item.label}-mobile`}
+                          aria-label={
+                            isOpen
+                              ? `Thu gọn menu ${item.label}`
+                              : `Mở menu ${item.label}`
+                          }
+                          onClick={() => toggleMobileItem(item)}
+                          className={cx(
+                            "inline-flex h-11 w-11 shrink-0 items-center justify-center self-center rounded-md text-foreground",
+                            "hover:bg-bg-secondary hover:text-cta",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta",
+                            isOpen && "text-cta",
+                          )}
+                        >
+                          <ChevronDown
+                            className={cx(
+                              "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                              isOpen && "rotate-180",
+                            )}
+                          />
+                        </button>
+                      </div>
                       <div
+                        id={`${menuId}-${item.label}-mobile`}
                         className="mobile-nav-submenu"
                         data-open={isOpen ? "true" : "false"}
                       >
@@ -427,6 +451,15 @@ export function Header() {
         </div>
       </div>
     </header>
+    {mobileOpen ? (
+      <button
+        type="button"
+        aria-label="Đóng menu"
+        className="fixed inset-0 z-30 bg-foreground/25 lg:hidden"
+        onClick={() => setMobileOpen(false)}
+      />
+    ) : null}
+    </>
   );
 }
 

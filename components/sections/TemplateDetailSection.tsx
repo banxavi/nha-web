@@ -88,13 +88,13 @@ export function TemplateDetailSection({
                 width={item.image.width ?? 1600}
                 height={item.image.height ?? 1200}
                 unoptimized={item.image.src.endsWith(".svg")}
-                frameClassName="h-[37.5rem] w-full bg-bg-secondary"
+                frameClassName="max-h-[22rem] w-full bg-bg-secondary sm:max-h-[28rem] lg:max-h-[37.5rem]"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 priority
               />
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 flex justify-center">
               <a
                 href={item.liveUrl ?? copy.liveViewFallbackUrl}
                 target="_blank"

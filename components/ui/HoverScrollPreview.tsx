@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useReducedMotion } from "motion/react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type HoverScrollPreviewProps = {
   src: string;
@@ -23,8 +23,8 @@ function cx(...parts: Array<string | undefined | false>) {
 }
 
 /**
- * Full-page screenshot preview: hover scrolls to the bottom,
- * mouse leave returns to the top (template-marketplace pattern).
+ * Full-page screenshot preview: hover (desktop) or tap (mobile)
+ * scrolls to the bottom; leave / tap again returns to the top.
  */
 export function HoverScrollPreview({
   src,
@@ -39,9 +39,18 @@ export function HoverScrollPreview({
   const reduceMotion = useReducedMotion();
   const frameRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
-  const hoveringRef = useRef(false);
+  const activeRef = useRef(false);
   const [offset, setOffset] = useState(0);
   const [durationMs, setDurationMs] = useState(RETURN_MS);
+  const [tapToToggle, setTapToToggle] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: none)");
+    const sync = () => setTapToToggle(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   const overflowPx = useCallback(() => {
     const frame = frameRef.current;
@@ -51,7 +60,7 @@ export function HoverScrollPreview({
   }, []);
 
   const startScroll = useCallback(() => {
-    hoveringRef.current = true;
+    activeRef.current = true;
     if (reduceMotion) return;
     const overflow = overflowPx();
     if (overflow <= 0) return;
@@ -60,17 +69,50 @@ export function HoverScrollPreview({
   }, [overflowPx, reduceMotion]);
 
   const resetScroll = useCallback(() => {
-    hoveringRef.current = false;
+    activeRef.current = false;
     setDurationMs(RETURN_MS);
     setOffset(0);
   }, []);
 
+  const toggleScroll = useCallback(() => {
+    if (activeRef.current || offset > 0) {
+      resetScroll();
+    } else {
+      startScroll();
+    }
+  }, [offset, resetScroll, startScroll]);
+
   return (
     <div
       ref={frameRef}
-      className={cx("relative overflow-hidden", frameClassName)}
-      onMouseEnter={startScroll}
-      onMouseLeave={resetScroll}
+      className={cx(
+        "relative overflow-hidden",
+        tapToToggle && "cursor-pointer touch-manipulation",
+        frameClassName,
+      )}
+      onMouseEnter={tapToToggle ? undefined : startScroll}
+      onMouseLeave={tapToToggle ? undefined : resetScroll}
+      onClick={tapToToggle ? toggleScroll : undefined}
+      role={tapToToggle ? "button" : undefined}
+      tabIndex={tapToToggle ? 0 : undefined}
+      aria-pressed={tapToToggle ? offset > 0 : undefined}
+      aria-label={
+        tapToToggle
+          ? offset > 0
+            ? "Trượt về đầu ảnh"
+            : "Trượt xem toàn bộ giao diện"
+          : undefined
+      }
+      onKeyDown={
+        tapToToggle
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleScroll();
+              }
+            }
+          : undefined
+      }
     >
       <div
         ref={mediaRef}
@@ -89,7 +131,7 @@ export function HoverScrollPreview({
           sizes={sizes}
           unoptimized={unoptimized}
           onLoad={() => {
-            if (hoveringRef.current) startScroll();
+            if (activeRef.current) startScroll();
           }}
           className="h-auto w-full select-none"
         />
