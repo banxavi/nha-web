@@ -13,7 +13,6 @@ function cx(...parts: Array<string | undefined | false>) {
 
 /**
  * Shared card — border + full background fill (ref luvini.vn product cards).
- * Light theme: white fill, soft border, rounded corners.
  */
 export function Card({
   children,
@@ -26,8 +25,6 @@ export function Card({
     <Tag
       className={cx(
         "overflow-hidden rounded-2xl border border-card-border bg-card",
-        "transition-[border-color,box-shadow] duration-200",
-        "hover:border-footer/20 hover:shadow-sm",
         className,
       )}
       {...rest}

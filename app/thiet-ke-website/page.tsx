@@ -1,12 +1,30 @@
 import type { Metadata } from "next";
-import { ServicePagePlaceholder } from "@/components/sections/ServicePagePlaceholder";
+import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
+import { websiteServiceContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Thiết kế website | Nhà Web",
   description:
-    "Dịch vụ thiết kế website chuyên nghiệp tại Nhà Web — nội dung đang được cập nhật.",
+    "Thiết kế website chuyên nghiệp, chuẩn SEO, giao diện hiện đại. Triển khai 5–7 ngày, dễ quản trị tại Nhà Web.",
 };
 
 export default function ThietKeWebsitePage() {
-  return <ServicePagePlaceholder title="Thiết kế website" />;
+  return (
+    <ServiceLandingPage
+      content={{
+        hero: websiteServiceContent.hero,
+        heroSectionId: "thiet-ke-website",
+        showSamples: true,
+        intro: websiteServiceContent.intro,
+        cost: websiteServiceContent.cost,
+        why: websiteServiceContent.why,
+        whySectionId: "tai-sao-chon-website",
+        details: websiteServiceContent.details,
+        process: websiteServiceContent.process,
+        processSectionId: "quy-trinh-website",
+        faq: websiteServiceContent.faq,
+        faqSectionId: "faq-website",
+      }}
+    />
+  );
 }

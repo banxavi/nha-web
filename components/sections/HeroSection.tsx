@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { RevealItem, RevealStagger } from "@/components/ui/Reveal";
 import { heroContent } from "@/lib/site-config";
 
 export type HeroContent = {
+  eyebrow?: string;
   headline: string;
   bullets: string[];
   ctaLabel: string;
@@ -29,7 +31,7 @@ export function HeroSection({
   content = heroContent,
   sectionId = "dich-vu",
 }: HeroSectionProps) {
-  const { headline, bullets, ctaLabel, banners, autoplayMs } = content;
+  const { eyebrow, headline, bullets, ctaLabel, banners, autoplayMs } = content;
   const { openContactForm } = useContactForm();
   const count = banners.length;
 
@@ -39,36 +41,51 @@ export function HeroSection({
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-gradient-to-b from-[#EEF4FB] via-bg-primary to-bg-secondary"
     >
-      <div className="mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-stretch lg:gap-12 lg:px-8 lg:py-20">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute -left-24 top-[-4rem] h-72 w-72 rounded-full bg-cta/10 blur-3xl" />
+        <div className="absolute -right-16 bottom-[-3rem] h-80 w-80 rounded-full bg-footer/10 blur-3xl" />
+        <div className="absolute left-1/3 top-8 h-40 w-40 rounded-full bg-cta/5 blur-2xl" />
+      </div>
+
+      <div className="relative mx-auto grid max-w-site items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-stretch lg:gap-12 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-center">
+          {eyebrow ? (
+            <p className="text-xs font-semibold tracking-[0.14em] text-cta uppercase sm:text-sm">
+              {eyebrow}
+            </p>
+          ) : null}
           <h1
             id="hero-heading"
-            className="text-2xl font-bold uppercase leading-tight tracking-wide text-foreground sm:text-3xl lg:text-[2rem] lg:leading-snug"
+            className={`text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl lg:text-[2.15rem] lg:leading-snug ${eyebrow ? "mt-3" : ""}`}
           >
             {headline}
           </h1>
 
-          <ul className="mt-6 space-y-3" aria-label="Ưu điểm dịch vụ">
+          <RevealStagger
+            as="ul"
+            className="mt-6 space-y-3"
+            stagger={0.07}
+            aria-label="Ưu điểm dịch vụ"
+          >
             {bullets.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 text-sm tracking-wide text-foreground sm:text-base"
-              >
-                <span
-                  className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta text-white"
-                  aria-hidden
-                >
-                  <CheckIcon />
+              <RevealItem key={item} as="li">
+                <span className="flex items-start gap-3 text-sm tracking-wide text-foreground sm:text-base">
+                  <span
+                    className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta text-white shadow-[0_4px_10px_rgba(249,115,22,0.35)]"
+                    aria-hidden
+                  >
+                    <CheckIcon />
+                  </span>
+                  <span>{item}</span>
                 </span>
-                <span>{item}</span>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealStagger>
 
           <div className="mt-8 flex justify-center lg:justify-start">
             <CTAButton
               type="button"
-              className="px-8 py-3.5 text-base font-bold uppercase"
+              className="px-8 py-3.5 text-base font-bold"
               onClick={() => openContactForm({ variant: "register" })}
             >
               {ctaLabel}
@@ -79,7 +96,7 @@ export function HeroSection({
         <div className="relative w-full lg:h-full">
           {/* Mobile giữ tỉ lệ banner 930×429; desktop cao bằng cột text (headline → CTA) */}
           <div
-            className="relative aspect-[930/429] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_12px_40px_rgba(11,31,58,0.12)] lg:aspect-auto lg:h-full"
+            className="relative aspect-[930/429] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_16px_48px_rgba(11,31,58,0.14)] ring-1 ring-footer/5 lg:aspect-auto lg:h-full"
             role="region"
             aria-roledescription="carousel"
             aria-label="Banner dịch vụ Nhà Web"

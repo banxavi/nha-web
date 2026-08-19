@@ -1,12 +1,30 @@
 import type { Metadata } from "next";
-import { ServicePagePlaceholder } from "@/components/sections/ServicePagePlaceholder";
+import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
+import { landingPageServiceContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Thiết kế Landing page | Nhà Web",
   description:
-    "Dịch vụ thiết kế Landing page tại Nhà Web — nội dung đang được cập nhật.",
+    "Thiết kế landing page tập trung chuyển đổi, tối ưu tốc độ, sẵn sàng chạy quảng cáo tại Nhà Web.",
 };
 
 export default function ThietKeLandingPagePage() {
-  return <ServicePagePlaceholder title="Thiết kế Landing page" />;
+  return (
+    <ServiceLandingPage
+      content={{
+        hero: landingPageServiceContent.hero,
+        heroSectionId: "thiet-ke-landing-page",
+        showSamples: true,
+        intro: landingPageServiceContent.intro,
+        cost: landingPageServiceContent.cost,
+        why: landingPageServiceContent.why,
+        whySectionId: "tai-sao-chon-landing",
+        details: landingPageServiceContent.details,
+        process: landingPageServiceContent.process,
+        processSectionId: "quy-trinh-landing",
+        faq: landingPageServiceContent.faq,
+        faqSectionId: "faq-landing",
+      }}
+    />
+  );
 }

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { faqContent, type FaqItem } from "@/lib/site-config";
 
 const FAQ_ANIM_MS = 700;
@@ -98,12 +99,10 @@ export function FaqSection({
       className="scroll-mt-24 bg-bg-primary"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <h2
-          id="faq-heading"
-          className="mx-auto max-w-4xl text-center text-xl font-bold leading-snug tracking-normal text-foreground sm:text-2xl lg:text-[1.75rem]"
-        >
-          {heading}
-        </h2>
+        <SectionHeader
+          headingId="faq-heading"
+          title={heading}
+        />
 
         <div className="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
           {/* Left — accordion */}
@@ -113,16 +112,16 @@ export function FaqSection({
               const isHovered = hoveredId === item.id;
               const panelId = `faq-panel-${item.id}`;
               const buttonId = `faq-button-${item.id}`;
-              const idleBg = isOpen ? "#EEF8FF" : "#ffffff";
+              const idleBg = isOpen ? "#F7F5F2" : "#ffffff";
 
               return (
                 <li key={item.id}>
                   <div
-                    className={`overflow-hidden rounded-md border transition-[border-color] duration-700 ${
+                    className={`overflow-hidden rounded-2xl border transition-[border-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       isHovered
                         ? "border-cta"
                         : isOpen
-                          ? "border-[#B8D4F0]"
+                          ? "border-cta/35"
                           : "border-card-border"
                     }`}
                     style={{ backgroundColor: isHovered ? undefined : idleBg }}
@@ -132,7 +131,7 @@ export function FaqSection({
                       type="button"
                       aria-expanded={isOpen}
                       aria-controls={panelId}
-                      className={`flex w-full cursor-pointer items-start justify-between gap-4 bg-[length:200%_100%] px-4 py-3.5 text-left transition-[background-position,color] duration-700 ease-out sm:px-5 sm:py-4 ${
+                      className={`flex w-full cursor-pointer items-start justify-between gap-4 bg-[length:200%_100%] px-4 py-3.5 text-left transition-[background-position,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-5 sm:py-4 ${
                         isHovered
                           ? "bg-left text-white"
                           : "bg-right text-foreground"
@@ -158,9 +157,9 @@ export function FaqSection({
                         {item.question}
                       </span>
                       <span
-                        className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center transition-[transform,color] duration-700 ${
+                        className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center transition-[transform,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                           isOpen ? "rotate-180" : ""
-                        } ${isHovered ? "text-white" : "text-[#2B6CB0]"}`}
+                        } ${isHovered ? "text-white" : "text-cta"}`}
                         aria-hidden
                       >
                         <ChevronIcon />
@@ -171,13 +170,13 @@ export function FaqSection({
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
-                      className={`grid transition-[grid-template-rows] duration-700 ease-out ${
+                      className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}
                     >
                       <div className="overflow-hidden">
                         <p
-                          className="border-t border-[#D6EAF8] px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/85 sm:px-5 sm:pb-5 sm:text-[0.9375rem]"
+                          className="border-t border-card-border px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/85 sm:px-5 sm:pb-5 sm:text-[0.9375rem]"
                           style={{ backgroundColor: idleBg }}
                         >
                           {item.answer}

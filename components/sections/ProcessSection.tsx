@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { RevealItem, RevealStagger } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import {
   processStepsContent,
   type ProcessStepItem,
@@ -52,45 +54,47 @@ export function ProcessSection({
       </div>
 
       <div className="relative z-10 mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <h2
-          id="process-heading"
-          className="text-center text-2xl font-bold uppercase tracking-normal text-foreground sm:text-3xl md:text-4xl"
-        >
-          Quy trình 5 bước
-        <span className="sr-only"> — {heading}</span>
-        
-        </h2>
+        <SectionHeader
+          headingId="process-heading"
+          title="Quy trình 5 bước"
+          tagline={heading !== "Quy trình 5 bước" ? heading : undefined}
+        />
 
-        <ol className="mt-12 flex flex-col items-center gap-10 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:flex lg:flex-row lg:items-start lg:justify-between lg:gap-4">
+        <RevealStagger
+          as="ol"
+          className="mt-12 flex flex-col items-center gap-10 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:flex lg:flex-row lg:items-start lg:justify-between lg:gap-4"
+          stagger={0.1}
+        >
           {steps.map((item, index) => (
-            <li
+            <RevealItem
               key={item.id}
+              as="li"
               className={`flex w-full max-w-[11.5rem] justify-center sm:max-w-none lg:w-[18%] ${STEP_OFFSET[index]}`}
             >
-              <div
-                className="process-float flex flex-col items-center text-center"
-                style={{
-                  animationDelay: `${index * 0.45}s`,
-                  animationDuration: `${3.6 + (index % 3) * 0.4}s`,
-                }}
-              >
-                <div className="relative h-[5.5rem] w-[5.5rem] sm:h-24 sm:w-24">
-                  <Image
-                    src={item.iconSrc}
-                    alt=""
-                    width={256}
-                    height={256}
-                    className="h-full w-full object-contain drop-shadow-[0_8px_20px_rgba(11,31,58,0.08)] rounded-full"
-                    sizes="96px"
-                  />
+                <div
+                  className="process-float flex flex-col items-center text-center"
+                  style={{
+                    animationDelay: `${index * 0.45}s`,
+                    animationDuration: `${3.6 + (index % 3) * 0.4}s`,
+                  }}
+                >
+                  <div className="relative h-[5.5rem] w-[5.5rem] sm:h-24 sm:w-24">
+                    <Image
+                      src={item.iconSrc}
+                      alt=""
+                      width={256}
+                      height={256}
+                      className="h-full w-full rounded-full object-contain drop-shadow-[0_8px_20px_rgba(11,31,58,0.08)]"
+                      sizes="96px"
+                    />
+                  </div>
+                  <h3 className="mt-5 whitespace-pre-line text-sm font-semibold leading-snug text-foreground sm:text-[0.9375rem]">
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 className="mt-5 whitespace-pre-line text-sm font-semibold leading-snug text-foreground sm:text-[0.9375rem]">
-                  {item.title}
-                </h3>
-              </div>
-            </li>
-          ))}
-        </ol>
+              </RevealItem>
+            ))}
+        </RevealStagger>
       </div>
     </section>
   );

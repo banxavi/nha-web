@@ -173,7 +173,7 @@ export function TemplateDetailSection({
 
         {relatedItems.length > 0 ? (
           <div className="mt-14 sm:mt-16">
-            <h2 className="mb-6 text-xl font-bold uppercase text-foreground sm:mb-8 sm:text-2xl">
+            <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground sm:mb-8 sm:text-2xl">
               {copy.similarHeading}
             </h2>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">

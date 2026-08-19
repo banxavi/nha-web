@@ -51,12 +51,12 @@ export function ProductsPageBanner() {
         <div className="max-w-3xl">
           <h1
             id="products-heading"
-            className="text-xl font-bold uppercase leading-tight tracking-wide text-white drop-shadow-sm sm:text-2xl md:text-3xl lg:leading-snug"
+            className="text-xl font-bold leading-tight tracking-tight text-white drop-shadow-sm sm:text-2xl md:text-3xl lg:leading-snug"
           >
             {heading}
           </h1>
           {tagline ? (
-            <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-white/90 sm:text-sm">
+            <p className="mt-2 text-xs font-semibold tracking-wide text-white/90 sm:text-sm">
               {tagline}
             </p>
           ) : null}

@@ -252,7 +252,7 @@ export function ContactFormModal({
                 </p>
                 <h2
                   id={titleId}
-                  className="mt-1 text-xl font-bold uppercase tracking-wide text-foreground sm:text-2xl"
+                  className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl"
                 >
                   {heading}
                 </h2>

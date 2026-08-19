@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { newsContent, type NewsItem } from "@/lib/site-config";
 
@@ -23,19 +24,12 @@ export function NewsSection() {
       className="scroll-mt-24 bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
     >
       <div className="mx-auto max-w-site">
-        <header className="mb-10 text-center sm:mb-14">
-          <h2
-            id="news-heading"
-            className="text-2xl font-bold text-foreground sm:text-3xl md:text-4xl"
-          >
-            {heading}
-          </h2>
-          {tagline ? (
-            <p className="mt-4 text-sm font-semibold tracking-wide text-muted sm:text-base">
-              {tagline}
-            </p>
-          ) : null}
-        </header>
+        <SectionHeader
+          headingId="news-heading"
+          title={heading}
+          tagline={tagline}
+          className="mb-10 sm:mb-14"
+        />
       </div>
 
       <Carousel
@@ -70,13 +64,14 @@ function NewsCard({ item }: { item: NewsItem }) {
     <Link href={item.href} className="group block h-full outline-none">
       <Card
         as="div"
-        className="h-full transition-colors group-hover:border-cta/40"
+        className="h-full transition-colors duration-200 group-hover:border-cta"
         media={
           <ZoomableImage
             src={item.image.src}
             alt={item.image.alt}
             width={640}
             height={400}
+            zoom={false}
             unoptimized={item.image.src.endsWith(".svg")}
             className="aspect-[4/3] w-full object-cover"
             frameClassName="aspect-[4/3] w-full"
@@ -89,7 +84,7 @@ function NewsCard({ item }: { item: NewsItem }) {
             <span className="text-cta">{item.category}</span>
             <time dateTime={toIsoDate(item.date)}>{item.date}</time>
           </div>
-          <h3 className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-cta sm:text-[0.9375rem]">
+          <h3 className="text-sm font-bold leading-snug text-foreground transition-colors duration-200 group-hover:text-cta sm:text-[0.9375rem]">
             {item.title}
           </h3>
           <p className="line-clamp-3 text-xs leading-relaxed text-muted sm:text-sm">

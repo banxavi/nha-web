@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { processImagesContent } from "@/lib/site-config";
 
 /**
@@ -12,15 +13,10 @@ export function ProcessImagesSection() {
     <section
       id="quy-trinh-chi-tiet"
       aria-labelledby="process-images-heading"
-      className="scroll-mt-24 bg-[#F8FAF9]"
+      className="scroll-mt-24 bg-bg-secondary"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <h2
-          id="process-images-heading"
-          className="text-center text-2xl font-bold tracking-normal text-foreground sm:text-3xl"
-        >
-          {heading}
-        </h2>
+        <SectionHeader headingId="process-images-heading" title={heading} />
 
         <div className="relative mx-auto mt-10 w-full overflow-hidden sm:mt-12 lg:mt-14">
           <Image

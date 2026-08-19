@@ -120,7 +120,7 @@ function FilterChip({
         "rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors sm:px-4 sm:text-sm",
         active
           ? "border-cta bg-cta text-white"
-          : "border-card-border bg-bg-primary text-foreground hover:border-cta/40 hover:text-cta",
+          : "border-card-border bg-bg-primary text-foreground hover:border-cta hover:text-cta",
       )}
     >
       {label}

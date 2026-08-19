@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import {
   websiteSamplesContent,
@@ -26,19 +27,12 @@ export function WebsiteSamplesSection() {
       className="bg-bg-primary px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
     >
       <div className="mx-auto max-w-site">
-        <header className="mb-10 text-center sm:mb-14">
-          <h2
-            id="samples-heading"
-            className="text-2xl font-bold uppercase text-foreground sm:text-3xl md:text-4xl"
-          >
-            {heading}
-          </h2>
-          {tagline ? (
-            <p className="mt-4 text-sm font-semibold uppercase text-muted sm:text-base">
-              {tagline}
-            </p>
-          ) : null}
-        </header>
+        <SectionHeader
+          headingId="samples-heading"
+          title={heading}
+          tagline={tagline}
+          className="mb-10 sm:mb-14"
+        />
 
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:grid-rows-2 lg:min-h-[560px]">
           {items.map((item) => (
@@ -62,7 +56,7 @@ function SampleCard({ item }: { item: SampleItem }) {
   return (
     <article
       className={cx(
-        "group relative h-full overflow-hidden rounded-2xl",
+        "group relative h-full overflow-hidden rounded-2xl border border-card-border transition-colors duration-200 hover:border-cta",
         item.featured ? "min-h-[320px] sm:min-h-[360px] lg:min-h-full" : "",
       )}
     >
@@ -75,6 +69,7 @@ function SampleCard({ item }: { item: SampleItem }) {
           src={item.image.src}
           alt={item.image.alt}
           fill
+          zoom={false}
           unoptimized={item.image.src.endsWith(".svg")}
           className="object-cover"
           frameClassName="absolute inset-0 h-full w-full"
@@ -85,8 +80,8 @@ function SampleCard({ item }: { item: SampleItem }) {
           }
         />
 
-        <div className="absolute inset-x-0 bottom-0 flex justify-center p-4 sm:p-5">
-          <span className="rounded-lg bg-bg-primary px-4 py-2.5 text-center text-sm font-bold tracking-wide text-foreground shadow-sm transition-colors group-hover:text-cta sm:px-5 sm:text-base">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent p-4 pt-16 sm:p-5 sm:pt-20">
+          <span className="mx-auto block w-fit rounded-lg bg-bg-primary px-4 py-2.5 text-center text-sm font-bold tracking-wide text-foreground shadow-sm transition-colors duration-200 group-hover:text-cta sm:px-5 sm:text-base">
             {item.title}
           </span>
         </div>

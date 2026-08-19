@@ -58,7 +58,7 @@ export function PhoneContactSection() {
           <div className="relative px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-11">
             {/* Bot — mobile/tablet: dedicated slot above copy (no overlap) */}
             <div className="relative z-10 mx-auto mb-5 flex justify-center lg:hidden">
-              <div className="relative h-28 w-28 sm:h-32 sm:w-32">
+              <div className="bot-float relative h-28 w-28 sm:h-32 sm:w-32">
                 <Image
                   src={illustration.src}
                   alt=""
@@ -73,11 +73,11 @@ export function PhoneContactSection() {
             <div className="relative z-10 mx-auto flex w-full flex-col items-center text-center">
               <h2
                 id="phone-contact-heading"
-                className="whitespace-nowrap text-[clamp(0.7rem,2.4vw,1.25rem)] font-bold leading-snug text-white"
+                className="text-[clamp(0.85rem,3.2vw,1.35rem)] font-bold leading-snug text-white"
               >
                 {headline}
               </h2>
-              <p className="mt-1.5 whitespace-nowrap text-[clamp(0.65rem,2vw,1.125rem)] font-bold text-white">
+              <p className="mt-1.5 text-[clamp(0.75rem,2.6vw,1.125rem)] font-bold leading-snug text-white/90">
                 {subheadline}
               </p>
 
@@ -97,14 +97,16 @@ export function PhoneContactSection() {
               className="pointer-events-none absolute top-1/2 right-3 z-0 hidden aspect-square h-[88%] max-h-full -translate-y-1/2 lg:block xl:right-8"
               aria-hidden
             >
-              <Image
-                src={illustration.src}
-                alt=""
-                fill
-                className="object-contain drop-shadow-md"
-                sizes="(min-width: 1280px) 220px, 200px"
-                priority={false}
-              />
+              <div className="bot-float relative h-full w-full">
+                <Image
+                  src={illustration.src}
+                  alt=""
+                  fill
+                  className="object-contain drop-shadow-md"
+                  sizes="(min-width: 1280px) 220px, 200px"
+                  priority={false}
+                />
+              </div>
             </div>
           </div>
         </div>

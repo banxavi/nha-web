@@ -44,6 +44,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchRootRef = useRef<HTMLDivElement>(null);
@@ -63,6 +64,15 @@ export function Header() {
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -118,9 +128,22 @@ export function Header() {
 
   return (
     <>
-    <header className="sticky top-0 z-40 border-b border-card-border bg-bg-primary">
+    <header
+      className={cx(
+        "sticky top-0 z-40 border-b border-card-border bg-bg-primary",
+        "transition-[background-color,box-shadow,backdrop-filter] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+        scrolled &&
+          "bg-bg-primary/85 shadow-[0_8px_24px_rgba(11,31,58,0.08)] backdrop-blur-md",
+      )}
+    >
       {/* Mobile: menu trái · logo giữa · search phải (ref msn.com). Desktop giữ layout cũ. */}
-      <div className="relative mx-auto flex h-20 max-w-site items-center justify-between gap-4 px-4 sm:h-24 sm:px-6 lg:px-8">
+      <div
+        className={cx(
+          "relative mx-auto flex max-w-site items-center justify-between gap-4 px-4 sm:px-6 lg:px-8",
+          "transition-[height] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+          scrolled ? "h-16 sm:h-[4.5rem]" : "h-20 sm:h-24",
+        )}
+      >
         <button
           type="button"
           className="relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-foreground transition-colors hover:bg-bg-secondary hover:text-cta lg:hidden"
@@ -149,7 +172,10 @@ export function Header() {
             width={1012}
             height={338}
             priority
-            className="h-12 w-auto object-contain sm:h-14"
+            className={cx(
+              "w-auto object-contain transition-[height] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+              scrolled ? "h-10 sm:h-12" : "h-12 sm:h-14",
+            )}
             sizes="200px"
           />
         </Link>
@@ -165,7 +191,7 @@ export function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="inline-flex rounded-md px-3 py-2 text-base font-medium tracking-normal text-foreground transition-colors hover:text-cta"
+                  className="inline-flex rounded-md px-3 py-2 text-base font-medium tracking-normal text-foreground transition-colors duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-cta"
                 >
                   {item.label}
                 </Link>

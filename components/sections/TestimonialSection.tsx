@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import {
   testimonialsContent,
   type TestimonialItem,
@@ -29,17 +30,11 @@ export function TestimonialSection() {
       className="scroll-mt-24 bg-gradient-to-b from-bg-secondary via-[#F3F6FA] to-bg-primary"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <header className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold tracking-[0.12em] text-muted sm:text-sm">
-            {eyebrow}
-          </p>
-          <h2
-            id="testimonials-heading"
-            className="mt-3 text-xl font-bold leading-snug tracking-wide text-foreground sm:text-2xl lg:text-[1.75rem]"
-          >
-            {heading}
-          </h2>
-        </header>
+        <SectionHeader
+          headingId="testimonials-heading"
+          eyebrow={eyebrow}
+          title={heading}
+        />
 
         <div className="relative mt-10 sm:mt-12">
           {single ? (
@@ -82,8 +77,14 @@ export function TestimonialSection() {
 
 function TestimonialCard({ item }: { item: TestimonialItem }) {
   return (
-    <article className="flex h-full gap-3 rounded-2xl border border-card-border bg-card p-4 shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-footer/20 hover:shadow-md sm:gap-4 sm:p-5">
-      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-xl bg-bg-secondary sm:h-20 sm:w-20">
+    <article className="relative flex h-full gap-3 overflow-hidden rounded-2xl border border-card-border bg-card p-4 shadow-[0_8px_24px_rgba(11,31,58,0.06)] sm:gap-4 sm:p-5">
+      <span
+        className="pointer-events-none absolute right-3 top-2 text-5xl font-serif leading-none text-cta/20 select-none sm:right-4 sm:text-6xl"
+        aria-hidden
+      >
+        “
+      </span>
+      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-xl bg-bg-secondary ring-2 ring-cta/15 sm:h-20 sm:w-20">
         <Image
           src={item.image.src}
           alt={item.image.alt}

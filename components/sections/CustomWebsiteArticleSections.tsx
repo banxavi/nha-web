@@ -1,22 +1,49 @@
-import Image from "next/image";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import {
   customWebsiteCostContent,
   customWebsiteDetailsContent,
   customWebsiteIntroContent,
 } from "@/lib/site-config";
 
+export type ServiceIntroContent = {
+  id: string;
+  heading: string;
+  intro: string;
+  highlightTitle: string;
+  points: string[];
+  note: string;
+  image: { src: string; alt: string };
+};
+
+export type ServiceCostContent = {
+  id: string;
+  heading: string;
+  body: string;
+};
+
+export type ServiceDetailsContent = {
+  id: string;
+  heading: string;
+  items: string[];
+};
+
+type IntroProps = {
+  content?: ServiceIntroContent;
+};
+
 /**
- * Khối “Bạn biết gì về thiết kế website theo yêu cầu?”
- * (ref web4s — intro + ảnh + bullet đẹp/độc/lạ).
+ * Khối intro 2 cột — ảnh + bullets (ref web4s).
  */
-export function CustomWebsiteIntroSection() {
-  const { id, heading, intro, highlightTitle, points, note, image } =
-    customWebsiteIntroContent;
+export function CustomWebsiteIntroSection({
+  content = customWebsiteIntroContent,
+}: IntroProps) {
+  const { id, heading, intro, highlightTitle, points, note, image } = content;
 
   return (
     <section
       id={id}
-      aria-labelledby="custom-web-intro-heading"
+      aria-labelledby={`${id}-heading`}
       className="relative scroll-mt-24 overflow-hidden bg-bg-primary"
     >
       <div
@@ -25,12 +52,7 @@ export function CustomWebsiteIntroSection() {
       />
 
       <div className="relative mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <h2
-          id="custom-web-intro-heading"
-          className="text-center text-xl font-bold uppercase leading-snug tracking-normal text-foreground sm:text-2xl lg:text-[1.75rem]"
-        >
-          {heading}
-        </h2>
+        <SectionHeader headingId={`${id}-heading`} title={heading} />
 
         <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-foreground/80 sm:mt-8 sm:text-base">
           {intro}
@@ -38,11 +60,13 @@ export function CustomWebsiteIntroSection() {
 
         <div className="mx-auto mt-10 grid max-w-5xl items-center gap-8 lg:mt-14 lg:grid-cols-2 lg:gap-12">
           <div className="relative mx-auto aspect-[3/2] w-full max-w-lg overflow-hidden rounded-2xl border border-card-border bg-bg-secondary shadow-[0_12px_40px_rgba(11,31,58,0.08)] lg:max-w-none">
-            <Image
+            <ZoomableImage
               src={image.src}
               alt={image.alt}
               fill
+              zoom={false}
               className="object-cover object-top"
+              frameClassName="absolute inset-0 h-full w-full"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
@@ -75,50 +99,51 @@ export function CustomWebsiteIntroSection() {
   );
 }
 
-/** Khối chi phí làm website theo yêu cầu. */
-export function CustomWebsiteCostSection() {
-  const { id, heading, body } = customWebsiteCostContent;
+type CostProps = {
+  content?: ServiceCostContent;
+};
+
+/** Khối chi phí / phạm vi dịch vụ. */
+export function CustomWebsiteCostSection({
+  content = customWebsiteCostContent,
+}: CostProps) {
+  const { id, heading, body } = content;
 
   return (
     <section
       id={id}
-      aria-labelledby="custom-web-cost-heading"
+      aria-labelledby={`${id}-heading`}
       className="scroll-mt-24 bg-bg-secondary"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2
-            id="custom-web-cost-heading"
-            className="text-xl font-bold uppercase leading-snug tracking-normal text-foreground sm:text-2xl lg:text-[1.75rem]"
-          >
-            {heading}
-          </h2>
-          <p className="mt-6 text-sm leading-relaxed text-foreground/80 sm:text-base">
-            {body}
-          </p>
-        </div>
+        <SectionHeader
+          headingId={`${id}-heading`}
+          title={heading}
+          tagline={body}
+        />
       </div>
     </section>
   );
 }
 
+type DetailsProps = {
+  content?: ServiceDetailsContent;
+};
+
 /** Khối thông tin chi tiết dịch vụ. */
-export function CustomWebsiteDetailsSection() {
-  const { id, heading, items } = customWebsiteDetailsContent;
+export function CustomWebsiteDetailsSection({
+  content = customWebsiteDetailsContent,
+}: DetailsProps) {
+  const { id, heading, items } = content;
 
   return (
     <section
       id={id}
-      aria-labelledby="custom-web-details-heading"
+      aria-labelledby={`${id}-heading`}
       className="scroll-mt-24 bg-bg-primary"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <h2
-          id="custom-web-details-heading"
-          className="mx-auto max-w-4xl text-center text-xl font-bold uppercase leading-snug tracking-normal text-foreground sm:text-2xl lg:text-[1.75rem]"
-        >
-          {heading}
-        </h2>
+        <SectionHeader headingId={`${id}-heading`} title={heading} />
 
         <ul
           className="mx-auto mt-10 max-w-3xl space-y-4 sm:mt-12"

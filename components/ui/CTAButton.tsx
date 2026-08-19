@@ -18,7 +18,7 @@ export type CTAButtonProps = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
 /**
- * Primary CTA — nền cam #F97316, chữ trắng, bo tròn (ref vinahost.vn "Xem thêm").
+ * Primary CTA — nền cam #F97316, chữ trắng, bo tròn, hover lift.
  */
 export function CTAButton({
   children,

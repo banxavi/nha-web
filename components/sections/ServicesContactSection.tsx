@@ -7,6 +7,7 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
+import { CTAButton } from "@/components/ui/CTAButton";
 import { lienHePageContent, siteContact } from "@/lib/site-config";
 
 type FormErrors = {
@@ -133,9 +134,13 @@ export function ServicesContactSection() {
     <section
       id={id}
       aria-labelledby={titleId}
-      className="relative scroll-mt-24 overflow-hidden bg-gradient-to-r from-[#0047FF] to-[#00C2FF]"
+      className="relative scroll-mt-24 overflow-hidden bg-footer"
     >
       <GlobeBackdrop />
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute -right-24 top-[-6rem] h-80 w-80 rounded-full bg-cta/20 blur-3xl" />
+        <div className="absolute -left-16 bottom-[-4rem] h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+      </div>
 
       <div className="relative mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <header className="text-center">
@@ -144,7 +149,7 @@ export function ServicesContactSection() {
           </p>
           <h1
             id={titleId}
-            className="mt-2 text-2xl font-bold uppercase tracking-wide text-white sm:text-3xl lg:text-4xl"
+            className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl"
           >
             {heading}
           </h1>
@@ -211,26 +216,26 @@ export function ServicesContactSection() {
           </div>
 
           {/* Right — form */}
-          <div>
+          <div className="rounded-2xl border border-white/10 bg-bg-primary p-5 shadow-[0_16px_40px_rgba(0,0,0,0.25)] sm:p-7">
             {submitted ? (
               <div
                 className="flex flex-col items-center justify-center py-10 text-center"
                 role="status"
                 aria-live="polite"
               >
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0B1F3A]">
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-cta text-white">
                   <CheckIcon />
                 </div>
-                <p className="text-lg font-bold text-white sm:text-xl">
+                <p className="text-lg font-bold text-foreground sm:text-xl">
                   {successTitle}
                 </p>
-                <p className="mt-2 max-w-sm text-sm text-white/85 sm:text-base">
+                <p className="mt-2 max-w-sm text-sm text-muted sm:text-base">
                   {successMessage}
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="mt-8 inline-flex items-center justify-center rounded-full bg-[#0B1F3A] px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="mt-8 inline-flex items-center justify-center rounded-full bg-footer px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
                 >
                   Gửi liên hệ khác
                 </button>
@@ -329,7 +334,7 @@ export function ServicesContactSection() {
                 <div>
                   <label
                     htmlFor={termsId}
-                    className="flex cursor-pointer items-start gap-2.5 text-sm text-white/90"
+                    className="flex cursor-pointer items-start gap-2.5 text-sm text-foreground/80"
                   >
                     <input
                       id={termsId}
@@ -341,38 +346,38 @@ export function ServicesContactSection() {
                         if (errors.terms)
                           setErrors((prev) => ({ ...prev, terms: undefined }));
                       }}
-                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/40 accent-[#0B1F3A]"
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-card-border accent-cta"
                     />
                     <span>
                       Tôi đồng ý với{" "}
                       <Link
                         href={termsHref}
-                        className="font-semibold underline underline-offset-2 hover:text-white"
+                        className="font-semibold text-cta underline underline-offset-2 hover:text-cta/80"
                       >
                         Thỏa thuận & Điều khoản sử dụng
                       </Link>
                     </span>
                   </label>
                   {errors.terms ? (
-                    <p className="mt-1 text-sm text-red-200" role="alert">
+                    <p className="mt-1 text-sm text-red-600" role="alert">
                       {errors.terms}
                     </p>
                   ) : null}
                 </div>
 
                 {errors.form ? (
-                  <p className="text-sm text-red-200" role="alert">
+                  <p className="text-sm text-red-600" role="alert">
                     {errors.form}
                   </p>
                 ) : null}
 
-                <button
+                <CTAButton
                   type="submit"
                   disabled={submitting}
-                  className="mt-1 inline-flex w-fit items-center justify-center rounded-full bg-cta px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-cta/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  className="mt-1 px-8 py-3.5 text-base"
                 >
                   {submitting ? "Đang gửi…" : submitLabel}
-                </button>
+                </CTAButton>
               </form>
             )}
           </div>
@@ -397,7 +402,7 @@ function Field({
     <div className="min-w-0">
       {children}
       {error ? (
-        <p className="mt-1 text-sm text-red-200" role="alert">
+        <p className="mt-1 text-sm text-red-600" role="alert">
           {error}
         </p>
       ) : null}
@@ -407,11 +412,11 @@ function Field({
 
 function inputClassName(hasError: boolean) {
   return cx(
-    "w-full rounded-xl border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition-[border-color,box-shadow]",
-    "placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-white/40",
+    "w-full rounded-xl border bg-bg-secondary px-3.5 py-3 text-sm text-foreground outline-none transition-[border-color,box-shadow]",
+    "placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-cta/30",
     hasError
       ? "border-red-400 focus-visible:border-red-400"
-      : "border-transparent hover:border-white/40 focus-visible:border-white",
+      : "border-card-border hover:border-footer/30 focus-visible:border-cta",
   );
 }
 

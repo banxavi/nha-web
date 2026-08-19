@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   footerContent,
+  footerLogoPath,
   serviceNavLinks,
   siteContact,
   socialLinks,
@@ -17,11 +19,15 @@ export function Footer() {
       <div className="mx-auto grid max-w-site gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16">
         {/* #9 Brand text + social — "Nhà" cam + "Web" navy như logo */}
         <div className="lg:col-span-3">
-          <Link href="/" className="mb-4 block rounded-md">
-            <span className="text-2xl font-bold tracking-wide sm:text-[1.75rem]">
-              <span className="text-logo-nha">Nhà</span>{" "}
-              <span className="text-white">Web</span>
-            </span>
+          <Link href="/" className="mb-4 block w-fit rounded-md">
+            <Image
+              src={footerLogoPath}
+              alt="Nhà Web"
+              width={1012}
+              height={338}
+              className="h-10 w-auto object-contain sm:h-12"
+              sizes="180px"
+            />
           </Link>
           <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
             Chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh

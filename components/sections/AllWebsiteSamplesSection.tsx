@@ -110,7 +110,7 @@ function SampleCard({
   onSelect: () => void;
 }) {
   return (
-    <article className="group relative min-h-[200px] overflow-hidden rounded-2xl sm:min-h-[220px] lg:min-h-[240px]">
+    <article className="group relative min-h-[200px] overflow-hidden rounded-2xl border border-card-border transition-colors duration-200 hover:border-cta sm:min-h-[220px] lg:min-h-[240px]">
       <button
         type="button"
         onClick={onSelect}
@@ -121,6 +121,7 @@ function SampleCard({
           src={item.image.src}
           alt={item.image.alt}
           fill
+          zoom={false}
           unoptimized={item.image.src.endsWith(".svg")}
           className="object-cover"
           frameClassName="absolute inset-0 h-full w-full"
@@ -132,7 +133,7 @@ function SampleCard({
         />
 
         <div className="absolute inset-x-0 bottom-0 flex justify-center p-3 sm:p-4">
-          <span className="max-w-[min(100%,18rem)] rounded-lg bg-bg-primary px-3 py-2 text-center text-xs font-bold leading-snug tracking-wide text-foreground shadow-sm transition-colors group-hover:text-cta sm:max-w-none sm:px-4 sm:text-sm md:text-base">
+          <span className="max-w-[min(100%,18rem)] rounded-lg bg-bg-primary px-3 py-2 text-center text-xs font-bold leading-snug tracking-wide text-foreground shadow-sm transition-colors duration-200 group-hover:text-cta sm:max-w-none sm:px-4 sm:text-sm md:text-base">
             {item.title}
           </span>
         </div>

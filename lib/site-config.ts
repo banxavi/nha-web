@@ -387,6 +387,7 @@ export const aboutVisionContent = {
  * Ảnh 930×429; khung desktop cao bằng cột text, mobile giữ tỉ lệ gốc.
  */
 export const heroContent = {
+  eyebrow: "Thiết kế & vận hành website",
   headline: "Dịch vụ thiết kế website chuyên nghiệp, uy tín, chuẩn SEO",
   bullets: [
     "Thời gian triển khai 5–7 ngày",
@@ -1273,7 +1274,7 @@ export const contactFormContent = {
       "Khởi tạo Web đơn giản - Dễ vận hành - Dễ tăng trưởng doanh thu",
     subheadline: "Thiết kế Website chuyên nghiệp tại Nhà Web ngay",
     ctaLabel: "Đăng ký ngay",
-    bannerColor: "#1B78E0",
+    bannerColor: "#1E293B",
     illustration: {
       src: "/support/bot-remove-bg.png",
       alt: "Bot hỗ trợ đăng ký website Nhà Web",
@@ -1292,7 +1293,7 @@ export const phoneContactContent = contactFormContent.section;
 export const lienHePageContent = {
   id: "lien-he",
   eyebrow: "Liên hệ",
-  heading: "LIÊN HỆ NHÀ WEB",
+  heading: "Liên hệ Nhà Web",
   intro:
     "Để lại thông tin — đội ngũ Nhà Web sẽ tư vấn giải pháp website phù hợp với nhu cầu của bạn.",
   hotlineLabel: "Hotline",
@@ -1333,6 +1334,7 @@ export const lienHePageContent = {
  * Ảnh minh họa: `public/services/thiet-ke-website-theo-yeu-cau.webp.png` (swap khi có bản final).
  */
 export const customWebsiteHeroContent = {
+  eyebrow: "Website độc quyền",
   headline: "Thiết Kế Website Theo Yêu Cầu, Độc Quyền Giao Diện",
   bullets: [
     "Thiết kế độc quyền theo thương hiệu",
@@ -1452,3 +1454,377 @@ export const customWebsiteFaqContent = {
     },
   ] satisfies FaqItem[],
 };
+
+const sharedHeroBanners = [
+  {
+    src: "/hero/hero-banner-1.webp.png",
+    alt: "Thiết kế website chuyên nghiệp — Nhà Web",
+  },
+  {
+    src: "/hero/hero-banner-2.webp.png",
+    alt: "Dịch vụ thiết kế website — Nhà Web",
+  },
+] as const;
+
+const sharedServiceImage = {
+  src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
+  alt: "Thiết kế website chuyên nghiệp tại Nhà Web",
+};
+
+/** Trang /thiet-ke-website */
+export const websiteServiceContent = {
+  hero: {
+    eyebrow: "Website theo mẫu",
+    headline: "Thiết kế website chuyên nghiệp, chuẩn SEO, giao trong 5–7 ngày",
+    bullets: [
+      "Triển khai nhanh 5–7 ngày làm việc",
+      "Giao diện hiện đại, tối ưu PageSpeed",
+      "Hiển thị tốt trên mọi thiết bị",
+      "Giao diện quản trị dễ sử dụng",
+      "Chuẩn SEO kỹ thuật từ ngày bàn giao",
+    ],
+    ctaLabel: "Đăng ký tư vấn",
+    autoplayMs: 5000,
+    banners: [...sharedHeroBanners],
+  },
+  intro: {
+    id: "gioi-thieu-thiet-ke-website",
+    heading: "Thiết kế website theo mẫu phù hợp với ngành nghề của bạn",
+    intro:
+      "Nhà Web giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp từ kho mẫu hiện đại, tinh chỉnh theo thương hiệu — không cần am hiểu kỹ thuật, vẫn ra mắt nhanh và dễ vận hành.",
+    highlightTitle: "Website theo mẫu giúp bạn ra mắt nhanh mà vẫn chỉn chu",
+    points: [
+      "Chọn mẫu đúng ngành, chỉnh màu sắc – nội dung – thông tin liên hệ theo thương hiệu.",
+      "Tối ưu hiển thị trên điện thoại, máy tính bảng và máy tính.",
+      "Bàn giao kèm hướng dẫn quản trị để bạn tự cập nhật bài viết, sản phẩm, banner.",
+    ],
+    note: "Nếu mẫu sẵn chưa đủ, đội ngũ Nhà Web sẽ tư vấn nâng cấp tính năng hoặc chuyển sang thiết kế theo yêu cầu.",
+    image: sharedServiceImage,
+  },
+  cost: {
+    id: "chi-phi-thiet-ke-website",
+    heading: "Chi phí thiết kế website tại Nhà Web như thế nào?",
+    body: "Gói website theo mẫu thường bắt đầu từ mức trọn gói minh bạch (bao gồm giao diện, nội dung cơ bản và các quà tặng như tên miền, SSL tùy gói). Website phức tạp hơn sẽ được báo giá sau khi nắm nhu cầu — luôn hướng tới mức hợp lý để bạn an tâm đầu tư.",
+  },
+  why: {
+    ...whyChooseContent,
+    heading: "Tại sao chọn Nhà Web để thiết kế website?",
+    subheading:
+      "Triển khai nhanh, giao diện hiện đại, chuẩn SEO và đội ngũ đồng hành sau bàn giao.",
+  },
+  details: {
+    id: "chi-tiet-thiet-ke-website",
+    heading: "Những gì bạn nhận được khi thiết kế website tại Nhà Web",
+    items: [
+      "Website hoàn chỉnh theo mẫu đã chọn, tinh chỉnh thương hiệu và nội dung.",
+      "Tối ưu tốc độ, hiển thị đa thiết bị và nền tảng SEO kỹ thuật.",
+      "Tài khoản quản trị để tự cập nhật tin tức, sản phẩm, hình ảnh.",
+      "Hướng dẫn vận hành và hỗ trợ trong thời gian bảo hành.",
+    ],
+  },
+  process: {
+    ...processStepsContent,
+    heading: "Quy trình thiết kế website tại Nhà Web",
+  },
+  faq: {
+    heading: "Câu hỏi thường gặp về thiết kế website tại Nhà Web",
+    image: faqContent.image,
+    items: [
+      {
+        id: "web-faq-1",
+        question: "Thiết kế website theo mẫu mất bao lâu?",
+        answer:
+          "Thông thường 5–7 ngày làm việc sau khi chốt mẫu, nội dung và thông tin thương hiệu. Gói có nhiều hạng mục tùy chỉnh có thể kéo dài hơn theo phạm vi đã thống nhất.",
+      },
+      {
+        id: "web-faq-2",
+        question: "Tôi có tự cập nhật website sau khi bàn giao không?",
+        answer:
+          "Có. Bạn được cấp tài khoản quản trị để đăng bài, sửa nội dung, cập nhật sản phẩm mà không cần biết lập trình.",
+      },
+      {
+        id: "web-faq-3",
+        question: "Website có chuẩn SEO không?",
+        answer:
+          "Website được tối ưu kỹ thuật (tốc độ, thẻ meta, cấu trúc, hiển thị mobile). Nội dung SEO chuyên sâu có thể bổ sung theo gói hoặc dịch vụ chăm sóc.",
+      },
+      {
+        id: "web-faq-4",
+        question: "Nếu tôi muốn giao diện độc quyền thì sao?",
+        answer:
+          "Bạn có thể chọn dịch vụ thiết kế website trọn gói / theo yêu cầu để có giao diện riêng, không dùng mẫu có sẵn.",
+      },
+    ] satisfies FaqItem[],
+  },
+};
+
+/** Trang /thiet-ke-landing-page */
+export const landingPageServiceContent = {
+  hero: {
+    eyebrow: "Landing page chuyển đổi",
+    headline: "Thiết kế landing page tập trung chuyển đổi, sẵn sàng chạy ads",
+    bullets: [
+      "Một trang – một mục tiêu chuyển đổi",
+      "CTA rõ ràng, form thu lead gọn",
+      "Tối ưu tốc độ để chạy quảng cáo",
+      "Bố cục hiện đại, đúng thông điệp chiến dịch",
+      "Dễ chỉnh nội dung khi đổi offer",
+    ],
+    ctaLabel: "Đăng ký tư vấn",
+    autoplayMs: 5000,
+    banners: [...sharedHeroBanners],
+  },
+  intro: {
+    id: "gioi-thieu-landing-page",
+    heading: "Landing page giúp chiến dịch quảng cáo ra lead tốt hơn",
+    intro:
+      "Landing page là trang đích tập trung một hành động: đăng ký, đặt lịch, mua ngay hoặc để lại thông tin. Nhà Web thiết kế trang gọn, tải nhanh, thông điệp rõ — phù hợp chạy Facebook Ads, Google Ads.",
+    highlightTitle: "Khi nào bạn nên làm landing page thay vì website đầy đủ?",
+    points: [
+      "Bạn đang chạy quảng cáo và cần trang đích đúng offer, không phân tán sang nhiều menu.",
+      "Bạn ra mắt sản phẩm / khóa học / sự kiện và cần thu lead trong thời gian ngắn.",
+      "Bạn muốn đo lường chuyển đổi rõ ràng: mỗi trang một chiến dịch.",
+    ],
+    note: "Landing page có thể đứng độc lập hoặc gắn thêm vào website hiện có của bạn.",
+    image: {
+      src: "/hero/hero-banner-1.webp.png",
+      alt: "Thiết kế landing page chuyển đổi — Nhà Web",
+    },
+  },
+  cost: {
+    id: "chi-phi-landing-page",
+    heading: "Chi phí thiết kế landing page có cao không?",
+    body: "Landing page thường nhẹ hơn website nhiều trang nên chi phí và thời gian triển khai thấp hơn. Mức giá phụ thuộc số phiên bản (A/B), số form và mức độ thiết kế. Nhà Web báo giá sau khi nắm offer, đối tượng và kênh quảng cáo bạn sẽ chạy.",
+  },
+  why: {
+    ...whyChooseContent,
+    heading: "Tại sao chọn Nhà Web thiết kế landing page?",
+    subheading:
+      "Tập trung chuyển đổi, tải nhanh, CTA rõ — sẵn sàng gắn pixel và form lead.",
+  },
+  details: {
+    id: "chi-tiet-landing-page",
+    heading: "Landing page Nhà Web gồm những gì?",
+    items: [
+      "Bố cục 1 trang: hero, lợi ích, social proof, FAQ ngắn và CTA.",
+      "Form đăng ký / nút liên hệ / Zalo tùy mục tiêu chiến dịch.",
+      "Tối ưu tốc độ và hiển thị mobile — quan trọng khi chạy ads.",
+      "Bàn giao kèm hướng dẫn chỉnh nội dung khi đổi chương trình khuyến mãi.",
+    ],
+  },
+  process: {
+    ...processStepsContent,
+    heading: "Quy trình thiết kế landing page tại Nhà Web",
+  },
+  faq: {
+    heading: "Câu hỏi thường gặp về thiết kế landing page",
+    image: faqContent.image,
+    items: [
+      {
+        id: "lp-faq-1",
+        question: "Landing page khác website như thế nào?",
+        answer:
+          "Website có nhiều trang, menu, blog. Landing page thường chỉ một trang, một lời kêu gọi hành động — dùng để chuyển đổi từ quảng cáo hoặc chiến dịch cụ thể.",
+      },
+      {
+        id: "lp-faq-2",
+        question: "Làm landing page mất bao lâu?",
+        answer:
+          "Thông thường nhanh hơn website đầy đủ. Khi nội dung và offer đã rõ, Nhà Web có thể triển khai trong vài ngày làm việc.",
+      },
+      {
+        id: "lp-faq-3",
+        question: "Có gắn Facebook Pixel / Google Tag được không?",
+        answer:
+          "Được. Chúng tôi hỗ trợ gắn mã đo lường theo yêu cầu để bạn theo dõi chuyển đổi trên kênh ads.",
+      },
+      {
+        id: "lp-faq-4",
+        question: "Tôi có thể dùng landing page song song với website không?",
+        answer:
+          "Có. Nhiều khách hàng giữ website giới thiệu thương hiệu và dùng landing page riêng cho từng chiến dịch.",
+      },
+    ] satisfies FaqItem[],
+  },
+};
+
+/** Trang /thiet-ke-nhan-dien-thuong-hieu */
+export const brandingServiceContent = {
+  hero: {
+    eyebrow: "Nhận diện thương hiệu",
+    headline: "Thiết kế nhận diện thương hiệu đồng bộ từ logo đến website",
+    bullets: [
+      "Logo và hệ thống nhận diện rõ ràng",
+      "Bảng màu, typography thống nhất",
+      "Ứng dụng lên website, card, social",
+      "Định vị thương hiệu dễ nhớ",
+      "Đồng bộ trải nghiệm online – offline",
+    ],
+    ctaLabel: "Đăng ký tư vấn",
+    autoplayMs: 5000,
+    banners: [...sharedHeroBanners],
+  },
+  intro: {
+    id: "gioi-thieu-nhan-dien",
+    heading: "Nhận diện thương hiệu giúp khách nhớ bạn ngay từ lần đầu",
+    intro:
+      "Nhà Web đồng hành thiết kế logo và hệ thống nhận diện để website, ấn phẩm và kênh social cùng một giọng điệu. Thương hiệu nhất quán giúp khách tin hơn và dễ lựa chọn bạn giữa thị trường.",
+    highlightTitle: "Bộ nhận diện không chỉ là logo",
+    points: [
+      "Logo chính / đảo nền, khoảng cách an toàn và ứng dụng tối thiểu.",
+      "Bảng màu cam – navy Nhà Web có thể chuyển thành palette riêng cho thương hiệu của bạn.",
+      "Hướng dẫn dùng trên website, fanpage, card visit và bao bì cơ bản.",
+    ],
+    note: "Có thể làm nhận diện độc lập hoặc kết hợp khi thiết kế website mới để tiết kiệm vòng chỉnh sửa.",
+    image: {
+      src: "/about-us/gioi-thieu-chung1.webp",
+      alt: "Thiết kế nhận diện thương hiệu — Nhà Web",
+    },
+  },
+  cost: {
+    id: "chi-phi-nhan-dien",
+    heading: "Chi phí thiết kế nhận diện thương hiệu",
+    body: "Mức đầu tư phụ thuộc phạm vi: chỉ logo, bộ nhận diện cơ bản, hay kèm guideline website. Nhà Web tư vấn gói phù hợp quy mô — hộ kinh doanh, shop, hay doanh nghiệp — trước khi triển khai.",
+  },
+  why: {
+    ...whyChooseContent,
+    heading: "Tại sao làm nhận diện cùng Nhà Web?",
+    subheading:
+      "Thiết kế để dùng được trên web và vận hành thật, không chỉ file đẹp để cất.",
+  },
+  details: {
+    id: "chi-tiet-nhan-dien",
+    heading: "Bạn nhận được gì từ gói nhận diện?",
+    items: [
+      "Logo vector và các biến thể cần dùng trên nền sáng / tối.",
+      "Bảng màu, font và nguyên tắc bố cục cơ bản.",
+      "File bàn giao để đưa lên website, social và in ấn.",
+      "Tư vấn cách gắn nhận diện lên giao diện web Nhà Web.",
+    ],
+  },
+  process: {
+    ...processStepsContent,
+    heading: "Quy trình thiết kế nhận diện tại Nhà Web",
+  },
+  faq: {
+    heading: "Câu hỏi thường gặp về thiết kế nhận diện thương hiệu",
+    image: faqContent.image,
+    items: [
+      {
+        id: "br-faq-1",
+        question: "Tôi đã có logo, có cần làm lại không?",
+        answer:
+          "Không bắt buộc. Nếu logo ổn, Nhà Web có thể chuẩn hóa file, bảng màu và cách dùng trên website. Làm mới khi logo khó đọc, không scale hoặc không còn đúng định vị.",
+      },
+      {
+        id: "br-faq-2",
+        question: "Nhận diện có đi kèm website không?",
+        answer:
+          "Có thể đặt riêng hoặc combo với thiết kế website để màu sắc, font và bố cục thống nhất từ ngày đầu.",
+      },
+      {
+        id: "br-faq-3",
+        question: "Bàn giao những định dạng file nào?",
+        answer:
+          "Thông thường gồm file vector và PNG/WebP dùng web. Chi tiết danh mục file sẽ ghi trong phạm vi gói đã chốt.",
+      },
+      {
+        id: "br-faq-4",
+        question: "Mất bao lâu để có bộ nhận diện?",
+        answer:
+          "Phụ thuộc số vòng chỉnh sửa. Sau khi chốt brief, Nhà Web đề xuất timeline cụ thể trong bước lập kế hoạch.",
+      },
+    ] satisfies FaqItem[],
+  },
+};
+
+/** Trang /cham-soc-website */
+export const careServiceContent = {
+  hero: {
+    eyebrow: "Vận hành bền vững",
+    headline: "Chăm sóc website — bảo trì, bảo mật, cập nhật nội dung",
+    bullets: [
+      "Theo dõi uptime và xử lý sự cố",
+      "Cập nhật bảo mật, sao lưu định kỳ",
+      "Hỗ trợ chỉnh nội dung khi bạn cần",
+      "Tối ưu tốc độ theo thời gian",
+      "Đầu mối kỹ thuật rõ ràng, phản hồi nhanh",
+    ],
+    ctaLabel: "Đăng ký tư vấn",
+    autoplayMs: 5000,
+    banners: [...sharedHeroBanners],
+  },
+  intro: {
+    id: "gioi-thieu-cham-soc",
+    heading: "Website cần được chăm sóc sau ngày bàn giao",
+    intro:
+      "Ra mắt chỉ là bước đầu. Nhà Web nhận chăm sóc website để site luôn chạy, an toàn và cập nhật — bạn tập trung kinh doanh, phần kỹ thuật có đội ngũ theo sát.",
+    highlightTitle: "Chăm sóc website phù hợp khi bạn…",
+    points: [
+      "Không có nhân sự IT nội bộ để theo plugin, hosting, SSL, backup.",
+      "Cần chỉnh banner, bài viết, form mà không muốn tự mò hệ thống.",
+      "Muốn có người xử lý khi site chậm, lỗi hoặc bị spam.",
+    ],
+    note: "Gói chăm sóc áp dụng cho website Nhà Web triển khai hoặc site sẵn có sau khi khảo sát.",
+    image: {
+      src: "/update/faq-nha-web.webp",
+      alt: "Dịch vụ chăm sóc website — Nhà Web",
+    },
+  },
+  cost: {
+    id: "chi-phi-cham-soc",
+    heading: "Chi phí chăm sóc website tính như thế nào?",
+    body: "Thường theo gói tháng / quý tùy mức hỗ trợ: chỉ bảo trì kỹ thuật, hay kèm cập nhật nội dung. Nhà Web khảo sát hiện trạng rồi đề xuất gói rõ việc — không phát sinh hạng mục mơ hồ.",
+  },
+  why: {
+    ...whyChooseContent,
+    heading: "Tại sao giao chăm sóc website cho Nhà Web?",
+    subheading:
+      "Cùng đội ngũ hiểu website của bạn — xử lý nhanh, bảo mật và vận hành ổn định.",
+  },
+  details: {
+    id: "chi-tiet-cham-soc",
+    heading: "Gói chăm sóc website thường bao gồm",
+    items: [
+      "Theo dõi hoạt động, xử lý sự cố và hỗ trợ kỹ thuật qua kênh đã chốt.",
+      "Sao lưu định kỳ, theo dõi SSL và các bản vá bảo mật cần thiết.",
+      "Hỗ trợ cập nhật nội dung trong hạn mức gói (banner, bài, thông tin liên hệ).",
+      "Tư vấn cải thiện tốc độ / SEO kỹ thuật khi phát hiện vấn đề.",
+    ],
+  },
+  process: {
+    ...processStepsContent,
+    heading: "Quy trình nhận chăm sóc website tại Nhà Web",
+  },
+  faq: {
+    heading: "Câu hỏi thường gặp về chăm sóc website",
+    image: faqContent.image,
+    items: [
+      {
+        id: "care-faq-1",
+        question: "Website không làm tại Nhà Web có thuê chăm sóc được không?",
+        answer:
+          "Có, sau khi khảo sát công nghệ và quyền truy cập. Một số hệ thống đặc thù sẽ được báo phạm vi rõ trước khi nhận.",
+      },
+      {
+        id: "care-faq-2",
+        question: "Sự cố ngoài giờ có được hỗ trợ không?",
+        answer:
+          "Mức SLA (thời gian phản hồi, ngoài giờ) phụ thuộc gói đã ký. Gói tiêu chuẩn xử lý trong giờ làm việc; sự cố nghiêm trọng được ưu tiên theo thỏa thuận.",
+      },
+      {
+        id: "care-faq-3",
+        question: "Chăm sóc có gồm viết bài SEO không?",
+        answer:
+          "Cập nhật nội dung kỹ thuật (đăng bài bạn soạn, sửa trang) nằm trong gói. Viết nội dung SEO chuyên sâu là hạng mục riêng nếu bạn cần.",
+      },
+      {
+        id: "care-faq-4",
+        question: "Tôi có thể hủy gói khi không còn nhu cầu?",
+        answer:
+          "Có. Điều khoản gia hạn / chấm dứt được ghi trong hợp đồng hoặc báo giá gói chăm sóc.",
+      },
+    ] satisfies FaqItem[],
+  },
+};
+
