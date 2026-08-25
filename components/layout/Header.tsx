@@ -67,8 +67,14 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    // Hysteresis: enter must exceed shrink delta (h-24→4.5rem = 24px) + exit,
+    // or sticky height changes yank scrollY back across a single threshold and flicker.
+    const ENTER_PX = 48;
+    const EXIT_PX = 8;
+
     function onScroll() {
-      setScrolled(window.scrollY > 8);
+      const y = window.scrollY;
+      setScrolled((prev) => (prev ? y > EXIT_PX : y > ENTER_PX));
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

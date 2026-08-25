@@ -489,6 +489,19 @@ export type SampleItem = {
   featured?: boolean;
 };
 
+/** Ảnh mockup theo nhóm ngành — dùng chung section nổi bật + lưới tất cả mẫu. */
+const INDUSTRY_GROUP_IMAGES: Partial<Record<string, string>> = {
+  "dich-vu-thuong-mai":
+    "/san-pham/dich-vu-thuong-mai/dich_vu_thuong_mai.webp",
+  "ban-le-tmdt": "/san-pham/thuong_mai_dien_tu/thuong_mai_dien_tu.webp",
+  "xay-dung-bds":
+    "/san-pham/xay_dung_bat_dong_san/xay_dung_bat_dong_san.webp",
+  "du-lich-khach-san":
+    "/san-pham/du-lich-khach-san/du_lich_khach_san.webp",
+  "dich-vu-chuyen-nghiep":
+    "/san-pham/thuong_hieu_ca_nhan/thuong_hieu_ca_nhan.webp",
+};
+
 export const websiteSamplesContent = {
   heading: "Mẫu website nổi bật",
   tagline: "Giao diện hiện đại, chuẩn SEO, đa dạng lĩnh vực",
@@ -500,7 +513,7 @@ export const websiteSamplesContent = {
       category: "Dịch vụ & Thương mại",
       href: "/san-pham#dich-vu-thuong-mai",
       image: {
-        src: "/samples/sample-1.svg",
+        src: INDUSTRY_GROUP_IMAGES["dich-vu-thuong-mai"]!,
         alt: "Mẫu website nhóm Dịch vụ & Thương mại",
       },
       featured: true,
@@ -511,7 +524,7 @@ export const websiteSamplesContent = {
       category: "Bán lẻ & Thương mại điện tử",
       href: "/san-pham#ban-le-tmdt",
       image: {
-        src: "/samples/sample-2.svg",
+        src: INDUSTRY_GROUP_IMAGES["ban-le-tmdt"]!,
         alt: "Mẫu website nhóm Bán lẻ & Thương mại điện tử",
       },
     },
@@ -521,7 +534,7 @@ export const websiteSamplesContent = {
       category: "Xây dựng & Bất động sản",
       href: "/san-pham#xay-dung-bds",
       image: {
-        src: "/samples/sample-3.svg",
+        src: INDUSTRY_GROUP_IMAGES["xay-dung-bds"]!,
         alt: "Mẫu website nhóm Xây dựng & Bất động sản",
       },
     },
@@ -531,7 +544,7 @@ export const websiteSamplesContent = {
       category: "Du lịch & Khách sạn",
       href: "/san-pham#du-lich-khach-san",
       image: {
-        src: "/samples/sample-5.svg",
+        src: INDUSTRY_GROUP_IMAGES["du-lich-khach-san"]!,
         alt: "Mẫu website nhóm Du lịch & Khách sạn",
       },
     },
@@ -541,7 +554,7 @@ export const websiteSamplesContent = {
       category: "Dịch vụ chuyên nghiệp",
       href: "/san-pham#dich-vu-chuyen-nghiep",
       image: {
-        src: "/samples/sample-4.svg",
+        src: INDUSTRY_GROUP_IMAGES["dich-vu-chuyen-nghiep"]!,
         alt: "Mẫu website Thương hiệu cá nhân",
       },
     },
@@ -585,7 +598,9 @@ function industryGroupToSample(
   index: number,
   size: AllSampleSize,
 ): AllSampleItem {
-  const src = SAMPLE_IMAGE_SRC[index % SAMPLE_IMAGE_SRC.length];
+  const src =
+    INDUSTRY_GROUP_IMAGES[group.id] ??
+    SAMPLE_IMAGE_SRC[index % SAMPLE_IMAGE_SRC.length];
   return {
     id: group.id,
     title: group.label,
@@ -716,15 +731,15 @@ function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
 
 export const productsPageContent = {
   heading: "Mẫu giao diện website",
-  tagline: "Đa dạng ngành nghề — chọn mẫu phù hợp và đăng ký triển khai",
-  /** Dòng phụ trên banner — bổ sung ngữ cảnh catalog mẫu. */
+  tagline: "Đa dạng ngành nghề - chọn mẫu phù hợp và đăng ký triển khai",
+  /** Dòng phụ trên banner — ngắn để vừa khung 1920×500. */
   description:
-    "Giao diện hiện đại, chuẩn SEO, dễ vận hành trên mọi thiết bị. Chọn mẫu sẵn — bàn giao chỉ 3–5 ngày.",
-  highlights: ["10 nhóm ngành", "Chuẩn SEO", "Bàn giao 3–5 ngày"],
+    "Giao diện hiện đại, chuẩn SEO, dễ vận hành. Chọn mẫu sẵn, bàn giao trong 3-5 ngày.",
+  highlights: ["10 nhóm ngành", "Chuẩn SEO", "Bàn giao 3-5 ngày"],
   banner: {
     src: "/san-pham/banner/banner.webp",
-    alt: "Mẫu giao diện website Nhà Web — không gian làm việc hiện đại",
-    /** Ảnh gốc 1920×500 — hiển thị gọn (object-cover) để catalog còn trong viewport. */
+    alt: "Mẫu giao diện website Nhà Web trên nền cam thương hiệu",
+    /** Ảnh gốc 1920×500 — aspect lock trên desktop, catalog còn trong viewport. */
     width: 1920,
     height: 500,
   },
@@ -1572,7 +1587,20 @@ export const landingPageServiceContent = {
     ],
     ctaLabel: "Đăng ký tư vấn",
     autoplayMs: 5000,
-    banners: [...sharedHeroBanners],
+    banners: [
+      {
+        src: "/hero/new/landing_page_flash_sale.webp",
+        alt: "Landing page flash sale — mẫu Nhà Web",
+      },
+      {
+        src: "/hero/new/landing_page_shipper.webp",
+        alt: "Landing page giao hàng — mẫu Nhà Web",
+      },
+      {
+        src: "/hero/new/landing_page_university.webp",
+        alt: "Landing page trường học — mẫu Nhà Web",
+      },
+    ],
   },
   intro: {
     id: "gioi-thieu-landing-page",
@@ -1587,7 +1615,7 @@ export const landingPageServiceContent = {
     ],
     note: "Landing page có thể đứng độc lập hoặc gắn thêm vào website hiện có của bạn.",
     image: {
-      src: "/hero/hero-banner-1.webp.png",
+      src: "/hero/new/landing_page_flash_sale.webp",
       alt: "Thiết kế landing page chuyển đổi — Nhà Web",
     },
   },

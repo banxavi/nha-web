@@ -13,7 +13,7 @@ export function ProcessImagesSection() {
     <section
       id="quy-trinh-chi-tiet"
       aria-labelledby="process-images-heading"
-      className="scroll-mt-24 bg-bg-secondary"
+      className="scroll-mt-24 bg-white"
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <SectionHeader headingId="process-images-heading" title={heading} />
