@@ -25,8 +25,8 @@ export function Footer() {
               alt="Nhà Web"
               width={1012}
               height={338}
-              className="h-10 w-auto object-contain sm:h-12"
-              sizes="180px"
+              className="h-[100px] w-auto object-contain"
+              sizes="300px"
             />
           </Link>
           <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
