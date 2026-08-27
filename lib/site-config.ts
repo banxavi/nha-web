@@ -191,7 +191,7 @@ export const navItems: NavItem[] = [
     columns: 2,
     children: templateCategoryLinks,
   },
-  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Tin tức", href: "/tin-tuc" },
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -223,7 +223,7 @@ export const footerContent = {
       { label: "Liên hệ", href: "/lien-he" },
       { label: "Quy trình làm việc", href: "/#quy-trinh" },
       { label: "Dự án", href: "/san-pham" },
-      { label: "Tin tức", href: "/#tin-tuc" },
+      { label: "Tin tức", href: "/tin-tuc" },
     ],
   },
   /** #12 — link/nội dung cập nhật sau */
@@ -837,7 +837,8 @@ export function getRelatedProductSamples(
 
 /**
  * Task 4 — Tin tức / Sự kiện mới nhất.
- * Cấu trúc carousel giống slider mẫu website cũ: 5 item/hàng, `<` `>` + auto next.
+ * Carousel trang chủ: 5 item/hàng. Listing đầy đủ tại `/tin-tuc`.
+ * Chi tiết bài viết tại `/tin-tuc/[slug]` khi có nội dung trong `newsArticles`.
  * TODO: thay title/excerpt/date/image bằng bài thật khi có CMS / content.
  */
 export type NewsItem = {
@@ -845,10 +846,19 @@ export type NewsItem = {
   title: string;
   excerpt: string;
   date: string;
+  /** Đường dẫn — `/tin-tuc/[slug]` nếu đã có bài, `/tin-tuc` nếu chưa. */
   href: string;
   category: string;
   image: { src: string; alt: string };
 };
+
+/** Slug bài viết đầy đủ đầu tiên (docx PML). */
+export const NEWS_ARTICLE_SLUG_TRENDS_2026 =
+  "xu-huong-thiet-ke-website-doanh-nghiep-2026" as const;
+
+export function newsArticleHref(slug: string) {
+  return `/tin-tuc/${slug}`;
+}
 
 export const newsContent = {
   heading: "Tin tức / Sự kiện mới nhất",
@@ -862,13 +872,13 @@ export const newsContent = {
       id: "news-1",
       title: "5 xu hướng thiết kế website doanh nghiệp năm 2026",
       excerpt:
-        "TODO: Tóm tắt ngắn — giao diện tối giản, tốc độ tải và chuẩn SEO kỹ thuật.",
-      date: "01/08/2026",
-      href: "/#tin-tuc",
+        "Website không chỉ là kênh thông tin — năm 2026 là lúc doanh nghiệp cần chiến lược thiết kế website giới thiệu bài bản.",
+      date: "28/08/2026",
+      href: newsArticleHref(NEWS_ARTICLE_SLUG_TRENDS_2026),
       category: "Xu hướng",
       image: {
-        src: "/samples/sample-1.svg",
-        alt: "Minh họa tin tức xu hướng thiết kế website",
+        src: "/tin-tuc/website_doanh_nghiep_pml.webp",
+        alt: "Xu hướng thiết kế website giới thiệu doanh nghiệp 2026",
       },
     },
     {
@@ -877,7 +887,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — cấu trúc nội dung, tốc độ PageSpeed và trải nghiệm mobile.",
       date: "28/07/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "SEO",
       image: {
         src: "/samples/sample-2.svg",
@@ -890,7 +900,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — tài khoản, hướng dẫn CMS và quy trình bảo trì.",
       date: "22/07/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Vận hành",
       image: {
         src: "/samples/sample-3.svg",
@@ -903,7 +913,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — hero rõ ràng, CTA nổi bật và social proof.",
       date: "15/07/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Landing page",
       image: {
         src: "/samples/sample-4.svg",
@@ -916,7 +926,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — case study thiết kế theo ngành thời trang.",
       date: "08/07/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Dự án",
       image: {
         src: "/samples/sample-5.svg",
@@ -929,7 +939,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — cập nhật nội dung nhanh, phân quyền và bảo mật.",
       date: "01/07/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Công nghệ",
       image: {
         src: "/samples/sample-6.svg",
@@ -942,7 +952,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — chia sẻ thực tế UX/UI cho doanh nghiệp vừa và nhỏ.",
       date: "24/06/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Sự kiện",
       image: {
         src: "/samples/sample-7.svg",
@@ -955,7 +965,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — gallery, menu số và tích hợp đặt chỗ.",
       date: "18/06/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Ngành nghề",
       image: {
         src: "/samples/sample-8.svg",
@@ -968,7 +978,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — HTTPS, form liên hệ an toàn và chính sách dữ liệu.",
       date: "10/06/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Bảo mật",
       image: {
         src: "/samples/sample-1.svg",
@@ -981,7 +991,7 @@ export const newsContent = {
       excerpt:
         "TODO: Tóm tắt ngắn — backup, cập nhật plugin và giám sát tốc độ.",
       date: "02/06/2026",
-      href: "/#tin-tuc",
+      href: "/tin-tuc",
       category: "Bảo trì",
       image: {
         src: "/samples/sample-2.svg",
@@ -990,6 +1000,240 @@ export const newsContent = {
     },
   ] satisfies NewsItem[],
 };
+
+/**
+ * Trang listing `/tin-tuc` — danh sách tin hiện có (ref catalog `/san-pham`).
+ */
+export const newsPageContent = {
+  heading: "Tin tức",
+  description:
+    "Cập nhật xu hướng thiết kế web, SEO và vận hành số từ Nhà Web.",
+  breadcrumbHome: "Trang chủ",
+  breadcrumbCurrent: "Tin tức",
+  banner: {
+    src: "/tin-tuc/banner_tin_tuc.webp",
+    alt: "Banner trang tin tức Nhà Web",
+  },
+};
+
+/**
+ * Bài viết chi tiết tại `/tin-tuc/[slug]`.
+ * Nội dung từ `public/tin-tuc/PML Vietnam_Tin tức.docx`.
+ */
+export type NewsArticleBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; level: 2 | 3; text: string }
+  | { type: "image"; src: string; alt: string }
+  | { type: "tagline"; text: string };
+
+export type NewsArticle = {
+  slug: string;
+  meta: {
+    title: string;
+    description: string;
+  };
+  banner: {
+    src: string;
+    alt: string;
+    badge: string;
+    publishedAt: string;
+    publishedAtIso: string;
+  };
+  blocks: NewsArticleBlock[];
+};
+
+export const newsArticles: NewsArticle[] = [
+  {
+  slug: NEWS_ARTICLE_SLUG_TRENDS_2026,
+  meta: {
+    title:
+      "Xu hướng thiết kế website giới thiệu doanh nghiệp 2026: Chuyển đổi số cùng PML Vietnam",
+    description:
+      "Năm 2026 hứa hẹn nhiều thay đổi đột phá trong thiết kế website giới thiệu doanh nghiệp. PML Vietnam đồng hành chuyển đổi số với giải pháp hiện đại, tối ưu hiệu suất.",
+  },
+  banner: {
+    src: "/tin-tuc/banner_tin_tuc.webp",
+    alt: "Banner tin tức — xu hướng thiết kế website doanh nghiệp 2026",
+    badge: "Xu hướng",
+    publishedAt: "10:14 - 28/08/2026",
+    publishedAtIso: "2026-08-28T10:14:00+07:00",
+  },
+  blocks: [
+    {
+      type: "paragraph",
+      text: "Trong bối cảnh kinh doanh ngày càng số hóa, một website không chỉ là một kênh thông tin mà còn là bộ mặt, là trung tâm tương tác của doanh nghiệp với khách hàng. Đặc biệt, năm 2026 hứa hẹn nhiều thay đổi đột phá, đòi hỏi doanh nghiệp phải có một chiến lược thiết kế website giới thiệu doanh nghiệp bài bản và cập nhật xu hướng.",
+    },
+    {
+      type: "image",
+      src: "/tin-tuc/website_doanh_nghiep_pml.webp",
+      alt: "Thiết kế website giới thiệu doanh nghiệp hiện đại",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "Tại sao thiết kế website giới thiệu doanh nghiệp là ưu tiên hàng đầu trong năm 2026?",
+    },
+    {
+      type: "paragraph",
+      text: "Website chính là cửa ngõ đầu tiên mà khách hàng tiềm năng tiếp cận doanh nghiệp trong kỷ nguyên số. Đầu tư vào thiết kế website giới thiệu doanh nghiệp không chỉ là một lựa chọn mà là một yếu tố sống còn để duy trì và phát triển sự cạnh tranh.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Nâng tầm thương hiệu và uy tín",
+    },
+    {
+      type: "paragraph",
+      text: "Một website được thiết kế website giới thiệu doanh nghiệp chuyên nghiệp, với giao diện hiện đại, nội dung mạch lạc và hình ảnh sắc nét, sẽ ngay lập tức tạo dựng ấn tượng về một doanh nghiệp uy tín và đáng tin cậy. Đây là nơi bạn có thể thể hiện rõ ràng tầm nhìn, sứ mệnh, giá trị cốt lõi và câu chuyện thương hiệu của mình, giúp khách hàng hiểu rõ hơn về doanh nghiệp bạn.",
+    },
+    {
+      type: "image",
+      src: "/tin-tuc/website_doanh_nghiep_pml_1.webp",
+      alt: "Website chuyên nghiệp nâng tầm thương hiệu doanh nghiệp",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Tiếp cận khách hàng không giới hạn",
+    },
+    {
+      type: "paragraph",
+      text: "Không giống như các kênh truyền thống bị giới hạn về không gian và thời gian, website hoạt động 24/7, không biên giới. Điều này cho phép doanh nghiệp tiếp cận một lượng lớn khách hàng tiềm năng mọi lúc, mọi nơi, mở rộng thị trường và cơ hội kinh doanh. Một dịch vụ thiết kế website giới thiệu doanh nghiệp chất lượng sẽ đảm bảo khả năng hiển thị tốt trên các công cụ tìm kiếm, thu hút thêm lưu lượng truy cập.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Kênh thông tin chính thức và tin cậy",
+    },
+    {
+      type: "paragraph",
+      text: "Website là nguồn thông tin chính thức và cập nhật nhất về doanh nghiệp, sản phẩm, dịch vụ, tin tức và các hoạt động khác. Khách hàng có thể dễ dàng tìm thấy những gì họ cần mà không cần phải liên hệ trực tiếp, tiết kiệm thời gian cho cả hai bên. Thông qua việc thiết kế website giới thiệu doanh nghiệp, bạn kiểm soát hoàn toàn thông điệp truyền tải.",
+    },
+    {
+      type: "image",
+      src: "/tin-tuc/website_doanh_nghiep_pml_2.webp",
+      alt: "Website là kênh thông tin chính thức của doanh nghiệp",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Công cụ hỗ trợ kinh doanh và bán hàng",
+    },
+    {
+      type: "paragraph",
+      text: "Ngoài việc giới thiệu, website còn có thể tích hợp các tính năng hỗ trợ kinh doanh như biểu mẫu liên hệ, tư vấn trực tuyến, tích hợp cửa hàng trực tuyến (e-commerce), cổng thanh toán, v.v. Điều này không chỉ giúp tối ưu hóa quy trình bán hàng mà còn nâng cao trải nghiệm khách hàng.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Tối ưu chi phí marketing",
+    },
+    {
+      type: "paragraph",
+      text: "So với các hình thức quảng cáo truyền thống, sở hữu một website giúp doanh nghiệp tối ưu hóa chi phí marketing về lâu dài. Website là nền tảng cốt lõi cho mọi chiến dịch marketing số (SEO, SEM, Social Media, Email Marketing,….), mang lại hiệu quả bền vững và có thể đo lường được.",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "Các xu hướng nổi bật trong thiết kế website giới thiệu doanh nghiệp năm 2026",
+    },
+    {
+      type: "paragraph",
+      text: "Để website của bạn không bị lỗi thời và phát huy tối đa hiệu quả, việc nắm bắt các xu hướng thiết kế website giới thiệu doanh nghiệp mới nhất là vô cùng quan trọng.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Thiết kế mobile-first và responsive",
+    },
+    {
+      type: "paragraph",
+      text: "Với lượng người dùng di động ngày càng tăng, việc thiết kế ưu tiên trải nghiệm trên điện thoại thông minh (mobile-first) và có khả năng thích ứng linh hoạt trên mọi thiết bị (responsive design) là điều bắt buộc. Website cần hiển thị hoàn hảo trên mọi kích thước màn hình, đảm bảo trải nghiệm người dùng liền mạch.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Trải nghiệm người dùng (UX) và giao diện (UI) tối ưu",
+    },
+    {
+      type: "paragraph",
+      text: "UX/UI là yếu tố then chốt quyết định sự thành công của website. Một website có UX tốt phải dễ điều hướng, tốc độ tải nhanh, nội dung dễ đọc và hình ảnh hấp dẫn. UI cần trực quan, nhất quán với nhận diện thương hiệu và mang lại cảm giác dễ chịu cho người dùng.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Tích hợp trí tuệ nhân tạo (AI) và chatbot",
+    },
+    {
+      type: "paragraph",
+      text: "AI và chatbot sẽ tiếp tục là xu hướng mạnh mẽ, giúp cá nhân hóa trải nghiệm khách hàng, cung cấp hỗ trợ 24/7, trả lời câu hỏi, hướng dẫn tìm kiếm và thậm chí là đề xuất sản phẩm/dịch vụ phù hợp, giảm tải cho đội ngũ hỗ trợ.",
+    },
+    {
+      type: "image",
+      src: "/tin-tuc/website_doanh_nghiep_pml_3.webp",
+      alt: "Tích hợp AI và chatbot trên website doanh nghiệp",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Nội dung tương tác và đa phương tiện",
+    },
+    {
+      type: "paragraph",
+      text: "Nội dung không chỉ dừng lại ở văn bản. Video, hình ảnh động, infographics, 3D modelling và các yếu tố tương tác khác sẽ giúp thu hút sự chú ý, truyền tải thông điệp hiệu quả hơn và giữ chân người dùng lâu hơn trên website.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Tối ưu hóa hiệu suất và tốc độ tải trang",
+    },
+    {
+      type: "paragraph",
+      text: "Trong thời đại mà sự kiên nhẫn của người dùng ngày càng giảm, tốc độ tải trang là cực kỳ quan trọng. Một website chậm sẽ khiến khách hàng rời đi. Doanh nghiệp cần đảm bảo website được tối ưu hóa về hình ảnh, mã nguồn và sử dụng hosting chất lượng cao. Đây là một tiêu chí quan trọng khi lựa chọn đơn vị cung cấp giải pháp thiết kế website giới thiệu doanh nghiệp.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Bảo mật và quyền riêng tư dữ liệu",
+    },
+    {
+      type: "paragraph",
+      text: "Với những lo ngại ngày càng tăng về an ninh mạng và quyền riêng tư, website cần được trang bị chứng chỉ SSL, các biện pháp bảo mật mạnh mẽ và tuân thủ các quy định về bảo vệ dữ liệu. Sự tin cậy là yếu tố then chốt để xây dựng mối quan hệ với khách hàng.",
+    },
+    {
+      type: "heading",
+      level: 3,
+      text: "Cá nhân hóa trải nghiệm người dùng",
+    },
+    {
+      type: "paragraph",
+      text: "Tương lai của web là cá nhân hóa. Website có khả năng ghi nhớ hành vi người dùng, đề xuất nội dung hoặc sản phẩm phù hợp, tạo ra trải nghiệm độc đáo cho từng cá nhân, từ đó tăng tỷ lệ chuyển đổi và lòng trung thành của khách hàng.",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "Kết luận",
+    },
+    {
+      type: "paragraph",
+      text: "Năm 2026 là thời điểm vàng để doanh nghiệp tăng tốc chuyển đổi số, và một website chuyên nghiệp là nền tảng không thể thiếu. Việc đầu tư vào thiết kế website giới thiệu doanh nghiệp không chỉ là một khoản chi mà là một khoản đầu tư chiến lược mang lại lợi nhuận lâu dài. PML Vietnam giúp bạn có một giải pháp thiết kế website giới thiệu doanh nghiệp không chỉ đẹp về giao diện, mạnh mẽ về tính năng mà còn được tối ưu hóa cho hiệu suất và tương lai.",
+    },
+    {
+      type: "image",
+      src: "/tin-tuc/website_doanh_nghiep_pml_4.webp",
+      alt: "PML Vietnam — giải pháp website hiện đại cho doanh nghiệp",
+    },
+    {
+      type: "tagline",
+      text: "PML Vietnam - Cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh doanh và doanh nghiệp.",
+    },
+  ] satisfies NewsArticleBlock[],
+  },
+];
+
+export function getNewsArticleBySlug(slug: string): NewsArticle | undefined {
+  return newsArticles.find((article) => article.slug === slug);
+}
 
 /**
  * Section 5 — FAQ (layout ref web4s.vn).

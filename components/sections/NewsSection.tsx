@@ -1,11 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { Card } from "@/components/ui/Card";
+import { NewsCard } from "@/components/news/NewsCard";
 import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ZoomableImage } from "@/components/ui/ZoomableImage";
-import { newsContent, type NewsItem } from "@/lib/site-config";
+import { newsContent } from "@/lib/site-config";
 
 /**
  * Task 4 — Tin tức / Sự kiện mới nhất.
@@ -47,7 +45,7 @@ export function NewsSection() {
           <CarouselSlide key={`news-page-${index}`}>
             <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
               {page.map((item) => (
-                <li key={item.id} className="min-h-0">
+                <li key={item.id} className="min-h-0 h-full">
                   <NewsCard item={item} />
                 </li>
               ))}
@@ -59,43 +57,6 @@ export function NewsSection() {
   );
 }
 
-function NewsCard({ item }: { item: NewsItem }) {
-  return (
-    <Link href={item.href} className="group block h-full outline-none">
-      <Card
-        as="div"
-        className="h-full transition-colors duration-200 group-hover:border-cta"
-        media={
-          <ZoomableImage
-            src={item.image.src}
-            alt={item.image.alt}
-            width={640}
-            height={400}
-            zoom={false}
-            unoptimized={item.image.src.endsWith(".svg")}
-            className="aspect-[4/3] w-full object-cover"
-            frameClassName="aspect-[4/3] w-full"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-          />
-        }
-      >
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between gap-2 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
-            <span className="text-cta">{item.category}</span>
-            <time dateTime={toIsoDate(item.date)}>{item.date}</time>
-          </div>
-          <h3 className="text-sm font-bold leading-snug text-foreground transition-colors duration-200 group-hover:text-cta sm:text-[0.9375rem]">
-            {item.title}
-          </h3>
-          <p className="line-clamp-3 text-xs leading-relaxed text-muted sm:text-sm">
-            {item.excerpt}
-          </p>
-        </div>
-      </Card>
-    </Link>
-  );
-}
-
 function chunkItems<T>(items: T[], size: number): T[][] {
   if (size <= 0) return [items];
   const pages: T[][] = [];
@@ -103,12 +64,4 @@ function chunkItems<T>(items: T[], size: number): T[][] {
     pages.push(items.slice(i, i + size));
   }
   return pages.length ? pages : [[]];
-}
-
-/** Parse dd/MM/yyyy → yyyy-MM-dd for <time dateTime> */
-function toIsoDate(displayDate: string) {
-  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(displayDate);
-  if (!match) return undefined;
-  const [, dd, mm, yyyy] = match;
-  return `${yyyy}-${mm}-${dd}`;
 }

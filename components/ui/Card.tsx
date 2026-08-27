@@ -24,15 +24,17 @@ export function Card({
   return (
     <Tag
       className={cx(
-        "overflow-hidden rounded-2xl border border-card-border bg-card",
+        "flex flex-col overflow-hidden rounded-2xl border border-card-border bg-card",
         className,
       )}
       {...rest}
     >
       {media ? (
-        <div className="relative overflow-hidden bg-bg-secondary">{media}</div>
+        <div className="relative shrink-0 overflow-hidden bg-bg-secondary">
+          {media}
+        </div>
       ) : null}
-      <div className="p-4 sm:p-5">{children}</div>
+      <div className="flex flex-1 flex-col p-4 sm:p-5">{children}</div>
     </Tag>
   );
 }
