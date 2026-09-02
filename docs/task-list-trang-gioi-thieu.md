@@ -1,13 +1,13 @@
-# Task List – Trang Giới thiệu (About Us) – Nhà Web
+# Task List – Trang Giới thiệu (About Us) – PML Vietnam
 
 ## Section 1: Giới thiệu chung
 - [x] Build component 2 cột: **text trái – hình phải**
 - [x] Ref layout theo interdata.vn/about-us → xem cách set container width, spacing giữa 2 cột
 - [ ] **Cần xác nhận với design**: pixel size chuẩn cho hình bên phải *(tạm dùng native 395×600)*
 - [x] Responsive: xử lý stack dọc trên mobile (text trước → hình dưới)
-- [x] Nội dung text: "NHÀ WEB -  Đồng hành chuyển đổi số cùng bạn
+- [x] Nội dung text: "PML Vietnam -  Đồng hành chuyển đổi số cùng bạn
 
-    Nhà Web mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số."
+    PML Vietnam mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số."
 - [x] Image bên phải public\about-us\gioi-thieu-chung.webp
 
 ## Section 2: Tầm nhìn – Sứ mệnh – Giá trị cốt lõi
@@ -19,7 +19,7 @@
 Title: Tầm nhìn - Sứ mệnh - Giá trị cốt lõi
 
 Đội ngũ
-Nhà Web được xây dựng bởi đội ngũ có hơn 7 năm kinh nghiệm phát triển website và 17 năm kinh nghiệm kiểm thử chất lượng phần mềm tại TMA Solutions. Nền tảng chuyên môn vững chắc giúp chúng tôi tạo ra những website hiện đại, ổn định, dễ sử dụng và đáp ứng tốt nhu cầu kinh doanh thực tế.
+PML Vietnam được xây dựng bởi đội ngũ có hơn 7 năm kinh nghiệm phát triển website và 17 năm kinh nghiệm kiểm thử chất lượng phần mềm tại TMA Solutions. Nền tảng chuyên môn vững chắc giúp chúng tôi tạo ra những website hiện đại, ổn định, dễ sử dụng và đáp ứng tốt nhu cầu kinh doanh thực tế.
 
 Tầm nhìn
 
@@ -27,11 +27,11 @@ Tầm nhìn
 
 Giá trị cốt lõi
 
-Nhà Web lấy trải nghiệm người dùng làm trung tâm, không ngừng sáng tạo và đổi mới trong từng giải pháp. Chúng tôi đề cao sự trung thực, minh bạch và luôn nỗ lực hoàn thiện sản phẩm đúng với những gì đã cam kết cùng khách hàng.
+PML Vietnam lấy trải nghiệm người dùng làm trung tâm, không ngừng sáng tạo và đổi mới trong từng giải pháp. Chúng tôi đề cao sự trung thực, minh bạch và luôn nỗ lực hoàn thiện sản phẩm đúng với những gì đã cam kết cùng khách hàng.
 
 Định hướng phát triển
 
-Nhà Web hướng đến trở thành đơn vị cung cấp dịch vụ thiết kế và vận hành website tiên phong trong việc ứng dụng công nghệ hiện đại. Mục tiêu của chúng tôi là mang đến những giải pháp website hiệu quả, dễ mở rộng và có khả năng hỗ trợ doanh nghiệp vừa và nhỏ tiếp cận khách hàng, phát triển thương hiệu và thúc đẩy doanh số.
+PML Vietnam hướng đến trở thành đơn vị cung cấp dịch vụ thiết kế và vận hành website tiên phong trong việc ứng dụng công nghệ hiện đại. Mục tiêu của chúng tôi là mang đến những giải pháp website hiệu quả, dễ mở rộng và có khả năng hỗ trợ doanh nghiệp vừa và nhỏ tiếp cận khách hàng, phát triển thương hiệu và thúc đẩy doanh số.
 
 - [x] image: public\about-us\gioi-thieu-chung-tam-nhin.webp
 
@@ -41,7 +41,7 @@ Nhà Web hướng đến trở thành đơn vị cung cấp dịch vụ thiết 
 - [ ] Follow-up: hỏi khách hàng có milestone/dấu mốc nào muốn đưa vào (timeline ngang hoặc dọc)
 
 ## Section 4: Trải nghiệm dịch vụ cao cấp
-- [ ] Hiển thị title + logo Nhà Web (`Nhà_Web_logo.webp`)
+- [ ] Hiển thị title + logo PML Vietnam (`Nhà_Web_logo.webp`)
 - [ ] Build 3 banner/card ngang: **Thiết kế Website / Chăm sóc Website / Thiết kế nhận diện thương hiệu**
   - [ ] Style: nền cam, chữ trắng
   - [ ] Mỗi card click → điều hướng tới trang ngành tương ứng (cần xác định route/slug)

@@ -3,9 +3,9 @@ import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
 import { websiteServiceContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Thiết kế website | Nhà Web",
+  title: "Thiết kế website | PML Vietnam",
   description:
-    "Thiết kế website chuyên nghiệp, chuẩn SEO, giao diện hiện đại. Triển khai 5–7 ngày, dễ quản trị tại Nhà Web.",
+    "Thiết kế website chuyên nghiệp, chuẩn SEO, giao diện hiện đại. Triển khai 5–7 ngày, dễ quản trị tại PML Vietnam.",
 };
 
 export default function ThietKeWebsitePage() {

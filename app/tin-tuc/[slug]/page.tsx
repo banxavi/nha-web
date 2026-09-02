@@ -18,11 +18,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = getNewsArticleBySlug(slug);
   if (!article) {
-    return { title: "Tin tức | Nhà Web" };
+    return { title: "Tin tức | PML Vietnam" };
   }
 
   return {
-    title: `${article.meta.title} | Nhà Web`,
+    title: `${article.meta.title} | PML Vietnam`,
     description: article.meta.description,
   };
 }

@@ -23,10 +23,10 @@ export type SocialLink = {
 };
 
 export const siteContact = {
-  phoneDisplay: "0907 566 279",
-  phoneTel: "0907566279",
-  zaloUrl: "https://zalo.me/0907566279",
-  email: "nhaweb.vn@gmail.com",
+  phoneDisplay: "0908 985 844",
+  phoneTel: "0908985844",
+  zaloUrl: "https://zalo.me/0908985844",
+  email: "pmluanvn@gmail.com",
   address: "208 Trường Chinh, Phường Tân Bình, TP.Hồ Chí Minh",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=208+Tr%C6%B0%E1%BB%9Dng+Chinh,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+B%C3%ACnh,+TP.+H%E1%BB%93+Ch%C3%AD+Minh",
@@ -198,17 +198,17 @@ export const socialLinks: SocialLink[] = [
   {
     id: "facebook",
     label: "Facebook",
-    href: "https://www.facebook.com/nhaweb.vn/",
+    href: "https://www.facebook.com/pmlvietnam.vn",
   },
   {
     id: "youtube",
     label: "YouTube",
-    href: "https://www.youtube.com/@nhàweb",
+    href: "https://www.youtube.com/@pmlvietnam",
   },
   {
     id: "tiktok",
     label: "TikTok",
-    href: "https://www.tiktok.com/@nhaweb.vn",
+    href: "https://www.tiktok.com/@pmlvietnam.vn",
   },
 ];
 
@@ -231,18 +231,18 @@ export const footerContent = {
     title: "Trợ giúp",
     links: [
       { label: "Hướng dẫn sử dụng", href: "/#huong-dan" },
-      { label: "Các chính sách", href: "/#chinh-sach" },
-      { label: "Bảo mật thông tin", href: "/#bao-mat" },
+      { label: "Chính sách bảo mật", href: "/chinh-sach-bao-mat" },
+      { label: "Điều khoản sử dụng", href: "/dieu-khoan-su-dung" },
     ],
   },
   contactTitle: "Liên hệ",
   /** #14 */
   copyright:
-    "Bản quyền © 2026 | Nhà Web – Thiết kế & Vận hành website",
+    "© 2026 PML Vietnam | Giải pháp website, chuyển đổi số cùng doanh nghiệp",
 };
 
-export const logoPath = "/logo/Nha_Web_logo.png";
-export const footerLogoPath = "/logo/nha-web-trang.png";
+export const logoPath = "/logo/pmlvietnam_logo_header.webp";
+export const footerLogoPath = "/logo/pmlvietnam_logo_header.webp";
 
 /**
  * Header search — gợi ý hardcode (ref luvini.vn dropdown).
@@ -287,6 +287,11 @@ export const searchPopularSuggestions: SearchSuggestion[] = [
   },
   { id: "mau-giao-dien", label: "Mẫu giao diện website", href: "/san-pham" },
   { id: "quy-trinh", label: "Quy trình làm việc", href: "/#quy-trinh" },
+  {
+    id: "dieu-khoan",
+    label: "Điều khoản sử dụng",
+    href: "/dieu-khoan-su-dung",
+  },
 ];
 
 export const searchPromoSuggestions: SearchSuggestion[] = [
@@ -307,16 +312,16 @@ export type AboutIntroImagePosition = "left" | "right";
 
 export const aboutIntroContent = {
   id: "gioi-thieu-chung",
-  /** Brand line — hiển thị "Nhà" cam + "Web" navy */
-  brandNha: "NHÀ",
-  brandWeb: "WEB",
+  /** Brand line — hiển thị "PML" cam + "Vietnam" navy */
+  brandNha: "PML",
+  brandWeb: "VIETNAM",
   tagline: "Đồng hành chuyển đổi số cùng bạn",
   body: [
-    "Nhà Web mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số.",
+    "PML Vietnam mang đến giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm người dùng với chi phí hợp lý. Chúng tôi giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp mà không cần am hiểu công nghệ, để tập trung phát triển kinh doanh và tăng trưởng doanh số.",
   ],
   image: {
-    src: "/about-us/gioi-thieu-chung1.webp",
-    alt: "Nhà Web — giới thiệu chung, đồng hành chuyển đổi số cùng bạn",
+    src: "/about-us/pmlvietnam_gioi_thieu_chung.webp",
+    alt: "PML Vietnam — giới thiệu chung, đồng hành chuyển đổi số cùng bạn",
     width: 1360,
     height: 1032,
   },
@@ -344,12 +349,12 @@ export type AboutVisionBlock = {
 export const aboutVisionContent = {
   id: "tam-nhin-su-menh",
   title: "Tầm nhìn - Sứ mệnh - Giá trị cốt lõi",
-  /** Badge dưới title — "Nhà" cam + "Web" trắng trên nền navy (ref InterData brand chip). */
-  brandNha: "Nhà",
-  brandWeb: "Web",
+  /** Badge dưới title — "PML" cam + "Vietnam" trắng trên nền navy (ref InterData brand chip). */
+  brandNha: "PML",
+  brandWeb: "Vietnam",
   image: {
     src: "/about-us/gioi-thieu-chung-tam-nhin.webp",
-    alt: "Nhà Web — tầm nhìn, sứ mệnh và giá trị cốt lõi",
+    alt: "PML Vietnam — tầm nhìn, sứ mệnh và giá trị cốt lõi",
     width: 680,
     height: 516,
   },
@@ -359,7 +364,7 @@ export const aboutVisionContent = {
       id: "doi-ngu",
       icon: "team" as AboutVisionBlockIcon,
       title: "Đội ngũ",
-      body: "Nhà Web được xây dựng bởi đội ngũ có hơn 7 năm kinh nghiệm phát triển website và 17 năm kinh nghiệm kiểm thử chất lượng phần mềm tại TMA Solutions. Nền tảng chuyên môn vững chắc giúp chúng tôi tạo ra những website hiện đại, ổn định, dễ sử dụng và đáp ứng tốt nhu cầu kinh doanh thực tế.",
+      body: "PML Vietnam được xây dựng bởi đội ngũ có hơn 9 năm kinh nghiệm phát triển website và 19+ năm kinh nghiệm kiểm thử chất lượng phần mềm tại TMA Solutions. Nền tảng chuyên môn vững chắc giúp chúng tôi tạo ra những website hiện đại, ổn định, dễ sử dụng và đáp ứng tốt nhu cầu kinh doanh thực tế.",
     },
     {
       id: "tam-nhin",
@@ -371,20 +376,20 @@ export const aboutVisionContent = {
       id: "gia-tri",
       icon: "values" as AboutVisionBlockIcon,
       title: "Giá trị cốt lõi",
-      body: "Nhà Web lấy trải nghiệm người dùng làm trung tâm, không ngừng sáng tạo và đổi mới trong từng giải pháp. Chúng tôi đề cao sự trung thực, minh bạch và luôn nỗ lực hoàn thiện sản phẩm đúng với những gì đã cam kết cùng khách hàng.",
+      body: "PML Vietnam lấy trải nghiệm người dùng làm trung tâm, không ngừng sáng tạo và đổi mới trong từng giải pháp. Chúng tôi đề cao sự trung thực, minh bạch và luôn nỗ lực hoàn thiện sản phẩm đúng với những gì đã cam kết cùng khách hàng.",
     },
     {
       id: "dinh-huong",
       icon: "growth" as AboutVisionBlockIcon,
       title: "Định hướng phát triển",
-      body: "Nhà Web hướng đến trở thành đơn vị cung cấp dịch vụ thiết kế và vận hành website tiên phong trong việc ứng dụng công nghệ hiện đại. Mục tiêu của chúng tôi là mang đến những giải pháp website hiệu quả, dễ mở rộng và có khả năng hỗ trợ doanh nghiệp vừa và nhỏ tiếp cận khách hàng, phát triển thương hiệu và thúc đẩy doanh số.",
+      body: "PML Vietnam hướng đến trở thành đơn vị cung cấp dịch vụ thiết kế và vận hành website tiên phong trong việc ứng dụng công nghệ hiện đại. Mục tiêu của chúng tôi là mang đến những giải pháp website hiệu quả, dễ mở rộng và có khả năng hỗ trợ doanh nghiệp vừa và nhỏ tiếp cận khách hàng, phát triển thương hiệu và thúc đẩy doanh số.",
     },
   ] satisfies AboutVisionBlock[],
 };
 
 /**
  * Section 1 — Hero (text trái + banner phải).
- * Ảnh 930×429; khung desktop cao bằng cột text, mobile giữ tỉ lệ gốc.
+ * Ảnh 757×394 (`public/new-banner`); khung desktop cao bằng cột text, mobile giữ tỉ lệ gốc.
  */
 export const heroContent = {
   eyebrow: "Thiết kế & vận hành website",
@@ -402,12 +407,20 @@ export const heroContent = {
   autoplayMs: 5000,
   banners: [
     {
-      src: "/hero/hero-banner-1.webp.png",
-      alt: "Thiết kế website theo yêu cầu — Nhà Web",
+      src: "/new-banner/pmlvietnam_banner_theo_yeu_cau.webp",
+      alt: "Thiết kế website theo yêu cầu — PML Vietnam",
     },
     {
-      src: "/hero/hero-banner-2.webp.png",
-      alt: "Dịch vụ thiết kế website — Nhà Web",
+      src: "/new-banner/pmlvietnam_landing_page_university.webp",
+      alt: "Thiết kế landing page — PML Vietnam",
+    },
+    {
+      src: "/new-banner/pmlvietnam_banner_personal_branding.webp",
+      alt: "Thiết kế nhận diện thương hiệu — PML Vietnam",
+    },
+    {
+      src: "/new-banner/pmlvietnam_banner_cham_soc_website.webp",
+      alt: "Dịch vụ chăm sóc website — PML Vietnam",
     },
   ],
 };
@@ -475,7 +488,7 @@ export const processStepsContent = {
  * Layout bento: 1 card cao trái (featured) + 4 card nhỏ 2×2 bên phải.
  * Nguồn nhãn: docs/10-nhom-nganh.md (+ “Thương hiệu cá nhân” thuộc nhóm 10).
  * Click → trang `/san-pham` (lọc theo nhóm ngành).
- * TODO: thay ảnh placeholder SVG bằng mockup/ảnh thật theo nhóm ngành.
+ * Ảnh: `public/mau-website-noi-bat/{pc|mobile}/…` — pc từ `md`, mobile dưới `md`.
  */
 export type SampleItem = {
   id: string;
@@ -484,7 +497,10 @@ export type SampleItem = {
   category: string;
   /** Link tới catalog sản phẩm (có thể kèm hash nhóm ngành) */
   href: string;
+  /** Ảnh desktop (`public/mau-website-noi-bat/pc`) */
   image: { src: string; alt: string };
+  /** Ảnh mobile (`public/mau-website-noi-bat/mobile`) */
+  imageMobile: { src: string; alt: string };
   /** Card cao full-height bên trái (chỉ 1 item) */
   featured?: boolean;
 };
@@ -502,7 +518,46 @@ const INDUSTRY_GROUP_IMAGES: Partial<Record<string, string>> = {
     "/san-pham/thuong_hieu_ca_nhan/thuong_hieu_ca_nhan.webp",
 };
 
-export const websiteSamplesContent = {
+/** Ảnh section “Mẫu website nổi bật” — `pc/` từ md, `mobile/` dưới md. */
+const FEATURED_SAMPLE_IMAGES = {
+  "dich-vu-thuong-mai": {
+    pc: "/mau-website-noi-bat/pc/dich_vu_thuong_mai_pc.webp",
+    mobile: "/mau-website-noi-bat/mobile/dich_vu_thuong_mai_mobile.webp",
+  },
+  "ban-le-tmdt": {
+    pc: "/mau-website-noi-bat/pc/ban_le_thuong_mai_dien_tu_pc.webp",
+    mobile: "/mau-website-noi-bat/mobile/ban_le_thuong_mai_dien_tu_mobile.webp",
+  },
+  "xay-dung-bds": {
+    pc: "/mau-website-noi-bat/pc/xay_dung_bat_dong_san_pc.webp",
+    mobile: "/mau-website-noi-bat/mobile/xay_dung_bat_dong_san_mobile.webp",
+  },
+  "du-lich-khach-san": {
+    pc: "/mau-website-noi-bat/pc/du_lich_khach_san_pc.webp",
+    mobile: "/mau-website-noi-bat/mobile/du_lich_khach_san_mobile.webp",
+  },
+  "thuong-hieu-ca-nhan": {
+    pc: "/mau-website-noi-bat/pc/thuong_hieu_ca_nhan_pc.webp",
+    mobile: "/mau-website-noi-bat/mobile/thuong_hieu_ca_nhan_mobile.webp",
+  },
+} as const;
+
+function featuredSampleImage(
+  key: keyof typeof FEATURED_SAMPLE_IMAGES,
+  alt: string,
+) {
+  const { pc, mobile } = FEATURED_SAMPLE_IMAGES[key];
+  return {
+    image: { src: pc, alt },
+    imageMobile: { src: mobile, alt },
+  };
+}
+
+export const websiteSamplesContent: {
+  heading: string;
+  tagline: string;
+  items: SampleItem[];
+} = {
   heading: "Mẫu website nổi bật",
   tagline: "Giao diện hiện đại, chuẩn SEO, đa dạng lĩnh vực",
   /** Đúng 5 nhóm ngành: featured đứng đầu, 4 còn lại xếp 2×2 */
@@ -512,10 +567,10 @@ export const websiteSamplesContent = {
       title: "Dịch vụ & Thương mại",
       category: "Dịch vụ & Thương mại",
       href: "/san-pham#dich-vu-thuong-mai",
-      image: {
-        src: INDUSTRY_GROUP_IMAGES["dich-vu-thuong-mai"]!,
-        alt: "Mẫu website nhóm Dịch vụ & Thương mại",
-      },
+      ...featuredSampleImage(
+        "dich-vu-thuong-mai",
+        "Mẫu website nhóm Dịch vụ & Thương mại",
+      ),
       featured: true,
     },
     {
@@ -523,40 +578,40 @@ export const websiteSamplesContent = {
       title: "Bán lẻ & Thương mại điện tử",
       category: "Bán lẻ & Thương mại điện tử",
       href: "/san-pham#ban-le-tmdt",
-      image: {
-        src: INDUSTRY_GROUP_IMAGES["ban-le-tmdt"]!,
-        alt: "Mẫu website nhóm Bán lẻ & Thương mại điện tử",
-      },
+      ...featuredSampleImage(
+        "ban-le-tmdt",
+        "Mẫu website nhóm Bán lẻ & Thương mại điện tử",
+      ),
     },
     {
       id: "s3",
       title: "Xây dựng & Bất động sản",
       category: "Xây dựng & Bất động sản",
       href: "/san-pham#xay-dung-bds",
-      image: {
-        src: INDUSTRY_GROUP_IMAGES["xay-dung-bds"]!,
-        alt: "Mẫu website nhóm Xây dựng & Bất động sản",
-      },
+      ...featuredSampleImage(
+        "xay-dung-bds",
+        "Mẫu website nhóm Xây dựng & Bất động sản",
+      ),
     },
     {
       id: "s4",
       title: "Du lịch & Khách sạn",
       category: "Du lịch & Khách sạn",
       href: "/san-pham#du-lich-khach-san",
-      image: {
-        src: INDUSTRY_GROUP_IMAGES["du-lich-khach-san"]!,
-        alt: "Mẫu website nhóm Du lịch & Khách sạn",
-      },
+      ...featuredSampleImage(
+        "du-lich-khach-san",
+        "Mẫu website nhóm Du lịch & Khách sạn",
+      ),
     },
     {
       id: "s5",
       title: "Thương hiệu cá nhân",
       category: "Dịch vụ chuyên nghiệp",
       href: "/san-pham#dich-vu-chuyen-nghiep",
-      image: {
-        src: INDUSTRY_GROUP_IMAGES["dich-vu-chuyen-nghiep"]!,
-        alt: "Mẫu website Thương hiệu cá nhân",
-      },
+      ...featuredSampleImage(
+        "thuong-hieu-ca-nhan",
+        "Mẫu website Thương hiệu cá nhân",
+      ),
     },
   ] satisfies SampleItem[],
 };
@@ -687,13 +742,48 @@ const TEMPLATE_LIVE_DEMOS: Record<string, string> = {
   "Thực phẩm & Đồ uống": "https://luvini.vn",
 };
 
-/** Screenshot full-page theo nghề — hover-scroll trên trang chi tiết. */
+/** Screenshot / thumbnail theo nghề — hover-scroll trên trang chi tiết. */
 const TEMPLATE_PREVIEW_IMAGES: Record<
   string,
   { src: string; width: number; height: number }
 > = {
+  "Nhà hàng, quán ăn": {
+    src: "/san-pham/dich-vu-thuong-mai/nha_hang_quan_an.webp",
+    width: 1080,
+    height: 720,
+  },
+  "Quán cà phê, trà sữa": {
+    src: "/san-pham/dich-vu-thuong-mai/quan_cafe_tra_sua.webp",
+    width: 1080,
+    height: 720,
+  },
+  "Spa, thẩm mỹ viện": {
+    src: "/san-pham/dich-vu-thuong-mai/spa_tham_my_vien.webp",
+    width: 1080,
+    height: 720,
+  },
+  "Salon tóc, nail": {
+    src: "/san-pham/dich-vu-thuong-mai/salon_toc_nail.webp",
+    width: 1080,
+    height: 720,
+  },
+  "Dịch vụ giặt ủi": {
+    src: "/san-pham/dich-vu-thuong-mai/dich_vu_giat_ui.webp",
+    width: 1080,
+    height: 720,
+  },
+  "Trung tâm gym, yoga": {
+    src: "/san-pham/dich-vu-thuong-mai/trung_tam_gym_yoga.webp",
+    width: 1080,
+    height: 720,
+  },
   "Thực phẩm & Đồ uống": {
-    src: "/san-pham/thuc-pham-do-uong/luvini.png",
+    src: "/san-pham/ban-le-&-tmdt/luvini.png",
+    width: 1651,
+    height: 4240,
+  },
+  "Cửa hàng thời trang": {
+    src: "/san-pham/ban-le-&-tmdt/cua_hang_thoi_trang_nho.png",
     width: 1651,
     height: 4240,
   },
@@ -738,7 +828,7 @@ export const productsPageContent = {
   highlights: ["10 nhóm ngành", "Chuẩn SEO", "Bàn giao 3-5 ngày"],
   banner: {
     src: "/san-pham/banner/banner.webp",
-    alt: "Mẫu giao diện website Nhà Web trên nền cam thương hiệu",
+    alt: "Mẫu giao diện website PML Vietnam trên nền cam thương hiệu",
     /** Ảnh gốc 1920×500 — aspect lock trên desktop, catalog còn trong viewport. */
     width: 1920,
     height: 500,
@@ -793,7 +883,7 @@ export const templateDetailContent = {
       label: "Tốc độ tải trang dưới 3 giây",
     },
   ] satisfies Array<{ icon: TemplateFeatureIcon; label: string }>,
-  benefitsTitle: "Quyền lợi khi sở hữu website tại Nhà Web",
+  benefitsTitle: "Quyền lợi khi sở hữu website tại PML Vietnam",
   readyHandover: "Thời gian bàn giao: 3–5 ngày",
   customHandover: "Thời gian bàn giao: 15–20 ngày (tùy độ phức tạp)",
   benefits: [
@@ -922,7 +1012,7 @@ export const newsContent = {
     },
     {
       id: "news-5",
-      title: "Nhà Web đồng hành cùng shop Luvini & Co nâng cấp website",
+      title: "PML Vietnam đồng hành cùng shop Luvini & Co nâng cấp website",
       excerpt:
         "TODO: Tóm tắt ngắn — case study thiết kế theo ngành thời trang.",
       date: "08/07/2026",
@@ -930,7 +1020,7 @@ export const newsContent = {
       category: "Dự án",
       image: {
         src: "/samples/sample-5.svg",
-        alt: "Minh họa case study dự án Nhà Web",
+        alt: "Minh họa case study dự án PML Vietnam",
       },
     },
     {
@@ -1007,12 +1097,12 @@ export const newsContent = {
 export const newsPageContent = {
   heading: "Tin tức",
   description:
-    "Cập nhật xu hướng thiết kế web, SEO và vận hành số từ Nhà Web.",
+    "Cập nhật xu hướng thiết kế web, SEO và vận hành số từ PML Vietnam.",
   breadcrumbHome: "Trang chủ",
   breadcrumbCurrent: "Tin tức",
   banner: {
     src: "/tin-tuc/banner_tin_tuc.webp",
-    alt: "Banner trang tin tức Nhà Web",
+    alt: "Banner trang tin tức PML Vietnam",
   },
 };
 
@@ -1247,7 +1337,7 @@ export type FaqItem = {
 
 export const faqContent = {
   heading:
-    "Câu hỏi thường gặp về dịch vụ thiết kế website chuyên nghiệp tại Nhà Web",
+    "Câu hỏi thường gặp về dịch vụ thiết kế website chuyên nghiệp tại PML Vietnam",
   image: {
     src: "/update/faq-nha-web.webp",
     alt: "Minh họa FAQ — giải pháp, chi phí, quy trình thiết kế website",
@@ -1256,9 +1346,9 @@ export const faqContent = {
     {
       id: "faq-1",
       question:
-        "Bảng giá thiết kế website chuyên nghiệp tại Nhà Web giá khoảng bao nhiêu?",
+        "Bảng giá thiết kế website chuyên nghiệp tại PML Vietnam giá khoảng bao nhiêu?",
       answer:
-        "Tại Nhà Web mức giá thiết kế website trọn gói thông thường sẽ là 4.000.000 ngoài ra bạn còn được thêm rất nhiều các quà tặng hấp dẫn như: tặng tên miền, tặng SSL... Trong trường hợp những website có nhiều yêu cầu phức tạp chúng tôi sẽ luôn đưa ra mức giá mà bạn cảm thấy hài lòng nhất.",
+        "Tại PML Vietnam mức giá thiết kế website trọn gói thông thường sẽ là 4.000.000 ngoài ra bạn còn được thêm rất nhiều các quà tặng hấp dẫn như: tặng tên miền, tặng SSL... Trong trường hợp những website có nhiều yêu cầu phức tạp chúng tôi sẽ luôn đưa ra mức giá mà bạn cảm thấy hài lòng nhất.",
     },
     {
       id: "faq-2",
@@ -1271,7 +1361,7 @@ export const faqContent = {
       question:
         "Chi phí cho dịch vụ chăm sóc website thường dao động như thế nào?",
       answer:
-        "Chi phí cho dịch vụ chăm sóc website tại Nhà Web được xác định dựa trên nhiều yếu tố. Chúng tôi cung cấp nhiều gói dịch vụ với mức giá linh hoạt, giúp khách hàng dễ dàng lựa chọn gói phù hợp với ngân sách và nhu cầu của mình.",
+        "Chi phí cho dịch vụ chăm sóc website tại PML Vietnam được xác định dựa trên nhiều yếu tố. Chúng tôi cung cấp nhiều gói dịch vụ với mức giá linh hoạt, giúp khách hàng dễ dàng lựa chọn gói phù hợp với ngân sách và nhu cầu của mình.",
     },
     {
       id: "faq-4",
@@ -1283,9 +1373,9 @@ export const faqContent = {
     {
       id: "faq-5",
       question:
-        "Nhà Web có hỗ trợ hướng dẫn hoặc nhập liệu bài viết chuẩn SEO lên cho khách được không?",
+        "PML Vietnam có hỗ trợ hướng dẫn hoặc nhập liệu bài viết chuẩn SEO lên cho khách được không?",
       answer:
-        "Sau khi hoàn thành website, Nhà Web sẽ hướng dẫn khách hàng nhập liệu bài viết chuẩn SEO thông qua giao diện quản trị mà chúng tôi thiết kế người không rành về công nghệ cũng có thể làm được.",
+        "Sau khi hoàn thành website, PML Vietnam sẽ hướng dẫn khách hàng nhập liệu bài viết chuẩn SEO thông qua giao diện quản trị mà chúng tôi thiết kế người không rành về công nghệ cũng có thể làm được.",
     },
   ] satisfies FaqItem[],
 };
@@ -1299,13 +1389,13 @@ export const processImagesContent = {
   heading: "Quy trình 5 bước",
   image: {
     src: "/update/quy-trinh-5-buoc.webp",
-    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
+    alt: "Quy trình 5 bước PML Vietnam — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
     width: 1920,
     height: 902,
   },
   imageMobile: {
     src: "/process/5-step-mobile.png",
-    alt: "Quy trình 5 bước Nhà Web — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
+    alt: "Quy trình 5 bước PML Vietnam — tiếp nhận yêu cầu, lập kế hoạch, thiết kế & xây dựng, kiểm thử & tối ưu, nghiệm thu bàn giao",
     width: 864,
     height: 1821,
   },
@@ -1315,13 +1405,13 @@ export const processImagesContent = {
 export const section6Content = processImagesContent;
 
 /**
- * Section 7 — Why choose Nhà Web (format tạm ref Mắt Bão WS glass cards).
+ * Section 7 — Why choose PML Vietnam (format tạm ref Mắt Bão WS glass cards).
  * TODO: swap `backgroundImage` + icon assets khi khách cung cấp ảnh final.
  */
 export type WhyChooseItem = {
   id: string;
   label: string;
-  /** Số lớn accent (vd. "7+", "17+") — ưu tiên hơn icon */
+  /** Số lớn accent (vd. "9+", "19+") — ưu tiên hơn icon */
   highlight?: string;
   /**
    * Icon key khi không có highlight.
@@ -1338,8 +1428,8 @@ export type WhyChooseItem = {
 
 export const whyChooseContent = {
   heading:
-    "Tại sao bạn nên chọn dịch vụ thiết kế website chuyên nghiệp tại Nhà Web?",
-  subheading: "Nền tảng công nghệ tạo nên sự khác biệt của Nhà Web",
+    "Tại sao bạn nên chọn dịch vụ thiết kế website chuyên nghiệp tại PML Vietnam?",
+  subheading: "Nền tảng công nghệ tạo nên sự khác biệt của PML Vietnam",
   ctaLabel: "Đăng ký tư vấn",
   ctaHref: "/#lien-he",
   /** Collage tạm từ mẫu web — thay bằng ảnh nền section 7 khi có */
@@ -1350,13 +1440,13 @@ export const whyChooseContent = {
   items: [
     {
       id: "reason-1",
-      highlight: "7+",
-      label: "năm kinh nghiệm trong lĩnh vực thiết kế website",
+      highlight: "9+",
+      label: "Năm kinh nghiệm trong lĩnh vực thiết kế website",
     },
     {
       id: "reason-2",
-      highlight: "17+",
-      label: "năm kinh nghiệm công nghệ",
+      highlight: "19+",
+      label: "Năm kinh nghiệm công nghệ",
     },
     {
       id: "reason-3",
@@ -1394,7 +1484,6 @@ export const whyChooseContent = {
 /**
  * Mục 5 — Nhận xét khách hàng (layout card ref web4s.vn, hiển thị carousel).
  * Thêm item vào `items` khi có review mới — không cần sửa layout.
- * TODO: thay `image.src` bằng ảnh thật của khách khi có.
  */
 export type TestimonialItem = {
   id: string;
@@ -1413,9 +1502,9 @@ export const testimonialsContent = {
       name: "Phạm Minh Luân",
       role: "Chủ shop Luvini & Co",
       quote:
-        "Thiết kế của Nhà Web rất tỉ mỉ và chuyên nghiệp — màu sắc, bố cục đều phù hợp đúng ngành hàng của shop. Từ ý tưởng đến bàn giao được chăm chút, giúp Luvini & Co có diện mạo online đúng chất thương hiệu.",
+        "Thiết kế của PML Vietnam rất tỉ mỉ và chuyên nghiệp — màu sắc, bố cục đều phù hợp đúng ngành hàng của shop. Từ ý tưởng đến bàn giao được chăm chút, giúp Luvini & Co có diện mạo online đúng chất thương hiệu.",
       image: {
-        src: "/testimonials/avatar-placeholder.svg",
+        src: "/customer/khach_hang_luvini.png",
         alt: "Ảnh Phạm Minh Luân — Chủ shop Luvini & Co",
       },
     },
@@ -1445,7 +1534,7 @@ export const premiumServicesContent = {
   id: "dich-vu",
   eyebrow: "Trải nghiệm dịch vụ cao cấp ngay tại",
   /** Domain-style brand line (ref INTERDATA.VN) */
-  brandDomain: "NHAWEB.VN",
+  brandDomain: "PML VIETNAM",
   services: [
     {
       id: "thiet-ke-website",
@@ -1483,17 +1572,16 @@ export const premiumServicesContent = {
 /**
  * Shared contact form (Form 7 "Đăng ký tư vấn" + Form 8 "Đăng ký ngay").
  * Dùng qua `ContactFormModal` với `variant`: "consult" | "register".
- * TODO: swap `image` khi có ảnh Nhà Web thật.
  */
 export type ContactFormVariant = "consult" | "register";
 
 export const contactFormContent = {
   image: {
-    src: "/contact/dang-ky-tu-van.webp.png",
-    alt: "Nhà Web — dịch vụ thiết kế website chuyên nghiệp",
+    src: "/form/dang_ky_tu_van.png",
+    alt: "PML Vietnam — dịch vụ thiết kế website chuyên nghiệp",
   },
   consult: {
-    heading: "NHÀ WEB XIN CHÀO!",
+    heading: "PML VIETNAM XIN CHÀO!",
     subheading:
       "Chúng tôi luôn sẵn sàng lắng nghe và đồng hành cùng bạn trên hành trình số hóa.",
     submitLabel: "Đăng ký tư vấn",
@@ -1502,14 +1590,14 @@ export const contactFormContent = {
     /** Dùng khi mở form không gắn mẫu cụ thể */
     defaultHeading: "Đăng ký ngay",
     subheading:
-      "Để lại thông tin — Nhà Web sẽ liên hệ tư vấn và triển khai mẫu website phù hợp.",
+      "Để lại thông tin — PML Vietnam sẽ liên hệ tư vấn và triển khai mẫu website phù hợp.",
     submitLabel: "Đăng ký ngay",
   },
   fields: {
     name: { label: "Tên của bạn", placeholder: "Nguyễn Văn A", required: true },
     phone: {
       label: "Số điện thoại",
-      placeholder: "0907 566 279",
+      placeholder: "0908 985 844",
       required: true,
     },
     email: {
@@ -1525,18 +1613,18 @@ export const contactFormContent = {
   },
   successTitle: "Gửi thông tin thành công!",
   successMessage:
-    "Cảm ơn bạn đã tin tưởng Nhà Web. Chúng tôi sẽ liên hệ sớm nhất.",
+    "Cảm ơn bạn đã tin tưởng PML Vietnam. Chúng tôi sẽ liên hệ sớm nhất.",
   /** Section 8 CTA banner — mở modal register */
   section: {
     id: "lien-he",
     headline:
       "Khởi tạo Web đơn giản - Dễ vận hành - Dễ tăng trưởng doanh thu",
-    subheadline: "Thiết kế Website chuyên nghiệp tại Nhà Web ngay",
+    subheadline: "Thiết kế Website chuyên nghiệp tại PML Vietnam ngay",
     ctaLabel: "Đăng ký ngay",
     bannerColor: "#1E293B",
     illustration: {
       src: "/support/bot-remove-bg.png",
-      alt: "Bot hỗ trợ đăng ký website Nhà Web",
+      alt: "Bot hỗ trợ đăng ký website PML Vietnam",
     },
   },
 };
@@ -1552,13 +1640,13 @@ export const phoneContactContent = contactFormContent.section;
 export const lienHePageContent = {
   id: "lien-he",
   eyebrow: "Liên hệ",
-  heading: "Liên hệ Nhà Web",
+  heading: "Liên hệ PML Vietnam",
   intro:
-    "Để lại thông tin — đội ngũ Nhà Web sẽ tư vấn giải pháp website phù hợp với nhu cầu của bạn.",
-  hotlineLabel: "Hotline",
+    "Để lại thông tin, đội ngũ PML Vietnam sẽ tư vấn giải pháp website phù hợp với nhu cầu của bạn.",
+  hotlineLabel: "Hotline / Zalo",
   workingHours: "Giờ làm việc: Thứ 2 - Thứ 7: 8:00 - 18:00",
   termsLabel: "Tôi đồng ý với Thỏa thuận & Điều khoản sử dụng",
-  termsHref: "/#chinh-sach",
+  termsHref: "/dieu-khoan-su-dung",
   submitLabel: "Gửi liên hệ",
   fields: {
     name: {
@@ -1568,7 +1656,7 @@ export const lienHePageContent = {
     },
     phone: {
       label: "Số điện thoại",
-      placeholder: "0907 566 279",
+      placeholder: "0908 985 844",
       required: true,
     },
     email: {
@@ -1584,7 +1672,7 @@ export const lienHePageContent = {
   },
   successTitle: "Gửi liên hệ thành công!",
   successMessage:
-    "Cảm ơn bạn đã liên hệ Nhà Web. Chúng tôi sẽ phản hồi sớm nhất.",
+    "Cảm ơn bạn đã liên hệ PML Vietnam. Chúng tôi sẽ phản hồi sớm nhất.",
 };
 
 /**
@@ -1607,12 +1695,12 @@ export const customWebsiteHeroContent = {
   autoplayMs: 5000,
   banners: [
     {
-      src: "/hero/hero-banner-1.webp.png",
-      alt: "Thiết kế website theo yêu cầu — Nhà Web",
+      src: "/thiet-ke-web-tron-goi/banner_theo_yeu_cau.webp",
+      alt: "Thiết kế website theo yêu cầu — PML Vietnam",
     },
     {
-      src: "/hero/hero-banner-2.webp.png",
-      alt: "Dịch vụ thiết kế website độc quyền — Nhà Web",
+      src: "/thiet-ke-web-tron-goi/banner_theo_yeu_cau_en.webp",
+      alt: "Custom website design — PML Vietnam",
     },
   ],
 };
@@ -1632,7 +1720,7 @@ export const customWebsiteIntroContent = {
   note: "Tuy nhiên, do tính chất trang website được thiết kế riêng dựa trên yêu cầu của khách hàng, vậy nên cần có thời gian bàn bạc và thống nhất, lên kế hoạch cụ thể cho từng thành phần của website.",
   image: {
     src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
-    alt: "Thiết kế website theo yêu cầu — giao diện độc quyền Nhà Web",
+    alt: "Thiết kế website theo yêu cầu — giao diện độc quyền PML Vietnam",
   },
 };
 
@@ -1645,10 +1733,10 @@ export const customWebsiteCostContent = {
 export const customWebsiteDetailsContent = {
   id: "thong-tin-chi-tiet",
   heading:
-    "Thông tin chi tiết dịch vụ thiết kế website theo yêu cầu tại Nhà Web",
+    "Thông tin chi tiết dịch vụ thiết kế website theo yêu cầu tại PML Vietnam",
   items: [
-    "Tất cả các gói thiết kế website của Nhà Web bao gồm tính năng và nội dung website, tùy vào gói dịch vụ khách hàng lựa chọn mà bạn sẽ được tặng thêm tên miền quốc tế, banner, Google Maps, công cụ hỗ trợ SEO để chạy quảng cáo.",
-    "Chi phí: Khi Nhà Web nắm bắt được ý tưởng và yêu cầu của khách hàng, chúng tôi sẽ gửi bảng giá thiết kế website theo yêu cầu phù hợp nhằm tiết kiệm chi phí tối đa nhất cho khách hàng.",
+    "Tất cả các gói thiết kế website của PML Vietnam bao gồm tính năng và nội dung website, tùy vào gói dịch vụ khách hàng lựa chọn mà bạn sẽ được tặng thêm tên miền quốc tế, banner, Google Maps, công cụ hỗ trợ SEO để chạy quảng cáo.",
+    "Chi phí: Khi PML Vietnam nắm bắt được ý tưởng và yêu cầu của khách hàng, chúng tôi sẽ gửi bảng giá thiết kế website theo yêu cầu phù hợp nhằm tiết kiệm chi phí tối đa nhất cho khách hàng.",
     "Các module cơ bản được tích hợp trên website: Trang chủ, Giới thiệu, Sản phẩm, Dịch vụ, Tin tức, Đối tác, Tuyển dụng, Liên hệ,… Tuy nhiên, phụ thuộc vào lĩnh vực kinh doanh và nhu cầu mà khách hàng có thể tạo web theo yêu cầu với những tính năng riêng để phục vụ mục đích của mình.",
     "Thời gian hoàn thiện web đúng tiến độ trong hợp đồng, đảm bảo chất lượng.",
     "Chế độ bảo trì, chăm sóc khách hàng sau khi hoàn thiện Website vẫn tận tình, chu đáo.",
@@ -1658,19 +1746,19 @@ export const customWebsiteDetailsContent = {
 export const customWebsiteWhyChooseContent = {
   ...whyChooseContent,
   heading:
-    "Tại sao bạn nên chọn dịch vụ thiết kế website theo yêu cầu tại Nhà Web?",
+    "Tại sao bạn nên chọn dịch vụ thiết kế website theo yêu cầu tại PML Vietnam?",
   subheading:
-    "Nếu bạn đang khó khăn trong việc chưa biết lựa chọn một đơn vị thiết kế web theo yêu cầu giá cả phải chăng, chuyên nghiệp, vậy đến ngay với Nhà Web bạn sẽ hài lòng tuyệt đối bởi:",
+    "Nếu bạn đang khó khăn trong việc chưa biết lựa chọn một đơn vị thiết kế web theo yêu cầu giá cả phải chăng, chuyên nghiệp, vậy đến ngay với PML Vietnam bạn sẽ hài lòng tuyệt đối bởi:",
 };
 
 export const customWebsiteProcessContent = {
   ...processStepsContent,
-  heading: "Quy trình thiết kế website theo yêu cầu tại Nhà Web",
+  heading: "Quy trình thiết kế website theo yêu cầu tại PML Vietnam",
 };
 
 export const customWebsiteFaqContent = {
   heading:
-    "Câu hỏi thường gặp về thiết kế website theo yêu cầu tại Nhà Web",
+    "Câu hỏi thường gặp về thiết kế website theo yêu cầu tại PML Vietnam",
   image: faqContent.image,
   items: [
     {
@@ -1703,31 +1791,39 @@ export const customWebsiteFaqContent = {
       question:
         "Tôi chưa có ý tưởng gì cho giao diện web, vậy có tạo website được không?",
       answer:
-        "Hoàn toàn được, nếu bạn chưa có ý tưởng thiết kế giao diện hay chưa lựa chọn được màu sắc web, đội ngũ Nhà Web sẽ tư vấn giao diện/ màu sắc phù hợp với nhu cầu, lĩnh vực kinh doanh của bạn.",
+        "Hoàn toàn được, nếu bạn chưa có ý tưởng thiết kế giao diện hay chưa lựa chọn được màu sắc web, đội ngũ PML Vietnam sẽ tư vấn giao diện/ màu sắc phù hợp với nhu cầu, lĩnh vực kinh doanh của bạn.",
     },
     {
       id: "cyw-faq-6",
       question: "Tôi có thể tự chỉnh sửa/ cập nhật thông tin lên web không?",
       answer:
-        "Chắc chắn là được. Khi thiết kế website tại Nhà Web, khách hàng sẽ được cung cấp một tài khoản quản trị admin để chủ động cập nhật nội dung/ chỉnh sửa theo mong muốn của mình.",
+        "Chắc chắn là được. Khi thiết kế website tại PML Vietnam, khách hàng sẽ được cung cấp một tài khoản quản trị admin để chủ động cập nhật nội dung/ chỉnh sửa theo mong muốn của mình.",
     },
   ] satisfies FaqItem[],
 };
 
 const sharedHeroBanners = [
   {
-    src: "/hero/hero-banner-1.webp.png",
-    alt: "Thiết kế website chuyên nghiệp — Nhà Web",
+    src: "/new-banner/pmlvietnam_banner_theo_yeu_cau.webp",
+    alt: "Thiết kế website theo yêu cầu — PML Vietnam",
   },
   {
-    src: "/hero/hero-banner-2.webp.png",
-    alt: "Dịch vụ thiết kế website — Nhà Web",
+    src: "/new-banner/pmlvietnam_landing_page_university.webp",
+    alt: "Thiết kế landing page — PML Vietnam",
+  },
+  {
+    src: "/new-banner/pmlvietnam_banner_personal_branding.webp",
+    alt: "Thiết kế nhận diện thương hiệu — PML Vietnam",
+  },
+  {
+    src: "/new-banner/pmlvietnam_banner_cham_soc_website.webp",
+    alt: "Dịch vụ chăm sóc website — PML Vietnam",
   },
 ] as const;
 
 const sharedServiceImage = {
   src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
-  alt: "Thiết kế website chuyên nghiệp tại Nhà Web",
+  alt: "Thiết kế website chuyên nghiệp tại PML Vietnam",
 };
 
 /** Trang /thiet-ke-website */
@@ -1750,30 +1846,30 @@ export const websiteServiceContent = {
     id: "gioi-thieu-thiet-ke-website",
     heading: "Thiết kế website theo mẫu phù hợp với ngành nghề của bạn",
     intro:
-      "Nhà Web giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp từ kho mẫu hiện đại, tinh chỉnh theo thương hiệu — không cần am hiểu kỹ thuật, vẫn ra mắt nhanh và dễ vận hành.",
+      "PML Vietnam giúp cá nhân và doanh nghiệp sở hữu website chuyên nghiệp từ kho mẫu hiện đại, tinh chỉnh theo thương hiệu — không cần am hiểu kỹ thuật, vẫn ra mắt nhanh và dễ vận hành.",
     highlightTitle: "Website theo mẫu giúp bạn ra mắt nhanh mà vẫn chỉn chu",
     points: [
       "Chọn mẫu đúng ngành, chỉnh màu sắc – nội dung – thông tin liên hệ theo thương hiệu.",
       "Tối ưu hiển thị trên điện thoại, máy tính bảng và máy tính.",
       "Bàn giao kèm hướng dẫn quản trị để bạn tự cập nhật bài viết, sản phẩm, banner.",
     ],
-    note: "Nếu mẫu sẵn chưa đủ, đội ngũ Nhà Web sẽ tư vấn nâng cấp tính năng hoặc chuyển sang thiết kế theo yêu cầu.",
+    note: "Nếu mẫu sẵn chưa đủ, đội ngũ PML Vietnam sẽ tư vấn nâng cấp tính năng hoặc chuyển sang thiết kế theo yêu cầu.",
     image: sharedServiceImage,
   },
   cost: {
     id: "chi-phi-thiet-ke-website",
-    heading: "Chi phí thiết kế website tại Nhà Web như thế nào?",
+    heading: "Chi phí thiết kế website tại PML Vietnam như thế nào?",
     body: "Gói website theo mẫu thường bắt đầu từ mức trọn gói minh bạch (bao gồm giao diện, nội dung cơ bản và các quà tặng như tên miền, SSL tùy gói). Website phức tạp hơn sẽ được báo giá sau khi nắm nhu cầu — luôn hướng tới mức hợp lý để bạn an tâm đầu tư.",
   },
   why: {
     ...whyChooseContent,
-    heading: "Tại sao chọn Nhà Web để thiết kế website?",
+    heading: "Tại sao chọn PML Vietnam để thiết kế website?",
     subheading:
       "Triển khai nhanh, giao diện hiện đại, chuẩn SEO và đội ngũ đồng hành sau bàn giao.",
   },
   details: {
     id: "chi-tiet-thiet-ke-website",
-    heading: "Những gì bạn nhận được khi thiết kế website tại Nhà Web",
+    heading: "Những gì bạn nhận được khi thiết kế website tại PML Vietnam",
     items: [
       "Website hoàn chỉnh theo mẫu đã chọn, tinh chỉnh thương hiệu và nội dung.",
       "Tối ưu tốc độ, hiển thị đa thiết bị và nền tảng SEO kỹ thuật.",
@@ -1783,10 +1879,10 @@ export const websiteServiceContent = {
   },
   process: {
     ...processStepsContent,
-    heading: "Quy trình thiết kế website tại Nhà Web",
+    heading: "Quy trình thiết kế website tại PML Vietnam",
   },
   faq: {
-    heading: "Câu hỏi thường gặp về thiết kế website tại Nhà Web",
+    heading: "Câu hỏi thường gặp về thiết kế website tại PML Vietnam",
     image: faqContent.image,
     items: [
       {
@@ -1833,16 +1929,16 @@ export const landingPageServiceContent = {
     autoplayMs: 5000,
     banners: [
       {
-        src: "/hero/new/landing_page_flash_sale.webp",
-        alt: "Landing page flash sale — mẫu Nhà Web",
+        src: "/new-landing-page/banner_landing_page_flash_sale.webp",
+        alt: "Landing page flash sale — mẫu PML Vietnam",
       },
       {
-        src: "/hero/new/landing_page_shipper.webp",
-        alt: "Landing page giao hàng — mẫu Nhà Web",
+        src: "/new-landing-page/banner_landing_page_order.webp",
+        alt: "Landing page đặt món giao hàng — mẫu PML Vietnam",
       },
       {
-        src: "/hero/new/landing_page_university.webp",
-        alt: "Landing page trường học — mẫu Nhà Web",
+        src: "/new-landing-page/banner_landing_page_university.webp",
+        alt: "Landing page trường học — mẫu PML Vietnam",
       },
     ],
   },
@@ -1850,7 +1946,7 @@ export const landingPageServiceContent = {
     id: "gioi-thieu-landing-page",
     heading: "Landing page giúp chiến dịch quảng cáo ra lead tốt hơn",
     intro:
-      "Landing page là trang đích tập trung một hành động: đăng ký, đặt lịch, mua ngay hoặc để lại thông tin. Nhà Web thiết kế trang gọn, tải nhanh, thông điệp rõ — phù hợp chạy Facebook Ads, Google Ads.",
+      "Landing page là trang đích tập trung một hành động: đăng ký, đặt lịch, mua ngay hoặc để lại thông tin. PML Vietnam thiết kế trang gọn, tải nhanh, thông điệp rõ — phù hợp chạy Facebook Ads, Google Ads.",
     highlightTitle: "Khi nào bạn nên làm landing page thay vì website đầy đủ?",
     points: [
       "Bạn đang chạy quảng cáo và cần trang đích đúng offer, không phân tán sang nhiều menu.",
@@ -1859,24 +1955,24 @@ export const landingPageServiceContent = {
     ],
     note: "Landing page có thể đứng độc lập hoặc gắn thêm vào website hiện có của bạn.",
     image: {
-      src: "/hero/new/landing_page_flash_sale.webp",
-      alt: "Thiết kế landing page chuyển đổi — Nhà Web",
+      src: "/new-banner/pmlvietnam_landing_page_university.webp",
+      alt: "Thiết kế landing page chuyển đổi — PML Vietnam",
     },
   },
   cost: {
     id: "chi-phi-landing-page",
     heading: "Chi phí thiết kế landing page có cao không?",
-    body: "Landing page thường nhẹ hơn website nhiều trang nên chi phí và thời gian triển khai thấp hơn. Mức giá phụ thuộc số phiên bản (A/B), số form và mức độ thiết kế. Nhà Web báo giá sau khi nắm offer, đối tượng và kênh quảng cáo bạn sẽ chạy.",
+    body: "Landing page thường nhẹ hơn website nhiều trang nên chi phí và thời gian triển khai thấp hơn. Mức giá phụ thuộc số phiên bản (A/B), số form và mức độ thiết kế. PML Vietnam báo giá sau khi nắm offer, đối tượng và kênh quảng cáo bạn sẽ chạy.",
   },
   why: {
     ...whyChooseContent,
-    heading: "Tại sao chọn Nhà Web thiết kế landing page?",
+    heading: "Tại sao chọn PML Vietnam thiết kế landing page?",
     subheading:
       "Tập trung chuyển đổi, tải nhanh, CTA rõ — sẵn sàng gắn pixel và form lead.",
   },
   details: {
     id: "chi-tiet-landing-page",
-    heading: "Landing page Nhà Web gồm những gì?",
+    heading: "Landing page PML Vietnam gồm những gì?",
     items: [
       "Bố cục 1 trang: hero, lợi ích, social proof, FAQ ngắn và CTA.",
       "Form đăng ký / nút liên hệ / Zalo tùy mục tiêu chiến dịch.",
@@ -1886,7 +1982,7 @@ export const landingPageServiceContent = {
   },
   process: {
     ...processStepsContent,
-    heading: "Quy trình thiết kế landing page tại Nhà Web",
+    heading: "Quy trình thiết kế landing page tại PML Vietnam",
   },
   faq: {
     heading: "Câu hỏi thường gặp về thiết kế landing page",
@@ -1902,7 +1998,7 @@ export const landingPageServiceContent = {
         id: "lp-faq-2",
         question: "Làm landing page mất bao lâu?",
         answer:
-          "Thông thường nhanh hơn website đầy đủ. Khi nội dung và offer đã rõ, Nhà Web có thể triển khai trong vài ngày làm việc.",
+          "Thông thường nhanh hơn website đầy đủ. Khi nội dung và offer đã rõ, PML Vietnam có thể triển khai trong vài ngày làm việc.",
       },
       {
         id: "lp-faq-3",
@@ -1927,40 +2023,49 @@ export const brandingServiceContent = {
     headline: "Thiết kế nhận diện thương hiệu đồng bộ từ logo đến website",
     bullets: [
       "Logo và hệ thống nhận diện rõ ràng",
-      "Bảng màu, typography thống nhất",
+      "Bảng màu, kiểu chữ thống nhất",
       "Ứng dụng lên website, card, social",
       "Định vị thương hiệu dễ nhớ",
       "Đồng bộ trải nghiệm online – offline",
     ],
     ctaLabel: "Đăng ký tư vấn",
     autoplayMs: 5000,
-    banners: [...sharedHeroBanners],
+    banners: [
+      {
+        src: "/nhan-dien-thuong-hieu/banner_personal_branding.webp",
+        alt: "Thiết kế nhận diện thương hiệu — PML Vietnam",
+      },
+      {
+        src: "/nhan-dien-thuong-hieu/banner_personal_branding_1.webp",
+        alt: "Bộ nhận diện thương hiệu cá nhân — mẫu PML Vietnam",
+      },
+    ],
   },
   intro: {
     id: "gioi-thieu-nhan-dien",
     heading: "Nhận diện thương hiệu giúp khách nhớ bạn ngay từ lần đầu",
     intro:
-      "Nhà Web đồng hành thiết kế logo và hệ thống nhận diện để website, ấn phẩm và kênh social cùng một giọng điệu. Thương hiệu nhất quán giúp khách tin hơn và dễ lựa chọn bạn giữa thị trường.",
+      "PML Vietnam đồng hành thiết kế logo và hệ thống nhận diện để website, ấn phẩm và kênh social cùng một giọng điệu. Thương hiệu nhất quán giúp khách tin hơn và dễ lựa chọn bạn giữa thị trường.",
     highlightTitle: "Bộ nhận diện không chỉ là logo",
     points: [
       "Logo chính / đảo nền, khoảng cách an toàn và ứng dụng tối thiểu.",
-      "Bảng màu cam – navy Nhà Web có thể chuyển thành palette riêng cho thương hiệu của bạn.",
+      "Bảng màu cam – navy PML Vietnam có thể chuyển thành palette riêng cho thương hiệu của bạn.",
       "Hướng dẫn dùng trên website, fanpage, card visit và bao bì cơ bản.",
     ],
     note: "Có thể làm nhận diện độc lập hoặc kết hợp khi thiết kế website mới để tiết kiệm vòng chỉnh sửa.",
     image: {
       src: "/about-us/gioi-thieu-chung1.webp",
-      alt: "Thiết kế nhận diện thương hiệu — Nhà Web",
+      alt: "Thiết kế nhận diện thương hiệu — PML Vietnam",
     },
   },
   cost: {
     id: "chi-phi-nhan-dien",
     heading: "Chi phí thiết kế nhận diện thương hiệu",
-    body: "Mức đầu tư phụ thuộc phạm vi: chỉ logo, bộ nhận diện cơ bản, hay kèm guideline website. Nhà Web tư vấn gói phù hợp quy mô — hộ kinh doanh, shop, hay doanh nghiệp — trước khi triển khai.",
+    body: "Mức đầu tư phụ thuộc phạm vi: chỉ logo, bộ nhận diện cơ bản, hay kèm guideline website. PML Vietnam tư vấn gói phù hợp quy mô — hộ kinh doanh, shop, hay doanh nghiệp — trước khi triển khai.",
   },
   why: {
     ...whyChooseContent,
-    heading: "Tại sao làm nhận diện cùng Nhà Web?",
+    heading: "Tại sao làm nhận diện cùng PML Vietnam?",
     subheading:
       "Thiết kế để dùng được trên web và vận hành thật, không chỉ file đẹp để cất.",
   },
@@ -1971,12 +2076,11 @@ export const brandingServiceContent = {
       "Logo vector và các biến thể cần dùng trên nền sáng / tối.",
       "Bảng màu, font và nguyên tắc bố cục cơ bản.",
       "File bàn giao để đưa lên website, social và in ấn.",
-      "Tư vấn cách gắn nhận diện lên giao diện web Nhà Web.",
     ],
   },
   process: {
     ...processStepsContent,
-    heading: "Quy trình thiết kế nhận diện tại Nhà Web",
+    heading: "Quy trình thiết kế nhận diện tại PML Vietnam",
   },
   faq: {
     heading: "Câu hỏi thường gặp về thiết kế nhận diện thương hiệu",
@@ -1986,7 +2090,7 @@ export const brandingServiceContent = {
         id: "br-faq-1",
         question: "Tôi đã có logo, có cần làm lại không?",
         answer:
-          "Không bắt buộc. Nếu logo ổn, Nhà Web có thể chuẩn hóa file, bảng màu và cách dùng trên website. Làm mới khi logo khó đọc, không scale hoặc không còn đúng định vị.",
+          "Không bắt buộc. Nếu logo ổn, PML Vietnam có thể chuẩn hóa file, bảng màu và cách dùng trên website. Làm mới khi logo khó đọc, không scale hoặc không còn đúng định vị.",
       },
       {
         id: "br-faq-2",
@@ -2004,11 +2108,380 @@ export const brandingServiceContent = {
         id: "br-faq-4",
         question: "Mất bao lâu để có bộ nhận diện?",
         answer:
-          "Phụ thuộc số vòng chỉnh sửa. Sau khi chốt brief, Nhà Web đề xuất timeline cụ thể trong bước lập kế hoạch.",
+          "Phụ thuộc vào số lần chỉnh sửa. Sau khi thống nhất yêu cầu, chúng tôi sẽ đề xuất lịch trình cụ thể trong bước lập kế hoạch.",
       },
     ] satisfies FaqItem[],
   },
 };
+
+/**
+ * Bảng so sánh công việc chăm sóc website (`/cham-soc-website`).
+ * Nguồn: `public/cham-soc-website/Cham_soc_website.xlsx`.
+ */
+export type CareWorkValue =
+  | { kind: "quota"; label: string }
+  | { kind: "included" }
+  | { kind: "excluded" };
+
+export type CareWorkItem = {
+  id: string;
+  label: string;
+  values: [CareWorkValue, CareWorkValue, CareWorkValue];
+};
+
+export type CareWorkGroup = {
+  id: string;
+  title: string;
+  items: CareWorkItem[];
+};
+
+export type CareWorkPackage = {
+  id: string;
+  name: string;
+  tagline: string;
+  shortName?: string;
+  featured?: boolean;
+};
+
+export type CareWorkNote = {
+  id: string;
+  title: string;
+  body: string;
+};
+
+export type CareWorkComparisonContent = {
+  id: string;
+  heading: string;
+  tagline: string;
+  toggleShow: string;
+  toggleHide: string;
+  ctaLabel: string;
+  includedLabel: string;
+  excludedLabel: string;
+  mobileTabsLabel: string;
+  packages: [CareWorkPackage, CareWorkPackage, CareWorkPackage];
+  groups: CareWorkGroup[];
+  notes?: CareWorkNote[];
+};
+
+const careIncluded = { kind: "included" } as const satisfies CareWorkValue;
+const careExcluded = { kind: "excluded" } as const satisfies CareWorkValue;
+const careQuota = (label: string): CareWorkValue => ({ kind: "quota", label });
+const careQuotaRow = (
+  a: string,
+  b: string,
+  c: string,
+): [CareWorkValue, CareWorkValue, CareWorkValue] => [
+  careQuota(a),
+  careQuota(b),
+  careQuota(c),
+];
+
+export const careWorkComparisonContent = {
+  id: "chi-tiet-cong-viec-cham-soc",
+  heading: "Chi tiết chăm sóc website",
+  tagline:
+    "Hãy lựa chọn gói chăm sóc website phù hợp với nhu cầu của bạn.",
+  toggleShow: "Xem chi tiết công việc chăm sóc website",
+  toggleHide: "Ẩn chi tiết công việc chăm sóc website",
+  ctaLabel: "Đăng ký ngay",
+  includedLabel: "Bao gồm",
+  excludedLabel: "Không bao gồm",
+  mobileTabsLabel: "Chọn gói chăm sóc website",
+  packages: [
+    {
+      id: "standard",
+      name: "PMLCare Standard",
+      shortName: "Standard",
+      tagline: "Phù hợp với nhu cầu quản trị website cơ bản",
+    },
+    {
+      id: "pro",
+      name: "PMLCare Pro",
+      shortName: "Pro",
+      tagline: "Phù hợp với nhu cầu cập nhật và tối ưu website thường xuyên",
+      featured: true,
+    },
+    {
+      id: "premium",
+      name: "PMLCare Premium",
+      shortName: "Premium",
+      tagline: "Phù hợp với nhu cầu chăm sóc và tối ưu website chuyên sâu",
+    },
+  ],
+  groups: [
+    {
+      id: "noi-dung",
+      title: "Quản trị nội dung website",
+      items: [
+        {
+          id: "cap-nhat-noi-dung",
+          label:
+            "Cập nhật nội dung do doanh nghiệp cung cấp (Cập nhật tên website, Số điện thoại, Email, địa chỉ cho website)",
+          values: careQuotaRow("10 lần/tháng", "15 lần/tháng", "20 lần/tháng"),
+        },
+        {
+          id: "san-pham-dich-vu-tin",
+          label: "Tạo, cập nhật, xóa sản phẩm, dịch vụ, tin tức cho website",
+          values: careQuotaRow(
+            "50 đơn vị/tháng",
+            "100 đơn vị/tháng",
+            "200 đơn vị/tháng",
+          ),
+        },
+        {
+          id: "banner-quan-tri",
+          label: "Tạo, cập nhật, xóa Banner cho website theo yêu cầu",
+          values: careQuotaRow("10 lần/tháng", "15 lần/tháng", "20 lần/tháng"),
+        },
+        {
+          id: "thiet-ke-banner",
+          label: "Thiết kế banner",
+          values: careQuotaRow(
+            "3 banner/tháng",
+            "5 banner/tháng",
+            "10 banner/tháng",
+          ),
+        },
+      ],
+    },
+    {
+      id: "giao-dien",
+      title: "Quản trị giao diện website",
+      items: [
+        {
+          id: "kieu-chu",
+          label: "Thay đổi kiểu chữ toàn website",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "mau-chu-dao",
+          label: "Thay đổi màu chủ đạo trên website",
+          values: careQuotaRow("1 lần/tháng", "3 lần/tháng", "5 lần/tháng"),
+        },
+        {
+          id: "logo",
+          label: "Thay đổi Logo theo yêu cầu (Khách hàng cung cấp logo)",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "menu",
+          label: "Sắp xếp vị trí Menu chính theo yêu cầu",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "slide-banner",
+          label: "Thay đổi nội dung/hình ảnh Slide, Banner",
+          values: careQuotaRow("3 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "trang-don",
+          label: "Cập nhật phần trang đơn, nội dung giới thiệu trên trang chủ",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "trinh-bay-san-pham",
+          label: "Trình bày sản phẩm trang chủ",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "trinh-bay-dich-vu",
+          label: "Trình bày dịch vụ trang chủ",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "trinh-bay-tin-tuc",
+          label: "Trình bày tin tức trang chủ",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "an-hien-thanh-phan",
+          label: "Ẩn/Hiện các đoạn thành phần trên trang chủ",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "mang-xa-hoi",
+          label: "Thay đổi đường dẫn các nút mạng xã hội",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "footer",
+          label: "Cập nhật thông tin các cột footer",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+        {
+          id: "toi-uu-hinh",
+          label: "Tối ưu hình ảnh trên website",
+          values: careQuotaRow("2 lần/tháng", "5 lần/tháng", "10 lần/tháng"),
+        },
+      ],
+    },
+    {
+      id: "ky-thuat",
+      title: "Quản trị kỹ thuật website",
+      items: [
+        {
+          id: "bao-tri",
+          label:
+            "Quản trị, bảo trì, vận hành và xử lý các sự cố phát sinh liên quan đến website",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "sao-luu",
+          label:
+            "Sao lưu dữ liệu trên website, phục hồi dữ liệu mới nhất khi có sự cố",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "gia-han",
+          label:
+            "Nhắc nhở gia hạn dịch vụ tên miền (nếu đăng ký hàng năm) để tránh website bị gián đoạn do hết hạn",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+      ],
+    },
+    {
+      id: "seo",
+      title: "Tối ưu SEO cho website",
+      items: [
+        {
+          id: "pagespeed",
+          label: "Kiểm tra website thân thiện Google",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "analytics",
+          label: "Phân tích lượng truy cập Google Analytics",
+          values: [careExcluded, careExcluded, careIncluded],
+        },
+        {
+          id: "google-maps",
+          label: "Đăng ký thông tin doanh nghiệp trên Google Maps",
+          values: [careExcluded, careExcluded, careIncluded],
+        },
+        {
+          id: "sitemap",
+          label: "Sitemap cho website",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "chinh-sua-sitemap",
+          label: "Chỉnh sửa sitemap",
+          values: [careExcluded, careExcluded, careIncluded],
+        },
+        {
+          id: "redirect-404",
+          label: "Chuyển hướng truy cập các link lỗi 404 - không tìm thấy trang",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+      ],
+    },
+  ],
+} satisfies CareWorkComparisonContent;
+
+/**
+ * Bảng so sánh gói thiết kế logo / nhận diện (`/thiet-ke-nhan-dien-thuong-hieu`).
+ * Nguồn: `public/nhan-dien-thuong-hieu/Nhan_dien_thuong_hieu_Logo.xlsx`.
+ */
+export const brandingWorkComparisonContent = {
+  id: "chi-tiet-goi-nhan-dien",
+  heading: "Chi tiết gói nhận diện",
+  tagline:
+    "So sánh hạn mức thiết kế logo theo từng gói PMLGo. Chọn gói phù hợp quy mô thương hiệu của bạn.",
+  toggleShow: "Xem chi tiết các gói thiết kế logo",
+  toggleHide: "Ẩn chi tiết các gói thiết kế logo",
+  ctaLabel: "Đăng ký ngay",
+  includedLabel: "Bao gồm",
+  excludedLabel: "Không bao gồm",
+  mobileTabsLabel: "Chọn gói thiết kế logo",
+  packages: [
+    {
+      id: "standard",
+      name: "PMLGo Standard",
+      shortName: "Standard",
+      tagline:
+        "Thiết kế logo cơ bản, phù hợp nhu cầu xây dựng thương hiệu ban đầu.",
+    },
+    {
+      id: "pro",
+      name: "PMLGo Pro",
+      shortName: "Pro",
+      tagline:
+        "Thiết kế logo chuyên nghiệp, phù hợp doanh nghiệp cần hình ảnh thương hiệu chỉn chu.",
+      featured: true,
+    },
+    {
+      id: "premium",
+      name: "PMLGo Premium",
+      shortName: "Premium",
+      tagline:
+        "Thiết kế logo chuyên sâu, phù hợp doanh nghiệp muốn xây dựng nhận diện thương hiệu bài bản.",
+    },
+  ],
+  groups: [
+    {
+      id: "thiet-ke-logo",
+      title: "Thiết kế logo",
+      items: [
+        {
+          id: "ban-demo",
+          label: "Số bản demo",
+          values: careQuotaRow("2 bản demo", "4 bản demo", "6 bản demo"),
+        },
+        {
+          id: "thoi-gian",
+          label: "Thời gian thiết kế",
+          values: careQuotaRow("1-2 ngày", "1-2 ngày", "1-2 ngày"),
+        },
+        {
+          id: "chinh-sua",
+          label: "Số lần chỉnh sửa",
+          values: careQuotaRow(
+            "5 lần",
+            "Đến khi hài lòng",
+            "Đến khi hài lòng",
+          ),
+        },
+        {
+          id: "ho-tro-ky-thuat",
+          label: "Kỹ thuật hỗ trợ riêng",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "mockup",
+          label: "Demo kèm mockup phối cảnh",
+          values: [careIncluded, careIncluded, careIncluded],
+        },
+        {
+          id: "doi-thu",
+          label: "Kiểm tra đối thủ cùng ngành",
+          values: careQuotaRow("50 đối thủ", "100 đối thủ", "200 đối thủ"),
+        },
+        {
+          id: "ban-giao",
+          label: "File bàn giao",
+          values: careQuotaRow(
+            "PNG, JPEG, PDF, AI",
+            "PNG, JPEG, PDF, AI",
+            "PNG, JPEG, PDF, AI",
+          ),
+        },
+      ],
+    },
+  ],
+  notes: [
+    {
+      id: "an-pham",
+      title: "Ấn phẩm thương hiệu",
+      body: "Thiết kế đồng bộ các ấn phẩm thương hiệu, từ namecard, profile đến bao bì, poster và biển bảng. Giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp và nhất quán.",
+    },
+    {
+      id: "bao-ho",
+      title: "Bảo hộ thương hiệu",
+      body: "Sau khi hoàn thiện logo, PML Vietnam hỗ trợ khách hàng đăng ký quyền tác giả cho logo hoặc đăng ký nhãn hiệu tại Cục Sở hữu trí tuệ, giúp bảo vệ tài sản thương hiệu và hạn chế rủi ro bị sao chép hoặc sử dụng trái phép. Dịch vụ hỗ trợ gồm: tư vấn hình thức bảo hộ phù hợp, kiểm tra sơ bộ khả năng đăng ký, chuẩn bị hồ sơ và hỗ trợ thủ tục nộp đơn.",
+    },
+  ],
+} satisfies CareWorkComparisonContent;
 
 /** Trang /cham-soc-website */
 export const careServiceContent = {
@@ -2024,33 +2497,42 @@ export const careServiceContent = {
     ],
     ctaLabel: "Đăng ký tư vấn",
     autoplayMs: 5000,
-    banners: [...sharedHeroBanners],
+    banners: [
+      {
+        src: "/cham-soc-website/banner_cham_soc_website.webp",
+        alt: "Dịch vụ chăm sóc website — PML Vietnam",
+      },
+      {
+        src: "/cham-soc-website/banner_website_maintenance.webp",
+        alt: "Website maintenance service — PML Vietnam",
+      },
+    ],
   },
   intro: {
     id: "gioi-thieu-cham-soc",
     heading: "Website cần được chăm sóc sau ngày bàn giao",
     intro:
-      "Ra mắt chỉ là bước đầu. Nhà Web nhận chăm sóc website để site luôn chạy, an toàn và cập nhật — bạn tập trung kinh doanh, phần kỹ thuật có đội ngũ theo sát.",
+      "Ra mắt chỉ là bước đầu. PML Vietnam nhận chăm sóc website để site luôn chạy, an toàn và cập nhật — bạn tập trung kinh doanh, phần kỹ thuật có đội ngũ theo sát.",
     highlightTitle: "Chăm sóc website phù hợp khi bạn…",
     points: [
       "Không có nhân sự IT nội bộ để theo plugin, hosting, SSL, backup.",
       "Cần chỉnh banner, bài viết, form mà không muốn tự mò hệ thống.",
       "Muốn có người xử lý khi site chậm, lỗi hoặc bị spam.",
     ],
-    note: "Gói chăm sóc áp dụng cho website Nhà Web triển khai hoặc site sẵn có sau khi khảo sát.",
+    note: "Gói chăm sóc áp dụng cho website PML Vietnam triển khai hoặc site sẵn có sau khi khảo sát.",
     image: {
       src: "/update/faq-nha-web.webp",
-      alt: "Dịch vụ chăm sóc website — Nhà Web",
+      alt: "Dịch vụ chăm sóc website — PML Vietnam",
     },
   },
   cost: {
     id: "chi-phi-cham-soc",
     heading: "Chi phí chăm sóc website tính như thế nào?",
-    body: "Thường theo gói tháng / quý tùy mức hỗ trợ: chỉ bảo trì kỹ thuật, hay kèm cập nhật nội dung. Nhà Web khảo sát hiện trạng rồi đề xuất gói rõ việc — không phát sinh hạng mục mơ hồ.",
+    body: "Thường theo gói tháng / quý tùy mức hỗ trợ: chỉ bảo trì kỹ thuật, hay kèm cập nhật nội dung. PML Vietnam khảo sát hiện trạng rồi đề xuất gói rõ việc — không phát sinh hạng mục mơ hồ.",
   },
   why: {
     ...whyChooseContent,
-    heading: "Tại sao giao chăm sóc website cho Nhà Web?",
+    heading: "Tại sao giao chăm sóc website cho PML Vietnam?",
     subheading:
       "Cùng đội ngũ hiểu website của bạn — xử lý nhanh, bảo mật và vận hành ổn định.",
   },
@@ -2064,9 +2546,10 @@ export const careServiceContent = {
       "Tư vấn cải thiện tốc độ / SEO kỹ thuật khi phát hiện vấn đề.",
     ],
   },
+  workComparison: careWorkComparisonContent,
   process: {
     ...processStepsContent,
-    heading: "Quy trình nhận chăm sóc website tại Nhà Web",
+    heading: "Quy trình nhận chăm sóc website tại PML Vietnam",
   },
   faq: {
     heading: "Câu hỏi thường gặp về chăm sóc website",
@@ -2074,7 +2557,7 @@ export const careServiceContent = {
     items: [
       {
         id: "care-faq-1",
-        question: "Website không làm tại Nhà Web có thuê chăm sóc được không?",
+        question: "Website không làm tại PML Vietnam có thuê chăm sóc được không?",
         answer:
           "Có, sau khi khảo sát công nghệ và quyền truy cập. Một số hệ thống đặc thù sẽ được báo phạm vi rõ trước khi nhận.",
       },
@@ -2098,5 +2581,233 @@ export const careServiceContent = {
       },
     ] satisfies FaqItem[],
   },
+};
+
+/**
+ * Trang pháp lý `/chinh-sach-bao-mat` và `/dieu-khoan-su-dung`.
+ * Nội dung từ `public/chinh-sach-bao-mat/` và `public/dieu-khoan-su-dung/`.
+ */
+export type LegalListItem = string | { text: string; children?: string[] };
+
+export type LegalDocumentBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; level: 2 | 3; text: string; id?: string }
+  | { type: "list"; items: LegalListItem[]; ordered?: boolean }
+  | { type: "image"; src: string; alt: string }
+  | {
+      type: "note";
+      title: string;
+      text: string;
+      contacts: Array<{
+        label: string;
+        value: string;
+        href: string;
+        external?: boolean;
+      }>;
+    };
+
+export type LegalPageContent = {
+  heading: string;
+  description: string;
+  breadcrumbHome: string;
+  breadcrumbCurrent: string;
+  tocLabel?: string;
+  /** Xuống dòng trước cụm này để không tách giữa các từ (vd. "PML Vietnam"). */
+  headingLineBreakBefore?: string;
+  blocks: LegalDocumentBlock[];
+};
+
+export const privacyPolicyPageContent: LegalPageContent = {
+  heading: "Chính sách bảo mật thông tin",
+  description:
+    "Chính sách bảo mật thông tin này nhằm giúp quý khách hiểu về cách website thu thập và sử dụng thông tin cá nhân của mình thông qua việc sử dụng trang web, bao gồm mọi thông tin có thể cung cấp thông qua trang web khi khách hàng đăng ký các gói dịch vụ hoặc gửi thư góp ý về sản phẩm, dịch vụ của PML Vietnam.",
+  breadcrumbHome: "Trang chủ",
+  breadcrumbCurrent: "Chính sách bảo mật",
+  blocks: [
+    {
+      type: "image",
+      src: "/chinh-sach-bao-mat/chinh_sach_bao_mat.webp",
+      alt: "Minh họa chính sách bảo mật thông tin PML Vietnam",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "1. PML Vietnam thu thập thông tin khách hàng từ đâu?",
+    },
+    {
+      type: "list",
+      items: [
+        "Nhận thông tin khách hàng qua mẫu đăng ký thông tin được đặt trên trang chủ, và các trang con trên website của PML Vietnam.",
+        "Thông tin khách hàng để lại qua các kênh khác nhau hay thông qua các cuộc khảo sát/ đăng ký trực tiếp trên website.",
+        "Thông tin người dùng có thể bao gồm: Họ tên, số điện thoại, email, tên đơn vị/ công ty, …",
+      ],
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "2. Mục đích sử dụng thông tin khách hàng",
+    },
+    {
+      type: "list",
+      items: [
+        "Gửi thông báo liên quan đến các dịch vụ và tài khoản bao gồm: Hướng dẫn quản trị web, báo giá, thông tin gia hạn, thông báo kế hoạch bảo trì hay nâng cấp dịch vụ…",
+        "Gửi thông báo liên quan đến các sự kiện quan trọng, chương trình khuyến mãi, ưu đãi của PML Vietnam.",
+        "Giải đáp các thắc mắc hay cung cấp thông tin tư vấn dịch vụ cho khách hàng.",
+        "Khảo sát ý kiến khách hàng để nâng cao chất lượng dịch vụ hay tìm hiểu các nhu cầu khác của khách hàng.",
+      ],
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "3. Vấn đề bảo mật thông tin khách hàng",
+    },
+    {
+      type: "paragraph",
+      text: "PML Vietnam luôn hiểu rằng việc bảo mật thông tin khách hàng là vô cùng quan trọng. Chúng tôi cam kết không bán, cho thuê hay chia sẻ thông tin của khách hàng với bất kỳ ai. Tuy nhiên trong trường hợp người dùng có dấu hiệu vi phạm các điều khoản dịch vụ, chúng tôi có thể tiết lộ thông tin cá nhân để phục vụ yêu cầu của luật pháp.",
+    },
+    {
+      type: "image",
+      src: "/chinh-sach-bao-mat/chinh_sach_bao_mat_1.webp",
+      alt: "Minh họa bảo mật thông tin khách hàng PML Vietnam",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "4. Vấn đề lưu trữ dữ liệu khách hàng",
+    },
+    {
+      type: "paragraph",
+      text: "Tất cả thông tin liên quan đến khách hàng của PML Vietnam đều được lưu trữ thành cơ sở dữ liệu trên hệ thống và sẽ kết thúc khi khách hàng chấm dứt sử dụng dịch vụ tại công ty.",
+    },
+    {
+      type: "heading",
+      level: 2,
+      text: "5. Thay đổi chính sách bảo mật",
+    },
+    {
+      type: "paragraph",
+      text: "PML Vietnam có quyền thay đổi chính sách bảo mật bất cứ lúc nào, tuy nhiên trước mỗi thay đổi, chúng tôi sẽ thông báo trên trang chủ hoặc gửi email thông báo đến quý khách hàng.",
+    },
+    {
+      type: "note",
+      title: "Quý khách hàng lưu ý",
+      text: "Nếu có bất kỳ thắc mắc hay góp ý liên quan đến chính sách bảo mật của PML Vietnam, quý khách vui lòng liên hệ đến:",
+      contacts: [
+        {
+          label: "Địa chỉ",
+          value: siteContact.address,
+          href: siteContact.mapsUrl,
+          external: true,
+        },
+        {
+          label: "Hotline/Zalo",
+          value: siteContact.phoneDisplay,
+          href: `tel:${siteContact.phoneTel}`,
+        },
+        {
+          label: "Email",
+          value: siteContact.email,
+          href: `mailto:${siteContact.email}`,
+        },
+      ],
+    },
+  ],
+};
+
+/**
+ * Trang Điều khoản sử dụng (`/dieu-khoan-su-dung`).
+ * Nội dung từ `public/dieu-khoan-su-dung/Điều khoản sử dụng.docx`.
+ */
+export const termsOfUsePageContent: LegalPageContent = {
+  heading: "Điều khoản sử dụng dịch vụ của PML Vietnam",
+  headingLineBreakBefore: "PML Vietnam",
+  description:
+    "Cập nhật một số điều khoản sử dụng dịch vụ của PML Vietnam để khách hàng hiểu rõ hơn về những quy định cần tuân thủ, qua đó hỗ trợ việc hợp tác nhanh chóng, đạt hiệu quả cao hơn.",
+  breadcrumbHome: "Trang chủ",
+  breadcrumbCurrent: "Điều khoản sử dụng",
+  tocLabel: "Nội dung",
+  blocks: [
+    {
+      type: "image",
+      src: "/dieu-khoan-su-dung/dieu_khoan_su_dung.webp",
+      alt: "Điều khoản sử dụng dịch vụ PML Vietnam",
+    },
+    {
+      type: "heading",
+      level: 2,
+      id: "dieu-khoan-chung",
+      text: "I. Điều khoản chung",
+    },
+    {
+      type: "list",
+      items: [
+        "Khách hàng phải đủ 18 tuổi trở lên.",
+        "Cần cung cấp đầy đủ, chính xác các thông tin cá nhân cơ bản, địa chỉ, email… và các thông tin khác cho PML Vietnam.",
+        "Khi sử dụng dịch vụ của PML Vietnam, khách hàng cần tuân thủ các điều khoản chúng tôi đề ra.",
+        "Đối tượng áp dụng: Tất cả người sử dụng dịch vụ PML Vietnam bao gồm các cá nhân, đơn vị, tổ chức, doanh nghiệp hay đại diện của họ.",
+        "Với việc đăng ký sử dụng dịch vụ, khách hàng được coi là đồng ý với các điều khoản và bị ràng buộc bởi những điều khoản do chúng tôi đề ra.",
+        "Trong quá trình tối ưu, các điều khoản sẽ có thể thay đổi vào từng thời điểm, bên mua cần chấp nhận các điều khoản đã được sửa đổi của bên cung cấp.",
+      ],
+    },
+    {
+      type: "heading",
+      level: 2,
+      id: "dieu-khoan-su-dung-website",
+      text: "II. Điều khoản sử dụng website",
+    },
+    {
+      type: "list",
+      ordered: true,
+      items: [
+        {
+          text: "Khách hàng (bên mua) cam kết và tự chịu trách nhiệm với PML Vietnam (bên cung cấp) sử dụng website của mình vào những mục đích hợp pháp.",
+          children: [
+            "Không được sử dụng các dịch vụ Internet vào bất cứ mục đích nào liên quan đến vi phạm Pháp luật Việt Nam như phá hoại an ninh quốc gia, gây rối trật tự xã hội, làm tổn hại thuần phong mỹ tục hoặc kinh doanh bất hợp pháp.",
+            "Có trách nhiệm kiểm soát, ngăn cấm các đối tượng khác thực hiện điều đó trên trang web của mình.",
+          ],
+        },
+        "Chịu trách nhiệm về tính xác thực của các thông tin đăng tải trên website.",
+        {
+          text: "Tuân thủ các quy định của Pháp luật về quyền sở hữu công nghiệp, bản quyền.",
+          children: [
+            "Tuân thủ theo đúng các quy định của Nhà nước về sử dụng dịch vụ Internet, quảng cáo và các điều khoản đã thỏa thuận giữa bên mua và bên cung cấp dịch vụ.",
+          ],
+        },
+        "Khách hàng cần tự bảo quản mật khẩu hay thông tin liên quan đến tài khoản quản trị web của mình. Khi có sự cố liên quan như mất, để lộ các thông tin về mật khẩu/ thông tin bảo mật khác hay phát hiện các hành vi truy cập web trái phép bằng tài khoản của mình, khách hàng cần báo lại ngay cho PML Vietnam. Tuy nhiên, PML Vietnam sẽ không chịu bất kỳ trách nhiệm nào liên quan đến việc người sử dụng không giữ an toàn các tài khoản quản trị mà chúng tôi đã cung cấp.",
+        "Bên cung cấp sẽ sao lưu dữ liệu định kỳ hàng tuần, đảm bảo an toàn dữ liệu và tính thông suốt của website cho bên mua nhưng sẽ không chịu trách nhiệm bồi thường dữ liệu trong trường hợp hệ thống máy chủ bị gián đoạn do các sự cố bất khả kháng như thiên tai, hỏa hoạn, hệ thống máy chủ hỏng vật lý phần cứng.",
+        "Đối với trường hợp khách hàng khiếu nại: PML Vietnam sẽ nhanh chóng giải quyết khiếu nại của khách hàng về chất lượng dịch vụ trong phạm vi trách nhiệm của chúng tôi.",
+        "Đối với khách hàng sử dụng dịch vụ không theo đúng cam kết đã thỏa thuận, PML Vietnam có quyền đơn phương tạm ngừng hay chấm dứt cung cấp dịch vụ mà không cần phải thông báo trước.",
+      ],
+    },
+    {
+      type: "heading",
+      level: 2,
+      id: "dieu-khoan-thanh-toan",
+      text: "III. Điều khoản thanh toán",
+    },
+    {
+      type: "list",
+      ordered: true,
+      items: [
+        "Ngay sau khi ký hợp đồng, khách hàng cần có trách nhiệm thanh toán 100% các khoản phí đã ghi trong hợp đồng, có thể lựa chọn một trong số các hình thức thanh toán theo quy định. Các khoản phí sẽ không hoàn trả lại khi khách hàng tự chấm dứt hợp đồng.",
+        "Chủ động nộp phí duy trì dịch vụ trước khi hết hạn dịch vụ. Trường hợp đã đóng phí gia hạn, khách hàng cần có trách nhiệm lưu lại các chứng từ liên quan.",
+        "Mọi thay đổi liên quan đến hợp đồng phải có văn bản đề nghị đối phương trước bảy ngày để giải quyết. Toàn bộ chi phí phát sinh sau thay đổi do nguyên nhân từ bên nào thì bên đó có trách nhiệm thanh toán đầy đủ.",
+      ],
+    },
+    {
+      type: "heading",
+      level: 2,
+      id: "dieu-khoan-khac",
+      text: "IV. Một số điều khoản khác",
+    },
+    {
+      type: "list",
+      items: [
+        "Đối với trường hợp khách hàng bằng bất kỳ lý do gì không cung cấp nội dung thông tin liên quan đến website của mình cho PML Vietnam thực hiện công việc, chúng tôi sẽ không chịu trách nhiệm về tiến độ triển khai hợp đồng.",
+        "Đối với trường hợp khách hàng có nhu cầu mở rộng tính năng, tăng thêm thông số kỹ thuật trang web, hợp đồng mới sẽ được lập chi tiết dựa theo yêu cầu của khách hàng.",
+        "Đối với trường hợp xảy ra sự cố bất khả kháng như thiên tai, hỏa hoạn, thảm họa… hai bên sẽ bàn bạc và xem xét về thời gian thực hiện tiếp hợp đồng.",
+      ],
+    },
+  ],
 };
 

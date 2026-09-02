@@ -22,9 +22,9 @@ export function Footer() {
           <Link href="/" className="mb-4 block w-fit rounded-md">
             <Image
               src={footerLogoPath}
-              alt="Nhà Web"
-              width={1012}
-              height={338}
+              alt="PML Vietnam"
+              width={1995}
+              height={1038}
               className="h-[100px] w-auto object-contain"
               sizes="300px"
             />
@@ -83,7 +83,18 @@ export function Footer() {
                 className="flex items-start gap-2.5 transition-colors hover:text-cta"
               >
                 <ContactPhoneIcon />
-                <span>{siteContact.phoneDisplay}</span>
+                <span>Hotline: {siteContact.phoneDisplay}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={siteContact.zaloUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 transition-colors hover:text-cta"
+              >
+                <ContactZaloIcon />
+                <span>Zalo: {siteContact.phoneDisplay}</span>
               </a>
             </li>
             <li>
@@ -187,6 +198,26 @@ function ContactPhoneIcon() {
     >
       <path
         d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.73-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ContactZaloIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden
+      className={contactIconClass}
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <path
+        d="M8 16V8h2.6a2.4 2.4 0 0 1 0 4.8H8M14 8v8M14 12h3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

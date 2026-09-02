@@ -1,4 +1,4 @@
-# Nhà Web Homepage — Content Update (từ sheet "Trang chủ")
+# PML Vietnam Homepage — Content Update (từ sheet "Trang chủ")
 
 > File này bổ sung content THẬT cho các section trước đây đánh dấu placeholder trong `nhaweb-landing-tasks.md`. Dùng kèm file đó, không thay thế.
 
@@ -37,7 +37,7 @@
 - Nội dung mẫu đầu tiên (dùng làm placeholder/demo trong lúc chưa có thêm):
   - Tên: Phạm Minh Luân
   - Chức danh: Chủ shop Luvini & Co
-  - Nội dung: đánh giá về Nhà Web (chất lượng thiết kế, tỉ mỉ, phù hợp ngành)
+  - Nội dung: đánh giá về PML Vietnam (chất lượng thiết kế, tỉ mỉ, phù hợp ngành)
 - Nên build dạng carousel/slider vì sau này sẽ có nhiều review hơn (dù hiện tại chỉ có 1)
 
 ### 6. Logo đối tác
@@ -45,8 +45,8 @@
 - Ghi chú: sau này chọn 1 trong 2 kiểu hiển thị — full logo grid hoặc slide ngang
 
 ### 7. Form "Đăng ký tư vấn"
-- Layout: trái là hình ảnh Nhà Web (ảnh update sau, để placeholder image), phải là form
-- Heading: "NHÀ WEB XIN CHÀO!" + text phụ (luôn sẵn sàng lắng nghe...)
+- Layout: trái là hình ảnh PML Vietnam (ảnh update sau, để placeholder image), phải là form
+- Heading: "PML Vietnam XIN CHÀO!" + text phụ (luôn sẵn sàng lắng nghe...)
 - Fields:
   - Tên của bạn * (required)
   - Số điện thoại * (required)
@@ -75,7 +75,7 @@
   - Phone: 0907566279
   - Email: nhaweb.vn@gmail.com
   - Địa chỉ: 208 Trường Chinh, Phường Tân Bình, TP.Hồ Chí Minh (link Google Maps)
-- **#14 Copyright**: "Bản quyền © 2026 | Nhà Web – Thiết kế & Vận hành website", căn giữa
+- **#14 Copyright**: "Bản quyền © 2026 | PML Vietnam – Thiết kế & Vận hành website", căn giữa
 
 ---
 
@@ -91,5 +91,5 @@
 ## Còn thiếu, chưa build được ngay
 - Pixel size banner (mục 1) — chờ dev
 - Nội dung giới thiệu ngắn <200 từ (mục 2) — chờ content
-- Ảnh Nhà Web cho Form 7 & 8 — chờ ảnh
+- Ảnh PML Vietnam cho Form 7 & 8 — chờ ảnh
 - Logo đối tác (mục 6) — chờ đối tác

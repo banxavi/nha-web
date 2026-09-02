@@ -352,6 +352,8 @@ export function ServicesContactSection() {
                       Tôi đồng ý với{" "}
                       <Link
                         href={termsHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="font-semibold text-cta underline underline-offset-2 hover:text-cta/80"
                       >
                         Thỏa thuận & Điều khoản sử dụng

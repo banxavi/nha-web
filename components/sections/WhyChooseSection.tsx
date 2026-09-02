@@ -23,7 +23,7 @@ type WhyChooseSectionProps = {
 };
 
 /**
- * Section 7 — Why choose Nhà Web.
+ * Section 7 — Why choose PML Vietnam.
  * Navy mesh + glass cards 2×4.
  */
 export function WhyChooseSection({

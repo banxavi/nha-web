@@ -23,13 +23,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const item = getProductSampleById(slug);
   if (!item) {
-    return { title: "Mẫu giao diện | Nhà Web" };
+    return { title: "Mẫu giao diện | PML Vietnam" };
   }
 
   const title = `${templateDetailContent.form1TitlePrefix} ${item.title}`;
   return {
-    title: `${title} | Nhà Web`,
-    description: `${title} — giao diện hiện đại, chuẩn SEO, tốc độ tải dưới 2 giây. Xem thực tế và đăng ký tư vấn triển khai tại Nhà Web.`,
+    title: `${title} | PML Vietnam`,
+    description: `${title} — giao diện hiện đại, chuẩn SEO, tốc độ tải dưới 2 giây. Xem thực tế và đăng ký tư vấn triển khai tại PML Vietnam.`,
   };
 }
 

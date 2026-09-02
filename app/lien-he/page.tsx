@@ -3,9 +3,9 @@ import { ServicesContactSection } from "@/components/sections/ServicesContactSec
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Liên hệ | Nhà Web",
+  title: "Liên hệ | PML Vietnam",
   description:
-    "Liên hệ Nhà Web để đăng ký tư vấn thiết kế website chuyên nghiệp, chuẩn SEO. Hotline, địa chỉ và form gửi yêu cầu.",
+    "Liên hệ PML Vietnam để đăng ký tư vấn thiết kế website chuyên nghiệp, chuẩn SEO. Hotline/Zalo, địa chỉ và form gửi yêu cầu.",
 };
 
 export default function LienHePage() {

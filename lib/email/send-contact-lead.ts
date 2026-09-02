@@ -58,7 +58,7 @@ function fromAddress() {
 
   const localPart = "onboarding";
   const domain = ["resend", "dev"].join(".");
-  return `Nhà Web <${localPart}@${domain}>`;
+  return `PML Vietnam <${localPart}@${domain}>`;
 }
 
 function escapeHtml(value: string) {
@@ -76,9 +76,9 @@ function variantLabel(variant: ContactLead["variant"]) {
 
 function subjectFor(lead: ContactLead) {
   if (lead.variant === "register" && lead.selectedSample) {
-    return `[Nhà Web] Đăng ký mẫu "${lead.selectedSample}" — ${lead.name}`;
+    return `[PML Vietnam] Đăng ký mẫu "${lead.selectedSample}" — ${lead.name}`;
   }
-  return `[Nhà Web] ${variantLabel(lead.variant)} — ${lead.name}`;
+  return `[PML Vietnam] ${variantLabel(lead.variant)} — ${lead.name}`;
 }
 
 function textBody(lead: ContactLead) {
@@ -118,7 +118,7 @@ function htmlBody(lead: ContactLead) {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid #e8e4de;border-radius:12px;">
       <tr>
         <td style="padding:24px 28px 16px;border-bottom:1px solid #f1efe9;">
-          <p style="margin:0;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F97316;font-weight:700;">Nhà Web</p>
+          <p style="margin:0;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F97316;font-weight:700;">PML Vietnam</p>
           <h1 style="margin:8px 0 0;font-size:20px;color:#0B1F3A;">${escapeHtml(variantLabel(lead.variant))}</h1>
         </td>
       </tr>

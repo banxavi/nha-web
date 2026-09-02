@@ -94,12 +94,12 @@ export function HeroSection({
         </div>
 
         <div className="relative w-full lg:h-full">
-          {/* Mobile giữ tỉ lệ banner 930×429; desktop cao bằng cột text (headline → CTA) */}
+          {/* Mobile giữ tỉ lệ banner 757×394; desktop cao bằng cột text (headline → CTA) */}
           <div
-            className="relative aspect-[930/429] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_16px_48px_rgba(11,31,58,0.14)] ring-1 ring-footer/5 lg:aspect-auto lg:h-full"
+            className="relative aspect-[757/394] w-full overflow-hidden rounded-2xl border-2 border-white shadow-[0_16px_48px_rgba(11,31,58,0.14)] ring-1 ring-footer/5 lg:aspect-auto lg:h-full"
             role="region"
             aria-roledescription="carousel"
-            aria-label="Banner dịch vụ Nhà Web"
+            aria-label="Banner dịch vụ PML Vietnam"
           >
             <Carousel
               className="absolute inset-0 h-full bg-bg-secondary"

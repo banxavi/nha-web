@@ -18,17 +18,23 @@ const encodeSansExpanded = Encode_Sans_Expanded({
 });
 
 export const metadata: Metadata = {
-  title: "Nhà Web | Thiết kế & Vận hành website chuyên nghiệp",
+  title: "PML Vietnam | Giải pháp website, Chuyển đổi số cùng doanh nghiệp",
   description:
-    "Dịch vụ thiết kế & vận hành website chuyên nghiệp, chuẩn SEO tại Nhà Web.",
+    "PML Vietnam thiết kế website chuyên nghiệp, chuẩn SEO và cung cấp hệ sinh thái chuyển đổi số toàn diện, giúp doanh nghiệp bứt phá doanh thu môi trường số.",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=3", sizes: "any" },
-      { url: "/favicon.png?v=3", type: "image/png", sizes: "48x48" },
-      { url: "/logo/NhaWeb_favicon.webp?v=3", type: "image/webp" },
+      {
+        url: "/seo/pmlvietnam_favicon.webp?v=4",
+        type: "image/webp",
+      },
     ],
-    shortcut: "/favicon.ico?v=3",
-    apple: [{ url: "/apple-icon.png?v=3", sizes: "180x180", type: "image/png" }],
+    shortcut: "/seo/pmlvietnam_favicon.webp?v=4",
+    apple: [
+      {
+        url: "/seo/pmlvietnam_favicon.webp?v=4",
+        type: "image/webp",
+      },
+    ],
   },
 };
 

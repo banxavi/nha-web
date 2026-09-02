@@ -4,7 +4,7 @@ import { NewsPageBanner } from "@/components/sections/NewsPageBanner";
 import { newsPageContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: `${newsPageContent.heading} | Nhà Web`,
+  title: `${newsPageContent.heading} | PML Vietnam`,
   description: newsPageContent.description,
 };
 

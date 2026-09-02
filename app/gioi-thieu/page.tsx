@@ -4,9 +4,9 @@ import { AboutVisionSection } from "@/components/sections/AboutVisionSection";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Giới thiệu | Nhà Web",
+  title: "Giới thiệu | PML Vietnam",
   description:
-    "Nhà Web — đồng hành chuyển đổi số cùng bạn. Giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm với chi phí hợp lý.",
+    "PML Vietnam — đồng hành chuyển đổi số cùng bạn. Giải pháp thiết kế và vận hành website hiện đại, tối ưu trải nghiệm với chi phí hợp lý.",
 };
 
 export default function GioiThieuPage() {

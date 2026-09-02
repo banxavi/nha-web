@@ -174,9 +174,9 @@ export function Header() {
         >
           <Image
             src={logoPath}
-            alt="Nhà Web"
-            width={1012}
-            height={338}
+            alt="PML Vietnam"
+            width={1995}
+            height={1038}
             priority
             className={cx(
               "w-auto object-contain transition-[height] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]",

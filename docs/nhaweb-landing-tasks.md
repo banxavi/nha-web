@@ -1,4 +1,4 @@
-# Nhà Web Landing Page — Task Breakdown cho Cursor
+# PML Vietnam Landing Page — Task Breakdown cho Cursor
 
 ## 1. Setup nền tảng (làm trước tiên, mọi task sau phụ thuộc vào đây)
 
@@ -29,7 +29,7 @@
 
 - [x] ~~**Section 4**~~ — gộp vào Section 3 (5 mẫu cố định, không carousel)
 
-- [x] **Section 5** — FAQ: "CÂU HỎI THƯỜNG GẶP VỀ DỊCH VỤ THIẾT KẾ WEBSITE CHUYÊN NGHIỆP TẠI NHÀ WEB". Layout ref web4s.vn. *(tạm dùng Q&A + ảnh crop từ mẫu web4s — swap trong `faqContent` khi có bản final)*
+- [x] **Section 5** — FAQ: "CÂU HỎI THƯỜNG GẶP VỀ DỊCH VỤ THIẾT KẾ WEBSITE CHUYÊN NGHIỆP TẠI PML Vietnam". Layout ref web4s.vn. *(tạm dùng Q&A + ảnh crop từ mẫu web4s — swap trong `faqContent` khi có bản final)*
 
 - [x] **Section 6** — Text giữa "Quy trình 5 bước" + text trái / hình phải (placeholder). ⚠️ Content/hình final CHƯA CÓ — swap `section6Content` khi có.
 

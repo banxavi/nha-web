@@ -3,9 +3,9 @@ import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
 import { landingPageServiceContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Thiết kế Landing page | Nhà Web",
+  title: "Thiết kế Landing page | PML Vietnam",
   description:
-    "Thiết kế landing page tập trung chuyển đổi, tối ưu tốc độ, sẵn sàng chạy quảng cáo tại Nhà Web.",
+    "Thiết kế landing page tập trung chuyển đổi, tối ưu tốc độ, sẵn sàng chạy quảng cáo tại PML Vietnam.",
 };
 
 export default function ThietKeLandingPagePage() {

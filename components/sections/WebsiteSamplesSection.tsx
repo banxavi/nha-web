@@ -66,17 +66,25 @@ function SampleCard({ item }: { item: SampleItem }) {
         aria-label={`Xem mẫu website ${item.title}`}
       >
         <ZoomableImage
+          src={item.imageMobile.src}
+          alt={item.imageMobile.alt}
+          fill
+          zoom={false}
+          className="object-cover md:hidden"
+          frameClassName="absolute inset-0 h-full w-full md:hidden"
+          sizes="100vw"
+        />
+        <ZoomableImage
           src={item.image.src}
           alt={item.image.alt}
           fill
           zoom={false}
-          unoptimized={item.image.src.endsWith(".svg")}
-          className="object-cover"
-          frameClassName="absolute inset-0 h-full w-full"
+          className="object-cover hidden md:block"
+          frameClassName="absolute inset-0 h-full w-full hidden md:block"
           sizes={
             item.featured
               ? "(max-width: 1024px) 100vw, 33vw"
-              : "(max-width: 1024px) 50vw, 33vw"
+              : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           }
         />
 

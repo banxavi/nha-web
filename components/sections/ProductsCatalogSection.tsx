@@ -1,9 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { ProductSampleCard } from "@/components/products/ProductSampleCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { productsPageContent } from "@/lib/site-config";
+import {
+  getUrlHashServerSnapshot,
+  getUrlHashSnapshot,
+  matchCatalogGroupId,
+  notifyUrlHashListeners,
+  subscribeToUrlHash,
+} from "@/lib/url-hash";
 
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
@@ -17,23 +24,15 @@ function cx(...parts: Array<string | undefined | false>) {
 export function ProductsCatalogSection() {
   const { allFilterLabel, emptyFilterMessage, registerHint, filters, items } =
     productsPageContent;
-  const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
-
-  useEffect(() => {
-    function syncFromHash() {
-      const hash = window.location.hash.replace(/^#/, "");
-      if (!hash) {
-        setActiveGroupId(null);
-        return;
-      }
-      const matched = filters.some((filter) => filter.id === hash);
-      setActiveGroupId(matched ? hash : null);
-    }
-
-    syncFromHash();
-    window.addEventListener("hashchange", syncFromHash);
-    return () => window.removeEventListener("hashchange", syncFromHash);
-  }, [filters]);
+  const hashId = useSyncExternalStore(
+    subscribeToUrlHash,
+    getUrlHashSnapshot,
+    getUrlHashServerSnapshot,
+  );
+  const activeGroupId = matchCatalogGroupId(
+    hashId,
+    filters.map((filter) => filter.id),
+  );
 
   const visibleItems = useMemo(() => {
     if (!activeGroupId) return items;
@@ -41,12 +40,20 @@ export function ProductsCatalogSection() {
   }, [activeGroupId, items]);
 
   function selectFilter(groupId: string | null) {
-    setActiveGroupId(groupId);
     if (groupId) {
-      window.history.replaceState(null, "", `#${groupId}`);
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${window.location.search}#${groupId}`,
+      );
     } else {
-      window.history.replaceState(null, "", window.location.pathname);
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${window.location.search}`,
+      );
     }
+    notifyUrlHashListeners();
   }
 
   return (
@@ -113,11 +120,11 @@ function FilterChip({
     <button
       type="button"
       role="tab"
-      id={id ? `filter-${id}` : "filter-all"}
+      id={id ?? "filter-all"}
       aria-selected={active}
       onClick={onClick}
       className={cx(
-        "rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors sm:px-4 sm:text-sm",
+        "scroll-mt-24 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors sm:px-4 sm:text-sm",
         active
           ? "border-cta bg-cta text-white"
           : "border-card-border bg-bg-primary text-foreground hover:border-cta hover:text-cta",

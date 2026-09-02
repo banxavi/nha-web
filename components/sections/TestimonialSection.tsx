@@ -84,7 +84,7 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
       >
         “
       </span>
-      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-xl bg-bg-secondary ring-2 ring-cta/15 sm:h-20 sm:w-20">
+      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-full bg-bg-secondary ring-2 ring-cta/15 sm:h-20 sm:w-20">
         <Image
           src={item.image.src}
           alt={item.image.alt}

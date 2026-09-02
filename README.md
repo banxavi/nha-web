@@ -1,4 +1,4 @@
-# Nhà Web
+# PML Vietnam
 
 Next.js landing page deployed to Cloudflare Workers via `@opennextjs/cloudflare`.
 
@@ -18,7 +18,7 @@ Contact forms POST to `/api/contact`, which sends mail via Resend.
 1. Copy `.env.example` → `.env.local` (Next.js) and `.dev.vars` (Wrangler preview).
 2. Set `RESEND_API_KEY` from the Resend dashboard. Do not commit it.
 3. `CONTACT_TO_EMAIL` is the inbox that receives leads. Resend's test sender can only deliver to the Resend account email until you verify a domain.
-4. Optional `RESEND_FROM_EMAIL` — after verifying `nhaweb.vn` on Resend, set it to `Nhà Web <noreply@nhaweb.vn>` and point `CONTACT_TO_EMAIL` at `hoangviet1807@gmail.com`.
+4. Optional `RESEND_FROM_EMAIL` — after verifying `nhaweb.vn` on Resend, set it to `PML Vietnam <noreply@nhaweb.vn>` and point `CONTACT_TO_EMAIL` at `hoangviet1807@gmail.com`.
 
 For Cloudflare production, put the API key in an encrypted Worker secret (not `wrangler.jsonc`):
 

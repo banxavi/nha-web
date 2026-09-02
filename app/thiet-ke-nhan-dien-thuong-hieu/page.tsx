@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
-import { brandingServiceContent } from "@/lib/site-config";
+import { brandingServiceContent, brandingWorkComparisonContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Thiết kế nhận diện thương hiệu | Nhà Web",
+  title: "Thiết kế nhận diện thương hiệu | PML Vietnam",
   description:
-    "Thiết kế logo và nhận diện thương hiệu đồng bộ với website — màu sắc, typography, ứng dụng thực tế tại Nhà Web.",
+    "Thiết kế logo và nhận diện thương hiệu đồng bộ với website — màu sắc, typography, ứng dụng thực tế tại PML Vietnam.",
 };
 
 export default function ThietKeNhanDienThuongHieuPage() {
@@ -19,6 +19,7 @@ export default function ThietKeNhanDienThuongHieuPage() {
         why: brandingServiceContent.why,
         whySectionId: "tai-sao-chon-nhan-dien",
         details: brandingServiceContent.details,
+        workComparison: brandingWorkComparisonContent,
         process: brandingServiceContent.process,
         processSectionId: "quy-trinh-nhan-dien",
         showProcessImages: false,

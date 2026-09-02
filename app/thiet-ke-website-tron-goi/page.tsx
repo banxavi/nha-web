@@ -11,9 +11,9 @@ import {
 } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Thiết kế website theo yêu cầu | Nhà Web",
+  title: "Thiết kế website theo yêu cầu | PML Vietnam",
   description:
-    "Thiết kế website theo yêu cầu, độc quyền giao diện — tùy chỉnh tính năng, tối ưu trải nghiệm, dễ mở rộng cùng Nhà Web.",
+    "Thiết kế website theo yêu cầu, độc quyền giao diện — tùy chỉnh tính năng, tối ưu trải nghiệm, dễ mở rộng cùng PML Vietnam.",
 };
 
 export default function ThietKeWebsiteTheoYeuCauPage() {

@@ -1,3 +1,4 @@
+import { CareWorkDetailsSection } from "@/components/sections/CareWorkDetailsSection";
 import {
   CustomWebsiteCostSection,
   CustomWebsiteDetailsSection,
@@ -19,6 +20,7 @@ import {
   type WhyChooseSectionContent,
 } from "@/components/sections/WhyChooseSection";
 import { Reveal } from "@/components/ui/Reveal";
+import type { CareWorkComparisonContent } from "@/lib/site-config";
 
 export type ServiceLandingContent = {
   hero: HeroContent;
@@ -28,7 +30,8 @@ export type ServiceLandingContent = {
   cost: ServiceCostContent;
   why: WhyChooseSectionContent;
   whySectionId: string;
-  details: ServiceDetailsContent;
+  details?: ServiceDetailsContent;
+  workComparison?: CareWorkComparisonContent;
   process: ProcessSectionContent;
   processSectionId: string;
   showProcessImages?: boolean;
@@ -54,9 +57,16 @@ export function ServiceLandingPage({ content }: { content: ServiceLandingContent
       <Reveal>
         <WhyChooseSection content={content.why} sectionId={content.whySectionId} />
       </Reveal>
-      <Reveal>
-        <CustomWebsiteDetailsSection content={content.details} />
-      </Reveal>
+      {content.details ? (
+        <Reveal>
+          <CustomWebsiteDetailsSection content={content.details} />
+        </Reveal>
+      ) : null}
+      {content.workComparison ? (
+        <Reveal>
+          <CareWorkDetailsSection content={content.workComparison} />
+        </Reveal>
+      ) : null}
       <Reveal>
         <ProcessSection
           content={content.process}
