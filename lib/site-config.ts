@@ -400,7 +400,6 @@ export const heroContent = {
     "Hiển thị tốt trên mọi thiết bị",
     "Giao diện quản trị dễ sử dụng",
     "Sử dụng công nghệ hiện đại, bền vững",
-    "Đội ngũ hỗ trợ chuyên nghiệp",
   ],
   ctaLabel: "Đăng ký ngay!",
   ctaHref: "/#lien-he",
@@ -1719,7 +1718,7 @@ export const customWebsiteIntroContent = {
   ],
   note: "Tuy nhiên, do tính chất trang website được thiết kế riêng dựa trên yêu cầu của khách hàng, vậy nên cần có thời gian bàn bạc và thống nhất, lên kế hoạch cụ thể cho từng thành phần của website.",
   image: {
-    src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
+    src: "/thiet-ke-web-tron-goi/banner_theo_yeu_cau.webp",
     alt: "Thiết kế website theo yêu cầu — giao diện độc quyền PML Vietnam",
   },
 };
@@ -1822,7 +1821,7 @@ const sharedHeroBanners = [
 ] as const;
 
 const sharedServiceImage = {
-  src: "/services/thiet-ke-website-theo-yeu-cau.webp.png",
+  src: "/new-banner/pmlvietnam_landing_page_university.webp",
   alt: "Thiết kế website chuyên nghiệp tại PML Vietnam",
 };
 
@@ -1955,7 +1954,7 @@ export const landingPageServiceContent = {
     ],
     note: "Landing page có thể đứng độc lập hoặc gắn thêm vào website hiện có của bạn.",
     image: {
-      src: "/new-banner/pmlvietnam_landing_page_university.webp",
+      src: "/new-landing-page/banner_landing_page_flash_sale.webp",
       alt: "Thiết kế landing page chuyển đổi — PML Vietnam",
     },
   },
@@ -2054,7 +2053,7 @@ export const brandingServiceContent = {
     ],
     note: "Có thể làm nhận diện độc lập hoặc kết hợp khi thiết kế website mới để tiết kiệm vòng chỉnh sửa.",
     image: {
-      src: "/about-us/gioi-thieu-chung1.webp",
+      src: "/about-us/pmlvietnam_gioi_thieu_chung.webp",
       alt: "Thiết kế nhận diện thương hiệu — PML Vietnam",
     },
   },
@@ -2159,6 +2158,8 @@ export type CareWorkComparisonContent = {
   includedLabel: string;
   excludedLabel: string;
   mobileTabsLabel: string;
+  /** Ghi đè subheading Form 8 khi đăng ký từ bảng so sánh gói */
+  registerSubheading?: string;
   packages: [CareWorkPackage, CareWorkPackage, CareWorkPackage];
   groups: CareWorkGroup[];
   notes?: CareWorkNote[];
@@ -2188,6 +2189,8 @@ export const careWorkComparisonContent = {
   includedLabel: "Bao gồm",
   excludedLabel: "Không bao gồm",
   mobileTabsLabel: "Chọn gói chăm sóc website",
+  registerSubheading:
+    "Để lại thông tin — PML Vietnam sẽ liên hệ tư vấn và triển khai gói chăm sóc website phù hợp.",
   packages: [
     {
       id: "standard",
@@ -2391,6 +2394,8 @@ export const brandingWorkComparisonContent = {
   toggleShow: "Xem chi tiết các gói thiết kế logo",
   toggleHide: "Ẩn chi tiết các gói thiết kế logo",
   ctaLabel: "Đăng ký ngay",
+  registerSubheading:
+    "Để lại thông tin - PML Vietnam sẽ liên hệ tư vấn và triển khai gói logo phù hợp.",
   includedLabel: "Bao gồm",
   excludedLabel: "Không bao gồm",
   mobileTabsLabel: "Chọn gói thiết kế logo",
@@ -2521,7 +2526,7 @@ export const careServiceContent = {
     ],
     note: "Gói chăm sóc áp dụng cho website PML Vietnam triển khai hoặc site sẵn có sau khi khảo sát.",
     image: {
-      src: "/update/faq-nha-web.webp",
+      src: "/cham-soc-website/banner_cham_soc_website.webp",
       alt: "Dịch vụ chăm sóc website — PML Vietnam",
     },
   },

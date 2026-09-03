@@ -32,6 +32,7 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
     includedLabel,
     excludedLabel,
     mobileTabsLabel,
+    registerSubheading,
     packages,
     groups,
     notes,
@@ -55,7 +56,11 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
   }
 
   function registerPackage(name: string) {
-    openContactForm({ variant: "register", selectedSample: name });
+    openContactForm({
+      variant: "register",
+      selectedSample: name,
+      subheading: registerSubheading,
+    });
   }
 
   return (

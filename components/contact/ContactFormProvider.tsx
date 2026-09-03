@@ -14,6 +14,7 @@ import type { ContactFormVariant } from "@/lib/site-config";
 type OpenContactFormOptions = {
   variant?: ContactFormVariant;
   selectedSample?: string;
+  subheading?: string;
 };
 
 type ContactFormContextValue = {
@@ -27,10 +28,12 @@ export function ContactFormProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState<ContactFormVariant>("register");
   const [selectedSample, setSelectedSample] = useState<string | undefined>();
+  const [subheading, setSubheading] = useState<string | undefined>();
 
   const openContactForm = useCallback((options?: OpenContactFormOptions) => {
     setVariant(options?.variant ?? "register");
     setSelectedSample(options?.selectedSample);
+    setSubheading(options?.subheading);
     setOpen(true);
   }, []);
 
@@ -51,6 +54,7 @@ export function ContactFormProvider({ children }: { children: ReactNode }) {
         onClose={closeContactForm}
         variant={variant}
         selectedSample={selectedSample}
+        subheading={subheading}
       />
     </ContactFormContext.Provider>
   );

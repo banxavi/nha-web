@@ -58,14 +58,14 @@ export function CustomWebsiteIntroSection({
           {intro}
         </p>
 
-        <div className="mx-auto mt-10 grid max-w-5xl items-center gap-8 lg:mt-14 lg:grid-cols-2 lg:gap-12">
-          <div className="relative mx-auto aspect-[3/2] w-full max-w-lg overflow-hidden rounded-2xl border border-card-border bg-bg-secondary shadow-[0_12px_40px_rgba(11,31,58,0.08)] lg:max-w-none">
+        <div className="mx-auto mt-10 grid items-center gap-8 lg:mt-14 lg:grid-cols-2 lg:gap-12">
+          <div className="relative mx-auto aspect-[25/13] w-full max-w-lg overflow-hidden rounded-2xl border border-card-border bg-bg-secondary shadow-[0_12px_40px_rgba(11,31,58,0.08)] lg:max-w-none">
             <ZoomableImage
               src={image.src}
               alt={image.alt}
               fill
               zoom={false}
-              className="object-cover object-top"
+              className="object-cover object-center"
               frameClassName="absolute inset-0 h-full w-full"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

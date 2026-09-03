@@ -102,7 +102,7 @@ function DocumentBlock({ block }: { block: LegalDocumentBlock }) {
   switch (block.type) {
     case "paragraph":
       return (
-        <p className="max-w-[65ch] text-sm leading-relaxed text-foreground/85 sm:text-[0.9375rem] sm:leading-[1.75]">
+        <p className="text-sm leading-relaxed text-foreground/85 sm:text-[0.9375rem] sm:leading-[1.75]">
           {block.text}
         </p>
       );

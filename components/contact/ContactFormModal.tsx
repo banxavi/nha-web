@@ -22,6 +22,8 @@ export type ContactFormModalProps = {
   variant: ContactFormVariant;
   /** Form 8 — tên mẫu web vừa chọn (vd. "Shop thời trang online") */
   selectedSample?: string;
+  /** Ghi đè subheading mặc định (vd. gói logo / nhận diện) */
+  subheading?: string;
 };
 
 type FormErrors = {
@@ -57,6 +59,7 @@ export function ContactFormModal({
   onClose,
   variant,
   selectedSample,
+  subheading: subheadingOverride,
 }: ContactFormModalProps) {
   const titleId = useId();
   const nameId = useId();
@@ -86,7 +89,7 @@ export function ContactFormModal({
         ? contactFormContent.consult.heading
         : contactFormContent.register.defaultHeading;
 
-  const subheading = copy.subheading;
+  const subheading = subheadingOverride ?? copy.subheading;
 
   useEffect(() => {
     const dialog = dialogRef.current;
