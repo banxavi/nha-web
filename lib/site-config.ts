@@ -427,7 +427,7 @@ export const heroContent = {
 
 /**
  * Section 2 — Quy trình 5 bước (icon + title blocks).
- * Icon crop từ `public/process/image.png` → `public/process/icons/`.
+ * Icon lấy từ `public/process/icons/`.
  * Ảnh infographic chuyển sang `processImagesContent` / ProcessImagesSection.
  */
 export type ProcessStepItem = {
