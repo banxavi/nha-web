@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { trackLead } from "@/lib/analytics/track";
 import { lienHePageContent, siteContact } from "@/lib/site-config";
 
 type FormErrors = {
@@ -117,6 +118,7 @@ export function ServicesContactSection() {
         return;
       }
 
+      trackLead({ variant: "consult" });
       setSubmitted(true);
       setName("");
       setPhone("");

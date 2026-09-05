@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { ContactFormModal } from "@/components/contact/ContactFormModal";
+import { trackConsultationClick } from "@/lib/analytics/track";
 import type { ContactFormVariant } from "@/lib/site-config";
 
 type OpenContactFormOptions = {
@@ -31,10 +32,12 @@ export function ContactFormProvider({ children }: { children: ReactNode }) {
   const [subheading, setSubheading] = useState<string | undefined>();
 
   const openContactForm = useCallback((options?: OpenContactFormOptions) => {
-    setVariant(options?.variant ?? "register");
+    const nextVariant = options?.variant ?? "register";
+    setVariant(nextVariant);
     setSelectedSample(options?.selectedSample);
     setSubheading(options?.subheading);
     setOpen(true);
+    trackConsultationClick({ variant: nextVariant });
   }, []);
 
   const closeContactForm = useCallback(() => {

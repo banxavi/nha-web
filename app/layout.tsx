@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Encode_Sans_Expanded } from "next/font/google";
+import { Suspense } from "react";
+import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { ContactFormProvider } from "@/components/contact/ContactFormProvider";
 import { FloatingContactIcons } from "@/components/layout/FloatingContactIcons";
 import { Footer } from "@/components/layout/Footer";
@@ -21,6 +24,11 @@ export const metadata: Metadata = {
   title: "PML Vietnam | Giải pháp website, Chuyển đổi số cùng doanh nghiệp",
   description:
     "PML Vietnam thiết kế website chuyên nghiệp, chuẩn SEO và cung cấp hệ sinh thái chuyển đổi số toàn diện, giúp doanh nghiệp bứt phá doanh thu môi trường số.",
+  verification: {
+    other: {
+      "facebook-domain-verification": "r262f7qlxtdsgl8nf4kg4vekrjzxn6",
+    },
+  },
   icons: {
     icon: [
       {
@@ -49,6 +57,10 @@ export default function RootLayout({
       className={`${encodeSansExpanded.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-bg-primary text-foreground">
+        <AnalyticsScripts />
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
         <ContactFormProvider>
           <Header />
           <main className="flex flex-1 flex-col">

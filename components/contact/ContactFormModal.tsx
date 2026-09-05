@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { trackLead } from "@/lib/analytics/track";
 import {
   contactFormContent,
   siteContact,
@@ -171,6 +172,7 @@ export function ContactFormModal({
         return;
       }
 
+      trackLead({ variant });
       setSubmitted(true);
     } catch {
       setErrors({ form: "Không gửi được. Vui lòng thử lại sau." });
