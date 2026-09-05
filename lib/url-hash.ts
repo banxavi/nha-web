@@ -37,6 +37,7 @@ export function matchCatalogGroupId(
 export function createUrlHashStore(target: UrlHashTarget): UrlHashStore {
   const listeners = new Set<() => void>();
   let patched = false;
+
   let originalPush: UrlHashTarget["history"]["pushState"];
   let originalReplace: UrlHashTarget["history"]["replaceState"];
 
@@ -44,19 +45,30 @@ export function createUrlHashStore(target: UrlHashTarget): UrlHashStore {
     listeners.forEach((listener) => listener());
   }
 
+  function scheduleNotify() {
+    queueMicrotask(() => {
+      notify();
+    });
+  }
+
   function ensurePatched() {
     if (patched) return;
+
     patched = true;
+
     originalPush = target.history.pushState.bind(target.history);
     originalReplace = target.history.replaceState.bind(target.history);
+
     target.history.pushState = (data, unused, url) => {
       originalPush(data, unused, url);
-      notify();
+      scheduleNotify();
     };
+
     target.history.replaceState = (data, unused, url) => {
       originalReplace(data, unused, url);
-      notify();
+      scheduleNotify();
     };
+
     target.addEventListener("hashchange", notify);
     target.addEventListener("popstate", notify);
   }

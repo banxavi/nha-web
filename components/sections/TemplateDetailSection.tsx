@@ -79,35 +79,35 @@ export function TemplateDetailSection({
           </ol>
         </nav>
 
-        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-8">
-          <div className="lg:sticky lg:top-28">
-            <div className="overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:items-stretch lg:gap-x-8 lg:gap-y-5">
+          <div className="min-h-0 lg:col-start-1 lg:row-start-1 lg:h-full">
+            <div className="overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm lg:h-full">
               <HoverScrollPreview
                 src={item.image.src}
                 alt={item.image.alt}
                 width={item.image.width ?? 1600}
                 height={item.image.height ?? 1200}
                 unoptimized={item.image.src.endsWith(".svg")}
-                frameClassName="max-h-[22rem] w-full bg-bg-secondary sm:max-h-[28rem] lg:max-h-[37.5rem]"
+                frameClassName="max-h-[22rem] w-full bg-bg-secondary sm:max-h-[28rem] lg:h-full lg:max-h-none"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 priority
               />
             </div>
-
-            <div className="mt-4 flex justify-center">
-              <a
-                href={item.liveUrl ?? copy.liveViewFallbackUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={liveViewClassName()}
-              >
-                {copy.liveViewLabel}
-                <ExternalLinkIcon />
-              </a>
-            </div>
           </div>
 
-          <div>
+          <div className="flex justify-center lg:col-start-1 lg:row-start-2">
+            <a
+              href={item.liveUrl ?? copy.liveViewFallbackUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={liveViewClassName()}
+            >
+              {copy.liveViewLabel}
+              <ExternalLinkIcon />
+            </a>
+          </div>
+
+          <div className="lg:col-start-2 lg:row-start-1">
             <h1
               id="template-detail-heading"
               className="text-2xl font-bold leading-tight text-foreground sm:text-3xl"
@@ -153,21 +153,21 @@ export function TemplateDetailSection({
                 </ul>
               </article>
             </div>
+          </div>
 
-            <div className="mt-5 flex justify-center">
-              <CTAButton
-                type="button"
-                className="w-1/2 min-w-[10.5rem] px-5 py-3.5 text-sm font-bold sm:text-base"
-                onClick={() =>
-                  openContactForm({
-                    variant: "consult",
-                    selectedSample: formTitle,
-                  })
-                }
-              >
-                {copy.consultLabel}
-              </CTAButton>
-            </div>
+          <div className="flex justify-center lg:col-start-2 lg:row-start-2">
+            <CTAButton
+              type="button"
+              className="w-1/2 min-w-[10.5rem] px-5 py-3.5 text-sm font-bold sm:text-base"
+              onClick={() =>
+                openContactForm({
+                  variant: "consult",
+                  selectedSample: formTitle,
+                })
+              }
+            >
+              {copy.consultLabel}
+            </CTAButton>
           </div>
         </div>
 

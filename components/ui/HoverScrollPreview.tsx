@@ -116,7 +116,7 @@ export function HoverScrollPreview({
     >
       <div
         ref={mediaRef}
-        className="will-change-transform"
+        className="min-h-full will-change-transform"
         style={{
           transform: `translate3d(0, -${offset}px, 0)`,
           transition: `transform ${durationMs}ms ${offset > 0 ? "linear" : "ease-out"}`,
@@ -133,7 +133,7 @@ export function HoverScrollPreview({
           onLoad={() => {
             if (activeRef.current) startScroll();
           }}
-          className="h-auto w-full select-none"
+          className="h-auto min-h-full w-full select-none object-cover object-top"
         />
       </div>
     </div>

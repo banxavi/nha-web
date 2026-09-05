@@ -51,7 +51,7 @@ test("matchCatalogGroupId reads category id from hash", () => {
   assert.equal(matchCatalogGroupId("#unknown", GROUP_IDS), null);
 });
 
-test("store notifies when pushState sets a hash (Next.js Link)", () => {
+test("store notifies when pushState sets a hash (Next.js Link)", async () => {
   const win = createMockWindow();
   const store = createUrlHashStore(win);
   let snapshot = store.getSnapshot();
@@ -61,6 +61,7 @@ test("store notifies when pushState sets a hash (Next.js Link)", () => {
 
   assert.equal(snapshot, "");
   win.history.pushState(null, "", "/san-pham#dich-vu-thuong-mai");
+  await Promise.resolve();
   assert.equal(snapshot, "dich-vu-thuong-mai");
   assert.equal(
     matchCatalogGroupId(snapshot, GROUP_IDS),
@@ -70,7 +71,7 @@ test("store notifies when pushState sets a hash (Next.js Link)", () => {
   unsubscribe();
 });
 
-test("store notifies when replaceState clears the hash", () => {
+test("store notifies when replaceState clears the hash", async () => {
   const win = createMockWindow("#ban-le-tmdt");
   const store = createUrlHashStore(win);
   let snapshot = store.getSnapshot();
@@ -79,6 +80,7 @@ test("store notifies when replaceState clears the hash", () => {
   });
 
   win.history.replaceState(null, "", "/san-pham");
+  await Promise.resolve();
   assert.equal(snapshot, "");
   assert.equal(matchCatalogGroupId(snapshot, GROUP_IDS), null);
 });
