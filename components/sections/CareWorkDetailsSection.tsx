@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState } from "react";
 import { useContactForm } from "@/components/contact/ContactFormProvider";
 import { CTAButton } from "@/components/ui/CTAButton";
@@ -15,13 +16,18 @@ function cx(...parts: Array<string | undefined | false>) {
 
 type CareWorkDetailsSectionProps = {
   content: CareWorkComparisonContent;
+  /** `false` — luôn hiện bảng, ẩn nút xem/ẩn chi tiết. */
+  showToggle?: boolean;
 };
 
 /**
  * Bảng so sánh hạng mục chăm sóc website theo gói PMLCare.
  * Desktop: accordion theo nhóm + 3 cột gói. Dưới lg: chọn gói rồi xem hạn mức.
  */
-export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps) {
+export function CareWorkDetailsSection({
+  content,
+  showToggle = true,
+}: CareWorkDetailsSectionProps) {
   const {
     id,
     heading,
@@ -36,6 +42,8 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
     packages,
     groups,
     notes,
+    flat = false,
+    footerLink,
   } = content;
 
   const uid = useId();
@@ -77,31 +85,33 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
         />
 
         <div className="mx-auto mt-8 max-w-6xl sm:mt-10">
-          <button
-            type="button"
-            aria-expanded={tableOpen}
-            aria-controls={tableId}
-            onClick={() => setTableOpen((open) => !open)}
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-card-border bg-card px-4 py-3 text-sm font-semibold text-foreground transition-colors duration-300 hover:border-cta hover:bg-card active:scale-[0.99] sm:py-3.5 sm:text-[0.9375rem]"
-          >
-            <span
-              className="inline-flex h-5 w-5 items-center justify-center text-cta"
-              aria-hidden
+          {showToggle ? (
+            <button
+              type="button"
+              aria-expanded={tableOpen}
+              aria-controls={tableId}
+              onClick={() => setTableOpen((open) => !open)}
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-card-border bg-card px-4 py-3 text-sm font-semibold text-foreground transition-colors duration-300 hover:border-cta hover:bg-card active:scale-[0.99] sm:py-3.5 sm:text-[0.9375rem]"
             >
-              {tableOpen ? <MinusIcon /> : <PlusIcon />}
-            </span>
-            {toggleLabel}
-          </button>
+              <span
+                className="inline-flex h-5 w-5 items-center justify-center text-cta"
+                aria-hidden
+              >
+                {tableOpen ? <MinusIcon /> : <PlusIcon />}
+              </span>
+              {toggleLabel}
+            </button>
+          ) : null}
 
           <div
             id={tableId}
             className={cx(
               "grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-              tableOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+              !showToggle || tableOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
             )}
           >
             <div className="overflow-hidden">
-              <div className="pt-6 sm:pt-8">
+              <div className={showToggle ? "pt-6 sm:pt-8" : undefined}>
                 <div className="lg:hidden">
                   <MobilePackageTabs
                     packages={packages}
@@ -115,18 +125,25 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
                         <p className="text-base font-bold text-foreground">
                           {packages[activePackage].name}
                         </p>
+                        {packages[activePackage].price ? (
+                          <p className="mt-2 text-lg font-bold text-cta">
+                            {packages[activePackage].price}
+                          </p>
+                        ) : null}
                         <p className="mt-1 text-sm leading-relaxed text-muted">
                           {packages[activePackage].tagline}
                         </p>
-                        <CTAButton
-                          type="button"
-                          className="mt-4 w-full"
-                          onClick={() =>
-                            registerPackage(packages[activePackage].name)
-                          }
-                        >
-                          {ctaLabel}
-                        </CTAButton>
+                        {ctaLabel ? (
+                          <CTAButton
+                            type="button"
+                            className="mt-4 w-full"
+                            onClick={() =>
+                              registerPackage(packages[activePackage].name)
+                            }
+                          >
+                            {ctaLabel}
+                          </CTAButton>
+                        ) : null}
                       </div>
                     ) : null}
                     <GroupList
@@ -138,6 +155,7 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
                       excludedLabel={excludedLabel}
                       packageIndex={activePackage}
                       packageNames={packages.map((item) => item.name)}
+                      flat={flat}
                     />
                   </div>
                 </div>
@@ -158,18 +176,25 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
                         <p className="text-sm font-bold text-foreground">
                           {pkg.name}
                         </p>
+                        {pkg.price ? (
+                          <p className="mt-2 text-base font-bold text-cta">
+                            {pkg.price}
+                          </p>
+                        ) : null}
                         <p className="mt-2 text-xs leading-relaxed text-muted">
                           {pkg.tagline}
                         </p>
-                        <div className="mt-auto w-full pt-4">
-                          <CTAButton
-                            type="button"
-                            className="w-full text-xs sm:text-sm"
-                            onClick={() => registerPackage(pkg.name)}
-                          >
-                            {ctaLabel}
-                          </CTAButton>
-                        </div>
+                        {ctaLabel ? (
+                          <div className="mt-auto w-full pt-4">
+                            <CTAButton
+                              type="button"
+                              className="w-full text-xs sm:text-sm"
+                              onClick={() => registerPackage(pkg.name)}
+                            >
+                              {ctaLabel}
+                            </CTAButton>
+                          </div>
+                        ) : null}
                       </div>
                     ))}
                   </div>
@@ -184,10 +209,23 @@ export function CareWorkDetailsSection({ content }: CareWorkDetailsSectionProps)
                       excludedLabel={excludedLabel}
                       packageNames={packages.map((item) => item.name)}
                       featuredIndex={packages.findIndex((item) => item.featured)}
+                      flat={flat}
                     />
                   </div>
                 </div>
               </div>
+
+              {footerLink ? (
+                <p className="mt-6 text-center text-sm leading-relaxed text-foreground/80 sm:text-[0.9375rem]">
+                  {footerLink.prefix}
+                  <Link
+                    href={footerLink.href}
+                    className="font-semibold text-cta underline underline-offset-2 hover:text-cta/80"
+                  >
+                    {footerLink.linkLabel}
+                  </Link>
+                </p>
+              ) : null}
 
               {notes?.length ? (
                 <ul className="mt-6 space-y-3" role="list">
@@ -224,6 +262,7 @@ type GroupListProps = {
   packageNames: string[];
   packageIndex?: number;
   featuredIndex?: number;
+  flat?: boolean;
 };
 
 function GroupList({
@@ -236,8 +275,30 @@ function GroupList({
   packageIndex,
   packageNames,
   featuredIndex = -1,
+  flat = false,
 }: GroupListProps) {
   const mobile = packageIndex !== undefined;
+  const items = flat ? groups.flatMap((group) => group.items) : null;
+
+  if (items) {
+    return (
+      <ul role="list">
+        {items.map((item, itemIndex) => (
+          <ComparisonRow
+            key={item.id}
+            item={item}
+            itemIndex={itemIndex}
+            mobile={mobile}
+            packageIndex={packageIndex}
+            packageNames={packageNames}
+            includedLabel={includedLabel}
+            excludedLabel={excludedLabel}
+            featuredIndex={featuredIndex}
+          />
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <ul role="list">
@@ -285,55 +346,17 @@ function GroupList({
               <div className="overflow-hidden">
                 <ul role="list">
                   {group.items.map((item, itemIndex) => (
-                    <li
+                    <ComparisonRow
                       key={item.id}
-                      className={cx(
-                        "border-t border-card-border",
-                        itemIndex % 2 === 0 ? "bg-bg-secondary/40" : "bg-card",
-                      )}
-                    >
-                      {mobile ? (
-                        <div className="grid gap-2 px-4 py-3.5 sm:px-5">
-                          <p className="text-sm leading-relaxed text-foreground/85">
-                            {item.label}
-                          </p>
-                          <div className="text-sm font-semibold text-foreground">
-                            <ValueCell
-                              value={
-                                item.values[packageIndex] ?? {
-                                  kind: "excluded",
-                                }
-                              }
-                              packageName={packageNames[packageIndex] ?? ""}
-                              includedLabel={includedLabel}
-                              excludedLabel={excludedLabel}
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-[minmax(16rem,1.35fr)_repeat(3,minmax(0,1fr))]">
-                          <p className="px-4 py-3.5 text-sm leading-relaxed text-foreground/85 sm:px-5">
-                            {item.label}
-                          </p>
-                          {item.values.map((value, valueIndex) => (
-                            <div
-                              key={`${item.id}-${packageNames[valueIndex]}`}
-                              className={cx(
-                                "flex items-center justify-center border-l border-card-border px-3 py-3.5 text-center text-sm font-semibold text-foreground",
-                                valueIndex === featuredIndex && "bg-cta/5",
-                              )}
-                            >
-                              <ValueCell
-                                value={value}
-                                packageName={packageNames[valueIndex] ?? ""}
-                                includedLabel={includedLabel}
-                                excludedLabel={excludedLabel}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </li>
+                      item={item}
+                      itemIndex={itemIndex}
+                      mobile={mobile}
+                      packageIndex={packageIndex}
+                      packageNames={packageNames}
+                      includedLabel={includedLabel}
+                      excludedLabel={excludedLabel}
+                      featuredIndex={featuredIndex}
+                    />
                   ))}
                 </ul>
               </div>
@@ -342,6 +365,81 @@ function GroupList({
         );
       })}
     </ul>
+  );
+}
+
+function ComparisonRow({
+  item,
+  itemIndex,
+  mobile,
+  packageIndex,
+  packageNames,
+  includedLabel,
+  excludedLabel,
+  featuredIndex,
+}: {
+  item: CareWorkComparisonContent["groups"][number]["items"][number];
+  itemIndex: number;
+  mobile: boolean;
+  packageIndex?: number;
+  packageNames: string[];
+  includedLabel: string;
+  excludedLabel: string;
+  featuredIndex: number;
+}) {
+  return (
+    <li
+      className={cx(
+        "border-t border-card-border",
+        item.highlight
+          ? "bg-cta/10"
+          : itemIndex % 2 === 0
+            ? "bg-bg-secondary/40"
+            : "bg-card",
+      )}
+    >
+      {mobile ? (
+        <div className="grid gap-2 px-4 py-3.5 sm:px-5">
+          <p className="text-sm leading-relaxed text-foreground/85">
+            {item.label}
+          </p>
+          <div className="text-sm font-semibold text-foreground">
+            <ValueCell
+              value={
+                item.values[packageIndex ?? 0] ?? {
+                  kind: "excluded",
+                }
+              }
+              packageName={packageNames[packageIndex ?? 0] ?? ""}
+              includedLabel={includedLabel}
+              excludedLabel={excludedLabel}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-[minmax(16rem,1.35fr)_repeat(3,minmax(0,1fr))]">
+          <p className="px-4 py-3.5 text-sm font-semibold leading-relaxed text-foreground/85 sm:px-5">
+            {item.label}
+          </p>
+          {item.values.map((value, valueIndex) => (
+            <div
+              key={`${item.id}-${packageNames[valueIndex]}`}
+              className={cx(
+                "flex items-center justify-center border-l border-card-border px-3 py-3.5 text-center text-sm font-semibold text-foreground",
+                valueIndex === featuredIndex && !item.highlight && "bg-cta/5",
+              )}
+            >
+              <ValueCell
+                value={value}
+                packageName={packageNames[valueIndex] ?? ""}
+                includedLabel={includedLabel}
+                excludedLabel={excludedLabel}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </li>
   );
 }
 

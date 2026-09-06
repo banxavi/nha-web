@@ -4,12 +4,10 @@ import { Suspense } from "react";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { ContactFormProvider } from "@/components/contact/ContactFormProvider";
+import { DefaultPageExtras } from "@/components/layout/DefaultPageExtras";
 import { FloatingContactIcons } from "@/components/layout/FloatingContactIcons";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { PhoneContactSection } from "@/components/sections/PhoneContactSection";
-import { PremiumServicesSection } from "@/components/sections/PremiumServicesSection";
-import { Reveal } from "@/components/ui/Reveal";
 import "./globals.css";
 
 /* Closest free alternative to Surt Expanded (perpetualny.com) — có subset Vietnamese */
@@ -21,7 +19,7 @@ const encodeSansExpanded = Encode_Sans_Expanded({
 });
 
 export const metadata: Metadata = {
-  title: "PML Vietnam | Giải pháp website, Chuyển đổi số cùng doanh nghiệp",
+  title: "PML Vietnam | Giải pháp, Chuyển đổi số cùng doanh nghiệp",
   description:
     "PML Vietnam thiết kế website chuyên nghiệp, chuẩn SEO và cung cấp hệ sinh thái chuyển đổi số toàn diện, giúp doanh nghiệp bứt phá doanh thu môi trường số.",
   verification: {
@@ -65,12 +63,7 @@ export default function RootLayout({
           <Header />
           <main className="flex flex-1 flex-col">
             {children}
-            <Reveal>
-              <PremiumServicesSection />
-            </Reveal>
-            <Reveal>
-              <PhoneContactSection />
-            </Reveal>
+            <DefaultPageExtras />
           </main>
           <Footer />
           <FloatingContactIcons />

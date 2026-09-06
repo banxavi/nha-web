@@ -19,6 +19,13 @@ type FormErrors = {
   form?: string;
 };
 
+type ServicesContactSectionProps = {
+  sectionId?: string;
+  headingAs?: "h1" | "h2";
+  /** Embed vào landing — bỏ header căn giữa, heading nằm cột trái. */
+  embed?: boolean;
+};
+
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
@@ -39,7 +46,11 @@ function isValidEmail(value: string) {
  * Trang Liên hệ — hero form (ref interdata.vn/contact).
  * Nền gradient xanh; nút gửi xanh đen (ref InterData).
  */
-export function ServicesContactSection() {
+export function ServicesContactSection({
+  sectionId,
+  headingAs = "h1",
+  embed = false,
+}: ServicesContactSectionProps = {}) {
   const {
     id,
     eyebrow,
@@ -53,6 +64,9 @@ export function ServicesContactSection() {
     successTitle,
     successMessage,
   } = lienHePageContent;
+
+  const resolvedId = sectionId ?? id;
+  const HeadingTag = headingAs;
 
   const titleId = useId();
   const nameId = useId();
@@ -134,7 +148,7 @@ export function ServicesContactSection() {
 
   return (
     <section
-      id={id}
+      id={resolvedId}
       aria-labelledby={titleId}
       className="relative scroll-mt-24 overflow-hidden bg-footer"
     >
@@ -145,24 +159,45 @@ export function ServicesContactSection() {
       </div>
 
       <div className="relative mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <header className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
-            {eyebrow}
-          </p>
-          <h1
-            id={titleId}
-            className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl"
-          >
-            {heading}
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">
-            {intro}
-          </p>
-        </header>
+        {embed ? null : (
+          <header className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
+              {eyebrow}
+            </p>
+            <HeadingTag
+              id={titleId}
+              className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl"
+            >
+              {heading}
+            </HeadingTag>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">
+              {intro}
+            </p>
+          </header>
+        )}
 
-        <div className="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-14">
+        <div
+          className={cx(
+            "grid items-start gap-10 lg:grid-cols-2 lg:gap-14",
+            embed ? "mt-0" : "mt-10 lg:mt-14",
+          )}
+        >
           {/* Left — contact info */}
           <div className="space-y-6 text-white lg:pt-2">
+            {embed ? (
+              <div>
+                <HeadingTag
+                  id={titleId}
+                  className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl"
+                >
+                  {heading}
+                </HeadingTag>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+                  {intro}
+                </p>
+              </div>
+            ) : null}
+
             <div>
               <p className="text-sm font-medium text-white/80">{hotlineLabel}</p>
               <a

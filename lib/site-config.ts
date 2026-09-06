@@ -177,6 +177,7 @@ export const navItems: NavItem[] = [
     href: "/",
     children: [
       { label: "Giới thiệu", href: "/gioi-thieu" },
+      { label: "Giải pháp", href: "/giai-phap" },
       { label: "Liên hệ", href: "/lien-he" },
     ],
   },
@@ -220,6 +221,7 @@ export const footerContent = {
     title: "Thông tin",
     links: [
       { label: "Giới thiệu", href: "/gioi-thieu" },
+      { label: "Giải pháp website", href: "/giai-phap" },
       { label: "Liên hệ", href: "/lien-he" },
       { label: "Quy trình làm việc", href: "/#quy-trinh" },
       { label: "Dự án", href: "/san-pham" },
@@ -255,6 +257,11 @@ export type SearchSuggestion = {
 };
 
 export const searchPopularSuggestions: SearchSuggestion[] = [
+  {
+    id: "giai-phap",
+    label: "Giải pháp website",
+    href: "/giai-phap",
+  },
   {
     id: "thiet-ke-website",
     label: "Thiết kế website",
@@ -1675,6 +1682,143 @@ export const lienHePageContent = {
 };
 
 /**
+ * Trang `/giai-phap` — landing quảng cáo gom dịch vụ website (7 section).
+ * Banner overlay trên asset 1920×620; nhu cầu theo layout quy trình 5 bước;
+ * why / gói PMLCare / form liên hệ / footer tái dùng section sẵn có.
+ */
+export type SolutionNeedItem = {
+  id: string;
+  title: string;
+  /** Path relative to /public — `public/icon-giai-phap/` */
+  iconSrc: string;
+};
+
+export type SolutionProjectItem = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  external?: boolean;
+  tags: string[];
+  image: { src: string; alt: string };
+};
+
+export const solutionPageContent = {
+  meta: {
+    title: "Giải pháp thiết kế & vận hành website | PML Vietnam",
+    description:
+      "Thiết kế và vận hành website chuyên nghiệp, chuẩn SEO, hiển thị tốt trên mọi thiết bị. Để lại thông tin để PML Vietnam tư vấn giải pháp phù hợp.",
+  },
+  banner: {
+    id: "giai-phap-banner",
+    headline: "Thiết kế & vận hành website",
+    bullets: [
+      "Giao diện hiện đại, chuẩn SEO",
+      "Hiển thị tốt trên mọi thiết bị",
+      "Sử dụng công nghệ hiện đại",
+    ],
+    description:
+      "Giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp và tạo thêm cơ hội kinh doanh trên môi trường số.",
+    ctaLabel: "Đăng ký ngay",
+    ctaHref: "#dang-ky",
+    image: {
+      src: "/san-pham/banner/banner.webp",
+      alt: "Thiết kế và vận hành website chuyên nghiệp tại PML Vietnam",
+      width: 1920,
+      height: 620,
+    },
+  },
+  needs: {
+    id: "nhu-cau",
+    heading: "Có phải doanh nghiệp của bạn đang gặp các vấn đề này?",
+    items: [
+      {
+        id: "need-1",
+        iconSrc: "/icon-giai-phap/no-website.webp",
+        title: "Chưa có website để giới thiệu doanh nghiệp và dịch vụ.",
+      },
+      {
+        id: "need-2",
+        iconSrc: "/icon-giai-phap/website-cu.webp",
+        title: "Website cũ, giao diện lỗi thời, khó thao tác.",
+      },
+      {
+        id: "need-3",
+        iconSrc: "/icon-giai-phap/chi-phi-Ads.webp",
+        title: "Tốn chi phí Ads nhưng tỉ lệ chuyển đổi thấp.",
+      },
+      {
+        id: "need-4",
+        iconSrc: "/icon-giai-phap/hinh-anh-thuong-hieu.webp",
+        title: "Hình ảnh thương hiệu chưa xứng tầm với sản phẩm.",
+      },
+      {
+        id: "need-5",
+        iconSrc: "/icon-giai-phap/chiec-luoc-thuc-hien.webp",
+        title: "Chưa có chiến lược thực hiện online hiệu quả.",
+      },
+    ] satisfies SolutionNeedItem[],
+  },
+  projects: {
+    id: "du-an-tieu-bieu",
+    eyebrow: "Dự án tiêu biểu",
+    heading: "Một số website chúng tôi đã thực hiện",
+    tagline:
+      "Giao diện hiện đại, chuẩn SEO, dễ vận hành theo từng ngành nghề.",
+    catalogLabel: "Xem tất cả mẫu website",
+    catalogHref: "/san-pham",
+    items: [
+      {
+        id: "luvini",
+        title: "Luvini & Co.",
+        description: "Website giới thiệu thương hiệu và sản phẩm",
+        href: "https://luvini.vn",
+        external: true,
+        tags: ["Responsive", "SEO", "CMS"],
+        image: {
+          src: "/san-pham/ban-le-&-tmdt/luvini.png",
+          alt: "Website Luvini & Co do PML Vietnam thực hiện",
+        },
+      },
+      {
+        id: "thoi-trang",
+        title: "Cửa hàng thời trang",
+        description: "Website bán lẻ thời trang, catalog sản phẩm",
+        href: "/san-pham/ban-le-tmdt-cua-hang-thoi-trang",
+        tags: ["Responsive", "SEO", "CMS"],
+        image: {
+          src: "/san-pham/ban-le-&-tmdt/cua_hang_thoi_trang_nho.png",
+          alt: "Mẫu website cửa hàng thời trang PML Vietnam",
+        },
+      },
+      {
+        id: "nha-hang",
+        title: "Nhà hàng, quán ăn",
+        description: "Website giới thiệu thực đơn và thương hiệu F&B",
+        href: "/san-pham/dich-vu-thuong-mai-nha-hang-quan-an",
+        tags: ["Responsive", "SEO", "CMS"],
+        image: {
+          src: "/san-pham/dich-vu-thuong-mai/nha_hang_quan_an.webp",
+          alt: "Mẫu website nhà hàng, quán ăn PML Vietnam",
+        },
+      },
+      {
+        id: "spa",
+        title: "Spa, thẩm mỹ viện",
+        description: "Website dịch vụ spa, liệu trình và đặt lịch",
+        href: "/san-pham/dich-vu-thuong-mai-spa-tham-my-vien",
+        tags: ["Responsive", "SEO", "CMS"],
+        image: {
+          src: "/san-pham/dich-vu-thuong-mai/spa_tham_my_vien.webp",
+          alt: "Mẫu website spa, thẩm mỹ viện PML Vietnam",
+        },
+      },
+    ] satisfies SolutionProjectItem[],
+  },
+  formSectionId: "dang-ky",
+};
+
+/**
  * Trang Thiết kế website theo yêu cầu (`/thiet-ke-website-theo-yeu-cau`).
  * Bố cục ref web4s.vn/thiet-ke-website-theo-yeu-cau; hero/FAQ/why/process tái dùng pattern trang chủ.
  * Ảnh minh họa: `public/services/thiet-ke-website-theo-yeu-cau.webp.png` (swap khi có bản final).
@@ -2126,6 +2270,8 @@ export type CareWorkItem = {
   id: string;
   label: string;
   values: [CareWorkValue, CareWorkValue, CareWorkValue];
+  /** Hàng nổi bật (vd. giá) */
+  highlight?: boolean;
 };
 
 export type CareWorkGroup = {
@@ -2140,6 +2286,8 @@ export type CareWorkPackage = {
   tagline: string;
   shortName?: string;
   featured?: boolean;
+  /** Giá khởi điểm — hiện trên card gói khi có */
+  price?: string;
 };
 
 export type CareWorkNote = {
@@ -2148,13 +2296,20 @@ export type CareWorkNote = {
   body: string;
 };
 
+export type CareWorkFooterLink = {
+  prefix: string;
+  linkLabel: string;
+  href: string;
+};
+
 export type CareWorkComparisonContent = {
   id: string;
   heading: string;
   tagline: string;
   toggleShow: string;
   toggleHide: string;
-  ctaLabel: string;
+  /** Bỏ qua thì không hiện nút đăng ký trên từng cột gói. */
+  ctaLabel?: string;
   includedLabel: string;
   excludedLabel: string;
   mobileTabsLabel: string;
@@ -2163,6 +2318,9 @@ export type CareWorkComparisonContent = {
   packages: [CareWorkPackage, CareWorkPackage, CareWorkPackage];
   groups: CareWorkGroup[];
   notes?: CareWorkNote[];
+  /** Bỏ accordion nhóm, hiện thẳng các hàng so sánh */
+  flat?: boolean;
+  footerLink?: CareWorkFooterLink;
 };
 
 const careIncluded = { kind: "included" } as const satisfies CareWorkValue;
@@ -2376,6 +2534,114 @@ export const careWorkComparisonContent = {
           id: "redirect-404",
           label: "Chuyển hướng truy cập các link lỗi 404 - không tìm thấy trang",
           values: [careIncluded, careIncluded, careIncluded],
+        },
+      ],
+    },
+  ],
+} satisfies CareWorkComparisonContent;
+
+/**
+ * Bảng so sánh gói thiết kế website trên `/giai-phap`.
+ * Layout tái dùng CareWorkDetailsSection; nội dung PMLWeb Standard / Pro / Custom.
+ */
+export const websitePackageComparisonContent = {
+  id: "goi-thiet-ke-website",
+  heading: "Giải pháp website linh hoạt cho mọi doanh nghiệp",
+  tagline: "Hãy lựa chọn gói thiết kế website phù hợp với nhu cầu của bạn.",
+  toggleShow: "Xem chi tiết gói thiết kế website",
+  toggleHide: "Ẩn chi tiết gói thiết kế website",
+  includedLabel: "Bao gồm",
+  excludedLabel: "Không bao gồm",
+  mobileTabsLabel: "Chọn gói thiết kế website",
+  registerSubheading:
+    "Để lại thông tin - PML Vietnam sẽ liên hệ tư vấn gói thiết kế website phù hợp.",
+  flat: true,
+  footerLink: {
+    prefix: "Xem chi tiết về tính năng và nội dung website ",
+    linkLabel: "tại đây",
+    href: "/thiet-ke-website",
+  },
+  packages: [
+    {
+      id: "standard",
+      name: "PMLWeb Standard",
+      shortName: "Standard",
+      price: "Từ 4.000.000đ",
+      tagline:
+        "Phù hợp với doanh nghiệp/cá nhân cần một website chuyên nghiệp để giới thiệu thương hiệu, sản phẩm hoặc dịch vụ.",
+    },
+    {
+      id: "pro",
+      name: "PMLWeb Pro",
+      shortName: "Pro",
+      price: "Từ 5.900.000đ",
+      tagline:
+        "Phù hợp với doanh nghiệp muốn website có khả năng quản trị nội dung và hỗ trợ hoạt động kinh doanh, marketing.",
+    },
+    {
+      id: "custom",
+      name: "PMLWeb Custom",
+      shortName: "Custom",
+      price: "Từ 7.900.000đ",
+      tagline:
+        "Phù hợp với doanh nghiệp có yêu cầu riêng về tính năng, giao diện hoặc cần xây dựng hệ thống website theo mô hình kinh doanh.",
+    },
+  ],
+  groups: [
+    {
+      id: "tinh-nang",
+      title: "Tính năng",
+      items: [
+        {
+          id: "gia",
+          label: "Giá",
+          highlight: true,
+          values: careQuotaRow(
+            "Từ 4.000.000đ",
+            "Từ 5.900.000đ",
+            "Từ 7.900.000đ",
+          ),
+        },
+        {
+          id: "seo",
+          label: "SEO",
+          values: careQuotaRow(
+            "Giao diện chuẩn SEO",
+            "Tối ưu chuẩn SEO",
+            "Tối ưu chuẩn SEO",
+          ),
+        },
+        {
+          id: "cms",
+          label: "CMS",
+          values: careQuotaRow(
+            "CMS cơ bản",
+            "CMS đầy đủ",
+            "CMS đầy đủ và tính năng tùy chỉnh",
+          ),
+        },
+        {
+          id: "marketing",
+          label: "Marketing",
+          values: [
+            careExcluded,
+            careQuota("Tối ưu cho marketing"),
+            careQuota("Tối ưu cho marketing"),
+          ],
+        },
+        {
+          id: "ngon-ngu",
+          label: "Ngôn ngữ",
+          values: careQuotaRow("1", "2", "3+"),
+        },
+        {
+          id: "chuc-nang",
+          label: "Tính năng",
+          values: careQuotaRow(
+            "Tính năng cơ bản",
+            "Tính năng nâng cao",
+            "Tính năng nâng cao và tích hợp hệ thống khác",
+          ),
         },
       ],
     },

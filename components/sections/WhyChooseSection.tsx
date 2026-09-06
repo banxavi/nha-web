@@ -20,6 +20,8 @@ type WhyChooseSectionProps = {
   /** Override content — mặc định `whyChooseContent` trang chủ. */
   content?: WhyChooseSectionContent;
   sectionId?: string;
+  /** Khi có — CTA là link (vd. #dang-ky). Không có thì mở form tư vấn. */
+  ctaHref?: string;
 };
 
 /**
@@ -29,6 +31,7 @@ type WhyChooseSectionProps = {
 export function WhyChooseSection({
   content = whyChooseContent,
   sectionId = "tai-sao-chon",
+  ctaHref,
 }: WhyChooseSectionProps) {
   const { heading, subheading, ctaLabel, items } = content;
   const { openContactForm } = useContactForm();
@@ -36,7 +39,7 @@ export function WhyChooseSection({
   return (
     <section
       id={sectionId}
-      aria-labelledby="why-choose-heading"
+      aria-labelledby={`${sectionId}-heading`}
       className="relative scroll-mt-24 overflow-hidden bg-[#0B1F3A]"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -55,7 +58,7 @@ export function WhyChooseSection({
 
       <div className="relative z-10 mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <SectionHeader
-          headingId="why-choose-heading"
+          headingId={`${sectionId}-heading`}
           title={heading}
           tagline={subheading}
           tone="dark"
@@ -73,13 +76,19 @@ export function WhyChooseSection({
         </ul>
 
         <div className="mt-10 flex justify-center sm:mt-12">
-          <CTAButton
-            type="button"
-            className="px-8 py-3.5 text-base"
-            onClick={() => openContactForm({ variant: "consult" })}
-          >
-            {ctaLabel}
-          </CTAButton>
+          {ctaHref ? (
+            <CTAButton href={ctaHref} className="whitespace-nowrap px-8 py-3.5 text-base">
+              {ctaLabel}
+            </CTAButton>
+          ) : (
+            <CTAButton
+              type="button"
+              className="whitespace-nowrap px-8 py-3.5 text-base"
+              onClick={() => openContactForm({ variant: "consult" })}
+            >
+              {ctaLabel}
+            </CTAButton>
+          )}
         </div>
       </div>
     </section>
@@ -88,8 +97,8 @@ export function WhyChooseSection({
 
 function ReasonCard({ item }: { item: WhyChooseItem }) {
   return (
-    <article className="flex h-full min-h-[9.5rem] flex-col justify-between rounded-xl border border-white/15 bg-white/10 px-5 py-5 backdrop-blur-md sm:min-h-[10.5rem] sm:px-6 sm:py-6">
-      <div className="text-cta">
+    <article className="flex h-full min-h-[6rem] flex-col rounded-xl border border-white/15 bg-white/10 px-5 py-5 backdrop-blur-md sm:min-h-[10.5rem] sm:px-6 sm:py-6">
+      <div className="flex h-12 shrink-0 items-end text-cta sm:h-14">
         {item.highlight ? (
           <p className="text-4xl font-bold leading-none tracking-tight sm:text-5xl">
             {item.highlight}

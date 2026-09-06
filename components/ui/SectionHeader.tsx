@@ -37,7 +37,7 @@ export function SectionHeader({
   return (
     <header
       className={cx(
-        align === "center" ? "mx-auto max-w-4xl text-center" : "max-w-3xl text-left",
+        align === "center" ? "mx-auto max-w-5xl text-center" : "max-w-3xl text-left",
         className,
       )}
     >

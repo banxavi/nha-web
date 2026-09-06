@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useId, useState } from "react";
 import {
   footerContent,
   footerLogoPath,
@@ -9,125 +12,162 @@ import {
   type SocialLink,
 } from "@/lib/site-config";
 
+function cx(...parts: Array<string | undefined | false>) {
+  return parts.filter(Boolean).join(" ");
+}
+
 /**
- * Footer #9–#14 — nền #1E293B (sáng hơn navy gốc để "Web" đọc được),
- * brand text + tagline + MXH, 4 cột, copyright căn giữa.
+ * Footer #9–#14 — nền #1E293B.
+ * Mobile: accordion, nét xám nhạt giữa các mục. Desktop: 5 cột.
  */
 export function Footer() {
   return (
     <footer className="mt-auto bg-footer text-white">
-      <div className="mx-auto grid max-w-site gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16">
-        {/* #9 Brand text + social — "Nhà" cam + "Web" navy như logo */}
-        <div className="lg:col-span-3">
-          <Link href="/" className="mb-4 block w-fit rounded-md">
-            <Image
-              src={footerLogoPath}
-              alt="PML Vietnam"
-              width={1995}
-              height={1038}
-              className="h-[100px] w-auto object-contain"
-              sizes="300px"
-            />
-          </Link>
-          <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
-            Chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh
-            doanh và doanh nghiệp.
-          </p>
-          <ul className="flex items-center gap-3" aria-label="Mạng xã hội">
-            {socialLinks.map((social) => (
-              <li key={social.id}>
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-cta hover:text-white"
-                  aria-label={social.label}
-                >
-                  <SocialIcon social={social} />
-                </a>
-              </li>
-            ))}
-          </ul>
+      <div className="mx-auto max-w-site px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-8">
+          <BrandBlock className="lg:col-span-3" />
+          <FooterLinkColumn
+            className="lg:col-span-2"
+            title={footerContent.servicesTitle}
+            links={serviceNavLinks}
+          />
+          <FooterLinkColumn
+            className="lg:col-span-2"
+            title={footerContent.info.title}
+            links={footerContent.info.links}
+          />
+          <FooterLinkColumn
+            className="lg:col-span-2"
+            title={footerContent.help.title}
+            links={footerContent.help.links}
+          />
+          <div className="lg:col-span-3">
+            <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+              {footerContent.contactTitle}
+            </h3>
+            <ContactList className="mt-4" />
+          </div>
         </div>
 
-        {/* #10 Dịch vụ — tái dùng serviceNavLinks từ Header */}
-        <FooterLinkColumn
-          className="lg:col-span-2"
-          title={footerContent.servicesTitle}
-          links={serviceNavLinks}
-        />
-
-        {/* #11 Thông tin */}
-        <FooterLinkColumn
-          className="lg:col-span-2"
-          title={footerContent.info.title}
-          links={footerContent.info.links}
-        />
-
-        {/* #12 Trợ giúp */}
-        <FooterLinkColumn
-          className="lg:col-span-2"
-          title={footerContent.help.title}
-          links={footerContent.help.links}
-        />
-
-        {/* #13 Liên hệ */}
-        <div className="lg:col-span-3">
-          <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
-            {footerContent.contactTitle}
-          </h3>
-          <ul className="mt-4 space-y-3 text-sm text-white/70">
-            <li>
-              <a
-                href={`tel:${siteContact.phoneTel}`}
-                className="flex items-start gap-2.5 transition-colors hover:text-cta"
-              >
-                <ContactPhoneIcon />
-                <span>Hotline: {siteContact.phoneDisplay}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={siteContact.zaloUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-2.5 transition-colors hover:text-cta"
-              >
-                <ContactZaloIcon />
-                <span>Zalo: {siteContact.phoneDisplay}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${siteContact.email}`}
-                className="flex items-start gap-2.5 transition-colors hover:text-cta"
-              >
-                <ContactMailIcon />
-                <span>{siteContact.email}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={siteContact.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-2.5 leading-relaxed transition-colors hover:text-cta"
-              >
-                <ContactMapIcon />
-                <span>{siteContact.address}</span>
-              </a>
-            </li>
-          </ul>
+        <div className="lg:hidden">
+          <BrandBlock />
+          <FooterAccordion />
         </div>
       </div>
 
-      {/* #14 Copyright */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-site px-4 py-5 text-center text-xs text-white/50 sm:px-6 lg:px-8">
           <p>{footerContent.copyright}</p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function BrandBlock({ className }: { className?: string }) {
+  return (
+    <div className={className}>
+      <Link href="/" className="mb-4 block w-fit rounded-md">
+        <Image
+          src={footerLogoPath}
+          alt="PML Vietnam"
+          width={1995}
+          height={1038}
+          className="h-[100px] w-auto object-contain"
+          sizes="300px"
+        />
+      </Link>
+      <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/70">
+        Chuyên cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh doanh
+        và doanh nghiệp.
+      </p>
+      <ul className="flex items-center gap-3" aria-label="Mạng xã hội">
+        {socialLinks.map((social) => (
+          <li key={social.id}>
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-cta hover:text-white"
+              aria-label={social.label}
+            >
+              <SocialIcon social={social} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function FooterAccordion() {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const uid = useId();
+
+  const panels = [
+    {
+      id: "services",
+      title: footerContent.servicesTitle,
+      body: <FooterLinkList links={serviceNavLinks} />,
+    },
+    {
+      id: "info",
+      title: footerContent.info.title,
+      body: <FooterLinkList links={footerContent.info.links} />,
+    },
+    {
+      id: "help",
+      title: footerContent.help.title,
+      body: <FooterLinkList links={footerContent.help.links} />,
+    },
+    {
+      id: "contact",
+      title: footerContent.contactTitle,
+      body: <ContactList />,
+    },
+  ];
+
+  return (
+    <div className="mt-8">
+      {panels.map((panel) => {
+        const open = openId === panel.id;
+        const panelId = `${uid}-${panel.id}`;
+        const buttonId = `${panelId}-button`;
+
+        return (
+          <div key={panel.id} className="border-b border-white/15">
+            <button
+              id={buttonId}
+              type="button"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpenId(open ? null : panel.id)}
+              className="flex w-full items-center justify-between gap-4 py-4 text-left"
+            >
+              <span className="text-sm font-semibold tracking-wide text-white uppercase">
+                {panel.title}
+              </span>
+              <span className="text-white" aria-hidden>
+                {open ? <MinusIcon /> : <PlusIcon />}
+              </span>
+            </button>
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              className={cx(
+                "grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+              )}
+            >
+              <div className="overflow-hidden">
+                <div className="pb-4">{panel.body}</div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -142,20 +182,107 @@ function FooterLinkColumn({
 }) {
   return (
     <div className={className}>
-      <h3 className="text-sm font-semibold tracking-wide text-white uppercase">{title}</h3>
-      <ul className="mt-4 space-y-2.5">
-        {links.map((link) => (
-          <li key={link.label}>
-            <Link
-              href={link.href}
-              className="text-sm text-white/70 transition-colors hover:text-cta"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+        {title}
+      </h3>
+      <FooterLinkList links={links} className="mt-4" />
     </div>
+  );
+}
+
+function FooterLinkList({
+  links,
+  className,
+}: {
+  links: Array<{ label: string; href: string }>;
+  className?: string;
+}) {
+  return (
+    <ul className={cx("space-y-2.5", className)}>
+      {links.map((link) => (
+        <li key={link.label}>
+          <Link
+            href={link.href}
+            className="text-sm text-white/70 transition-colors hover:text-cta"
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ContactList({ className }: { className?: string }) {
+  return (
+    <ul className={cx("space-y-3 text-sm text-white/70", className)}>
+      <li>
+        <a
+          href={`tel:${siteContact.phoneTel}`}
+          className="flex items-start gap-2.5 transition-colors hover:text-cta"
+        >
+          <ContactPhoneIcon />
+          <span>Hotline: {siteContact.phoneDisplay}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={siteContact.zaloUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-start gap-2.5 transition-colors hover:text-cta"
+        >
+          <ContactZaloIcon />
+          <span>Zalo: {siteContact.phoneDisplay}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={`mailto:${siteContact.email}`}
+          className="flex items-start gap-2.5 transition-colors hover:text-cta"
+        >
+          <ContactMailIcon />
+          <span>{siteContact.email}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={siteContact.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-start gap-2.5 leading-relaxed transition-colors hover:text-cta"
+        >
+          <ContactMapIcon />
+          <span>{siteContact.address}</span>
+        </a>
+      </li>
+    </ul>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5" aria-hidden>
+      <path
+        d="M10 4v12M4 10h12"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function MinusIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5" aria-hidden>
+      <path
+        d="M4 10h12"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
@@ -183,8 +310,7 @@ function SocialIcon({ social }: { social: SocialLink }) {
   }
 }
 
-const contactIconClass =
-  "mt-0.5 h-4 w-4 shrink-0 text-cta";
+const contactIconClass = "mt-0.5 h-4 w-4 shrink-0 text-cta";
 
 function ContactPhoneIcon() {
   return (
