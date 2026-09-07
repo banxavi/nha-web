@@ -41,7 +41,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
   const relatedItems = getRelatedProductSamples(item);
 
   return (
-    <Reveal>
+    <Reveal trigger="mount">
       <TemplateDetailSection item={item} relatedItems={relatedItems} />
     </Reveal>
   );

@@ -80,15 +80,17 @@ export function TemplateDetailSection({
         </nav>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:items-stretch lg:gap-x-8 lg:gap-y-5">
-          <div className="min-h-0 lg:col-start-1 lg:row-start-1 lg:h-full">
-            <div className="overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm lg:h-full">
+          {/* Absolute fill on lg so the screenshot cannot inflate the grid
+              row (lg:h-full % height is indefinite on auto rows). */}
+          <div className="relative h-[22rem] min-h-0 sm:h-[28rem] lg:col-start-1 lg:row-start-1 lg:h-auto">
+            <div className="h-full overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm lg:absolute lg:inset-0">
               <HoverScrollPreview
                 src={item.image.src}
                 alt={item.image.alt}
                 width={item.image.width ?? 1600}
                 height={item.image.height ?? 1200}
                 unoptimized={item.image.src.endsWith(".svg")}
-                frameClassName="max-h-[22rem] w-full bg-bg-secondary sm:max-h-[28rem] lg:h-full lg:max-h-none"
+                frameClassName="h-full w-full bg-bg-secondary"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 priority
               />

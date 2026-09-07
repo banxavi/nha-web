@@ -1711,18 +1711,8 @@ export const solutionPageContent = {
   },
   banner: {
     id: "giai-phap-banner",
-    headline: "Thiết kế & vận hành website",
-    bullets: [
-      "Giao diện hiện đại, chuẩn SEO",
-      "Hiển thị tốt trên mọi thiết bị",
-      "Sử dụng công nghệ hiện đại",
-    ],
-    description:
-      "Giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp và tạo thêm cơ hội kinh doanh trên môi trường số.",
-    ctaLabel: "Đăng ký ngay",
-    ctaHref: "#dang-ky",
     image: {
-      src: "/san-pham/banner/banner.webp",
+      src: "/giai-phap/hero-banner-giai-phap.webp",
       alt: "Thiết kế và vận hành website chuyên nghiệp tại PML Vietnam",
       width: 1920,
       height: 620,
@@ -1774,7 +1764,6 @@ export const solutionPageContent = {
         description: "Website giới thiệu thương hiệu và sản phẩm",
         href: "https://luvini.vn",
         external: true,
-        tags: ["Responsive", "SEO", "CMS"],
         image: {
           src: "/san-pham/ban-le-&-tmdt/luvini.png",
           alt: "Website Luvini & Co do PML Vietnam thực hiện",
@@ -1785,7 +1774,6 @@ export const solutionPageContent = {
         title: "Cửa hàng thời trang",
         description: "Website bán lẻ thời trang, catalog sản phẩm",
         href: "/san-pham/ban-le-tmdt-cua-hang-thoi-trang",
-        tags: ["Responsive", "SEO", "CMS"],
         image: {
           src: "/san-pham/ban-le-&-tmdt/cua_hang_thoi_trang_nho.png",
           alt: "Mẫu website cửa hàng thời trang PML Vietnam",
@@ -1796,7 +1784,6 @@ export const solutionPageContent = {
         title: "Nhà hàng, quán ăn",
         description: "Website giới thiệu thực đơn và thương hiệu F&B",
         href: "/san-pham/dich-vu-thuong-mai-nha-hang-quan-an",
-        tags: ["Responsive", "SEO", "CMS"],
         image: {
           src: "/san-pham/dich-vu-thuong-mai/nha_hang_quan_an.webp",
           alt: "Mẫu website nhà hàng, quán ăn PML Vietnam",
@@ -1807,7 +1794,6 @@ export const solutionPageContent = {
         title: "Spa, thẩm mỹ viện",
         description: "Website dịch vụ spa, liệu trình và đặt lịch",
         href: "/san-pham/dich-vu-thuong-mai-spa-tham-my-vien",
-        tags: ["Responsive", "SEO", "CMS"],
         image: {
           src: "/san-pham/dich-vu-thuong-mai/spa_tham_my_vien.webp",
           alt: "Mẫu website spa, thẩm mỹ viện PML Vietnam",
@@ -2550,6 +2536,7 @@ export const websitePackageComparisonContent = {
   tagline: "Hãy lựa chọn gói thiết kế website phù hợp với nhu cầu của bạn.",
   toggleShow: "Xem chi tiết gói thiết kế website",
   toggleHide: "Ẩn chi tiết gói thiết kế website",
+  ctaLabel: "Đăng ký ngay",
   includedLabel: "Bao gồm",
   excludedLabel: "Không bao gồm",
   mobileTabsLabel: "Chọn gói thiết kế website",
@@ -2566,7 +2553,6 @@ export const websitePackageComparisonContent = {
       id: "standard",
       name: "PMLWeb Standard",
       shortName: "Standard",
-      price: "Từ 4.000.000đ",
       tagline:
         "Phù hợp với doanh nghiệp/cá nhân cần một website chuyên nghiệp để giới thiệu thương hiệu, sản phẩm hoặc dịch vụ.",
     },
@@ -2574,15 +2560,14 @@ export const websitePackageComparisonContent = {
       id: "pro",
       name: "PMLWeb Pro",
       shortName: "Pro",
-      price: "Từ 5.900.000đ",
       tagline:
         "Phù hợp với doanh nghiệp muốn website có khả năng quản trị nội dung và hỗ trợ hoạt động kinh doanh, marketing.",
+      featured: true,
     },
     {
       id: "custom",
       name: "PMLWeb Custom",
       shortName: "Custom",
-      price: "Từ 7.900.000đ",
       tagline:
         "Phù hợp với doanh nghiệp có yêu cầu riêng về tính năng, giao diện hoặc cần xây dựng hệ thống website theo mô hình kinh doanh.",
     },
@@ -2595,7 +2580,6 @@ export const websitePackageComparisonContent = {
         {
           id: "gia",
           label: "Giá",
-          highlight: true,
           values: careQuotaRow(
             "Từ 4.000.000đ",
             "Từ 5.900.000đ",
@@ -2624,7 +2608,7 @@ export const websitePackageComparisonContent = {
           id: "marketing",
           label: "Marketing",
           values: [
-            careExcluded,
+            careQuota("Cơ bản"),
             careQuota("Tối ưu cho marketing"),
             careQuota("Tối ưu cho marketing"),
           ],

@@ -10,15 +10,19 @@ type RevealProps = {
   className?: string;
   /** Stagger delay (seconds). Default 0. */
   delay?: number;
-  /** Viewport amount before revealing. Default 0.2. */
+  /** Viewport amount before revealing. Default "some" so a tall block
+   *  cannot stay opacity:0 when less than `amount` of it fits on screen. */
   amount?: number | "some" | "all";
+  /** "mount" for above-the-fold shells; "view" for scroll-reveal. */
+  trigger?: "view" | "mount";
 };
 
 export function Reveal({
   children,
   className,
   delay = 0,
-  amount = 0.2,
+  amount = "some",
+  trigger = "view",
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
 
@@ -26,12 +30,15 @@ export function Reveal({
     return <div className={className}>{children}</div>;
   }
 
+  const shown = { opacity: 1, y: 0 } as const;
+
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount }}
+      {...(trigger === "mount"
+        ? { animate: shown }
+        : { whileInView: shown, viewport: { once: true, amount } })}
       transition={{ duration: 0.55, ease: easeOut, delay }}
     >
       {children}

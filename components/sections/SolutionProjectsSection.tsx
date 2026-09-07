@@ -83,16 +83,6 @@ export function SolutionProjectsSection() {
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
-                <ul className="relative z-10 mt-4 flex flex-wrap gap-1.5">
-                  {item.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="rounded-md bg-bg-secondary px-2 py-1 text-[11px] font-semibold tracking-wide text-foreground/70"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
               </Card>
             </RevealItem>
           ))}

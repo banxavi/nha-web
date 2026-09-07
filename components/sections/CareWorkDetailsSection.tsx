@@ -121,7 +121,14 @@ export function CareWorkDetailsSection({
                   />
                   <div className="mt-4 overflow-hidden rounded-2xl border border-card-border bg-card">
                     {packages[activePackage] ? (
-                      <div className="border-b border-card-border bg-bg-secondary/80 px-4 py-4">
+                      <div
+                        className={cx(
+                          "border-b border-card-border px-4 py-4",
+                          packages[activePackage].featured
+                            ? "bg-cta/10"
+                            : "bg-bg-secondary/80",
+                        )}
+                      >
                         <p className="text-base font-bold text-foreground">
                           {packages[activePackage].name}
                         </p>
@@ -167,7 +174,7 @@ export function CareWorkDetailsSection({
                       <div
                         key={pkg.id}
                         className={cx(
-                          "flex h-full flex-col items-center border-t border-r border-card-border bg-bg-secondary px-4 py-5 text-center",
+                          "flex h-full flex-col items-center border-t border-r border-card-border bg-card px-4 py-5 text-center",
                           index === 0 && "rounded-tl-2xl border-l",
                           index === packages.length - 1 && "rounded-tr-2xl",
                           pkg.featured && "bg-cta/10",
@@ -282,12 +289,11 @@ function GroupList({
 
   if (items) {
     return (
-      <ul role="list">
-        {items.map((item, itemIndex) => (
+      <ul role="list" className="[&>li:first-child]:border-t-0">
+        {items.map((item) => (
           <ComparisonRow
             key={item.id}
             item={item}
-            itemIndex={itemIndex}
             mobile={mobile}
             packageIndex={packageIndex}
             packageNames={packageNames}
@@ -345,11 +351,10 @@ function GroupList({
             >
               <div className="overflow-hidden">
                 <ul role="list">
-                  {group.items.map((item, itemIndex) => (
+                  {group.items.map((item) => (
                     <ComparisonRow
                       key={item.id}
                       item={item}
-                      itemIndex={itemIndex}
                       mobile={mobile}
                       packageIndex={packageIndex}
                       packageNames={packageNames}
@@ -370,7 +375,6 @@ function GroupList({
 
 function ComparisonRow({
   item,
-  itemIndex,
   mobile,
   packageIndex,
   packageNames,
@@ -379,7 +383,6 @@ function ComparisonRow({
   featuredIndex,
 }: {
   item: CareWorkComparisonContent["groups"][number]["items"][number];
-  itemIndex: number;
   mobile: boolean;
   packageIndex?: number;
   packageNames: string[];
@@ -388,18 +391,14 @@ function ComparisonRow({
   featuredIndex: number;
 }) {
   return (
-    <li
-      className={cx(
-        "border-t border-card-border",
-        item.highlight
-          ? "bg-cta/10"
-          : itemIndex % 2 === 0
-            ? "bg-bg-secondary/40"
-            : "bg-card",
-      )}
-    >
+    <li className="border-t border-card-border">
       {mobile ? (
-        <div className="grid gap-2 px-4 py-3.5 sm:px-5">
+        <div
+          className={cx(
+            "grid gap-2 px-4 py-3.5 sm:px-5",
+            item.highlight ? "bg-cta/10" : "bg-card",
+          )}
+        >
           <p className="text-sm leading-relaxed text-foreground/85">
             {item.label}
           </p>
@@ -418,7 +417,12 @@ function ComparisonRow({
         </div>
       ) : (
         <div className="grid grid-cols-[minmax(16rem,1.35fr)_repeat(3,minmax(0,1fr))]">
-          <p className="px-4 py-3.5 text-sm font-semibold leading-relaxed text-foreground/85 sm:px-5">
+          <p
+            className={cx(
+              "px-4 py-3.5 text-sm font-semibold leading-relaxed text-foreground/85 sm:px-5",
+              item.highlight ? "bg-cta/10" : "bg-bg-secondary",
+            )}
+          >
             {item.label}
           </p>
           {item.values.map((value, valueIndex) => (
@@ -426,7 +430,9 @@ function ComparisonRow({
               key={`${item.id}-${packageNames[valueIndex]}`}
               className={cx(
                 "flex items-center justify-center border-l border-card-border px-3 py-3.5 text-center text-sm font-semibold text-foreground",
-                valueIndex === featuredIndex && !item.highlight && "bg-cta/5",
+                item.highlight || valueIndex === featuredIndex
+                  ? "bg-cta/10"
+                  : "bg-card",
               )}
             >
               <ValueCell

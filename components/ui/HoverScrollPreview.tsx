@@ -86,7 +86,7 @@ export function HoverScrollPreview({
     <div
       ref={frameRef}
       className={cx(
-        "relative overflow-hidden",
+        "relative min-h-0 overflow-hidden",
         tapToToggle && "cursor-pointer touch-manipulation",
         frameClassName,
       )}
