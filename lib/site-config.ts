@@ -1703,7 +1703,6 @@ export type SolutionProjectItem = {
   description: string;
   href: string;
   external?: boolean;
-  tags: string[];
   image: { src: string; alt: string };
 };
 

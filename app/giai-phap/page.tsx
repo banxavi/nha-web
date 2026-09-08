@@ -29,7 +29,6 @@ export default function GiaiPhapPage() {
         <WhyChooseSection
           content={whyChooseContent}
           sectionId="tai-sao-chon-giai-phap"
-          ctaHref={solutionPageContent.banner.ctaHref}
         />
       </Reveal>
       <Reveal>
