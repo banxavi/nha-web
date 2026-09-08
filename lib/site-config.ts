@@ -235,6 +235,10 @@ export const footerContent = {
       { label: "Hướng dẫn sử dụng", href: "/#huong-dan" },
       { label: "Chính sách bảo mật", href: "/chinh-sach-bao-mat" },
       { label: "Điều khoản sử dụng", href: "/dieu-khoan-su-dung" },
+      {
+        label: "Tính năng & nội dung",
+        href: "/giai-phap#tinh-nang-noi-dung-website",
+      },
     ],
   },
   contactTitle: "Liên hệ",
@@ -1711,6 +1715,8 @@ export const solutionPageContent = {
   },
   banner: {
     id: "giai-phap-banner",
+    heading: "Giải pháp",
+    body: "Website được thiết kế hiện đại, cung cấp đầy đủ thông tin về dịch vụ, sản phẩm, tin tức và phương thức liên hệ. Tốc độ tải trang nhanh, giao diện thân thiện với người dùng, kết hợp các công cụ hỗ trợ SEO và tương tác trực tuyến giúp nâng cao trải nghiệm khách hàng.",
     image: {
       src: "/giai-phap/hero-banner-giai-phap.webp",
       alt: "Thiết kế và vận hành website chuyên nghiệp tại PML Vietnam",
@@ -2321,6 +2327,20 @@ const careQuotaRow = (
   careQuota(b),
   careQuota(c),
 ];
+const careAllIncluded: [CareWorkValue, CareWorkValue, CareWorkValue] = [
+  careIncluded,
+  careIncluded,
+  careIncluded,
+];
+const careFlagRow = (
+  a: boolean,
+  b: boolean,
+  c: boolean,
+): [CareWorkValue, CareWorkValue, CareWorkValue] => [
+  a ? careIncluded : careExcluded,
+  b ? careIncluded : careExcluded,
+  c ? careIncluded : careExcluded,
+];
 
 export const careWorkComparisonContent = {
   id: "chi-tiet-cong-viec-cham-soc",
@@ -2626,6 +2646,338 @@ export const websitePackageComparisonContent = {
             "Tính năng nâng cao",
             "Tính năng nâng cao và tích hợp hệ thống khác",
           ),
+        },
+      ],
+    },
+  ],
+} satisfies CareWorkComparisonContent;
+
+/**
+ * Bảng chi tiết tính năng và nội dung website (`/giai-phap`, `/thiet-ke-website`).
+ * Layout tái dùng CareWorkDetailsSection (accordion nhóm như chăm sóc website).
+ * Nguồn: `public/giai-phap/PML_Vietnam_Tính năng_nội dung_website.xlsx`.
+ */
+export const websiteFeaturesComparisonContent = {
+  id: "tinh-nang-noi-dung-website",
+  heading: "Tính năng và nội dung website",
+  tagline:
+    "So sánh tính năng tích hợp và hạn mức hoàn thiện nội dung theo từng gói PMLWeb.",
+  toggleShow: "Xem chi tiết tính năng và nội dung website",
+  toggleHide: "Ẩn chi tiết tính năng và nội dung website",
+  ctaLabel: "Đăng ký ngay",
+  includedLabel: "Bao gồm",
+  excludedLabel: "Không bao gồm",
+  mobileTabsLabel: "Chọn gói thiết kế website",
+  registerSubheading:
+    "Để lại thông tin - PML Vietnam sẽ liên hệ tư vấn gói thiết kế website phù hợp.",
+  packages: websitePackageComparisonContent.packages,
+  groups: [
+    {
+      id: "thong-tin-chung",
+      title: "Thông tin chung",
+      items: [
+        {
+          id: "noi-dung-luu-tru",
+          label: "Nội dung lưu trữ",
+          values: careQuotaRow("1.000 bài", "5.000 bài", "10.000 bài"),
+        },
+        {
+          id: "trang-bo-cuc-luu-tru",
+          label: "Trang bố cục lưu trữ",
+          values: careQuotaRow("50 trang", "100 trang", "250 trang"),
+        },
+        {
+          id: "mau-website",
+          label: "Mẫu website",
+          values: careQuotaRow(
+            "Hiện đại, cao cấp",
+            "Hiện đại, cao cấp",
+            "Hiện đại, cao cấp",
+          ),
+        },
+        {
+          id: "ngon-ngu-goi",
+          label: "Ngôn ngữ",
+          values: careQuotaRow("1", "2", "3+"),
+        },
+        {
+          id: "luu-tru-bang-thong",
+          label: "Lưu trữ và băng thông",
+          values: careQuotaRow(
+            "Không giới hạn",
+            "Không giới hạn",
+            "Không giới hạn",
+          ),
+        },
+        {
+          id: "sao-luu-du-lieu",
+          label: "Sao lưu dữ liệu",
+          values: careQuotaRow("Hàng tuần", "Hàng tuần", "Hàng tuần"),
+        },
+        {
+          id: "cong-cu-quan-tri",
+          label: "Công cụ quản trị website",
+          values: careAllIncluded,
+        },
+        {
+          id: "ssl",
+          label: "Chứng chỉ bảo mật SSL",
+          values: careAllIncluded,
+        },
+        {
+          id: "email-thong-bao",
+          label: "Email thông báo",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "nut-goi-dien",
+          label: "Nút gọi điện nhanh",
+          values: careAllIncluded,
+        },
+        {
+          id: "nut-chat",
+          label: "Nút chat trực tiếp",
+          values: careQuotaRow(
+            "Zalo, Messenger",
+            "Zalo, Messenger, trợ lý AI",
+            "Zalo, Messenger, trợ lý AI",
+          ),
+        },
+        {
+          id: "tuy-chinh-logo-banner",
+          label: "Tùy chỉnh logo, hero banner",
+          values: careAllIncluded,
+        },
+        {
+          id: "tuy-chinh-chan-trang",
+          label: "Tùy chỉnh nội dung chân trang",
+          values: careAllIncluded,
+        },
+        {
+          id: "them-tinh-nang",
+          label: "Thêm tính năng website",
+          values: careFlagRow(false, true, true),
+        },
+      ],
+    },
+    {
+      id: "cong-cu-seo",
+      title: "Công cụ hỗ trợ SEO",
+      items: [
+        {
+          id: "toi-uu-google",
+          label: "Tối ưu hiển thị Google",
+          values: careAllIncluded,
+        },
+        {
+          id: "so-do-website",
+          label: "Sơ đồ website & Lập chỉ mục",
+          values: careAllIncluded,
+        },
+        {
+          id: "loi-ky-thuat-seo",
+          label: "Kiểm soát lỗi kỹ thuật SEO",
+          values: careAllIncluded,
+        },
+        {
+          id: "trinh-soan-thao-seo",
+          label: "Trình soạn thảo chuẩn SEO",
+          values: careAllIncluded,
+        },
+        {
+          id: "seo-ban-hang",
+          label: "SEO cho website bán hàng",
+          values: careAllIncluded,
+        },
+        {
+          id: "google-analytics",
+          label: "Google Analytics",
+          values: careAllIncluded,
+        },
+        {
+          id: "google-search-console",
+          label: "Google Search Console",
+          values: careAllIncluded,
+        },
+        {
+          id: "meta-pixel",
+          label: "Meta Pixel",
+          values: careAllIncluded,
+        },
+      ],
+    },
+    {
+      id: "quan-ly-ban-hang",
+      title: "Quản lý bán hàng",
+      items: [
+        {
+          id: "san-pham",
+          label: "Sản phẩm",
+          values: careAllIncluded,
+        },
+        {
+          id: "danh-muc-san-pham",
+          label: "Danh mục sản phẩm",
+          values: careAllIncluded,
+        },
+        {
+          id: "thuoc-tinh-san-pham",
+          label: "Thuộc tính sản phẩm",
+          values: careAllIncluded,
+        },
+        {
+          id: "gio-hang",
+          label: "Giỏ hàng",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "thanh-toan",
+          label: "Thanh toán",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "don-hang",
+          label: "Đơn hàng",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "ton-kho",
+          label: "Tồn kho",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "khach-hang",
+          label: "Khách hàng",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "khuyen-mai",
+          label: "Khuyến mãi",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "bao-cao-kinh-doanh",
+          label: "Báo cáo kinh doanh",
+          values: careFlagRow(false, false, true),
+        },
+        {
+          id: "chuyen-khoan-qr",
+          label: "Chuyển khoản ngân hàng (Mã QR)",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "cong-thanh-toan",
+          label: "Kết nối cổng thanh toán",
+          values: careFlagRow(false, true, true),
+        },
+        {
+          id: "don-vi-van-chuyen",
+          label: "Kết nối đơn vị vận chuyển",
+          values: careFlagRow(false, false, true),
+        },
+      ],
+    },
+    {
+      id: "hoan-thien-noi-dung",
+      title: "Hoàn thiện nội dung",
+      items: [
+        {
+          id: "nhap-lieu",
+          label: "Nhập liệu nội dung",
+          values: careQuotaRow("60 ĐVT", "150 ĐVT", "250 ĐVT"),
+        },
+        {
+          id: "thiet-ke-banner",
+          label: "Thiết kế Banner / Poster",
+          values: careQuotaRow("3 banner", "6 banner", "12 banner"),
+        },
+        {
+          id: "doi-mau-kieu-chu",
+          label: "Thay đổi màu sắc, kiểu chữ",
+          values: careQuotaRow("1 lần", "3 lần", "5 lần"),
+        },
+        {
+          id: "doi-trang-bo-cuc",
+          label: "Thay đổi trang bố cục",
+          values: careQuotaRow("1 lần", "3 lần", "5 lần"),
+        },
+      ],
+    },
+    {
+      id: "xu-ly-hinh-anh",
+      title: "Xử lý hình ảnh",
+      items: [
+        {
+          id: "doi-kich-thuoc-anh",
+          label: "Thay đổi kích thước ảnh",
+          values: careAllIncluded,
+        },
+        {
+          id: "tang-chat-luong-anh",
+          label: "Tăng chất lượng ảnh",
+          values: careAllIncluded,
+        },
+        {
+          id: "tim-kiem-hinh-anh",
+          label: "Tìm kiếm hình ảnh",
+          values: careAllIncluded,
+        },
+        {
+          id: "hieu-ung-anh-sang",
+          label: "Chỉnh hiệu ứng ánh sáng",
+          values: careAllIncluded,
+        },
+        {
+          id: "cat-nen-anh",
+          label: "Cắt nền ảnh",
+          values: careAllIncluded,
+        },
+        {
+          id: "chen-logo-anh",
+          label: "Chèn logo vào ảnh",
+          values: careAllIncluded,
+        },
+      ],
+    },
+    {
+      id: "sang-tao-noi-dung",
+      title: "Sáng tạo nội dung",
+      items: [
+        {
+          id: "sang-tao-noi-dung-website",
+          label: "Sáng tạo nội dung website",
+          values: careAllIncluded,
+        },
+        {
+          id: "dang-noi-dung",
+          label: "Đăng nội dung lên website",
+          values: careAllIncluded,
+        },
+      ],
+    },
+    {
+      id: "kenh-ho-tro",
+      title: "Kênh hỗ trợ kỹ thuật",
+      items: [
+        {
+          id: "ho-tro-email",
+          label: "Email",
+          values: careAllIncluded,
+        },
+        {
+          id: "ho-tro-dien-thoai",
+          label: "Điện thoại",
+          values: careAllIncluded,
+        },
+        {
+          id: "ho-tro-zalo",
+          label: "Zalo chat",
+          values: careAllIncluded,
+        },
+        {
+          id: "chia-se-man-hinh",
+          label: "Chia sẻ màn hình",
+          values: careAllIncluded,
         },
       ],
     },

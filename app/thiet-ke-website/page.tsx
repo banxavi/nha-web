@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
-import { websiteServiceContent } from "@/lib/site-config";
+import { websiteFeaturesComparisonContent, websiteServiceContent } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Thiết kế website | PML Vietnam",
@@ -20,6 +20,7 @@ export default function ThietKeWebsitePage() {
         why: websiteServiceContent.why,
         whySectionId: "tai-sao-chon-website",
         details: websiteServiceContent.details,
+        workComparison: websiteFeaturesComparisonContent,
         process: websiteServiceContent.process,
         processSectionId: "quy-trinh-website",
         faq: websiteServiceContent.faq,

@@ -19,7 +19,7 @@ const encodeSansExpanded = Encode_Sans_Expanded({
 });
 
 export const metadata: Metadata = {
-  title: "PML Vietnam | Giải pháp, Chuyển đổi số cùng doanh nghiệp",
+  title: "PML Vietnam | Giải pháp website, Chuyển đổi số cùng doanh nghiệp",
   description:
     "PML Vietnam thiết kế website chuyên nghiệp, chuẩn SEO và cung cấp hệ sinh thái chuyển đổi số toàn diện, giúp doanh nghiệp bứt phá doanh thu môi trường số.",
   verification: {

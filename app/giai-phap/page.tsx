@@ -8,6 +8,7 @@ import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   solutionPageContent,
+  websiteFeaturesComparisonContent,
   websitePackageComparisonContent,
   whyChooseContent,
 } from "@/lib/site-config";
@@ -37,6 +38,12 @@ export default function GiaiPhapPage() {
       <Reveal>
         <CareWorkDetailsSection
           content={websitePackageComparisonContent}
+          showToggle={false}
+        />
+      </Reveal>
+      <Reveal>
+        <CareWorkDetailsSection
+          content={websiteFeaturesComparisonContent}
           showToggle={false}
         />
       </Reveal>
