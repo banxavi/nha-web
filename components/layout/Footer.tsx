@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useId, useState } from "react";
 import {
   footerContent,
   footerLogoPath,
@@ -18,13 +15,13 @@ function cx(...parts: Array<string | undefined | false>) {
 
 /**
  * Footer #9–#14 — nền #1E293B.
- * Mobile: accordion, nét xám nhạt giữa các mục. Desktop: 5 cột.
+ * Mobile: list thẳng dưới heading, gạch cam sát chữ. Tablet trở lên: không gạch.
  */
 export function Footer() {
   return (
     <footer className="mt-auto bg-footer text-white">
       <div className="mx-auto max-w-site px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-8">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <BrandBlock className="lg:col-span-3" />
           <FooterLinkColumn
             className="lg:col-span-2"
@@ -42,16 +39,9 @@ export function Footer() {
             links={footerContent.help.links}
           />
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
-              {footerContent.contactTitle}
-            </h3>
+            <FooterHeading>{footerContent.contactTitle}</FooterHeading>
             <ContactList className="mt-4" />
           </div>
-        </div>
-
-        <div className="lg:hidden">
-          <BrandBlock />
-          <FooterAccordion />
         </div>
       </div>
 
@@ -61,6 +51,14 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="w-fit border-b border-cta pb-2 text-sm font-semibold tracking-wide text-cta uppercase md:w-auto md:border-0 md:pb-0 md:text-white">
+      {children}
+    </h3>
   );
 }
 
@@ -100,77 +98,6 @@ function BrandBlock({ className }: { className?: string }) {
   );
 }
 
-function FooterAccordion() {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const uid = useId();
-
-  const panels = [
-    {
-      id: "services",
-      title: footerContent.servicesTitle,
-      body: <FooterLinkList links={serviceNavLinks} />,
-    },
-    {
-      id: "info",
-      title: footerContent.info.title,
-      body: <FooterLinkList links={footerContent.info.links} />,
-    },
-    {
-      id: "help",
-      title: footerContent.help.title,
-      body: <FooterLinkList links={footerContent.help.links} />,
-    },
-    {
-      id: "contact",
-      title: footerContent.contactTitle,
-      body: <ContactList />,
-    },
-  ];
-
-  return (
-    <div className="mt-8">
-      {panels.map((panel) => {
-        const open = openId === panel.id;
-        const panelId = `${uid}-${panel.id}`;
-        const buttonId = `${panelId}-button`;
-
-        return (
-          <div key={panel.id} className="border-b border-white/15">
-            <button
-              id={buttonId}
-              type="button"
-              aria-expanded={open}
-              aria-controls={panelId}
-              onClick={() => setOpenId(open ? null : panel.id)}
-              className="flex w-full items-center justify-between gap-4 py-4 text-left"
-            >
-              <span className="text-sm font-semibold tracking-wide text-white uppercase">
-                {panel.title}
-              </span>
-              <span className="text-white" aria-hidden>
-                {open ? <MinusIcon /> : <PlusIcon />}
-              </span>
-            </button>
-            <div
-              id={panelId}
-              role="region"
-              aria-labelledby={buttonId}
-              className={cx(
-                "grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-                open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-              )}
-            >
-              <div className="overflow-hidden">
-                <div className="pb-4">{panel.body}</div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 function FooterLinkColumn({
   title,
   links,
@@ -182,9 +109,7 @@ function FooterLinkColumn({
 }) {
   return (
     <div className={className}>
-      <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
-        {title}
-      </h3>
+      <FooterHeading>{title}</FooterHeading>
       <FooterLinkList links={links} className="mt-4" />
     </div>
   );
@@ -257,32 +182,6 @@ function ContactList({ className }: { className?: string }) {
         </a>
       </li>
     </ul>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5" aria-hidden>
-      <path
-        d="M10 4v12M4 10h12"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function MinusIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5" aria-hidden>
-      <path
-        d="M4 10h12"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
 

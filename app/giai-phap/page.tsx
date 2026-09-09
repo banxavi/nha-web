@@ -35,16 +35,20 @@ export default function GiaiPhapPage() {
         <SolutionProjectsSection />
       </Reveal>
       <Reveal>
+        <div className=" bg-bg-secondary">
         <CareWorkDetailsSection
           content={websitePackageComparisonContent}
           showToggle={false}
         />
+        </div>
+        
       </Reveal>
       <Reveal>
-        <CareWorkDetailsSection
-          content={websiteFeaturesComparisonContent}
-          showToggle={false}
-        />
+          <CareWorkDetailsSection
+            content={websiteFeaturesComparisonContent}
+            showToggle={false}
+            bgColor="bg-white"
+          />
       </Reveal>
       <Reveal>
         <ServicesContactSection

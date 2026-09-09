@@ -1714,13 +1714,17 @@ export const solutionPageContent = {
   },
   banner: {
     id: "giai-phap-banner",
-    heading: "Giải pháp",
-    body: "Website được thiết kế hiện đại, cung cấp đầy đủ thông tin về dịch vụ, sản phẩm, tin tức và phương thức liên hệ. Tốc độ tải trang nhanh, giao diện thân thiện với người dùng, kết hợp các công cụ hỗ trợ SEO và tương tác trực tuyến giúp nâng cao trải nghiệm khách hàng.",
     image: {
       src: "/giai-phap/hero-banner-giai-phap.webp",
       alt: "Thiết kế và vận hành website chuyên nghiệp tại PML Vietnam",
       width: 1920,
       height: 620,
+    },
+    imageMobile: {
+      src: "/giai-phap/hero-banner-giai-phap-mobile.webp",
+      alt: "Thiết kế và vận hành website chuyên nghiệp tại PML Vietnam",
+      width: 768,
+      height: 768,
     },
   },
   needs: {
@@ -2562,11 +2566,7 @@ export const websitePackageComparisonContent = {
   registerSubheading:
     "Để lại thông tin - PML Vietnam sẽ liên hệ tư vấn gói thiết kế website phù hợp.",
   flat: true,
-  footerLink: {
-    prefix: "Xem chi tiết về tính năng và nội dung website ",
-    linkLabel: "tại đây",
-    href: "/thiet-ke-website",
-  },
+
   packages: [
     {
       id: "standard",
@@ -2658,7 +2658,7 @@ export const websitePackageComparisonContent = {
  */
 export const websiteFeaturesComparisonContent = {
   id: "tinh-nang-noi-dung-website",
-  heading: "Tính năng và nội dung website",
+  heading: "Chi tiết tính năng và nội dung website",
   tagline:
     "So sánh tính năng tích hợp và hạn mức hoàn thiện nội dung theo từng gói PMLWeb.",
   toggleShow: "Xem chi tiết tính năng và nội dung website",

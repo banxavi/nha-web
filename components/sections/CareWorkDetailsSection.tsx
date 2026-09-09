@@ -18,6 +18,7 @@ type CareWorkDetailsSectionProps = {
   content: CareWorkComparisonContent;
   /** `false` — luôn hiện bảng, ẩn nút xem/ẩn chi tiết. */
   showToggle?: boolean;
+  bgColor?: string;
 };
 
 /**
@@ -27,6 +28,7 @@ type CareWorkDetailsSectionProps = {
 export function CareWorkDetailsSection({
   content,
   showToggle = true,
+  bgColor = "bg-bg-secondary",   
 }: CareWorkDetailsSectionProps) {
   const {
     id,
@@ -44,6 +46,7 @@ export function CareWorkDetailsSection({
     notes,
     flat = false,
     footerLink,
+
   } = content;
 
   const uid = useId();
@@ -75,7 +78,7 @@ export function CareWorkDetailsSection({
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="scroll-mt-24 bg-bg-secondary"
+      className={`scroll-mt-24 ${bgColor}`}
     >
       <div className="mx-auto max-w-site px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <SectionHeader
