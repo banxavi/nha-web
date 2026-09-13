@@ -251,8 +251,8 @@ export const logoPath = "/logo/pmlvietnam_logo_header.webp";
 export const footerLogoPath = "/logo/pmlvietnam_logo_header.webp";
 
 /**
- * Header search — gợi ý hardcode (ref luvini.vn dropdown).
- * Lọc có dấu / không dấu ở `Header` (normalize NFD).
+ * Header search — gợi ý khi chưa gõ (ref luvini.vn dropdown).
+ * Lọc có dấu / không dấu và catalog trang nằm ở `lib/search.ts`.
  */
 export type SearchSuggestion = {
   id: string;
@@ -295,13 +295,6 @@ export const searchPopularSuggestions: SearchSuggestion[] = [
     id: "nhan-dien-thuong-hieu",
     label: "Thiết kế nhận diện thương hiệu",
     href: "/thiet-ke-nhan-dien-thuong-hieu",
-  },
-  { id: "mau-giao-dien", label: "Mẫu giao diện website", href: "/san-pham" },
-  { id: "quy-trinh", label: "Quy trình làm việc", href: "/#quy-trinh" },
-  {
-    id: "dieu-khoan",
-    label: "Điều khoản sử dụng",
-    href: "/dieu-khoan-su-dung",
   },
 ];
 
@@ -519,13 +512,33 @@ export type SampleItem = {
 const INDUSTRY_GROUP_IMAGES: Partial<Record<string, string>> = {
   "dich-vu-thuong-mai":
     "/san-pham/dich-vu-thuong-mai/dich_vu_thuong_mai.webp",
-  "ban-le-tmdt": "/san-pham/thuong_mai_dien_tu/thuong_mai_dien_tu.webp",
-  "xay-dung-bds":
-    "/san-pham/xay_dung_bat_dong_san/xay_dung_bat_dong_san.webp",
-  "du-lich-khach-san":
-    "/san-pham/du-lich-khach-san/du_lich_khach_san.webp",
-  "dich-vu-chuyen-nghiep":
-    "/san-pham/thuong_hieu_ca_nhan/thuong_hieu_ca_nhan.webp",
+  "ban-le-tmdt": encodeURI(
+    "/Tat_ca_website/Bán lẻ_thương_mại_điện tử/cua-hang-thoi-trang.webp",
+  ),
+  "san-xuat-cong-nghiep": encodeURI(
+    "/Tat_ca_website/Sản xuất công nghiệp/xuong-may-mac.webp",
+  ),
+  "xay-dung-bds": encodeURI(
+    "/Tat_ca_website/Xây dựng bất động sản/dai-ly-bat-dong-san.webp",
+  ),
+  "giao-duc-dao-tao": encodeURI(
+    "/Tat_ca_website/Giáo dục đào tạo/truong-mau-non-tieu-hoc-trung-hoc.webp",
+  ),
+  "y-te-suc-khoe": encodeURI(
+    "/Tat_ca_website/Y tế sức khỏe/phong-kham-da-khoa.webp",
+  ),
+  "du-lich-khach-san": encodeURI(
+    "/Tat_ca_website/Du lịch khách sạn/hotel-resort.webp",
+  ),
+  "luat-tai-chinh": encodeURI(
+    "/Tat_ca_website/Luật tài chính/cty-luat-van-phong-luat-su.webp",
+  ),
+  "cong-nghe-dich-vu-so": encodeURI(
+    "/Tat_ca_website/Công nghệ Dịch vụ số/cty-phan-mem.webp",
+  ),
+  "dich-vu-chuyen-nghiep": encodeURI(
+    "/Tat_ca_website/Dịch vụ chuyên nghiệp/thuong-hieu-ca-nhan.webp",
+  ),
 };
 
 /** Ảnh section “Mẫu website nổi bật” — `pc/` từ md, `mobile/` dưới md. */
@@ -631,7 +644,6 @@ export const websiteSamplesContent: {
  * Desktop: lưới 5 cột; hàng đủ 4 item = 1 wide (span 2) + 3 small (span 1).
  * Hàng cuối có thể 2 item (nhóm 9–10).
  * Carousel `<` `>` + auto next 4s khi >1 page.
- * TODO: thay ảnh placeholder bằng mẫu website thật theo từng nhóm.
  */
 export type AllSampleSize = "wide" | "small";
 
@@ -718,7 +730,6 @@ export const allWebsiteSamplesContent = {
 /**
  * Trang `/san-pham` — catalog tất cả mẫu giao diện theo ngành nghề
  * (docs/10-nhom-nganh.md). Mỗi nghề = 1 mẫu; lọc theo nhóm ngành.
- * TODO: thay ảnh placeholder bằng mockup thật theo từng nghề.
  */
 export type ProductSampleItem = {
   id: string;
@@ -752,6 +763,15 @@ const TEMPLATE_LIVE_DEMOS: Record<string, string> = {
   "Thực phẩm & Đồ uống": "https://luvini.vn",
 };
 
+const TEMPLATE_IMAGE_SIZE = { width: 1080, height: 720 } as const;
+
+function templatePreview(folder: string, file: string) {
+  return {
+    src: encodeURI(`/Tat_ca_website/${folder}/${file}`),
+    ...TEMPLATE_IMAGE_SIZE,
+  };
+}
+
 /** Screenshot / thumbnail theo nghề — hover-scroll trên trang chi tiết. */
 const TEMPLATE_PREVIEW_IMAGES: Record<
   string,
@@ -759,44 +779,173 @@ const TEMPLATE_PREVIEW_IMAGES: Record<
 > = {
   "Nhà hàng, quán ăn": {
     src: "/san-pham/dich-vu-thuong-mai/nha_hang_quan_an.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Quán cà phê, trà sữa": {
     src: "/san-pham/dich-vu-thuong-mai/quan_cafe_tra_sua.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Spa, thẩm mỹ viện": {
     src: "/san-pham/dich-vu-thuong-mai/spa_tham_my_vien.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Salon tóc, nail": {
     src: "/san-pham/dich-vu-thuong-mai/salon_toc_nail.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Dịch vụ giặt ủi": {
     src: "/san-pham/dich-vu-thuong-mai/dich_vu_giat_ui.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Trung tâm gym, yoga": {
     src: "/san-pham/dich-vu-thuong-mai/trung_tam_gym_yoga.webp",
-    width: 1080,
-    height: 720,
+    ...TEMPLATE_IMAGE_SIZE,
   },
   "Thực phẩm & Đồ uống": {
     src: "/san-pham/ban-le-&-tmdt/luvini.png",
     width: 1651,
     height: 4240,
   },
-  "Cửa hàng thời trang": {
-    src: "/san-pham/ban-le-&-tmdt/cua_hang_thoi_trang_nho.png",
-    width: 1651,
-    height: 4240,
-  },
+  "Cửa hàng thời trang": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-thoi-trang.webp",
+  ),
+  "Cửa hàng mỹ phẩm": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua_hang_my_pham.webp",
+  ),
+  "Cửa hàng thú cưng": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-thu-cung.webp",
+  ),
+  "Siêu thị mini, tạp hóa": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "sieu-thi-mini-tap-hoa.webp",
+  ),
+  "Cửa hàng hoa, cây cảnh": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-hoa-cay-canh.webp",
+  ),
+  "Cửa hàng đồ gia dụng": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-do-gia-dung.webp",
+  ),
+  "Cửa hàng thiết bị điện tử": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-thiet-bi-dien-tu.webp",
+  ),
+  "Cửa hàng điện máy": templatePreview(
+    "Bán lẻ_thương_mại_điện tử",
+    "cua-hang-dien-may.webp",
+  ),
+  "Xưởng may mặc": templatePreview(
+    "Sản xuất công nghiệp",
+    "xuong-may-mac.webp",
+  ),
+  "Nhà máy thực phẩm chế biến": templatePreview(
+    "Sản xuất công nghiệp",
+    "nha-may-thuc-pham-che-bien.webp",
+  ),
+  "Xưởng gỗ & nội thất": templatePreview(
+    "Sản xuất công nghiệp",
+    "xuong-go-nôi-that.webp",
+  ),
+  "Sản xuất bao bì, in ấn": templatePreview(
+    "Sản xuất công nghiệp",
+    "san-xuat-bao-bi-in-an.webp",
+  ),
+  "Cơ khí, kim loại": templatePreview(
+    "Sản xuất công nghiệp",
+    "co-khi-kim-loai.webp",
+  ),
+  "Công ty xây dựng, thiết kế nội thất": templatePreview(
+    "Xây dựng bất động sản",
+    "cty-xay-dung-thiet-ke-noi-that.webp",
+  ),
+  "Đại lý bất động sản": templatePreview(
+    "Xây dựng bất động sản",
+    "dai-ly-bat-dong-san.webp",
+  ),
+  "Dự án khu đô thị, căn hộ": templatePreview(
+    "Xây dựng bất động sản",
+    "du-an-khu-do-thi-can-ho.webp",
+  ),
+  "Cho thuê văn phòng, nhà ở": templatePreview(
+    "Xây dựng bất động sản",
+    "cho-thue-van-phong-nha-o.webp",
+  ),
+  "Trường mầm non, tiểu học, trung học": templatePreview(
+    "Giáo dục đào tạo",
+    "truong-mau-non-tieu-hoc-trung-hoc.webp",
+  ),
+  "Trung tâm ngoại ngữ": templatePreview(
+    "Giáo dục đào tạo",
+    "trung-tam-ngoai-ngu.webp",
+  ),
+  "Trung tâm đào tạo kỹ năng": templatePreview(
+    "Giáo dục đào tạo",
+    "trung-tam-dao-tao-ky-nang.webp",
+  ),
+  "Gia sư, dạy kèm": templatePreview(
+    "Giáo dục đào tạo",
+    "gia-su-day-kem.webp",
+  ),
+  "Phòng khám đa khoa": templatePreview(
+    "Y tế sức khỏe",
+    "phong-kham-da-khoa.webp",
+  ),
+  "Nhà thuốc, dược phẩm": templatePreview(
+    "Y tế sức khỏe",
+    "nha-thuoc-duoc-pham.webp",
+  ),
+  "Thiết bị y tế": templatePreview("Y tế sức khỏe", "thiet-bi-y-te.webp"),
+  "Trung tâm vật lý trị liệu": templatePreview(
+    "Y tế sức khỏe",
+    "trung-tam-tam-ly-tri-lieu.webp",
+  ),
+  "Công ty du lịch, lữ hành": templatePreview(
+    "Du lịch khách sạn",
+    "du-lich-lu-hanh.webp",
+  ),
+  "Khách sạn, resort": templatePreview(
+    "Du lịch khách sạn",
+    "hotel-resort.webp",
+  ),
+  "Homestay, căn hộ dịch vụ": templatePreview(
+    "Du lịch khách sạn",
+    "homestay-can-ho-dich-vu.webp",
+  ),
+  "Địa điểm vui chơi, giải trí": templatePreview(
+    "Du lịch khách sạn",
+    "dia-chi-vui-choi-giai-tri.webp",
+  ),
+  "Công ty luật, văn phòng luật sư": templatePreview(
+    "Luật tài chính",
+    "cty-luat-van-phong-luat-su.webp",
+  ),
+  "Tư vấn tài chính, đầu tư": templatePreview(
+    "Luật tài chính",
+    "tu-van-tai-chinh-dau-tu.webp",
+  ),
+  "Bảo hiểm": templatePreview("Luật tài chính", "bao-hiem.webp"),
+  "Kế toán, thuế": templatePreview("Luật tài chính", "ke-toan-thue.webp"),
+  "Công ty phần mềm": templatePreview(
+    "Công nghệ Dịch vụ số",
+    "cty-phan-mem.webp",
+  ),
+  "Dịch vụ IT": templatePreview("Công nghệ Dịch vụ số", "dich-vu-it.webp"),
+  "Marketing số": templatePreview(
+    "Công nghệ Dịch vụ số",
+    "marketing-so.webp",
+  ),
+  "AI và tự động hóa": templatePreview(
+    "Công nghệ Dịch vụ số",
+    "ai-tu-dong-hoa.webp",
+  ),
+  "Thương hiệu cá nhân": templatePreview(
+    "Dịch vụ chuyên nghiệp",
+    "thuong-hieu-ca-nhan.webp",
+  ),
 };
 
 function buildProductSamples(groups: IndustryGroup[]): ProductSampleItem[] {
@@ -939,6 +1088,7 @@ export function getRelatedProductSamples(
  * Task 4 — Tin tức / Sự kiện mới nhất.
  * Carousel trang chủ: 5 item/hàng. Listing đầy đủ tại `/tin-tuc`.
  * Chi tiết bài viết tại `/tin-tuc/[slug]` khi có nội dung trong `newsArticles`.
+ * Item chưa có bài chi tiết vẫn giữ trong `items`; site chỉ hiện `publishedNewsItems`.
  * TODO: thay title/excerpt/date/image bằng bài thật khi có CMS / content.
  */
 export type NewsItem = {
@@ -955,6 +1105,10 @@ export type NewsItem = {
 /** Slug bài viết đầy đủ đầu tiên (docx PML). */
 export const NEWS_ARTICLE_SLUG_TRENDS_2026 =
   "xu-huong-thiet-ke-website-doanh-nghiep-2026" as const;
+
+/** Slug bài viết SEO (`public/tin-tuc/vi-sao`). */
+export const NEWS_ARTICLE_SLUG_SEO =
+  "vi-sao-website-chuan-seo-giup-tang-khach-hang-tiem-nang" as const;
 
 export function newsArticleHref(slug: string) {
   return `/tin-tuc/${slug}`;
@@ -985,13 +1139,13 @@ export const newsContent = {
       id: "news-2",
       title: "Vì sao website chuẩn SEO giúp tăng khách hàng tiềm năng",
       excerpt:
-        "TODO: Tóm tắt ngắn — cấu trúc nội dung, tốc độ PageSpeed và trải nghiệm mobile.",
+        "Website đẹp chưa đủ nếu khách hàng không tìm thấy bạn trên Google. Chuẩn SEO giúp doanh nghiệp xuất hiện đúng lúc khách đang có nhu cầu.",
       date: "28/07/2026",
-      href: "/tin-tuc",
+      href: newsArticleHref(NEWS_ARTICLE_SLUG_SEO),
       category: "SEO",
       image: {
-        src: "/samples/sample-2.svg",
-        alt: "Minh họa tin tức SEO website",
+        src: "/tin-tuc/vi-sao/thumbnail-tin-tuc-chuan-seo.webp",
+        alt: "Vì sao website chuẩn SEO giúp khách hàng dễ tìm thấy doanh nghiệp",
       },
     },
     {
@@ -1118,7 +1272,7 @@ export const newsPageContent = {
 
 /**
  * Bài viết chi tiết tại `/tin-tuc/[slug]`.
- * Nội dung từ `public/tin-tuc/PML Vietnam_Tin tức.docx`.
+ * Nguồn: `public/tin-tuc/PML Vietnam_Tin tức.docx`, `public/tin-tuc/vi-sao`.
  */
 export type NewsArticleBlock =
   | { type: "paragraph"; text: string }
@@ -1329,11 +1483,223 @@ export const newsArticles: NewsArticle[] = [
     },
   ] satisfies NewsArticleBlock[],
   },
+  {
+    slug: NEWS_ARTICLE_SLUG_SEO,
+    meta: {
+      title:
+        "Vì sao website chuẩn SEO giúp khách hàng dễ tìm thấy doanh nghiệp của bạn?",
+      description:
+        "Website đẹp chưa đủ nếu khách hàng không tìm thấy bạn trên Google. Tìm hiểu vì sao website chuẩn SEO giúp doanh nghiệp xuất hiện đúng lúc khách đang có nhu cầu.",
+    },
+    banner: {
+      src: "/tin-tuc/banner_tin_tuc.webp",
+      alt: "Banner tin tức - vì sao website chuẩn SEO giúp tăng khách hàng tiềm năng",
+      badge: "SEO",
+      publishedAt: "10:14 - 28/07/2026",
+      publishedAtIso: "2026-07-28T10:14:00+07:00",
+    },
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Bạn đã có một website đẹp, đầy đủ thông tin về sản phẩm và dịch vụ nhưng có một câu hỏi quan trọng là: khách hàng có dễ dàng tìm thấy bạn khi họ đang cần sản phẩm hoặc dịch vụ của bạn không?",
+      },
+      {
+        type: "paragraph",
+        text: "Hãy thử hình dung một tình huống rất đơn giản. Một khách hàng đang cần thiết kế website cho doanh nghiệp, họ mở Google và tìm kiếm \"thiết kế website chuyên nghiệp\".",
+      },
+      {
+        type: "paragraph",
+        text: "Nếu website của bạn xuất hiện ở những vị trí đầu tiên, khách hàng có thể bấm vào, xem dịch vụ, tham khảo sản phẩm và liên hệ với bạn. Nhưng nếu website nằm ở trang 5, trang 10 hoặc thậm chí Google không hiểu rõ website của bạn đang cung cấp dịch vụ gì, khách hàng gần như sẽ không nhìn thấy bạn.",
+      },
+      {
+        type: "paragraph",
+        text: "Đó chính là lý do website chuẩn SEO quan trọng. SEO không chỉ là câu chuyện dành cho lập trình viên hay chuyên gia marketing. Hiểu đơn giản, SEO giúp website của bạn được Google hiểu rõ hơn và giúp khách hàng dễ tìm thấy bạn hơn.",
+      },
+      {
+        type: "image",
+        src: "/tin-tuc/vi-sao/tin-tuc-website-chuan-seo.webp",
+        alt: "Search engine optimization giúp khách hàng tìm thấy website doanh nghiệp",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "1. Khách hàng tìm kiếm - website của bạn có xuất hiện không?",
+      },
+      {
+        type: "paragraph",
+        text: "Ngày nay, trước khi mua một sản phẩm hoặc sử dụng một dịch vụ, rất nhiều người có thói quen lên Google tìm kiếm. Ví dụ: \"thiết kế website giá bao nhiêu?\", \"thiết kế logo bao nhiêu tiền?\", \"thiết kế website theo yêu cầu?\", \"giá chăm sóc website\", \"thiết kế website gần Tân Bình, uy tín?\".",
+      },
+      {
+        type: "paragraph",
+        text: "Người tìm kiếm những từ khóa này thường đã có nhu cầu thật. Nếu website của bạn xuất hiện đúng lúc họ đang tìm kiếm, bạn có cơ hội tiếp cận một khách hàng đang quan tâm đến sản phẩm hoặc dịch vụ của mình. Ngược lại, nếu website không xuất hiện hoặc xuất hiện quá xa, khách hàng sẽ tìm đến một doanh nghiệp khác.",
+      },
+      {
+        type: "paragraph",
+        text: "Vì vậy, một website đẹp nhưng khó được tìm thấy cũng giống như một cửa hàng được trang trí rất đẹp nhưng nằm ở nơi khách hàng không biết đến.",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "2. Website đẹp chưa chắc đã mang lại khách hàng",
+      },
+      {
+        type: "paragraph",
+        text: "Nhiều doanh nghiệp khi làm website thường quan tâm trước tiên đến giao diện: \"Website phải đẹp.\" Điều đó hoàn toàn đúng, nhưng một website hiệu quả cần nhiều hơn thế. Khách hàng cần: Tìm thấy, hiểu, tin tưởng, liên hệ, rồi mới mua hàng.",
+      },
+      {
+        type: "paragraph",
+        text: "Nếu website chỉ đẹp mà khách hàng không tìm thấy thì website chưa phát huy được hết giá trị. Ví dụ, bạn có một showroom rất đẹp, sản phẩm tốt và nhân viên tư vấn chuyên nghiệp. Nhưng nếu không có biển hiệu, không có địa chỉ rõ ràng và khách hàng không biết showroom nằm ở đâu thì việc có một cửa hàng đẹp cũng không giúp bạn bán được nhiều hàng. Website cũng tương tự. SEO chính là một phần giúp khách hàng tìm được \"cửa hàng\" của bạn trên Google.",
+      },
+      {
+        type: "image",
+        src: "/tin-tuc/vi-sao/tin-tuc-seo-khach-hang-can.webp",
+        alt: "Hành trình khách hàng từ tìm thấy, hiểu, tin tưởng, liên hệ đến mua hàng",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "3. Website chuẩn SEO giúp Google hiểu bạn đang bán gì",
+      },
+      {
+        type: "paragraph",
+        text: "Google phải xử lý hàng triệu website mỗi ngày. Muốn đưa một website đến đúng người tìm kiếm, Google cần hiểu website này nói về lĩnh vực gì, doanh nghiệp đang cung cấp sản phẩm hoặc dịch vụ nào, nội dung nào quan trọng, trang nào trả lời tốt câu hỏi của khách hàng, và website có dễ sử dụng hay không.",
+      },
+      {
+        type: "paragraph",
+        text: "Một website được xây dựng tốt sẽ giúp Google dễ hiểu những thông tin này hơn. Ví dụ, nếu bạn kinh doanh dịch vụ thiết kế website, website nên thể hiện rõ: bạn là ai, bạn cung cấp dịch vụ gì, dành cho ai, bạn giải quyết vấn đề gì, và khách hàng có thể liên hệ như thế nào. Khi nội dung được tổ chức rõ ràng, cả Google và khách hàng đều dễ hiểu website của bạn hơn.",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "4. Khách hàng ở lại lâu hơn khi website dễ sử dụng",
+      },
+      {
+        type: "paragraph",
+        text: "Bạn có bao giờ bấm vào một website rồi thoát ngay vì trang tải quá lâu? Hoặc trên điện thoại chữ quá nhỏ, hình ảnh bị lệch, nút liên hệ khó tìm? Đây là những trải nghiệm khiến khách hàng nhanh chóng rời khỏi website.",
+      },
+      {
+        type: "paragraph",
+        text: "Một website chuẩn SEO không chỉ quan tâm đến việc Google có tìm thấy website hay không, mà còn quan tâm đến trải nghiệm của người truy cập. Ví dụ: website tải nhanh, hiển thị tốt trên điện thoại, nội dung dễ đọc, hình ảnh phù hợp, menu dễ sử dụng, thông tin liên hệ rõ ràng, nút gọi điện, đăng ký hoặc gửi yêu cầu dễ tìm.",
+      },
+      {
+        type: "paragraph",
+        text: "Hãy tưởng tượng bạn bước vào một cửa hàng. Nếu mọi thứ được sắp xếp rõ ràng, nhân viên dễ tìm, sản phẩm dễ xem và thanh toán thuận tiện, bạn sẽ có xu hướng ở lại lâu hơn. Website cũng vậy. Trải nghiệm tốt giúp khách hàng dễ tiếp tục tìm hiểu và thực hiện hành động hơn.",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "5. Khách hàng không phải lúc nào cũng tìm kiếm để mua ngay",
+      },
+      {
+        type: "paragraph",
+        text: "Đây là một điểm rất quan trọng. Một người tìm kiếm trên Google hôm nay chưa chắc sẽ mua hàng ngay hôm nay. Ví dụ, một chủ doanh nghiệp đang tìm \"Website doanh nghiệp cần có những gì?\" Họ có thể chưa có ý định thuê đơn vị thiết kế website ngay lập tức. Nhưng nếu họ đọc được một bài viết hữu ích trên website của bạn, hiểu thêm về website và nhận thấy bạn có chuyên môn, họ có thể nhớ đến thương hiệu của bạn. Một thời gian sau, khi có nhu cầu làm website, họ có thể quay lại tìm bạn. Đó là cách nội dung trên website từng bước xây dựng sự tin tưởng với khách hàng.",
+      },
+      {
+        type: "paragraph",
+        text: "Thay vì chỉ nói \"Hãy mua dịch vụ của chúng tôi\", bạn đang giúp khách hàng hiểu vấn đề, tìm giải pháp, biết đến doanh nghiệp, tin tưởng, rồi liên hệ khi có nhu cầu.",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "6. Website có thể tiếp tục tìm kiếm khách hàng ngay cả khi bạn không chạy quảng cáo",
+      },
+      {
+        type: "paragraph",
+        text: "Quảng cáo có một đặc điểm rất dễ hiểu: bạn trả tiền để có lượt tiếp cận, khi ngân sách quảng cáo dừng, lượng khách hàng đến từ quảng cáo cũng có thể giảm. SEO hoạt động theo cách khác. Khi một bài viết hoặc một trang dịch vụ của bạn được Google đánh giá tốt và có vị trí tìm kiếm tốt, khách hàng vẫn có thể tìm thấy nội dung đó mỗi ngày.",
+      },
+      {
+        type: "paragraph",
+        text: "Điều này không có nghĩa là SEO hoàn toàn miễn phí hoặc website lên Google một lần rồi giữ vị trí mãi mãi. SEO cần thời gian, nội dung chất lượng và quá trình cải thiện liên tục. Nhưng nếu làm tốt, website có thể trở thành một kênh thu hút khách hàng lâu dài, thay vì chỉ phụ thuộc vào quảng cáo.",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "7. Vậy website chuẩn SEO thực sự mang lại điều gì cho doanh nghiệp?",
+      },
+      {
+        type: "paragraph",
+        text: "Nếu nói theo cách đơn giản nhất: website chuẩn SEO giúp rút ngắn khoảng cách giữa khách hàng đang có nhu cầu và doanh nghiệp đang cung cấp giải pháp.",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Tăng khả năng xuất hiện trên các công cụ tìm kiếm",
+      },
+      {
+        type: "paragraph",
+        text: "Website chuẩn SEO giúp website của bạn xuất hiện ở vị trí cao trong kết quả tìm kiếm của các công cụ như Google, Bing, v.v. Điều này rất quan trọng vì người dùng thường chỉ chú ý đến các kết quả tìm kiếm ở trang đầu tiên.",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Giảm chi phí quảng cáo",
+      },
+      {
+        type: "paragraph",
+        text: "Khi website của bạn đạt thứ hạng cao nhờ SEO, bạn không cần phải chi tiêu quá nhiều cho quảng cáo trả phí. SEO giúp giảm chi phí quảng cáo và tạo ra nguồn khách hàng bền vững hơn, giúp doanh nghiệp tiết kiệm ngân sách và tối ưu hóa chi phí marketing.",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Tăng khả năng tương tác và giữ chân khách hàng",
+      },
+      {
+        type: "paragraph",
+        text: "SEO không chỉ tối ưu hóa nội dung cho người dùng mà còn giúp cải thiện các yếu tố kỹ thuật như tốc độ tải trang, thiết kế thân thiện với điện thoại, cấu trúc URL hợp lý, và các yếu tố khác giúp website của bạn dễ sử dụng hơn. Khi khách hàng có trải nghiệm tốt trên website, họ sẽ có xu hướng quay lại và tương tác lâu dài với thương hiệu.",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Cải thiện độ tin cậy và uy tín của thương hiệu",
+      },
+      {
+        type: "paragraph",
+        text: "Website được tối ưu hóa SEO tốt sẽ được Google và các công cụ tìm kiếm đánh giá cao và xếp hạng cao. Điều này không chỉ giúp website của bạn xuất hiện ở vị trí tốt mà còn tạo ra ấn tượng tốt với người dùng. Khi người dùng thấy website của bạn xuất hiện ở các vị trí cao trong kết quả tìm kiếm, họ sẽ cảm thấy tin tưởng hơn và dễ dàng quyết định sử dụng sản phẩm hoặc dịch vụ của bạn.",
+      },
+      {
+        type: "image",
+        src: "/tin-tuc/vi-sao/chuan-seo-mang-lai-cho-doanh-nghiep.webp",
+        alt: "Bốn lợi ích website chuẩn SEO mang lại cho doanh nghiệp",
+      },
+      {
+        type: "heading",
+        level: 2,
+        text: "Kết luận",
+      },
+      {
+        type: "paragraph",
+        text: "Website chuẩn SEO không phải là một khái niệm quá kỹ thuật. Hiểu đơn giản, đó là cách xây dựng website sao cho Google dễ hiểu, khách hàng dễ tìm, dễ xem, dễ tin tưởng và dễ liên hệ với doanh nghiệp. Một website đẹp giúp bạn tạo ấn tượng, một website có nội dung tốt giúp khách hàng hiểu bạn.",
+      },
+      {
+        type: "paragraph",
+        text: "Nhưng một website được xây dựng tốt và chuẩn SEO sẽ giúp khách hàng có nhu cầu có cơ hội tìm thấy bạn ngay khi họ đang tìm kiếm giải pháp. Và đó mới là giá trị lâu dài của một website đối với doanh nghiệp.",
+      },
+      {
+        type: "paragraph",
+        text: "Bạn đã sẵn sàng để website thực sự hỗ trợ doanh nghiệp? Nếu bạn đang cần xây dựng một website mới hoặc muốn cải thiện website hiện tại, PML Vietnam có thể đồng hành cùng bạn từ giao diện đến nội dung, hướng đến một website đẹp, hiện đại và chuyên nghiệp, đồng thời thân thiện với Google, chuẩn SEO và dễ sử dụng trên mọi thiết bị.",
+      },
+      {
+        type: "tagline",
+        text: "PML Vietnam - Cung cấp giải pháp website hiện đại cho cá nhân, hộ kinh doanh và doanh nghiệp.",
+      },
+    ] satisfies NewsArticleBlock[],
+  },
 ];
 
 export function getNewsArticleBySlug(slug: string): NewsArticle | undefined {
   return newsArticles.find((article) => article.slug === slug);
 }
+
+/**
+ * Tin đã có nội dung chi tiết — listing, carousel và search chỉ hiện các item này.
+ * Không xóa draft khỏi `newsContent.items`.
+ */
+export const publishedNewsItems: NewsItem[] = newsContent.items.filter((item) =>
+  newsArticles.some(
+    (article) =>
+      item.href === newsArticleHref(article.slug) && article.blocks.length > 0,
+  ),
+);
 
 /**
  * Section 5 — FAQ (layout ref web4s.vn).

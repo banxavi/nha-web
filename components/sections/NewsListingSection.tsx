@@ -1,12 +1,12 @@
 import { NewsCard } from "@/components/news/NewsCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { newsContent } from "@/lib/site-config";
+import { publishedNewsItems } from "@/lib/site-config";
 
 /**
- * Danh sách tin tại `/tin-tuc` — grid toàn bộ item hiện có.
+ * Danh sách tin tại `/tin-tuc` — chỉ bài đã có nội dung chi tiết.
  */
 export function NewsListingSection() {
-  const { items } = newsContent;
+  const items = publishedNewsItems;
 
   return (
     <section

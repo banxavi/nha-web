@@ -3,14 +3,15 @@
 import { NewsCard } from "@/components/news/NewsCard";
 import { Carousel, CarouselSlide } from "@/components/ui/Carousel";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { newsContent } from "@/lib/site-config";
+import { newsContent, publishedNewsItems } from "@/lib/site-config";
 
 /**
  * Task 4 — Tin tức / Sự kiện mới nhất.
  * Heading giữa + grid 5 item/hàng + Embla carousel (prev/next, autoplay, swipe).
  */
 export function NewsSection() {
-  const { heading, tagline, items, itemsPerRow, autoplayMs } = newsContent;
+  const { heading, tagline, itemsPerRow, autoplayMs } = newsContent;
+  const items = publishedNewsItems;
   const pages = chunkItems(items, itemsPerRow);
   const pageCount = Math.max(1, pages.length);
 

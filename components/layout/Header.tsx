@@ -8,31 +8,13 @@ import { CTAButton } from "@/components/ui/CTAButton";
 import {
   logoPath,
   navItems,
-  searchPopularSuggestions,
-  searchPromoSuggestions,
   type NavItem,
   type SearchSuggestion,
 } from "@/lib/site-config";
+import { filterSearchResults } from "@/lib/search";
 
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
-}
-
-/** Bỏ dấu tiếng Việt — search "thiet ke" khớp "Thiết kế" (ref luvini.vn). */
-function normalizeSearch(value: string) {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D")
-    .toLowerCase()
-    .trim();
-}
-
-function filterSuggestions(items: SearchSuggestion[], query: string) {
-  const q = normalizeSearch(query);
-  if (!q) return items;
-  return items.filter((item) => normalizeSearch(item.label).includes(q));
 }
 
 /**
@@ -50,9 +32,17 @@ export function Header() {
   const searchRootRef = useRef<HTMLDivElement>(null);
   const { openContactForm } = useContactForm();
 
-  const popularResults = filterSuggestions(searchPopularSuggestions, searchQuery);
-  const promoResults = filterSuggestions(searchPromoSuggestions, searchQuery);
-  const hasResults = popularResults.length > 0 || promoResults.length > 0;
+  const {
+    popular: popularResults,
+    templates: templateResults,
+    pages: pageResults,
+    promo: promoResults,
+  } = filterSearchResults(searchQuery);
+  const hasResults =
+    popularResults.length > 0 ||
+    templateResults.length > 0 ||
+    pageResults.length > 0 ||
+    promoResults.length > 0;
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -116,7 +106,11 @@ export function Header() {
 
   function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const first = popularResults[0] ?? promoResults[0];
+    const first =
+      popularResults[0] ??
+      templateResults[0] ??
+      pageResults[0] ??
+      promoResults[0];
     if (first) {
       closeSearch();
       window.location.href = first.href;
@@ -317,6 +311,20 @@ export function Header() {
                         <SearchGroup
                           title="Tìm kiếm nhiều nhất"
                           items={popularResults}
+                          onSelect={handleSuggestionClick}
+                        />
+                      ) : null}
+                      {templateResults.length > 0 ? (
+                        <SearchGroup
+                          title="Mẫu website"
+                          items={templateResults}
+                          onSelect={handleSuggestionClick}
+                        />
+                      ) : null}
+                      {pageResults.length > 0 ? (
+                        <SearchGroup
+                          title="Trang"
+                          items={pageResults}
                           onSelect={handleSuggestionClick}
                         />
                       ) : null}
